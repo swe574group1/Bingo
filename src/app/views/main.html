@@ -1,16 +1,116 @@
-<!DOCTYPE html>
-
-<html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="${_response_encoding}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-        #{get 'moreStyles' /}
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-        <script src="@{'/public/javascripts/jquery-1.5.2.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-        #{get 'moreScripts' /}
-    </head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>#{get 'title' /} | LETS!</title>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/screen.css'}" />
+#{get 'moreStyles' /}
+<link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+<script src="@{'/public/javascripts/jquery.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+<script src="@{'/public/javascripts/index.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+#{get 'moreScripts' /}
+</head>
     <body>
-        #{doLayout /}
+    <!--header -->
+<div id="header-wrap">
+  <div id="header"> <a name="top"></a>
+    <h1 id="logo-text"><a href="#">LETS!</a></h1>
+    <p id="slogan">Local Exchange Trading System offers a new way for trading services!</p>
+    <div  id="nav">
+      <ul>
+        <li id="current"><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="terms_of_Service.html">Terms Of Service</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <!--<p id="rss"> <a href="#">Grab the RSS feed</a> </p>-->
+    <!--<form id="quick-search" method="get" action="#">
+      <fieldset class="search">
+        <label for="qsearch">Search:</label>
+        <input class="tbox" id="qsearch" type="text" name="qsearch" value="Search..." />
+        <button class="btn">Search</button>
+      </fieldset>
+    </form>-->
+    <!--/header-->
+  </div>
+</div>
+<!-- content-outer -->
+<div id="content-wrap" class="clear" >
+  <!-- content -->
+  <div id="content">
+	#{doLayout /}
+  <!-- content -->
+  </div>
+  <!-- /content-out -->
+</div>
+<!-- footer-outer -->
+<div id="footer-outer" class="clear">
+  <div id="footer-wrap">
+    <div id="gallery" class="clear">
+      <h3>Recent Users </h3>
+      <p class="thumbs"> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> </p>
+    </div>
+    <div class="col-a">
+      <h3>About</h3>
+      <p> This project is developed in SWE574 class @ Bogazici University Software Engineering Department.</p>
+      <p>For more information: <a href="#">visit contact page</a></p>
+      </div>
+    <div class="col-a">
+      <h3>Site Links</h3>
+      <div class="footer-list">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Terms Of Service</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      
+    </div>
+    <div class="col-a">
+      <h3>Statistics</h3>
+      <div class="footer-list">
+        <ul>
+          <li>55 New Users This Month!</li>
+          <li>222 open offers! </li>
+          <li>124 open requests! </li>
+          <li>56  services in 1 week! </li>
+          <li>2023 users available! </li>
+        </ul>
+      </div>
+      
+    </div>
+    <div class="col-b">
+      <h3>Tag Cloud</h3>
+      <div class=" tag_cloud">
+        <ul>
+          <li class="tag_3"><a href="#">Reading</a></li>
+          <li class="tag_2"><a href="#">English</a></li>
+          <li class="tag_1"><a href="#">Driving</a></li>
+          <li class="tag_4"><a href="#">teaching</a></li>
+          <li class="tag_3"><a href="#">technology</a></li>
+          <li class="tag_1"><a href="#">computer</a></li>
+          <li class="tag_2"><a href="#">tennis</a></li>
+          <li class="tag_1"><a href="#">writing</a></li>
+          <li class="tag_5"><a href="#">lesson</a></li>
+          <li class="tag_2"><a href="#">swimming</a></li>
+          <li class="tag_3"><a href="#">riding</a></li>
+          
+        </ul>
+      </div>
+      
+    </div>
+    <!-- /footer-outer -->
+  </div>
+</div>
+<!-- footer-bottom -->
+<div id="footer-bottom">
+  <p class="bottom-left"> &copy; 2011 <strong>SWE 574 Team 2 Members</strong>&nbsp; &nbsp; &nbsp;</p>
+  <p class="bottom-right"><strong><a href="#top">Back to Top</a></strong> </p>
+  <!-- /footer-bottom-->
+</div>
     </body>
 </html>
