@@ -32,8 +32,8 @@ public class Application extends Controller
 		newUser.save();
 
 		// Retrieve the user with e-mail address bob@gmail.com
-		User bob = User.find("byEmail", "bob@gmail.com").first();
+		User bob2 = User.find("byEmail", "bob@gmail.com").first();
 
-		render(bob);
+		render(bob2);
 	}
 }
