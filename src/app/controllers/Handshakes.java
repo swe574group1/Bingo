@@ -12,7 +12,12 @@ import service.SearchService.SearchQuery.SortDirection;
 import service.SearchService.SearchQuery.SortField;
 import service.SearchService.SearchResult;
 import service.SearchService.Type;
-
+import play.*;
+import play.mvc.*;
+ 
+import java.util.*;
+// Require Login
+@With(Secure.class)
 public class Handshakes extends Controller
 {
 	public static void user(Long userId)

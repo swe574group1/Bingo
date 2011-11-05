@@ -1,9 +1,16 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
+#{if isLoggedIn}
+${user.email}
+#{/if}
+<a href="@{Secure.login()}">Log in</a>
+<a href="@{Secure.logout()}">Log out</a>
 <!-- main -->
 <div id="main" style="padding-top:0px">
+  #{if isLoggedIn}  
   <div class="post" style="padding:top:0px">
+
     <h3 style="padding-top:0px;">Recent HandShakes</h3>
     
     <table class="show_data">
@@ -158,7 +165,7 @@
             
         </div>
   </div>
-  
+  #{/if} 
   <!-- /main -->
 </div>
 <!-- sidebar -->
