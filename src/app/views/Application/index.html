@@ -172,18 +172,18 @@ ${user.email}
 <div id="sidebar"  style="border:0px solid #aaa; padding-top:0px;">
   <div class="about-me">
     <h3>Login</h3>
-    <form action="#" method="POST" class="login">
+    <form action="@{Secure.login()}" method="POST" class="login">
     	<ul class="login">
         	<li>
             	<label>Name</label>
-                <input type="text" name="name" />
+                <input type="text" name="email" />
             </li>
             <li>
             	<label>Pass</label>
                 <input type="password" name="pass" />
             </li>
             <li>
-                <input type="button" class="login_button" value="Login" />
+                <input type="submit" class="login_button" value="Login"/>
             </li>
             <li>
                 <div align="center"><a href="#">Forgotten Pass?</a> | <a href="#">Register</a></div>
