@@ -15,7 +15,7 @@ public class Application extends Controller
 {   
 	@Before
     static void setConnectedUser() {
-    System.out.println("APPLICATION IS IN CONNECTED USER");
+//    System.out.println("APPLICATION IS IN CONNECTED USER");
     boolean isConnected = Security.isConnected();
     renderArgs.put("isLoggedIn", isConnected);
 	if(isConnected) {
