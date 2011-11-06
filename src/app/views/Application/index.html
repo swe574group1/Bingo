@@ -3,9 +3,10 @@
 
 #{if isLoggedIn}
 ${user.email}
-#{/if}
-<a href="@{Secure.login()}">Log in</a>
 <a href="@{Secure.logout()}">Log out</a>
+#{/if}
+<!--<a href="@{Secure.login()}">Log in</a>-->
+
 <!-- main -->
 <div id="main" style="padding-top:0px">
   #{if isLoggedIn}  
@@ -165,14 +166,31 @@ ${user.email}
             
         </div>
   </div>
-  #{/if} 
+  #{/if}
+  #{else}
+    <div>
+    #{form @Secure.authenticate()}
+    <p id="username-field">
+      <label for="username">&{'secure.username'}</label>
+      <input type="text" name="username" id="username" value="${flash.username}" />
+    </p>
+    <p id="password-field">
+      <label for="password">&{'secure.password'}</label>
+      <input type="password" name="password" id="password" value="" />
+    </p>
+    <p id="signin-field">
+      <input type="submit" id="signin" value="&{'secure.signin'}" />
+    </p>
+    #{/form}
+  </div>
+  #{/else}
   <!-- /main -->
 </div>
 <!-- sidebar -->
 <div id="sidebar"  style="border:0px solid #aaa; padding-top:0px;">
   <div class="about-me">
     <h3>Login</h3>
-    <form action="@{Secure.login()}" method="POST" class="login">
+<!--    <form action="@{Secure.login()}" method="POST" class="login">
     	<ul class="login">
         	<li>
             	<label>Name</label>
@@ -190,7 +208,8 @@ ${user.email}
             </li>
         </ul>
     </form>
-  </div>
+  </div>-->
+
   
   <div class="sidemenu">
     <h3>Menu After Login</h3>
