@@ -52,4 +52,8 @@ public class Application extends Controller
 		render(bob2);*/
 		
 	}
+
+    public static void register() {
+	render();
+    }
 }
