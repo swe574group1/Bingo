@@ -1042,5 +1042,223 @@ ul.login .login_button {
 	font-size:10px;
 }
 
+.utility_form {
+	width:85%;
+	background-color:#fff;
+	-moz-border-radius:3px;
+	border-radius:3px;
+}
+.utility_form ul {
+	list-style-type:none;
+	padding:0px;
+	margin:0px;
+	margin-left:10px;
+}
+.utility_form ul li {
+	margin:5px 0px 5px 0px;
+}
+.utility_form label {
+	display:inline-block;
+	width:200px;
+	float:left;
+}
+.utility_form textarea {
+	width:350px;
+	height:70px;
+}
+.utility_form fieldset {
+	background-color:#eee;
+	border:1px solid #ccc;
+	margin-bottom:10px;
+	-moz-box-shadow: 3px 3px 5px #888;
+	-webkit-box-shadow: 3px 3px 5px #888;
+	box-shadow: 3px 3px 5px #888;
+	-moz-border-radius:3px;
+	border-radius:3px;
+}
+.utility_form legend {
+	background-color:#fff;
+	margin-left:20px;
+	padding:3px 20px 3px 20px;
+	border:1px solid #eee;
+	-moz-box-shadow: 2px 2px 1px #888;
+	-webkit-box-shadow: 2px 2px 1px #888;
+	box-shadow: 2px 2px 1px #888;
+	-moz-border-radius:3px;
+	border-radius:3px;
+}
+
+
+div.buttons {
+	margin-right:30px;
+	margin-left:30px;
+	margin-top:40px;
+}
+div.buttons a {
+	background-color:#eee;
+	border:1px solid #ccc;
+	padding:4px 10px;
+}
+div.buttons a.cancel {
+	background-color:#900;
+	color:#fff;
+}
+div.buttons a.accept {
+	background-color:#090;
+	color:#fff;
+}
+
+.hata, .ikaz, .tamam, .bilgi {
+
+    margin-bottom: 1.5em;
+
+    padding: 1em 1.5em 1em 5.5em;
+
+    border-bottom: 2px solid #fff;
+
+    border-top: 2px solid #fff;
+
+    color: #444
+
+}
+
+
+
+.hata    {background: #fbe3e4 url(../images/mBox/hata.png) 2.2em center no-repeat; border-color: #e0011b}
+
+.hata a  {color: #d12f19}
+
+
+
+.ikaz    {background: #fff6bf url(../images/mBox/ikaz.png) 2.2em center no-repeat; border-color: #ffd324}
+
+.ikaz a  {color: #817134}
+
+
+
+.tamam   {background: #e9ffdd url(../images/mBox/tamam.png) 2.2em center no-repeat; border-color: #72c868}
+
+.tamam a {color: #529214}
+
+
+
+.bilgi   {background: #e2ecee url(../images/mBox/bilgi.png) 2.2em center no-repeat; border-color: #9ddae6}
+
+.bilgi a {color: #2d7ba2}
+
+
+
+
+
+/* listeler */
+
+.hata ul, .ikaz ul, .tamam ul, .bilgi ul {
+
+    list-style: none;
+
+    margin: 1.3em 1.5em
+
+}
+
+.hata ul li, .ikaz ul li, .tamam ul li, .bilgi ul li {
+
+    padding-left: 1.3em
+
+}
+
+.hata ul li  { background: url(../images/mBox/hata-bullet.png)  0 0.55em no-repeat }
+
+.ikaz ul li  { background: url(../images/mBox/ikaz-bullet.png)  0 0.55em no-repeat }
+
+.tamam ul li { background: url(../images/mBox/tamam-bullet.png) 0 0.55em no-repeat }
+
+.bilgi ul li { background: url(../images/mBox/bilgi-bullet.png) 0 0.55em no-repeat }
+
+
+
+img.owner_image {
+	margin:10px 0px 10px 60px;
+}
+
+.related_images {
+	margin:0px 20px 0px 20px;
+}
+
+.restrictions {
+	background-color:#eee;
+	border:1px solid #ddd;
+	-moz-box-shadow: 2px 2px 1px #888;
+	-webkit-box-shadow: 2px 2px 1px #888;
+	box-shadow: 2px 2px 1px #888;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	margin:40px 20px 0px 20px;
+	padding:0px;
+}
+.restrictions ul {
+	list-style-type:none;
+	margin:0px;
+	padding:10px;
+}
+.restrictions ul li {
+	margin:0px;
+	border-top:1px solid #fff;
+	border-bottom:1px solid #ddd;
+	padding:10px 5px 10px 5px;
+}
+.restrictions ul li label {
+	display:inline-block;
+	width:200px;
+}
+
+.apply_menu {
+	margin:20px 0px 10px 0px;
+}
+.apply_menu a {
+	display:block;
+	margin:10px 0px 0px 0px;
+}
+.apply_menu a.apply {
+	background-color:#090;
+	color:#fff;
+	-moz-border-radius:8px;
+	border-radius:8px;
+	padding:15px 10px 15px 30px;
+	font-size:24px;
+}
+.apply_menu a.apply:hover {
+	background-color:#0C0;
+}
+.apply_menu a.cancel {
+	background-color:#900;
+	color:#fff;
+	-moz-border-radius:8px;
+	border-radius:8px;
+	padding:15px 10px 15px 30px;
+	font-size:24px;
+}
+.apply_menu a.cancel:hover {
+	background-color:#C00;
+}
+
+.handshake_link {
+	border:0px solid red;
+	margin:10px 0px 0px 10px;
+}
+.handshake_link a {
+	padding:10px;
+	background-color:#093;
+	color:#fff;
+	-moz-border-radius:8px;
+	border-radius:8px;
+	
+}
+.handshake_link a:hover {
+	background-color:#0C3;
+}
+
+
+
+
 
 /* end: definitions by isa engiz */
