@@ -48,10 +48,12 @@
 <!-- footer-outer -->
 <div id="footer-outer" class="clear">
   <div id="footer-wrap">
+    #{if isLoggedIn}
     <div id="gallery" class="clear">
       <h3>Recent Users </h3>
       <p class="thumbs"> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> </p>
     </div>
+    #{/if}
     <div class="col-a">
       <h3>About</h3>
       <p> This project is developed in SWE574 class @ Bogazici University Software Engineering Department.</p>
