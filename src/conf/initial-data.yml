@@ -1,0 +1,15 @@
+# initial data for testing
+
+User(bob):
+  email: bob@gmail.com
+  password: secret
+  nickname: bob
+  fullname: Bob
+  address: Babiali
+  balance: 13
+  birthday: 1980-01-01
+  city: City
+  job: clown
+  phone: 2125555555
+  registrationDate: 2011-11-01
+  reputation: 2
