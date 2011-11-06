@@ -1,18 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-<title>Create New Offer | LETS!</title>
-<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-<link rel="stylesheet" type="text/css" media="screen" href="css/screen.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="css/datepicker.css" />
+#{extends 'main.html' /}
+#{set title:'Home' /}
 
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/datepicker.js"></script>
-<script type="text/javascript" src="js/create-offer.js"></script>
-</head>
-<body>
 <!--header -->
-<div id="header-wrap">
+<!--<div id="header-wrap">
   <div id="header"> <a name="top"></a>
     <h1 id="logo-text"><a href="#">LETS!</a></h1>
     <p id="slogan">Local Exchange Trading System offers a new way for trading services!</p>
@@ -33,9 +23,9 @@
         <button class="btn">Search</button>
       </fieldset>
     </form>-->
-    <!--/header-->
+    <!--/header
   </div>
-</div>
+</div>-->
 <!-- content-outer -->
 <div id="content-wrap" class="clear" >
   <!-- content -->
@@ -49,7 +39,8 @@
         <p class="ikaz">Warning. Please be a kind girl!</p>
         <p class="tamam">Hey, we did it!</p>
         <p class="bilgi"> here comes info. Very informative!!!</p>
-        <form action="#" method="POST" class="utility_form">
+        <form action="@{Application.finalizeOffer()}" method="POST" class="utility_form">
+
         	<fieldset>
             	<legend>Descriptions</legend>
                 
@@ -129,15 +120,15 @@
                     <li>
                     	<label>Added Photos</label>
                         <div class="photos">
-                        	<img src="images/icons/user.png" />
-                            <img src="images/icons/user.png" />
+                        	<img src="@{'public/images/icons/user.png'}" />
+                            <img src="@{'public/images/icons/user.png'}" />
                         </div>
                     </li>
                 </ul>
             </fieldset>
             
-            <input type="button" value="OK. Create!" />
-        
+            <input type="submit" value="OK. Create!" />
+
         </form>
         
         
@@ -198,5 +189,3 @@
   <p class="bottom-right"><strong><a href="#top">Back to Top</a></strong> </p>
   <!-- /footer-bottom-->
 </div>
-</body>
-</html>
