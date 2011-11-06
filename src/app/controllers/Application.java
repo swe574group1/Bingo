@@ -25,8 +25,9 @@ public class Application extends Controller
 }
 	public static void index()
 	{
+	    render();
 		// Create a new user and save it
-		User newUser = new User();
+/*		User newUser = new User();
 		newUser.email = "bob@gmail.com";
 		newUser.password = "secret";
         newUser.nickname = "bob";
@@ -48,6 +49,7 @@ public class Application extends Controller
 		// Retrieve the user with e-mail address bob@gmail.com
 		User bob2 = User.find("byEmail", "bob@gmail.com").first();
 
-		render(bob2);
+		render(bob2);*/
+		
 	}
 }
