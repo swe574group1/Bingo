@@ -10,5 +10,5 @@ import play.db.jpa.Model;
 public class UploadedFile extends Model
 {
     @Required
-    public Blob blob;
+    public Blob file;
 }
