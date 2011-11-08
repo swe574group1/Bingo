@@ -64,4 +64,8 @@ public class Application extends Controller
     public static void finalizeOffer() {
 	render();
     }
+
+    public static void createRequest() {
+	render();
+    }
 }
