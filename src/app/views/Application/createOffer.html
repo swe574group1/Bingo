@@ -32,13 +32,13 @@
           <li>
 	    #{error 'offerItem.description' /}
             <label>Description</label>
-            <textarea name="offerItem.description"></textarea>
+            <textarea name="offerItem.description">${flash['offerItem.description']}</textarea>
           </li>
           <li>
             <label>Units</label>
             <select name="credit" style="width:150px;">
               <option value="1">1</option>
-p              <option value="2">2</option>
+              <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
               <option value="5">5</option>
@@ -67,8 +67,9 @@ p              <option value="2">2</option>
           </li>-->
           
           <li>
+	    #{error 'offerItem.endDate' /}
             <label>Valid Until</label>
-            <input type="text" name="valid_until" class="date_pick" />
+            <input type="text" name="offerItem.endDate" class="date_pick" value="${flash['offerItem.endDate']}" />
           </li>
           
 <!--          <li>
