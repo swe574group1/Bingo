@@ -24,9 +24,13 @@ public class Offer extends Model
     @Lob
     public String description;
 
-    @Required
+    /*    @Required
     @ManyToMany
-    public List<Tag> tags;
+    public List<Tag> tags;*/
+
+    //Simple tags field to test validation
+    @Required
+    public String tags;
 
     @Required
     @Temporal(TemporalType.TIMESTAMP)
