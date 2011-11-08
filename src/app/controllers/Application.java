@@ -68,4 +68,8 @@ public class Application extends Controller
     public static void createRequest() {
 	render();
     }
+
+    public static void finalizeRequest() {
+	render();
+    }
 }

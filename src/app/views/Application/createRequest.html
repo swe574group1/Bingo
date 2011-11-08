@@ -9,7 +9,7 @@
     <p class="ikaz">Warning. Please be a kind girl!</p>
     <p class="tamam">Hey, we did it!</p>
     <p class="bilgi"> here comes info. Very informative!!!</p>
-    <form action="#" method="POST" class="utility_form">
+    <form action="@{Application.finalizeRequest()}" method="POST" class="utility_form">
       <fieldset>
         <legend>Descriptions</legend>
         
@@ -87,7 +87,7 @@
         </ul>
       </fieldset>
       
-      <input type="button" value="OK. Create!" />
+      <input type="submit" value="OK. Create!" />
       
     </form>
     
