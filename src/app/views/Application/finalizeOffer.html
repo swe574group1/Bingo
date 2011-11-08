@@ -5,8 +5,21 @@
 <div id="main" style="padding-top:0px">
   <div class="post" style="padding:top:0px">
     <h3 style="padding-top:0px;">Finalizing Offer</h3>
+
+    <form action="@{Application.createOffer()}" method="POST">
+      <p>
+	${offerItem.title}
+      </p>
+      <p>
+	${offerItem.description}
+      </p>
+      <p>
+	${offerItem.tags}
+      </p>
+    </form>
+    
     <p>We have found the following request that may suit your offer. We recommend applying them instead of creating a new offer if that is what you are looking for!</p>
-    <p class="tamam">Kullanici asagidaki requestleri begenmeyip yinede olusturursa offer i, bu alan gozukecek ve asagidaki tablo gozukmeyecek. Your offer is created successfully. Very successfully indeed!</p>
+    <p class="tamam">Kullannici asagidaki requestleri begenmeyip yinede olusturursa offer i, bu alan gozukecek ve asagidaki tablo gozukmeyecek. Your offer is created successfully. Very successfully indeed!</p>
     
     <table class="show_data">
       <tr class="first">
