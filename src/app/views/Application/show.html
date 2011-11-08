@@ -1,0 +1,10 @@
+#{extends 'main.html' /}
+#{set title:'Offer Created' /}
+<div id="main">
+  <h3>Your offer was succesfully created.</h3>
+  <h4>Details:</h4>
+  Name: ${offerItem.title}<br/>
+  Tags: ${offerItem.tags}<br/>
+  Description: ${offerItem.description}<br/>
+  Valid Until: ${offerItem.endDate}
+</div>

@@ -84,4 +84,14 @@ public class Application extends Controller
 	render();
     }
 
+    public static void saveOffer(Offer offerItem) {
+	offerItem.save();
+	show(offerItem.id);
+    }
+
+    public static void show(Long id) {
+	Offer offerItem = Offer.findById(id);
+	render(offerItem);
+    }
+
 }
