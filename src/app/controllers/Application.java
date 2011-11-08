@@ -75,7 +75,7 @@ public class Application extends Controller
 	if (validation.hasErrors()) {
 	    params.flash();
 	    validation.keep();
-	    createRequest();
+	    createOffer();
 	}
 	finalizeOffer(offerItem);
     }

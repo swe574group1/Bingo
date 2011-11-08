@@ -9,21 +9,24 @@
     <p class="ikaz">Warning. Please be a kind girl!</p>
     <p class="tamam">Hey, we did it!</p>
     <p class="bilgi"> here comes info. Very informative!!!</p>
-    <form action="@{Application.finalizeOffer()}" method="POST" class="utility_form">
+    <form action="@{Application.doCreateOfferItem()}" method="POST" class="utility_form">
 
       <fieldset>
         <legend>Descriptions</legend>
         
         <ul>
           <li>
+	    #{error 'offerItem.title' /}
             <label>Title</label>
-            <input type="text" name="offerItem.title" value="" />
+            <input type="text" name="offerItem.title" value="${flash['offerItem.title']}" />
           </li>
           <li>
+	    #{error 'offerItem.tags' /}
             <label>Tags</label>
-            <input type="text" name="offerItem.tags" value="" />
+            <input type="text" name="offerItem.tags" value="${flash['offerItem.tags']}" />
           </li>
           <li>
+	    #{error 'offerItem.description' /}
             <label>Description</label>
             <textarea name="offerItem.description"></textarea>
           </li>
