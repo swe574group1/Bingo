@@ -32,15 +32,26 @@ public class Offer extends Model
     @Required
     public String tags;
 
+    /* Commenting out to test validation
     @Required
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP) */
     public Date startDate;
 
     @Required
     @Temporal(TemporalType.TIMESTAMP)
     public Date endDate;
 
-    @Required
+    public void setStartDate() {
+	this.startDate = new Date();
+    }
+	
+
+/*    @Required
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date endDate; */
+
+    //Commenting these out to test validation
+/*    @Required
     public Boolean async;
 
     @Required
@@ -54,5 +65,5 @@ public class Offer extends Model
     public List<UploadedFile> images;
 
     @Required
-    public Boolean allowMultipleAttendees;
+    public Boolean allowMultipleAttendees; */
 }
