@@ -1,151 +1,106 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title:'Create Offer' /}
 
-<!--header -->
-<!--<div id="header-wrap">
-  <div id="header"> <a name="top"></a>
-    <h1 id="logo-text"><a href="#">LETS!</a></h1>
-    <p id="slogan">Local Exchange Trading System offers a new way for trading services!</p>
-    <div  id="nav">
-      <ul>
-        <li id="current"><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="terms_of_Service.html">Terms Of Service</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-    <!--<p id="rss"> <a href="#">Grab the RSS feed</a> </p>-->
-    <!--<form id="quick-search" method="get" action="#">
-      <fieldset class="search">
-        <label for="qsearch">Search:</label>
-        <input class="tbox" id="qsearch" type="text" name="qsearch" value="Search..." />
-        <button class="btn">Search</button>
+<div id="main" style="padding-top:0px">
+  <div class="post" style="padding:top:0px">
+    <h3 style="padding-top:0px;">Create New Offer</h3>
+    <p>Use the form below to create a new offer.</p>
+    <p class="hata"> Errors looks like this. Something went terribly wrong! Nuclear explosion warning!</p>
+    <p class="ikaz">Warning. Please be a kind girl!</p>
+    <p class="tamam">Hey, we did it!</p>
+    <p class="bilgi"> here comes info. Very informative!!!</p>
+    <form action="@{Application.finalizeOffer()}" method="POST" class="utility_form">
+
+      <fieldset>
+        <legend>Descriptions</legend>
+        
+        <ul>
+          <li>
+            <label>Title</label>
+            <input type="text" name="title" value="" />
+          </li>
+          <li>
+            <label>Tags</label>
+            <input type="text" name="tags" value="" />
+          </li>
+          <li>
+            <label>Description</label>
+            <textarea name="description"></textarea>
+          </li>
+          <li>
+            <label>Units</label>
+            <select name="units" style="width:150px;">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </li>
+        </ul>
       </fieldset>
-    </form>-->
-    <!--/header
-  </div>
-</div>-->
-<!-- content-outer -->
-<!--<div id="content-wrap" class="clear" >
-  <!-- content
-  <div id="
-  main -->
-    <div id="main" style="padding-top:0px">
-      <div class="post" style="padding:top:0px">
-        <h3 style="padding-top:0px;">Create New Offer</h3>
-        <p>Use the form below to create a new offer.</p>
-        <p class="hata"> Errors looks like this. Something went terribly wrong! Nuclear explosion warning!</p>
-        <p class="ikaz">Warning. Please be a kind girl!</p>
-        <p class="tamam">Hey, we did it!</p>
-        <p class="bilgi"> here comes info. Very informative!!!</p>
-        <form action="@{Application.finalizeOffer()}" method="POST" class="utility_form">
-
-        	<fieldset>
-            	<legend>Descriptions</legend>
-                
-                <ul>
-                	<li>
-                    	<label>Title</label>
-                        <input type="text" name="title" value="" />
-                    </li>
-                    <li>
-                    	<label>Tags</label>
-                        <input type="text" name="tags" value="" />
-                    </li>
-                    <li>
-                    	<label>Description</label>
-                        <textarea name="description"></textarea>
-                    </li>
-                    <li>
-                    	<label>Units</label>
-                        <select name="units" style="width:150px;">
-                        	<option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </li>
-                </ul>
-            </fieldset>
-            
-            <fieldset>
-            	<legend>Limitations</legend>
-                <ul>
-                	<li>
-                    	<label>Attendee Number</label>
-                        <select name="attendee_number">
-                        	<option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6-10">6-10</option>
-                            <option value="10-20">10-20</option>
-                            <option value="20-50">20-50</option>
-                            <option value="50-100">50-100</option>
-                            <option value="100+">100+</option>
-                        </select>
-                    </li>
-                    
-                    <li>
-                    <label>Valid Until</label>
-                    <input type="text" name="valid_until" class="date_pick" />
-                    </li>
-                    
-                    <li>
-                    <label>Location</label>
-                    	<select name="city">
-                        	<option value="1">List of Cities</option> 
-                        </select>
-                        <select name="town">
-                        	<option value="1">List of town</option> 
-                        </select>
-                        <select name="district">
-                        	<option value="1">List of district</option> 
-                        </select>
-                    </li>
-                </ul>
-                
-            </fieldset>
-            
-            <fieldset>
-            	<legend>Photos</legend>
-                <ul>
-                	<li>
-                    	<label>Photo</label>
-                        <input type="file" name="photo" />
-                    </li>
-                    <li>
-                    	<label>Added Photos</label>
-                        <div class="photos">
-                        	<img src="@{'public/images/icons/user.png'}" />
-                            <img src="@{'public/images/icons/user.png'}" />
-                        </div>
-                    </li>
-                </ul>
-            </fieldset>
-            
-            <input type="submit" value="OK. Create!" />
-
-        </form>
-        
-        
-        
-        
-      </div>
       
-           
+      <fieldset>
+        <legend>Limitations</legend>
+        <ul>
+          <li>
+            <label>Attendee Number</label>
+            <select name="attendee_number">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6-10">6-10</option>
+              <option value="10-20">10-20</option>
+              <option value="20-50">20-50</option>
+              <option value="50-100">50-100</option>
+              <option value="100+">100+</option>
+            </select>
+          </li>
+          
+          <li>
+            <label>Valid Until</label>
+            <input type="text" name="valid_until" class="date_pick" />
+          </li>
+          
+          <li>
+            <label>Location</label>
+            <select name="city">
+              <option value="1">List of Cities</option> 
+            </select>
+            <select name="town">
+              <option value="1">List of town</option> 
+            </select>
+            <select name="district">
+              <option value="1">List of district</option> 
+            </select>
+          </li>
+        </ul>
+        
+      </fieldset>
       
-      <!-- /main -->
-    </div>
-    <!-- sidebar -->
+      <fieldset>
+        <legend>Photos</legend>
+        <ul>
+          <li>
+            <label>Photo</label>
+            <input type="file" name="photo" />
+          </li>
+          <li>
+            <label>Added Photos</label>
+            <div class="photos">
+              <img src="@{'public/images/icons/user.png'}" />
+              <img src="@{'public/images/icons/user.png'}" />
+            </div>
+          </li>
+        </ul>
+      </fieldset>
+      
+      <input type="submit" value="OK. Create!" />
 
-    <!--
-    <!-- content
+    </form>
+    
   </div>
-  <!-- /content-out
-</div>-->
-<!-- footer-outer -->
 
+</div>
