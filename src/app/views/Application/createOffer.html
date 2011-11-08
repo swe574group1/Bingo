@@ -1,6 +1,10 @@
 #{extends 'main.html' /}
 #{set title:'Create Offer' /}
 
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/datepicker.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+#{/set}
+
 <div id="main" style="padding-top:0px">
   <div class="post" style="padding:top:0px">
     <h3 style="padding-top:0px;">Create New Offer</h3>
@@ -34,7 +38,7 @@
             <label>Units</label>
             <select name="credit" style="width:150px;">
               <option value="1">1</option>
-              <option value="2">2</option>
+p              <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
               <option value="5">5</option>
@@ -46,7 +50,7 @@
       <fieldset>
         <legend>Limitations</legend>
         <ul>
-          <li>
+<!--          <li>
             <label>Attendee Number</label>
             <select name="attendee_number">
               <option value="1">1</option>
@@ -60,14 +64,14 @@
               <option value="50-100">50-100</option>
               <option value="100+">100+</option>
             </select>
-          </li>
+          </li>-->
           
           <li>
             <label>Valid Until</label>
             <input type="text" name="valid_until" class="date_pick" />
           </li>
           
-          <li>
+<!--          <li>
             <label>Location</label>
             <select name="city">
               <option value="1">List of Cities</option> 
@@ -79,7 +83,7 @@
               <option value="1">List of district</option> 
             </select>
           </li>
-        </ul>
+        </ul>-->
         
       </fieldset>
       
