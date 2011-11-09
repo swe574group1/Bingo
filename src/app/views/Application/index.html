@@ -2,7 +2,7 @@
 #{set title:'Home' /}
 
 #{if isLoggedIn}
-${user.email}
+Welcome ${user.nickname}!
 <a href="@{Secure.logout()}">Log out</a>
 #{/if}
 
