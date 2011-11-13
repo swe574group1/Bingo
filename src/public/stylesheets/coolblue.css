@@ -1262,3 +1262,9 @@ img.owner_image {
 
 
 /* end: definitions by isa engiz */
+
+/* minimalist styles */
+
+span.title {
+    font-weight: bold;
+}
