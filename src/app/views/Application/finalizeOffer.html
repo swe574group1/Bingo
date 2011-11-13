@@ -8,14 +8,23 @@
 
     <form action="@{Application.saveOffer(offerItem)}" method="POST">
       <p>
-	${offerItem.title}
+	Offer Title:
       </p>
+      ${offerItem.title}
       <p>
-	${offerItem.description}
+	Offer Tags:
       </p>
+      ${offerItem.tags}
+
       <p>
-	${offerItem.tags}
+	Offer Description:
       </p>
+      ${offerItem.description}
+      <p>
+	Offer's Honey Combs:
+      </p>
+      ${offerItem.credit}
+      <br/><br/>
       <input type="submit" name="create" method="POST" value="Create Offer" />
     </form>
     

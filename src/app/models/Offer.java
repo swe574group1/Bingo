@@ -48,22 +48,23 @@ public class Offer extends Model
 
 /*    @Required
     @Temporal(TemporalType.TIMESTAMP)
-    public Date endDate; */
+    public Date endDate;
 
     //Commenting these out to test validation
-/*    @Required
+    @Required
     public Boolean async;
-
+*/
+    
     @Required
     public Integer credit;
 
-    @Required
-    @ManyToOne
-    public User user;
+    // @Required
+    // @ManyToOne
+    // public User user;
 
-    @OneToMany
-    public List<UploadedFile> images;
+    // @OneToMany
+    // public List<UploadedFile> images;
 
-    @Required
-    public Boolean allowMultipleAttendees; */
+    // @Required
+    // public Boolean allowMultipleAttendees; */
 }

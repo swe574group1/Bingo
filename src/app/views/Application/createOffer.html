@@ -35,14 +35,16 @@
             <textarea name="offerItem.description">${flash['offerItem.description']}</textarea>
           </li>
           <li>
-            <label>Units</label>
-            <select name="offerItem.credit" style="width:150px;">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
+	    #{error 'offerItem.credit' /}
+            <label>Honey Combs</label>
+	    <input type="text" name="offerItem.credit" value="${flash['offerItem.credit']}" />
+            <!-- <select name="offerItem.credit" style="width:150px;"> -->
+            <!--   <option value="1">1</option> -->
+            <!--   <option value="2">2</option> -->
+            <!--   <option value="3">3</option> -->
+            <!--   <option value="4">4</option> -->
+            <!--   <option value="5">5</option> -->
+            <!-- </select> -->
           </li>
         </ul>
       </fieldset>
