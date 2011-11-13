@@ -35,15 +35,15 @@ public class Offer extends Model
     /* Commenting out to test validation
     @Required
     @Temporal(TemporalType.TIMESTAMP) */
-    public Date startDate;
+//    public Date startDate;
 
     @Required
     @Temporal(TemporalType.TIMESTAMP)
     public Date endDate;
 
-    public void setStartDate() {
-	this.startDate = new Date();
-    }
+    // public void setStartDate() {
+    // 	this.startDate = new Date();
+    // }
 	
 
 /*    @Required
@@ -60,8 +60,10 @@ public class Offer extends Model
 
     // @Required
     // @ManyToOne
-    // public User user;
+    //public User user;
 
+    public String userEmail;
+    
     // @OneToMany
     // public List<UploadedFile> images;
 

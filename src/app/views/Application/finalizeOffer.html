@@ -7,6 +7,7 @@
     <h3 style="padding-top:0px;">Finalizing Offer</h3>
 
     <form action="@{Application.saveOffer(offerItem)}" method="POST">
+      <input type="hidden" name="offerItem.userEmail" value="${offerItem.userEmail}" />
       <p>
 	Offer Title:
       </p>
