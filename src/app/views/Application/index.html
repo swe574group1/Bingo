@@ -160,12 +160,6 @@ Welcome ${user.nickname}!
   </div>
   #{/if}
   #{else}
-  #{if flash.error}
-  <p>{$flash.error}</p>
-  #{/if}
-  #{if flash.succes}
-  <p>{$flash.success}</p>
-  #{/if}
   <div>
     #{form @Secure.authenticate()}
     <p id="username-field">
