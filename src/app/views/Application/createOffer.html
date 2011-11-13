@@ -9,10 +9,10 @@
   <div class="post" style="padding:top:0px">
     <h3 style="padding-top:0px;">Create New Offer</h3>
     <p>Use the form below to create a new offer.</p>
-    <p class="hata"> Errors looks like this. Something went terribly wrong! Nuclear explosion warning!</p>
-    <p class="ikaz">Warning. Please be a kind girl!</p>
-    <p class="tamam">Hey, we did it!</p>
-    <p class="bilgi"> here comes info. Very informative!!!</p>
+    <!-- <p class="hata"> Errors looks like this. Something went terribly wrong! Nuclear explosion warning!</p> -->
+    <!-- <p class="ikaz">Warning. Please be a kind girl!</p> -->
+    <!-- <p class="tamam">Hey, we did it!</p> -->
+    <!-- <p class="bilgi"> here comes info. Very informative!!!</p> -->
     <form action="@{Application.doCreateOfferItem()}" method="POST" class="utility_form">
 
       <fieldset>
@@ -36,7 +36,7 @@
           </li>
           <li>
             <label>Units</label>
-            <select name="credit" style="width:150px;">
+            <select name="offerItem.credit" style="width:150px;">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
