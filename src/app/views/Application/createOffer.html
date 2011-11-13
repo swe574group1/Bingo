@@ -3,16 +3,16 @@
 
 #{set 'moreScripts'}
 <script src="@{'/public/javascripts/datepicker.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-#{/set}
+n#{/set}
 
 <div id="main" style="padding-top:0px">
   <div class="post" style="padding:top:0px">
     <h3 style="padding-top:0px;">Create New Offer</h3>
     <p>Use the form below to create a new offer.</p>
-    <p class="hata"> Errors looks like this. Something went terribly wrong! Nuclear explosion warning!</p>
-    <p class="ikaz">Warning. Please be a kind girl!</p>
-    <p class="tamam">Hey, we did it!</p>
-    <p class="bilgi"> here comes info. Very informative!!!</p>
+    <!-- <p class="hata"> Errors looks like this. Something went terribly wrong! Nuclear explosion warning!</p> -->
+    <!-- <p class="ikaz">Warning. Please be a kind girl!</p> -->
+    <!-- <p class="tamam">Hey, we did it!</p> -->
+    <!-- <p class="bilgi"> here comes info. Very informative!!!</p> -->
     <form action="@{Application.doCreateOfferItem()}" method="POST" class="utility_form">
 
       <fieldset>
@@ -20,17 +20,23 @@
         
         <ul>
           <li>
-	    #{error 'offerItem.title' /}
+	    #{if errors}
+	    <p class="hata">Offer title is required</p>
+	    #{/if}
             <label>Title</label>
             <input type="text" name="offerItem.title" value="${flash['offerItem.title']}" />
           </li>
           <li>
-	    #{error 'offerItem.tags' /}
+	    #{if errors}
+	    <p class="hata">At least one tag is required</p>
+	    #{/if}
             <label>Tags</label>
             <input type="text" name="offerItem.tags" value="${flash['offerItem.tags']}" />
           </li>
           <li>
-	    #{error 'offerItem.description' /}
+	    #{if errors}
+	    <p class="hata">A description is required</p>
+	    #{/if}
             <label>Description</label>
             <textarea name="offerItem.description">${flash['offerItem.description']}</textarea>
           </li>
@@ -67,8 +73,10 @@
           </li>-->
           
           <li>
-	    #{error 'offerItem.endDate' /}
-            <label>Valid Until</label>
+	    #{if errors}
+	    <p class="hata">A date for latest validity has to be specified</p>
+	    #{/if}
+            <label>Valid Until (YYYY-MM-DD)</label>
             <input type="text" name="offerItem.endDate" class="date_pick" value="${flash['offerItem.endDate']}" />
           </li>
           
