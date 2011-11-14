@@ -86,6 +86,11 @@ public class Application extends Controller
 	render(offerItem);
     }
 
+    public static void showRequestDetails(Long id) {
+	Request requestItem = Request.findById(id);
+	render(requestItem);
+    }
+    
     public static void showRequest(Long id) {
 	Request requestItem = Request.findById(id);
 	render(requestItem);
@@ -94,6 +99,11 @@ public class Application extends Controller
     public static void listUserOffers(String email) {
 	List<Offer> offers = Offer.find("byUserEmail", email).fetch();
 	render(offers);
+    }
+
+    public static void listUserRequests(String email) {
+	List<Request> requests = Request.find("byUserEmail", email).fetch();
+	render(requests);
     }
     
 }

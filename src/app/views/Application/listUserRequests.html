@@ -1,0 +1,15 @@
+#{extends 'main.html' /}
+#{set title:'Your Requests' /}
+
+#{if requests}
+<ul>
+#{list items:requests, as:'request'}
+<li>
+ Request Title: ${request.title} <a href="@{Application.showRequestDetails(request.id)}">(show details)</a>
+</li>
+#{/list}
+</ul>
+#{/if}
+#{else}
+Currently you have no requests.
+#{/else}
