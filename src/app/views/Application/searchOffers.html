@@ -1,0 +1,12 @@
+#{extends 'main.html' /}
+#{set title:'Search Offers' /}
+
+#{if offers}
+<ul>
+  #{list items:offers, as:'offer'}
+  <li>
+    ${offer.title}
+  </li>
+  #{/list}
+</ul>
+#{/if}

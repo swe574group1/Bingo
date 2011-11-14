@@ -105,5 +105,9 @@ public class Application extends Controller
 	List<Request> requests = Request.find("byUserEmail", email).fetch();
 	render(requests);
     }
-    
+
+    public static void searchOffers() {
+	List<Offer> offers = Offer.all().fetch();
+	render(offers);
+    }
 }
