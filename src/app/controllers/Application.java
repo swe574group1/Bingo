@@ -1,7 +1,6 @@
 package controllers;
 
-import java.util.Date;
-
+import java.util.*;
 
 import models.City;
 import models.County;
@@ -82,9 +81,19 @@ public class Application extends Controller
 	render(offerItem);
     }
 
+    public static void showOfferDetails(Long id) {
+	Offer offerItem = Offer.findById(id);
+	render(offerItem);
+    }
+
     public static void showRequest(Long id) {
 	Request requestItem = Request.findById(id);
 	render(requestItem);
     }
 
+    public static void listUserOffers(String email) {
+	List<Offer> offers = Offer.find("byUserEmail", email).fetch();
+	render(offers);
+    }
+    
 }
