@@ -116,4 +116,8 @@ public class Application extends Controller
 	render(requests);
     }
 
+    public static void termsOfService() {
+	render();
+    }
+
 }
