@@ -110,4 +110,10 @@ public class Application extends Controller
 	List<Offer> offers = Offer.all().fetch();
 	render(offers);
     }
+
+    public static void searchRequests() {
+	List<Request> requests = Request.all().fetch();
+	render(requests);
+    }
+
 }
