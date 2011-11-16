@@ -63,9 +63,11 @@ public class Offer extends Model
     //public User user;
 
     public String userEmail;
+
+    public UploadedFile image;
     
-    @OneToMany
-    public List<UploadedFile> images;
+    // @OneToMany
+    // public List<UploadedFile> images;
 
     // @Required
     // public Boolean allowMultipleAttendees; */

@@ -2,11 +2,7 @@ package controllers;
 
 import java.util.*;
 
-import models.City;
-import models.County;
-import models.User;
-import models.Offer;
-import models.Request;
+import models.*;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.With;
