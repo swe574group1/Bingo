@@ -2,11 +2,20 @@
 #{set title:'Search Offers' /}
 
 #{if offers}
-<ul>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Offerer</th>
+    <th>Valid Until</th>
+    <th>Honey Combs</th>
+  </tr>
   #{list items:offers, as:'offer'}
-  <li>
-    ${offer.title}
-  </li>
+  <tr>
+    <td>${offer.title}</td>
+    <td>${offer.userEmail}</td>
+    <td>${offer.endDate}</td>
+    <td>${offer.credit}</td>
+  </tr>
   #{/list}
-</ul>
+</table>
 #{/if}
