@@ -116,6 +116,18 @@ public class Application extends Controller
 	render(requests);
     }
 
+    public static void about() {
+	render();
+    }
+
+    public static void faq() {
+	render();
+    }
+
+    public static void contact() {
+	render();
+    }
+    
     public static void termsOfService() {
 	render();
     }

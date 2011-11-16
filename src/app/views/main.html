@@ -21,10 +21,10 @@
 	<div  id="nav">
 	  <ul>
             <li id="current"><a href=@{Application.index()}>Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="@{Application.about()}">About</a></li>
+            <li><a href="@{Application.faq()}">FAQ</a></li>
             <li><a href="@{Application.termsOfService()}">Terms Of Service</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="@{Application.contact()}">Contact</a></li>
 	  </ul>
 	</div>
 	<!--<p id="rss"> <a href="#">Grab the RSS feed</a> </p>-->
