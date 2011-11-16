@@ -132,4 +132,9 @@ public class Application extends Controller
 	render();
     }
 
+    public static void associateImage(Offer offer, UploadedFile image) {
+	offer.image = image;
+	offer.save();
+    }
+
 }
