@@ -1,14 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
+    
     <title>#{get 'title' /} | LET IT BEE!</title>
     <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+    
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
     <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/screen.css'}" />
     #{get 'moreStyles' /}
-    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
-    <script src="@{'/public/javascripts/jquery.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-    <script src="@{'/public/javascripts/index.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/jquery.js'}" type="text/javascript" charset="${_response_encoding}"></script>
     #{get 'moreScripts' /}
+    
   </head>
   <body>
     <!--header -->
