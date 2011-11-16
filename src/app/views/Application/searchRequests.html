@@ -1,19 +1,21 @@
 #{extends 'main.html' /}
 #{set title:'Search Requests' /}
 
-#{if requests}
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Requester</th>
-    <th>Valid Until</th>
-  </tr>
-  #{list items:requests, as:'request'}
-  <tr>
-    <td>${request.title}</td>
-    <td>${request.userEmail}</td>
-    <td>${request.endDate}</td>
-  </tr>
-  #{/list}
-</table>
-#{/if}
+<div id="main" style="padding-top:0px">
+  #{if requests}
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Requester</th>
+      <th>Valid Until</th>
+    </tr>
+    #{list items:requests, as:'request'}
+    <tr>
+      <td>${request.title}</td>
+      <td>${request.userEmail}</td>
+      <td>${request.endDate}</td>
+    </tr>
+    #{/list}
+  </table>
+  #{/if}
+</div>
