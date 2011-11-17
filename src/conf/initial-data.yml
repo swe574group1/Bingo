@@ -3,27 +3,17 @@
 User(bob):
   email: bob@gmail.com
   password: secret
-  nickname: bob
   fullname: Bob
   address: Babiali
-  balance: 13
-  birthday: 1980-01-01
-  city: City
-  job: clown
-  phone: 2125555555
-  registrationDate: 2011-11-01
-  reputation: 2
+  isAdmin: false
+  balance: -8
+  reputation: 3
 
 User(milhouse):
   email: milhouse@gmail.com
   password: lisa
-  nickname: mvh
   fullname: Milhouse
-  balance: 8
   address: Springfield
-  birthday: 1990-02-03
-  city: Springfield
-  job: Student
-  phone: 2165555555
-  registrationDate: 2011-11-17
-  reputation: 4
+  isAdmin: false
+  balance: 13
+  reputation: 5
