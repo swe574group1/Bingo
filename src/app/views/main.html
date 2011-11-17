@@ -20,12 +20,11 @@
 	<p id="slogan">To Bee or Not To Bee</p>
 	<div  id="nav">
 	  <ul>
-	    <!--TODO: implement selected link functionality (id="current")-->
-            <li><a href=@{Application.index()}>Home</a></li>
-            <li><a href="@{Application.about()}">About</a></li>
-            <li><a href="@{Application.faq()}">FAQ</a></li>
-            <li><a href="@{Application.termsOfService()}">Terms Of Service</a></li>
-            <li><a href="@{Application.contact()}">Contact</a></li>
+            <li #{if title == 'Home'}id="current"#{/if}><a href="@{Application.index()}">Home</a></li>
+            <li #{if title == 'About'}id="current"#{/if}><a href="@{Application.about()}">About</a></li>
+            <li #{if title == 'FAQ'}id="current"#{/if}><a href="@{Application.faq()}">FAQ</a></li>
+            <li #{if title == 'Terms of Service'}id="current"#{/if}><a href="@{Application.termsOfService()}">Terms Of Service</a></li>
+            <li #{if title == 'Contact'}id="current"#{/if}><a href="@{Application.contact()}">Contact</a></li>
 	  </ul>
 	</div>
 	<!--<p id="rss"> <a href="#">Grab the RSS feed</a> </p>-->
