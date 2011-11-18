@@ -21,7 +21,8 @@ public class Application extends Controller
     }
     public static void index()
     {
-	render();
+	List<User> newUsers = User.getNewUsers(5);
+	render(newUsers);
     }
 
     public static void register() {

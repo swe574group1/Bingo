@@ -1,6 +1,6 @@
 package models;
 
-import java.util.Date;
+import java.util.*;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -70,11 +70,12 @@ public class User extends Model
      // @Enumerated(EnumType.STRING)
      // public Status status;
 
+     public static List<User> getNewUsers(int maxUsers) {
+	 return User.all().fetch(maxUsers);
+     }
+     
      public static User connect(String email, String password) {
 	 return find("byEmailAndPassword", email, password).first();
      }
 
-     // public void setRegistrationDate() {
-     // 	 registrationDate = new Date();
-     // }
 }
