@@ -15,6 +15,9 @@ import play.db.jpa.Model;
 @Entity
 public class User extends Model
  {
+     public int INITIAL_BALANCE = 10;
+     public int INITIAL_REPUTATION = 1;
+     
      // public enum Status {
      // 	 WAITING_CONFIRMATION, ACTIVE, PASSIVE
      // 	     };
@@ -34,9 +37,9 @@ public class User extends Model
      @Required
      public Boolean isAdmin;
 
-     // @Required
-     // @Temporal(TemporalType.TIMESTAMP)
-     // public Date registrationDate;
+     @Required
+     @Temporal(TemporalType.TIMESTAMP)
+     public Date registrationDate;
 
      @Required
      public String address;
@@ -71,11 +74,18 @@ public class User extends Model
      // public Status status;
 
      public static List<User> getNewUsers(int maxUsers) {
-	 return User.all().fetch(maxUsers);
+	 return find("order by registrationDate DESC").fetch(maxUsers);
      }
      
      public static User connect(String email, String password) {
 	 return find("byEmailAndPassword", email, password).first();
      }
+
+     public User() {
+	 this.registrationDate = new Date();
+	 this.isAdmin = false;
+	 this.balance = INITIAL_BALANCE;
+	 this.reputation = INITIAL_REPUTATION;
+     }	 
 
 }

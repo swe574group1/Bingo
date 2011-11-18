@@ -7,7 +7,7 @@ import play.data.validation.*;
 public class Users extends Controller {
 
     public static void register() {
-	render();
+	render(new User());
     }
 
     public static void doCreateUserEntry(@Valid User user) {
