@@ -9,14 +9,17 @@
       <th>Offerer</th>
       <th>Valid Until</th>
       <th>Honey Combs</th>
+      <th>Details</th>
     </tr>
     #{list items:offers, as:'offer'}
-    <tr>
-      <a href="@{Offers.detail()}"<td>${offer.title}</td></a>
-      <td>${offer.userEmail}</td>
-      <td>${offer.endDate}</td>
-      <td>${offer.credit}</td>
-    </tr>
+      <tr>
+	<td>${offer.title}</td>
+	<td>${offer.userEmail}</td>
+	<td>${offer.endDate}</td>
+	<td>${offer.credit}</td>
+	<td><a href="@{Offers.detail(offer.id)}">Details</a></td>
+      </tr>
+    </a>
     #{/list}
   </table>
   #{/if}
