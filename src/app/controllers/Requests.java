@@ -2,7 +2,7 @@ package controllers;
 
 import java.util.List;
 
-import models.Request;
+import models.*;
 import play.data.validation.*;
 import play.mvc.Controller;
 import service.SearchService;
@@ -26,43 +26,44 @@ public class Requests extends Controller
 	}
 
     public static void detail(Long requestId)
-	{
-	    if (requestId == null) {
-		error("missing requestId");
-	    }
+    	{
+    	    if (requestId == null) {
+    		error("missing requestId");
+    	    }
 
-	    Request request = Request.findById(requestId);
+    	    Request request = Request.findById(requestId);
 
-	    render(request);
-	}
+    	    render(request);
+     	}
+    
+    /* commented out because throws exception and I have no idea how to fix */
+    // public static void search(List<String> tags, SortField sortField, SortDirection sortDirection)
+    // 	{
+    // 	    SearchQuery query = new SearchQuery();
+    // 	    query.tags = tags;
+    // 	    query.sortField = sortField;
+    // 	    query.sortDirection = sortDirection;
+    // 	    SearchResult<Request> searchResult = SearchService.search(Type.REQUEST, query);
 
-    public static void search(List<String> tags, SortField sortField, SortDirection sortDirection)
-	{
-	    SearchQuery query = new SearchQuery();
-	    query.tags = tags;
-	    query.sortField = sortField;
-	    query.sortDirection = sortDirection;
-	    SearchResult<Request> searchResult = SearchService.search(Type.REQUEST, query);
+    // 	    List<Request> requests = searchResult.entities;
+    // 	    render(requests);
+    // 	}
 
-	    List<Request> requests = searchResult.entities;
-	    render(requests);
-	}
-
-    public static void create() {
-	render();
+    public static void create(User user) {
+	render(user);
     }
 
-    public static void doCreateRequestItem(@Valid Request requestItem) {
+    public static void doCreate(@Valid Request requestItem, User user) {
 	if (validation.hasErrors()) {
 	    params.flash();
 	    validation.keep();
-	    create();
+	    create(user);
 	}
-	finalize(requestItem);
+	finalize(requestItem, user);
     }
 
-    public static void finalize(Request requestItem) {
-	render(requestItem);
+    public static void finalize(Request requestItem, User user) {
+	render(requestItem, user);
     }
 
     public static void save(Request requestItem) {
@@ -70,11 +71,6 @@ public class Requests extends Controller
 	show(requestItem.id);
     }
 
-    public static void showDetails(Long id) {
-	Request requestItem = Request.findById(id);
-	render(requestItem);
-    }
-    
     public static void show(Long id) {
 	Request requestItem = Request.findById(id);
 	render(requestItem);
@@ -84,11 +80,15 @@ public class Requests extends Controller
 	List<Request> requests = Request.find("byUserEmail", email).fetch();
 	render(requests);
     }
+    
+    public static void showDetails(Long id) {
+	Request requestItem = Request.findById(id);
+	render(requestItem);
+    }
 
     public static void search() {
 	List<Request> requests = Request.all().fetch();
 	render(requests);
     }
-
 
 }

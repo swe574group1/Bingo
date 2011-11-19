@@ -8,12 +8,12 @@
     <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
     <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/screen.css'}" />
     #{get 'moreStyles' /}
-        <script src="@{'/public/javascripts/jquery.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/javascripts/jquery.js'}" type="text/javascript" charset="${_response_encoding}"></script>
     #{get 'moreScripts' /}
     
   </head>
   <body>
-    <!--header -->
+
     <div id="header-wrap">
       <div id="header"> <a name="top"></a>
 	<h1 id="logo-text"><a href="@{Application.index()}">LET IT BEE!</a></h1>
@@ -27,30 +27,20 @@
             <li #{if title == 'Contact'}id="current"#{/if}><a href="@{Application.contact()}">Contact</a></li>
 	  </ul>
 	</div>
-	<!--<p id="rss"> <a href="#">Grab the RSS feed</a> </p>-->
-	<!--<form id="quick-search" method="get" action="#">
-	    <fieldset class="search">
-	      <label for="qsearch">Search:</label>
-	      <input class="tbox" id="qsearch" type="text" name="qsearch" value="Search..." />
-	      <button class="btn">Search</button>
-	    </fieldset>
-	</form>-->
-	<!--/header-->
       </div>
     </div>
-    <!-- content-outer -->
+
     <div id="content-wrap" class="clear" >
-      <!-- content -->
+
       <div id="content">
 	#{doLayout /}
 	#{if isLoggedIn}
 	<div id="sidebar"  style="border:0px solid #aaa; padding-top:0px;">  
 	  <div class="sidemenu">
 
-
 	    <ul>
 	      <li><a href="@{Offers.create(user)}">Create Offer</a></li>
-	      <li><a href="@{Requests.create()}">Create Request</a></li>
+	      <li><a href="@{Requests.create(user)}">Create Request</a></li>
 	      <li><a href="@{Offers.listBelongingToUser(user.email)}">My Offers</a></li>
 	      <li><a href="@{Requests.listBelongingToUser(user.email)}">My Requests</a></li>
 	      <li><a href="@{Offers.search()}">Search Offers</a></li>

@@ -1,0 +1,29 @@
+#{extends 'main.html' /}
+#{set title:'Search Offers' /}
+
+<div id="main" style="padding-top:0px">
+  #{if offers}
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Offerer</th>
+      <th>Valid Until</th>
+      <th>Honey Combs</th>
+      <th>Details</th>
+    </tr>
+    #{list items:offers, as:'offer'}
+      <tr>
+	<td>${offer.title}</td>
+	<td>${offer.userEmail}</td>
+	<td>${offer.endDate}</td>
+	<td>${offer.credit}</td>
+	<td><a href="@{Offers.showDetails(offer.id)}">Details</a></td>
+      </tr>
+    </a>
+    #{/list}
+  </table>
+  #{/if}
+  #{else}
+  There are no offers available.
+  #{/else}
+</div>

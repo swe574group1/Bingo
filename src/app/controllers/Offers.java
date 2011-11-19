@@ -26,61 +26,32 @@ public class Offers extends Controller
 	}
 
     public static void detail(Long offerId)
-	{
-	    if (offerId == null) {
-		error("missing offerId");
-	    }
+    	{
+    	    if (offerId == null) {
+    		error("missing offerId");
+    	    }
 
-	    Offer offer = Offer.findById(offerId);
+    	    Offer offer = Offer.findById(offerId);
 
-	    render(offer);
-	}
+    	    render(offer);
+    	}
 
-    public static void search(List<String> tags, SortField sortField, SortDirection sortDirection)
-	{
-	    SearchQuery query = new SearchQuery();
-	    query.tags = tags;
-	    query.sortField = sortField;
-	    query.sortDirection = sortDirection;
-	    SearchResult<Offer> searchResult = SearchService.search(Type.OFFER, query);
+    /* Commented out because throws exception and I have no idea how to fix */
+    // public static void search(List<String> tags, SortField sortField, SortDirection sortDirection)
+    // 	{
+    // 	    SearchQuery query = new SearchQuery();
+    // 	    query.tags = tags;
+    // 	    query.sortField = sortField;
+    // 	    query.sortDirection = sortDirection;
+    // 	    SearchResult<Offer> searchResult = SearchService.search(Type.OFFER, query);
 
-	    List<Offer> offers = searchResult.entities;
-	    render(offers);
+    // 	    List<Offer> offers = searchResult.entities;
+    // 	    render(offers);
 
-	}
+    // 	}
 
-    public static void listBelongingToUser(String email) {
-	List<Offers> offers = Offer.find("byUserEmail", email).fetch();
-	render(offers);
-    }
-
-    
-    public static void search() {
-	List<Offer> offers = Offer.all().fetch();
-	render(offers);
-    }
-
-    public static void show(Long id) {
-	Offer offerItem = Offer.findById(id);
-	render(offerItem);
-    }
-
-    public static void showDetails(Long id) {
-	Offer offerItem = Offer.findById(id);
-	render(offerItem);
-    }
-    
-    public static void save(Offer offerItem) {
-	offerItem.save();
-	show(offerItem.id);
-    }
-    
     public static void create(User user) {
 	render(user);
-    }
-
-    public static void finalize(Offer offerItem) {
-	render(offerItem);
     }
 
     public static void doCreate(@Valid Offer offerItem, User user) {
@@ -89,6 +60,36 @@ public class Offers extends Controller
 	    validation.keep();
 	    create(user);
 	}
-	finalize(offerItem);
+	finalize(offerItem, user);
     }
+    
+    public static void finalize(Offer offerItem, User user) {
+	render(offerItem, user);
+    }
+
+    public static void save(Offer offerItem) {
+	offerItem.save();
+	show(offerItem.id);
+    }
+
+    public static void show(Long id) {
+	Offer offerItem = Offer.findById(id);
+	render(offerItem);
+    }
+
+    public static void listBelongingToUser(String email) {
+	List<Offers> offers = Offer.find("byUserEmail", email).fetch();
+	render(offers);
+    }
+
+    public static void showDetails(Long id) {
+	Offer offerItem = Offer.findById(id);
+	render(offerItem);
+    }
+
+    public static void search() {
+	List<Offer> offers = Offer.all().fetch();
+	render(offers);
+    }
+
 }

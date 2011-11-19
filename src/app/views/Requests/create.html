@@ -1,5 +1,5 @@
 #{extends 'main.html' /}
-#{set title:'Create Offer' /}
+#{set title:'Create Request' /}
 
 #{set 'moreStyles'}
 <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/datepicker.css'}">
@@ -12,34 +12,29 @@
 
 <div id="main" style="padding-top:0px">
   <div class="post" style="padding:top:0px">
-    <h3 style="padding-top:0px;">Create New Offer</h3>
-    <p>Use the form below to create a new offer.</p>
-    <form action="@{Offers.doCreate()}" method="POST" class="utility_form">
+    <h3 style="padding-top:0px;">Create New Request</h3>
+    <p>Use the form below to create a new request.</p>
+    <form action="@{Requests.doCreate()}" method="POST" class="utility_form">
 
       <fieldset>
         <legend>Descriptions</legend>
         
         <ul>
-	  <input type="hidden" name="offerItem.userEmail" value="${user.email}" />
+	  <input type="hidden" name="requestItem.userEmail" value="${user.email}" />
           <li>
-	    #{error 'offerItem.title' /}
+	    #{error 'requestItem.title' /}
             <label>Title</label>
-            <input type="text" name="offerItem.title" value="${flash['offerItem.title']}" />
+            <input type="text" name="requestItem.title" value="${flash['requestItem.title']}" />
           </li>
           <li>
-	    #{error 'offerItem.tags' /}
+	    #{error 'requestItem.tags' /}
             <label>Tags</label>
-            <input type="text" name="offerItem.tags" value="${flash['offerItem.tags']}" />
+            <input type="text" name="requestItem.tags" value="${flash['requestItem.tags']}" />
           </li>
           <li>
-	    #{error 'offerItem.description' /}
+	    #{error 'requestItem.description' /}
             <label>Description</label>
-            <textarea name="offerItem.description">${flash['offerItem.description']}</textarea>
-          </li>
-          <li>
-	    #{error 'offerItem.credit' /}
-            <label>Honey Combs</label>
-	    <input type="text" name="offerItem.credit" value="${flash['offerItem.credit']}" />
+            <textarea name="requestItem.description">${flash['requestItem.description']}</textarea>
           </li>
         </ul>
       </fieldset>
@@ -48,9 +43,9 @@
         <legend>Limitations</legend>
         <ul>
           <li>
-	    #{error 'offerItem.endDate' /}
+	    #{error 'requestItem.endDate' /}
             <label>Valid Until</label>
-            <input type="text" name="offerItem.endDate" class="date_pick" value="${flash['offerItem.endDate']}" />
+            <input type="text" name="requestItem.endDate" class="date_pick" value="${flash['requestItem.endDate']}" />
           </li>
         </ul>
         

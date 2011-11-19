@@ -4,10 +4,10 @@
 <div id="main" style="padding-top:0px">
   <div class="post" style="padding:top:0px">
     <div class="right">
-      <h3>${offerItem.title}</h3>
+      <h3>${request.title}</h3>
 
       <h4>Description</h4>
-      <p>${offerItem.description}</p>
+      <p>${request.description}</p>
       
       <div class="restrictions">
         <ul>
@@ -16,7 +16,7 @@
           <!-- </li> -->
           <li>
             <label>Valid Until</label>
-	    ${offerItem.endDate}
+	    ${request.endDate}
           </li>
           <li>
             <label>Location</label> Istanbul / Sisli / Pangalti
@@ -29,7 +29,7 @@
       <a href="#"><img src="images/icons/user.png" class="owner_image" /></a>
       <div class="post-meta">
         <ul>
-          <li class="user"><a href="#">${offerItem.userEmail}</a></li>
+          <li class="user"><a href="#">${request.userEmail}</a></li>
           <li class="time"><a href="#">10 Units</a></li>
           <li class="comment"><a href="#">27 Applicants</a></li>
         </ul>
@@ -38,7 +38,7 @@
     
     <div class="post-meta">
       <h4>tags</h4>
-      ${offerItem.tags}
+      ${request.tags}
     </div>
     
   </div>

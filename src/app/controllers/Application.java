@@ -12,7 +12,7 @@ import play.data.validation.*;
 public class Application extends Controller
 {   
     @Before
-	static void setConnectedUser() {
+    static void setConnectedUser() {
 	boolean isConnected = Security.isConnected();
 	renderArgs.put("isLoggedIn", isConnected);
 	if(isConnected) {
@@ -21,21 +21,14 @@ public class Application extends Controller
 	}
     }
     public static void index()
-    {
-	List<User> newUsers = User.getNewUsers(5);
-	render(newUsers);
-    }
+	{
+	    List<User> newUsers = User.getNewUsers(5);
+	    render(newUsers);
+	}
 
     public static void register() {
 	render();
     }
-
-
-    public static void listBelongingtoUser(String email) {
-	List<Offer> offers = Offer.find("byUserEmail", email).fetch();
-	render(offers);
-    }
-
 
     public static void about() {
 	render();
@@ -51,11 +44,6 @@ public class Application extends Controller
     
     public static void termsOfService() {
 	render();
-    }
-
-    public static void associateImage(Offer offer, UploadedFile image) {
-	offer.image = image;
-	offer.save();
     }
 
 }

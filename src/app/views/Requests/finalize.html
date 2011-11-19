@@ -1,0 +1,28 @@
+#{extends 'main.html' /}
+#{set title:'Finalize Request' /}
+
+<div id="main" style="padding-top:0px">
+  <div class="post" style="padding:top:0px">
+    <h3 style="padding-top:0px;">Finalizing Request</h3>
+    <form action="@{Requests.save(requestItem)}" method="POST">
+      <input type="hidden" name="requestItem.userEmail" value="${requestItem.userEmail}" />
+      <p>
+	Request Title:
+      </p>
+      ${requestItem.title}
+      <p>
+	Request Tags:
+      </p>
+      ${requestItem.tags}
+      <p>
+	Request Description:
+      </p>
+      ${requestItem.description}
+      <br/><br/>
+      <input type="submit" name="create" method="POST" value="Create Request" />
+      <input type="button" value="Edit Request" onclick="window.history.back()" />
+    </form>
+    
+  </div>
+
+</div>

@@ -1,0 +1,21 @@
+#{extends 'main.html' /}
+#{set title:'Request Created' /}
+<div id="main">
+  <h3>Your request was succesfully created.</h3>
+  <h4>Details:</h4>
+  <p>
+    <span class="title">Name:</span> ${requestItem.title}
+  </p>
+  <p>
+    <span class="title">Tags:</span> ${requestItem.tags}
+  </p>
+  <p>
+    <span class="title">Description:</span> ${requestItem.description}
+  </p>
+  <p>
+    <span class="title">Valid Until:</span> ${requestItem.endDate}
+  </p>
+  <p>
+    <a href="@{Application.index()}">Main Page</a>
+  </p>
+</div>
