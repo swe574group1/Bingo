@@ -1,6 +1,6 @@
 package models;
 
-import java.util.Date;
+import java.util.*;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,63 +14,78 @@ import play.db.jpa.Model;
 
 @Entity
 public class User extends Model
-{
-    public enum Status {
-        WAITING_CONFIRMATION, ACTIVE, PASSIVE
-    }
+ {
+     public int INITIAL_BALANCE = 10;
+     public int INITIAL_REPUTATION = 1;
+     
+     // public enum Status {
+     // 	 WAITING_CONFIRMATION, ACTIVE, PASSIVE
+     // 	     };
 
-    @Required
-	public String email;
+     @Required
+     public String email;
 
-    @Required
-	public String password;
+     @Required
+     public String password;
 
-    @Required
-    public String nickname;
+     // @Required
+     // public String nickname;
 
-    @Required
-	public String fullname;
+     @Required
+     public String fullname;
 
-    @Required
-	public Boolean isAdmin;
+     @Required
+     public Boolean isAdmin;
 
-    @Required
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date registrationDate;
+     @Required
+     @Temporal(TemporalType.TIMESTAMP)
+     public Date registrationDate;
 
-    @Required
-	public String address;
+     @Required
+     public String address;
 
-    @Required
-	public String phone;
+     // @Required
+     // public String phone;
 
-    @OneToOne
-	public UploadedFile avatar;
+     // @OneToOne
+     // public UploadedFile avatar;
 
-    @Required
-    public Integer balance;
+     @Required
+     public Integer balance;
 
-    @Required
-    public Integer reputation;
+     @Required
+     public Integer reputation;
 
-    @Required
-    @Temporal(TemporalType.DATE)
-    public Date birthday;
+     // @Required
+     // @Temporal(TemporalType.DATE)
+     // public Date birthday;
 
-    @Required
-    public String job;
+     // @Required
+     // public String job;
 
-    @Required
-    public City city;
+     // @Required
+     // public City city;
 
-    @Required
-    public County county;
+     // @Required
+     // public County county;
 
-    @Required
-    @Enumerated(EnumType.STRING)
-    public Status status;
+     // @Required
+     // @Enumerated(EnumType.STRING)
+     // public Status status;
 
-    public static User connect(String email, String password) {
-        return find("byEmailAndPassword", email, password).first();
-    }
+     public static List<User> getNewUsers(int maxUsers) {
+	 return find("order by registrationDate DESC").fetch(maxUsers);
+     }
+     
+     public static User connect(String email, String password) {
+	 return find("byEmailAndPassword", email, password).first();
+     }
+
+     public User() {
+	 this.registrationDate = new Date();
+	 this.isAdmin = false;
+	 this.balance = INITIAL_BALANCE;
+	 this.reputation = INITIAL_REPUTATION;
+     }	 
+
 }

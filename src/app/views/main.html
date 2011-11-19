@@ -1,14 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
+    
     <title>#{get 'title' /} | LET IT BEE!</title>
     <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+    
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
     <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/screen.css'}" />
     #{get 'moreStyles' /}
-    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
-    <script src="@{'/public/javascripts/jquery.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-    <script src="@{'/public/javascripts/index.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/jquery.js'}" type="text/javascript" charset="${_response_encoding}"></script>
     #{get 'moreScripts' /}
+    
   </head>
   <body>
     <!--header -->
@@ -18,11 +20,11 @@
 	<p id="slogan">To Bee or Not To Bee</p>
 	<div  id="nav">
 	  <ul>
-            <li id="current"><a href=@{Application.index()}>Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="terms_of_Service.html">Terms Of Service</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li #{if title == 'Home'}id="current"#{/if}><a href="@{Application.index()}">Home</a></li>
+            <li #{if title == 'About'}id="current"#{/if}><a href="@{Application.about()}">About</a></li>
+            <li #{if title == 'FAQ'}id="current"#{/if}><a href="@{Application.faq()}">FAQ</a></li>
+            <li #{if title == 'Terms of Service'}id="current"#{/if}><a href="@{Application.termsOfService()}">Terms Of Service</a></li>
+            <li #{if title == 'Contact'}id="current"#{/if}><a href="@{Application.contact()}">Contact</a></li>
 	  </ul>
 	</div>
 	<!--<p id="rss"> <a href="#">Grab the RSS feed</a> </p>-->
@@ -52,6 +54,7 @@
 	      <li><a href="@{Application.listUserOffers(user.email)}">My Offers</a></li>
 	      <li><a href="@{Application.listUserRequests(user.email)}">My Requests</a></li>
 	      <li><a href="@{Application.searchOffers()}">Search Offers</a></li>
+	      <li><a href="@{Application.searchRequests()}">Search Requests</a></li>
 	      <!-- <li><a href="#">My Profile</a></li> -->
 	      <!-- <li><a href="#">Update Account</a></li> -->
 	    </ul>
@@ -94,17 +97,17 @@
 	<div class="col-a">
 	  <h3>About</h3>
 	  <p> This project is developed in SWE574 class @ Bogazici University Software Engineering Department.</p>
-	  <p>For more information: <a href="#">visit contact page</a></p>
+	  <p>For more information: <a href="@{Application.contact()}">visit contact page</a></p>
 	</div>
 	<div class="col-a">
 	  <h3>Site Links</h3>
 	  <div class="footer-list">
             <ul>
-	      <li><a href="#">Home</a></li>
-	      <li><a href="#">About</a></li>
-	      <li><a href="#">FAQ</a></li>
-	      <li><a href="#">Terms Of Service</a></li>
-	      <li><a href="#">Contact</a></li>
+	      <li><a href="@{Application.index()}">Home</a></li>
+	      <li><a href="@{Application.about()}">About</a></li>
+	      <li><a href="@{Application.faq()}">FAQ</a></li>
+	      <li><a href="@{Application.termsOfService()}">Terms Of Service</a></li>
+	      <li><a href="@{Application.contact()}">Contact</a></li>
             </ul>
 	  </div>
 	  

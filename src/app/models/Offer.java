@@ -63,6 +63,8 @@ public class Offer extends Model
     //public User user;
 
     public String userEmail;
+
+    public UploadedFile image;
     
     // @OneToMany
     // public List<UploadedFile> images;

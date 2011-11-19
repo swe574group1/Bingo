@@ -1,6 +1,15 @@
 #{extends 'main.html' /}
 #{set title:'Create Request' /}
 
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/datepicker.css'}">
+#{/set}
+
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/datepicker.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+<script src="@{'/public/javascripts/create-offer.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+#{/set}
+
 <div id="main" style="padding-top:0px">
   <div class="post" style="padding:top:0px">
     <h3 style="padding-top:0px;">Create New Request</h3>
@@ -37,20 +46,20 @@
       <fieldset>
         <legend>Limitations</legend>
         <ul>
-<!--          <li>
-            <label>Attendee Number</label>
-            <select name="attendee_number">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6-10">6-10</option>
-              <option value="10-20">10-20</option>
-              <option value="20-50">20-50</option>
-              <option value="50-100">50-100</option>
-              <option value="100+">100+</option>
-            </select>
+	  <!--          <li>
+			<label>Attendee Number</label>
+			<select name="attendee_number">
+			  <option value="1">1</option>
+			  <option value="2">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
+			  <option value="6-10">6-10</option>
+			  <option value="10-20">10-20</option>
+			  <option value="20-50">20-50</option>
+			  <option value="50-100">50-100</option>
+			  <option value="100+">100+</option>
+			</select>
           </li>-->
           
           <li>
@@ -59,19 +68,19 @@
             <input type="text" name="requestItem.endDate" class="date_pick" value="${flash['requestItem.endDate']}" />
           </li>
           
-<!--          <li>
-            <label>Location</label>
-            <select name="city">
-              <option value="1">List of Cities</option> 
-            </select>
-            <select name="town">
-              <option value="1">List of town</option> 
-            </select>
-            <select name="district">
-              <option value="1">List of district</option> 
-            </select>
-          </li>
-        </ul>-->
+	  <!--          <li>
+			<label>Location</label>
+			<select name="city">
+			  <option value="1">List of Cities</option> 
+			</select>
+			<select name="town">
+			  <option value="1">List of town</option> 
+			</select>
+			<select name="district">
+			  <option value="1">List of district</option> 
+			</select>
+          </li>-->
+        </ul>
         
       </fieldset>
       

@@ -3,13 +3,23 @@
 User(bob):
   email: bob@gmail.com
   password: secret
-  nickname: bob
-  fullname: Bob
+  fullname: Bob Loblaw
   address: Babiali
+  isAdmin: false
+  balance: -8
+  reputation: 3
+
+User(milhouse):
+  email: milhouse@gmail.com
+  password: lisa
+  fullname: Milhouse van Houten
+  address: Springfield
+  isAdmin: false
   balance: 13
-  birthday: 1980-01-01
-  city: City
-  job: clown
-  phone: 2125555555
-  registrationDate: 2011-11-01
-  reputation: 2
+  reputation: 5
+
+User(reducto):
+  email: mreducto@gmail.com
+  password: shrink
+  fullname: Myron Reducto
+  address: Williams Street

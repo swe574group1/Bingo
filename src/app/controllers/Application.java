@@ -2,11 +2,7 @@ package controllers;
 
 import java.util.*;
 
-import models.City;
-import models.County;
-import models.User;
-import models.Offer;
-import models.Request;
+import models.*;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.With;
@@ -25,7 +21,8 @@ public class Application extends Controller
     }
     public static void index()
     {
-	render();
+	List<User> newUsers = User.getNewUsers(5);
+	render(newUsers);
     }
 
     public static void register() {
@@ -110,4 +107,31 @@ public class Application extends Controller
 	List<Offer> offers = Offer.all().fetch();
 	render(offers);
     }
+
+    public static void searchRequests() {
+	List<Request> requests = Request.all().fetch();
+	render(requests);
+    }
+
+    public static void about() {
+	render();
+    }
+
+    public static void faq() {
+	render();
+    }
+
+    public static void contact() {
+	render();
+    }
+    
+    public static void termsOfService() {
+	render();
+    }
+
+    public static void associateImage(Offer offer, UploadedFile image) {
+	offer.image = image;
+	offer.save();
+    }
+
 }

@@ -1,0 +1,44 @@
+#{extends 'main.html' /}
+#{set title:"Contact" /}
+
+<div id="main" style="padding-top:0px">
+  <div class="post" style="padding:top:0px">
+    <h3 style="padding-top:0px;">Contact Us</h3>
+    <p>You can contact us by using the following form.</p>
+    <p class="hata"> Error!</p>
+    <p class="ikaz">Warning. </p>
+    <p class="tamam">Suces!</p>
+    <p class="bilgi"> nf </p>
+    <form action="#" method="POST" class="utility_form">
+      <fieldset>
+        <legend>Contact Info</legend>
+        
+        <ul>
+          <li>
+            <label>Your Name And Surname (*)</label>
+            <input type="text" name="name" value="" />
+          </li>
+          <li>
+            <label>Your Email (*)</label>
+            <input type="text" name="email" value="" />
+          </li>
+          <li>
+            <label>Subject of Your Message (*)</label>
+            <input type="text" name="subject" value="" />
+            
+          </li>
+          <li>
+            <label>Your Message (*)</label>
+            <textarea name="message"></textarea>
+          </li>
+          
+        </ul>
+      </fieldset>
+      
+      <input type="button" value="     Send    " />
+      
+    </form>
+    
+  </div>
+  
+</div>
