@@ -1,0 +1,17 @@
+#{extends 'main.html' /}
+#{set title:'Your Offers' /}
+
+<div id="main" style="padding-top:0px">
+  #{if offers}
+  <ul>
+    #{list items:offers, as:'offer'}
+    <li>
+      Offer Title: ${offer.title} <a href="@{Offers.showDetails(offer.id)}">(show details)</a>
+    </li>
+    #{/list}
+  </ul>
+  #{/if}
+  #{else}
+  Currently you have no offers.
+  #{/else}
+</div>

@@ -49,12 +49,12 @@
 
 
 	    <ul>
-	      <li><a href="@{Application.createOffer()}">Create Offer</a></li>
-	      <li><a href="@{Application.createRequest()}">Create Request</a></li>
-	      <li><a href="@{Application.listUserOffers(user.email)}">My Offers</a></li>
-	      <li><a href="@{Application.listUserRequests(user.email)}">My Requests</a></li>
-	      <li><a href="@{Application.searchOffers()}">Search Offers</a></li>
-	      <li><a href="@{Application.searchRequests()}">Search Requests</a></li>
+	      <li><a href="@{Offers.create(user)}">Create Offer</a></li>
+	      <li><a href="@{Requests.create()}">Create Request</a></li>
+	      <li><a href="@{Offers.listBelongingToUser(user.email)}">My Offers</a></li>
+	      <li><a href="@{Requests.listBelongingToUser(user.email)}">My Requests</a></li>
+	      <li><a href="@{Offers.search()}">Search Offers</a></li>
+	      <li><a href="@{Requests.search()}">Search Requests</a></li>
 	      <!-- <li><a href="#">My Profile</a></li> -->
 	      <!-- <li><a href="#">Update Account</a></li> -->
 	    </ul>
