@@ -12,7 +12,7 @@
     </tr>
     #{list items:offers, as:'offer'}
     <tr>
-      <td>${offer.title}</td>
+      <a href="@{Offers.detail()}"<td>${offer.title}</td></a>
       <td>${offer.userEmail}</td>
       <td>${offer.endDate}</td>
       <td>${offer.credit}</td>
