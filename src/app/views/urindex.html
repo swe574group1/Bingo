@@ -1,0 +1,108 @@
+#{extends 'main.html' /}
+
+#{if isLoggedIn}
+
+<div id="content">
+
+  <div id="main" style="padding-top:0px">
+    #{doLayout /}
+  </div>
+
+  <div id="sidebar"  style="border:0px solid #aaa; padding-top:0px;">
+    
+    <div class="sidemenu">
+      <h3>Menu</h3>
+      Welcome, ${user.fullname}!<br />
+      <a href="@{Secure.logout()}">Logout</a>
+      <ul>
+        <li><a href="@{Offers.create()}">Create Offer</a></li>
+        <li><a href="@{Requests.create()}">Create Request</a></li>
+        <li><a href="@{Offers.listBelongingToUser()}">My Offers</a></li>
+        <li><a href="@{Requests.listBelongingToUser()}">My Requests</a></li>
+        <li><a href="#">My Profile</a></li>
+        <li><a href="#">Update Account</a></li>
+      </ul>
+    </div>
+    
+    <div class="popular">
+      <h3>Recent Comments</h3>
+      <ul>
+        <li><a href="#">Hey, this offer was great.</a> <br />
+          <span>Posted on December 22, 2010</span> </li>
+        <li><a href="#">I think this guy will be very popular in LETS.</a> <br />
+          <span>Posted on December 20, 2010</span> </li>
+        <li><a href="#">Offer from Elizabeth was great! I am looking forward to have new offers from her!</a> <br />
+          <span>Posted on December 15, 2010</span> </li>
+        <li><a href="#">I think this was not the service what i was looking for.</a> <br />
+          <span>Posted on December 14, 2010</span> </li>
+        <li><a href="#">Average at all. 3 stars from me... sorry buddy.</a> <br />
+          <span>Posted on December 12, 2010</span> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+#{/if}
+
+#{else}
+<div id="content">
+  <div id="main" style="padding-top:0px">
+    #{doLayout /}
+  </div>
+      <div id="sidebar"  style="border:0px solid #aaa; padding-top:0px;">
+      <div class="about-me">
+        <h3>Login</h3>
+	#{if flash.error}
+	Wrong Email or Password!
+	#{/if}
+        <form action="@{Secure.authenticate()}" method="POST" class="login">
+        	<ul class="login">
+            	<li>
+                  <label>Email</label>
+                  <input type="text" name="username" value="${flash.username}" />
+                </li>
+                <li>
+                  <label>Pass</label>
+                    <input type="password" name="password" />
+                </li>
+                <li>
+                  <input type="submit" class="login_button" value="Login" />
+                </li>
+                <li>
+                    <div align="center"> <a href="@{Users.register()}">Register</a></div>
+                </li>
+            </ul>
+        </form>
+      </div>
+      
+      
+      <div class="sidemenu">
+        <h3>Popular Services In Last 30 Days</h3>
+          <div class=" tag_cloud" style="text-transform:none !important;">
+            <ul>
+              <li class="tag_3"><a href="#">Reading</a></li>
+              <li class="tag_2"><a href="#">English</a></li>
+              <li class="tag_1"><a href="#">Driving</a></li>
+              <li class="tag_4"><a href="#">teaching</a></li>
+              <li class="tag_3"><a href="#">technology</a></li>
+              <li class="tag_1"><a href="#">computer</a></li>
+              <li class="tag_2"><a href="#">tennis</a></li>
+              <li class="tag_1"><a href="#">writing</a></li>
+              <li class="tag_5"><a href="#">lesson</a></li>
+              <li class="tag_2"><a href="#">swimming</a></li>
+              <li class="tag_3"><a href="#">riding</a></li>
+              
+            </ul>
+          </div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      <!-- /sidebar -->
+    </div>
+</div>
+#{/else}

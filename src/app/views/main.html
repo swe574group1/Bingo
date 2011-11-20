@@ -1,23 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
   <head>
-    
-    <title>#{get 'title' /} | LET IT BEE!</title>
+    <title>#{get 'title' /} | Let It Bee</title>
     <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-    
     <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
     <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/screen.css'}" />
     #{get 'moreStyles' /}
     <script src="@{'/public/javascripts/jquery.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/javascripts/index.js'}" type="text/javascript" charset="${_response_encoding}"></script>
     #{get 'moreScripts' /}
-    
   </head>
+
   <body>
 
     <div id="header-wrap">
       <div id="header"> <a name="top"></a>
-	<h1 id="logo-text"><a href="@{Application.index()}">LET IT BEE!</a></h1>
-	<p id="slogan">To Bee or Not To Bee</p>
+	<h1 id="logo-text"><a href="@{Application.index()}">Let It Bee</a></h1>
+	<p id="slogan">Why Pay When You Can Share?</p>
 	<div  id="nav">
 	  <ul>
             <li #{if title == 'Home'}id="current"#{/if}><a href="@{Application.index()}">Home</a></li>
@@ -32,56 +32,15 @@
 
     <div id="content-wrap" class="clear" >
 
-      <div id="content">
-	#{doLayout /}
-	#{if isLoggedIn}
-	<div id="sidebar"  style="border:0px solid #aaa; padding-top:0px;">  
-	  <div class="sidemenu">
+      #{doLayout /}
 
-	    <ul>
-	      <li><a href="@{Offers.create(user)}">Create Offer</a></li>
-	      <li><a href="@{Requests.create(user)}">Create Request</a></li>
-	      <li><a href="@{Offers.listBelongingToUser(user.email)}">My Offers</a></li>
-	      <li><a href="@{Requests.listBelongingToUser(user.email)}">My Requests</a></li>
-	      <li><a href="@{Offers.search()}">Search Offers</a></li>
-	      <li><a href="@{Requests.search()}">Search Requests</a></li>
-	      <!-- <li><a href="#">My Profile</a></li> -->
-	      <!-- <li><a href="#">Update Account</a></li> -->
-	    </ul>
-
-	  </div>
-
-
-	  <div class="popular">
-	    <h3>Recent Comments</h3>
-	    <ul>
-	      <li><a href="#">Hey, this offer was great.</a> <br />
-		<span>Posted on December 22, 2010</span> </li>
-	      <li><a href="#">I think this guy will be very popular in LETS.</a> <br />
-		<span>Posted on December 20, 2010</span> </li>
-	      <li><a href="#">Offer from Elizabeth was great! I am looking forward to have new offers from her!</a> <br />
-		<span>Posted on December 15, 2010</span> </li>
-	      <li><a href="#">I think this was not the service what i was looking for.</a> <br />
-		<span>Posted on December 14, 2010</span> </li>
-	      <li><a href="#">Average at all. 3 stars from me... sorry buddy.</a> <br />
-		<span>Posted on December 12, 2010</span> </li>
-	    </ul>
-	  </div>
-	  #{/if}
-	  
-	  <!-- /sidebar -->
-	</div>
-	<!-- content -->
-      </div>
-      <!-- /content-out -->
     </div>
-    <!-- footer-outer -->
+    
     <div id="footer-outer" class="clear">
       <div id="footer-wrap">
 	#{if isLoggedIn}
 	<div id="gallery" class="clear">
 	  <h3>Recent Users </h3>
-	  <p class="thumbs"> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> <a href="#"><img src="@{'/public/images/icons/user.png'}" width="40" height="40" alt="" /></a> </p>
 	</div>
 	#{/if}
 	<div class="col-a">
@@ -135,14 +94,14 @@
 	  </div>
 	  
 	</div>
-	<!-- /footer-outer -->
+
       </div>
     </div>
-    <!-- footer-bottom -->
+
     <div id="footer-bottom">
       <p class="bottom-left"> &copy; 2011 <strong>SWE 574 Team 2 Members</strong>&nbsp; &nbsp; &nbsp;</p>
       <p class="bottom-right"><strong><a href="#top">Back to Top</a></strong> </p>
-      <!-- /footer-bottom-->
     </div>
+
   </body>
 </html>

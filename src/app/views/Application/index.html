@@ -1,95 +1,571 @@
-#{extends 'main.html' /}
+#{extends 'urindex.html' /}
 #{set title:'Home' /}
 
 #{if isLoggedIn}
-Welcome ${user.fullname}!
-<a href="@{Secure.logout()}">Log out</a>
-#{/if}
 
-#{set 'moreScripts'}
-<script src="@{'/public/javascripts/index.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-#{/set}
+<div class="post" style="padding:top:0px">
+  <h3 style="padding-top:0px;">Recent HandShakes</h3>
+  
+  <table class="show_data">
+    <tr class="first">
+      <td>Title</td>
+      <td>Place</td>
+      <td>Service Time</td>
+      <td>Credits Exchanged</td>
+      <td>Offerer</td>
+      <td>Requester</td>
+      <td>Details</td>
+    </tr>
+    <tr>
+      <td><a href="#">Cooking Lesson</a></td>
+      <td>Sisli</td>
+      <td>1 day ago</td>
+      <td>10</td>
+      <td><a href="#">Isa Engiz</a></td>
+      <td><a href="#">Cihan Demirci</a></td>
+      <td><a href="#"><img src="images/icons/zoom.png" class="zoom_icon" /></a></td>
+    </tr>
+    <tr class="background">
+      <td><a href="#">Plumbing Help</a></td>
+      <td>Bebek</td>
+      <td>2 days ago</td>
+      <td>20</td>
+      <td><a href="#">Isa Engiz</a></td>
+      <td><a href="#">Onur Ceryan</a></td>
+      <td><a href="#"><img src="images/icons/zoom.png" class="zoom_icon" /></a></td>
+    </tr>
+    <tr>
+      <td><a href="#">Read for my child</a></td>
+      <td>Beylikduzu</td>
+      <td>2 days ago</td>
+      <td>3</td>
+      <td><a href="#">Eylem Ozekin</a></td>
+      <td><a href="#">Onur Ceryan</a></td>
+      <td><a href="#"><img src="images/icons/zoom.png" class="zoom_icon" /></a></td>
+    </tr>
+  </table>
+  <div align="right" style="margin-right:30px;"><a href="#">See All &raquo;</a></div>
+</div>
 
-<!-- main -->
-<div id="main" style="padding-top:0px">
-  #{if isLoggedIn}  
-  <div class="post" style="padding:top:0px">
-
-    <h3 style="padding-top:0px;">Recent HandShakes</h3>
-    
-    <table class="show_data">
-      <tr class="first">
-        <td>Title</td>
-        <td>Place</td>
-        <td>Service Time</td>
-        <td>Honey Combs Made</td>
-        <td>Offerer</td>
-        <td>Requester</td>
-        <td>Details</td>
-      </tr>
-      <tr>
-        <td><a href="#">Cooking Lesson</a></td>
-        <td>Sisli</td>
-        <td>1 day ago</td>
-        <td>10</td>
-        <td><a href="#">Isa Engiz</a></td>
-        <td><a href="#">Cihan Demirci</a></td>
-        <td><a href="#"><img src="@{'/public/images/icons/zoom.png'}" class="zoom_icon" /></a></td>
-      </tr>
-      <tr class="background">
-        <td><a href="#">Plumbing Help</a></td>
-        <td>Bebek</td>
-        <td>2 days ago</td>
-        <td>20</td>
-        <td><a href="#">Isa Engiz</a></td>
-        <td><a href="#">Onur Ceryan</a></td>
-        <td><a href="#"><img src="@{'/public/images/icons/zoom.png'}" class="zoom_icon" /></a></td>
-      </tr>
-      <tr>
-        <td><a href="#">Read for my child</a></td>
-        <td>Beylikduzu</td>
-        <td>2 days ago</td>
-        <td>3</td>
-        <td><a href="#">Eylem Ozekin</a></td>
-        <td><a href="#">Onur Ceryan</a></td>
-        <td><a href="#"><img src="@{'/public/images/icons/zoom.png'}" class="zoom_icon" /></a></td>
-      </tr>
-    </table>
-    <div align="right" style="margin-right:30px;"><a href="#">See All &raquo;</a></div>
+<div class="post">     
+  <div class="user_tabs" style="margin-top:30px;">
+    <ul>
+      <li>
+        <a href="#" no="1"> New Bees</a>
+      </li>
+      <li>
+        <a href="#" class="active" no="2"> Busy Bees</a>
+      </li>
+      <li>
+        <a href="#" no="3"> Working Bees</a>
+      </li>
+      <li>
+        <a href="#" no="4"> Bumble Bees</a>
+      </li>
+    </ul>
   </div>
-  <div class="post">
-    <h3>New Bees</h3>
+  
+  <div class="index_tab_content" id="index_tab_content_1">
     <div class="active_users">
-      <ul>
-	#{list items:newUsers, as:'newbee'}
-	<li>${newbee.fullname}</li>
-	#{/list}
-      </ul>
+      <div class="user">
+        <div class="left_">
+          <div class="image">
+            <div align="center"><img src="images/icons/user.png" /></div>
+          </div>
+          <div class="credits">
+            <div align="center">10 Credits</div>
+          </div>
+        </div>
+        <div class="right_">
+          <ul>
+            <li>
+              User: <strong>Eylem Ozekin</strong>
+            </li>
+            <li>
+              Favourite Tags: <a href="#">Books</a> <a href="#">Swimming</a>
+              
+            </li>
+            <li>
+              Recent Offer: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              Recent Request: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              14 handshake in last 3 months!
+            </li>
+          </ul>
+          
+        </div>      
+        <div style="clear:both;"></div>
+      </div>
+      
+      <div class="user">
+        <div class="left_">
+          <div class="image">
+            <div align="center"><img src="images/icons/user.png" /></div>
+          </div>
+          <div class="credits">
+            <div align="center">10 Credits</div>
+          </div>
+        </div>
+        <div class="right_">
+          <ul>
+            <li>
+              User: <strong>Ertug Karamatli</strong>
+            </li>
+            <li>
+              Favourite Tags: <a href="#">Books</a> <a href="#">Swimming</a>
+              
+            </li>
+            <li>
+              Recent Offer: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              Recent Request: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              12 handshake in last 3 months!
+            </li>
+          </ul>
+          
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+      
+      <div class="user">
+        <div class="left_">
+          <div class="image">
+            <div align="center"><img src="images/icons/user.png" /></div>
+          </div>
+          <div class="credits">
+            <div align="center">10 Credits</div>
+          </div>
+        </div>
+        <div class="right_">
+          <ul>
+            <li>
+              User: <strong>Baris Avsar</strong>
+            </li>
+            <li>
+              Favourite Tags: <a href="#">Books</a> <a href="#">Swimming</a>
+              
+            </li>
+            <li>
+              Recent Offer: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              Recent Request: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              9 handshake in last 3 months!
+            </li>
+          </ul>
+          
+        </div>
+        <div style="clear:both;"></div>
+      </div>
     </div>
   </div>
-  #{/if}
-  #{else}
-  <div>
-    #{if flash.error}
-    Wrong email or password.
-    #{/if}
-    #{form @Secure.authenticate()}
-    <p id="username-field">
-      <label for="username">&{'secure.username'}</label>
-      <input type="text" name="username" id="username" value="${flash.username}" />
-    </p>
-    <p id="password-field">
-      <label for="password">&{'secure.password'}</label>
-      <input type="password" name="password" id="password" value="" />
-    </p>
-    <p id="signin-field">
-      <input type="submit" id="signin" value="&{'secure.signin'}" />
-    </p>
-    <p id="register-field">
-      <a href="@{Users.register()}">Register</a>
-    </p>
-    #{/form}
+  
+  <div class="index_tab_content" id="index_tab_content_2">
+    <div class="active_users">
+      <div class="user">
+        <div class="left_">
+          <div class="image">
+            <div align="center"><img src="images/icons/user.png" /></div>
+          </div>
+          <div class="credits">
+            <div align="center">10 Credits</div>
+          </div>
+        </div>
+        <div class="right_">
+          <ul>
+            <li>
+              User: <strong>Eylem Ozekin</strong>
+            </li>
+            <li>
+              Favourite Tags: <a href="#">Books</a> <a href="#">Swimming</a>
+            </li>
+            <li>
+              Recent Offer: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              Recent Request: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              14 handshake in last 3 months!
+            </li>
+          </ul>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+      
+      <div class="user">
+        <div class="left_">
+          <div class="image">
+            <div align="center"><img src="images/icons/user.png" /></div>
+          </div>
+          <div class="credits">
+            <div align="center">10 Credits</div>
+          </div>
+        </div>
+        <div class="right_">
+          <ul>
+            <li>
+              User: <strong>Ertug Karamatli</strong>
+            </li>
+            <li>
+              Favourite Tags: <a href="#">Books</a> <a href="#">Swimming</a>
+              
+            </li>
+            <li>
+              Recent Offer: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              Recent Request: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              12 handshake in last 3 months!
+            </li>
+          </ul>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+      
+      <div class="user">
+        <div class="left_">
+          <div class="image">
+            <div align="center"><img src="images/icons/user.png" /></div>
+          </div>
+          <div class="credits">
+            <div align="center">10 Credits</div>
+          </div>
+        </div>
+        <div class="right_">
+          <ul>
+            <li>
+              User: <strong>Baris Avsar</strong>
+            </li>
+            <li>
+              Favourite Tags: <a href="#">Books</a> <a href="#">Swimming</a>
+              
+            </li>
+            <li>
+              Recent Offer: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              Recent Request: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              9 handshake in last 3 months!
+            </li>
+          </ul>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+    </div>
   </div>
-  #{/else}
-  <!-- /main -->
+  
+  <div class="index_tab_content" id="index_tab_content_3">
+    <div class="active_users">
+      <div class="user">
+        <div class="left_">
+          <div class="image">
+            <div align="center"><img src="images/icons/user.png" /></div>
+          </div>
+          <div class="credits">
+            <div align="center">10 Credits</div>
+          </div>
+        </div>
+        <div class="right_">
+          <ul>
+            <li>
+              User: <strong>Eylem Ozekin</strong>
+            </li>
+            <li>
+              Favourite Tags: <a href="#">Books</a> <a href="#">Swimming</a>
+            </li>
+            <li>
+              Recent Offer: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              Recent Request: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              14 handshake in last 3 months!
+            </li>
+          </ul>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+      
+      <div class="user">
+        <div class="left_">
+          <div class="image">
+            <div align="center"><img src="images/icons/user.png" /></div>
+          </div>
+          <div class="credits">
+            <div align="center">10 Credits</div>
+          </div>
+        </div>
+        <div class="right_">
+          <ul>
+            <li>
+              User: <strong>Ertug Karamatli</strong>
+            </li>
+            <li>
+              Favourite Tags: <a href="#">Books</a> <a href="#">Swimming</a>
+            </li>
+            <li>
+              Recent Offer: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              Recent Request: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              12 handshake in last 3 months!
+            </li>
+          </ul>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+      
+      <div class="user">
+        <div class="left_">
+          <div class="image">
+            <div align="center"><img src="images/icons/user.png" /></div>
+          </div>
+          <div class="credits">
+            <div align="center">10 Credits</div>
+          </div>
+        </div>
+        <div class="right_">
+          <ul>
+            <li>
+              User: <strong>Baris Avsar</strong>
+            </li>
+            <li>
+              Favourite Tags: <a href="#">Books</a> <a href="#">Swimming</a>
+            </li>
+            <li>
+              Recent Offer: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              Recent Request: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              9 handshake in last 3 months!
+            </li>
+          </ul>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+    </div>
+  </div>
+      
+  <div class="index_tab_content" id="index_tab_content_4">
+    <div class="active_users">
+      <div class="user">
+        <div class="left_">
+          <div class="image">
+            <div align="center"><img src="images/icons/user.png" /></div>
+          </div>
+          <div class="credits">
+            <div align="center">10 Credits</div>
+          </div>
+        </div>
+        <div class="right_">
+          <ul>
+            <li>
+              User: <strong>Eylem Ozekin</strong>
+            </li>
+            <li>
+              Favourite Tags: <a href="#">Books</a> <a href="#">Swimming</a>
+            </li>
+            <li>
+              Recent Offer: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              Recent Request: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              14 handshake in last 3 months!
+            </li>
+          </ul>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+          
+      <div class="user">
+        <div class="left_">
+          <div class="image">
+            <div align="center"><img src="images/icons/user.png" /></div>
+          </div>
+          <div class="credits">
+            <div align="center">10 Credits</div>
+          </div>
+        </div>
+        <div class="right_">
+          <ul>
+            <li>
+              User: <strong>Ertug Karamatli</strong>
+            </li>
+            <li>
+              Favourite Tags: <a href="#">Books</a> <a href="#">Swimming</a>
+            </li>
+            <li>
+              Recent Offer: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              Recent Request: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              12 handshake in last 3 months!
+            </li>
+          </ul>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+      
+      <div class="user">
+        <div class="left_">
+          <div class="image">
+            <div align="center"><img src="images/icons/user.png" /></div>
+          </div>
+          <div class="credits">
+            <div align="center">10 Credits</div>
+          </div>
+        </div>
+        <div class="right_">
+          <ul>
+            <li>
+              User: <strong>Baris Avsar</strong>
+            </li>
+            <li>
+              Favourite Tags: <a href="#">Books</a> <a href="#">Swimming</a>
+            </li>
+            <li>
+              Recent Offer: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              Recent Request: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago)
+            </li>
+            <li>
+              9 handshake in last 3 months!
+            </li>
+          </ul>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+    </div>
+  </div>
 </div>
+#{/if}
+
+
+
+#{else}
+
+<div class="post" style="padding:top:00px">
+  
+  <div class="user_tabs" style="margin-top:30px;">
+    <ul>
+      <li>
+        <a href="#" class="active" no="1">A Hard Day's Cooking Night</a>
+      </li>
+      <li>
+        <a href="#" no="2">Mowers of Lawn</a>
+      </li>
+      <li>
+        <a href="#" no="3">Ain't No Spot When He Cleans</a>
+      </li>
+    </ul>
+  </div>
+  
+      
+  <div class="index_tab_content" id="index_tab_content_1">
+    <div class="images">
+      <div align="center"><img src="images/icons/user.png" /></div>
+      <div align="center"><img src="images/icons/user.png" /></div>
+    </div>   
+    <div class="service">
+      <b>Service:</b><br  />
+      <p>Cooking, mostly chinese, some thai</p>
+      <b>Tagline:</b><br  />
+      <p>Two people, one eager to cook, one eager to learn, none eager to clean</p>
+      <b>Quotes:</b><br  />
+      <p>- My eye, my beautiful eye!<br  />
+        - I have no idea what i am eating tastes good enough.<br />
+        - Which was the bowl with vomit in it, again?</p>
+    </div>  
+    <div style="clear:both;"></div>
+  </div>
+  
+  <div class="index_tab_content nonvisible" id="index_tab_content_2">
+    <div class="images">
+      <div align="center"><img src="images/icons/user.png" /></div>
+      <div align="center"><img src="images/icons/user.png" /></div>
+    </div>
+    
+    <div class="service">
+      <b>Service:</b><br  />
+      <p>Gardening services, most importantly lawn mowing</p>
+      <b>Tagline:</b><br  />
+      <p>It was supposed to be an ordinary day in the garden</p>
+      <b>Quotes:</b><br  />
+      <p>- I drink your lemonade!<br  />
+        - I didn't know a lawn mower could do that.<br />
+        - Is everyone's fingers intact?</p>
+    </div>   
+    <div style="clear:both;"></div>
+  </div>
+  
+  <div class="index_tab_content nonvisible" id="index_tab_content_3">
+    <div class="images">
+      <div align="center"><img src="images/icons/user.png" /></div>
+      <div align="center"><img src="images/icons/user.png" /></div>
+    </div>
+    
+    <div class="service">
+      <b>Service:</b><br  />
+      <p>Cleaning a garage</p>
+      <b>Tagline:</b><br  />
+      <p>In the garage, no one can hear you clean</p>
+      <b>Quotes:</b><br  />
+      <p>- Do you know what this is? - No, but I'll clean the hell out of it.<br  />
+	- Is it safe to mix these stuff? - Probably not. (continues mixing cleaning materials)<br />
+        - Did I miss a spot? - (Everyone) Nooooo!</p>
+    </div>
+
+    <div style="clear:both;"></div>
+  </div>
+</div>
+<div class="post">
+  <h4>Humble Bee of The Month</h4>
+  <div class="interview">
+    <div class="image">
+      <div align="center"><img src="images/icons/user.png" /></div>
+      <div align="center">Harvey Birdman<br  /><a href="#nowhere">Working Bee</a></div>
+    </div>
+    
+    <div class="baloon">
+      <blockquote>
+        <span class="bqstart">&ldquo;</span>
+        I joined because back then i had too much spare time Now i try to manage my schedule to create free time for services! 
+        <span class="bqend">&rdquo;</span>
+      </blockquote>
+    </div>
+    
+    <div class="story">
+      <b>Let It Bee:</b>Can you tell us about yourself?<br  />
+      <b>Harvey Birdman:</b>Well, i am an ex superhero, currently an attorney. My power comes from rays of the sun. I also have the power of attorney. [loughs] <br  />
+      <b>Let It Bee:</b>What did yu participate in yur first attorney?<br  />
+      <b>Harvey Birdman:</b>It was eight months ago When i  first joined i had trouble with participating in handshakes. Then ... <a href="#nowhere">read the rest of the interview</a> <br  />
+    </div>
+    
+  </div>
+  
+</div>
+
+#{/else}

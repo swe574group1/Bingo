@@ -97,7 +97,7 @@ blockquote {
   	margin: 10px 25px;
   	padding: 10px 20px 10px 32px;
   	border: 1px solid #F0F0F0;
-  	background: #f8f8f8 url(../images/quote.gif) no-repeat 12px 12px;
+   background: #f8f8f8;
   	font-weight: normal;
   	font-size: 17px;
   	line-height: 1.5em;
@@ -386,7 +386,7 @@ fieldset.search {
    color: #33799B;
 	padding-left: 0;
 	font-weight: bold;
-   text-transform: uppercase;
+   //text-transform: uppercase;
 }
 .sidemenu ul li a span {
 	color: #959595;
@@ -1021,9 +1021,13 @@ ul.login .login_button {
 
 .tag_cloud li {
 	display:inline;
+	text-decoration:none !important;
+	border:0px !important;
 }
 .tag_cloud li a {
 	display:inline;
+	text-decoration:none !important;
+	border:0px !important;
 }
 .tag_cloud .tag_1 {
 	font-size:20px;
@@ -1252,19 +1256,221 @@ img.owner_image {
 	-moz-border-radius:8px;
 	border-radius:8px;
 	
+	
 }
 .handshake_link a:hover {
 	background-color:#0C3;
 }
 
+.pager {
+	float:right;
+	margin:10px 30px 10px 0px;
+}
+.pager a {
+	border:1px solid #eee;
+	padding:3px 10px;
+	color:#75a1d0;
+}
+.pager a:hover {
+	background-color:#eee;
+	text-decoration:none;
+}
+.pager a.current_page {
+	background-color:#edf7f9;
+	padding:5px 15px;
+	font-weight:bold;
+}
 
+.search_form {
+	margin:0px;
+	padding:5px;
+	width:230px;
+}
+.search_form ul {
+	margin:0px;
+	padding:0px;
+	border:0px;
+}
+.search_form li {
+	margin:0px;
+	padding:0px;
+	border:0px;
+}
+.search_form input.search_input {
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	width:200px;
+}
+.search_form li.half {
+	width:100px;
+	display:inline-block;
+}
+
+.user_tabs {
+	background-color:#eee;
+	border:#ddd;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-top-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+.user_tabs ul
+{
+	margin:0px;
+	padding:0px;
+	padding-top:14px;
+	padding-left:10px;
+}
+.user_tabs li {
+	padding:0px;
+	margin:0px;
+	display:inline;
+	
+}
+.user_tabs a {
+	color:#888;
+	padding:2px 10px;
+	padding-top:5px;
+	border:1px solid #aaa;
+	background-color:#ccc;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-top-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+.user_tabs a:hover {
+	color:#fff;
+	text-decoration:none;
+	background-color:#888;
+	
+	
+}
+.user_tabs a.active {
+	background-color:#fff;
+	border-bottom:0px;
+	font-weight:bold;
+	
+}
+.user_tabs a.active:hover {
+	color:#fff;
+	text-decoration:none;
+	background-color:#888;
+}
+
+.tab_left {
+	border:0px solid red;
+	float:left;
+	width:165px;
+	display:inline;
+}
+.tab_left ul {
+	margin:0px;
+	padding:0px;
+}
+.tab_left li {
+	margin:0px;
+	padding:0px;
+}
+
+.tab_left a {
+	background-color:#ccc;
+	color:#888;
+	padding:8px 0px 8px 10px;
+	display:block;
+}
+.tab_left a:hover {
+	background-color:#eee;
+	color:#111;
+}
+.tab_left a.active {
+	background-color:#eee;
+	color:#111;
+}
+
+
+.tab_right {
+	background:#eee;
+}
+.tab_content {
+	border:0px solid red;
+}
+span.title {
+	font-size:20px;
+	margin:20px 0px 0px 20px;
+	padding-top:50px;
+}
+
+.nonvisible {
+	display:none;
+}
+
+.index_tab_content {
+	border:1px solid #eee;
+}
+.index_tab_content .images {
+	display:inline-block;
+	width:150px;
+	border:0px solid #eee;
+	float:left;
+	padding-top:20px;
+}
+.index_tab_content .service {
+	display:inline-block;
+	border:0px solid #ddd;
+	width:560px;
+	float:left;
+	padding:10px;
+}
+.index_tab_content .service p {
+	margin:5px 5px 5px 40px;
+}
+
+.interview {
+	border:1px solid #eee;
+	padding:10px;
+}
+.interview .image {
+	width:150px;
+	border:1px solid #eee;
+	float:left;
+	padding-top:10px;
+}
+.interview .baloon {
+	width:560px;
+	float:left;
+}
+.interview .baloon .bqstart {
+     float: left;
+     height: 45px;
+     margin-top: -30px;
+     padding-top: 45px;
+     margin-bottom: -50px;
+     font-size: 700%;
+     color: #FF0000;
+	 margin-right:10px;
+ }
+
+
+ .interview .baloon .bqend {
+     float: right;
+     height: 25px;
+     margin-top: 0px;
+     padding-top: 45px;
+     font-size: 700%;
+     color: #FF0000;
+ }
+.interview .story {
+	clear:both;
+}
 
 
 
 /* end: definitions by isa engiz */
-
-/* minimalist styles */
-
-span.title {
-    font-weight: bold;
-}
