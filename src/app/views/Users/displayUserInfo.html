@@ -1,12 +1,15 @@
 #{extends 'main.html' /}
 #{set title:'Information' /}
 
-Your User Information
-
-<p><span class="title">Full Name: </span>${user.fullname}</p>
-<p><span class="title">Email: </span>${user.email}</p>
-<p><span class="title">Address: </span>${user.address}</p>
-<p><span class="title">Gathered Honey Combs: </span>${user.balance}</p>
-<p><span class="title">Reputation: </span>${user.reputation}</p>
-
-<a href="@{Application.index()}">Main Page</a>
+<div id="main">
+  <h3>Your User Information</h3>
+  <form action="@{Users.finalizeUser()}" method="POST">
+    <p><span class="title">Full Name: </span>${user.fullname}</p>
+    <p><span class="title">Email: </span>${user.email}</p>
+    <p><span class="title">Address: </span>${user.address}</p>
+    <p><span class="title">Gathered Honey Combs: </span>${user.balance}</p>
+    <p><span class="title">Reputation: </span>${user.reputation}</p>
+    <input type="submit" name="create" method="POST" value="Confirm" />
+    <input type="button" value="Edit" onclick="window.history.back()" />
+  </form>
+</div>

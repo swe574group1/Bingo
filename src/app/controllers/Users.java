@@ -24,4 +24,8 @@ public class Users extends Controller {
 	render(user);
     }
 
+    public static void finalizeUser() {
+	render();
+    }
+
 }
