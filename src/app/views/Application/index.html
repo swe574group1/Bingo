@@ -1,8 +1,7 @@
-#{extends 'urindex.html' /}
 #{set title:'Home' /}
 
 #{if isLoggedIn}
-
+#{extends 'logged_user.html' /}
 <div class="post" style="padding:top:0px">
   <h3 style="padding-top:0px;">Recent HandShakes</h3>
   
@@ -466,7 +465,7 @@
 
 
 #{else}
-
+#{extends 'unlogged_user.html' /}
 <div class="post" style="padding:top:00px">
   
   <div class="user_tabs" style="margin-top:30px;">

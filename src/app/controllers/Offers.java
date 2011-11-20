@@ -77,11 +77,6 @@ public class Offers extends Controller
 	render(offerItem);
     }
 
-    public static void listBelongingToUser(String email) {
-	List<Offers> offers = Offer.find("byUserEmail", email).fetch();
-	render(offers);
-    }
-
     public static void showDetails(Long id) {
 	Offer offerItem = Offer.findById(id);
 	render(offerItem);

@@ -1,0 +1,19 @@
+#{extends 'logged_user.html' /}
+#{set title:'Your Requests' /}
+
+#{if requests}
+<ul>
+  #{list items:requests, as:'request'}
+  <li>
+    Title: ${request.title}<br />
+    Tags: ${request.tags}<br />
+    Description: ${request.description}<br />
+    Honey Combs: ${request.credit}<br />
+    Valid Until: ${request.endDate}
+  </li>
+  #{/list}
+</ul>
+#{/if}
+#{else}
+<p>Currently you have no requests.</p>
+#{/else}

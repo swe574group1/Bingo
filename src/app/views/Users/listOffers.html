@@ -1,0 +1,19 @@
+#{extends 'logged_user.html' /}
+#{set title:'Your Offers' /}
+
+#{if offers}
+<ul>
+  #{list items:offers, as:'offer'}
+  <li>
+    Title: ${offer.title}<br />
+    Tags: ${offer.tags}<br />
+    Description: ${offer.description}<br />
+    Honey Combs: ${offer.credit}<br />
+    Valid Until: ${offer.endDate}
+  </li>
+  #{/list}
+</ul>
+#{/if}
+#{else}
+<p>Currently you have no offers.</p>
+#{/else}
