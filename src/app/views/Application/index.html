@@ -170,6 +170,9 @@ Welcome ${user.fullname}!
   #{/if}
   #{else}
   <div>
+    #{if flash.error}
+    Wrong email or password.
+    #{/if}
     #{form @Secure.authenticate()}
     <p id="username-field">
       <label for="username">&{'secure.username'}</label>
