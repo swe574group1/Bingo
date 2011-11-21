@@ -4,12 +4,29 @@
 <div id="main">
   <h3>Your User Information</h3>
   <form action="@{Users.finalizeUser()}" method="POST">
-    <p><span class="title">Full Name: </span>${user.fullname}</p>
-    <p><span class="title">Email: </span>${user.email}</p>
-    <p><span class="title">Address: </span>${user.address}</p>
-    <p><span class="title">Gathered Honey Combs: </span>${user.balance}</p>
-    <p><span class="title">Reputation: </span>${user.reputation}</p>
-    <input type="submit" name="create" method="POST" value="Confirm" />
-    <input type="button" value="Edit" onclick="window.history.back()" />
+    <ul class="long_login">
+      <li>
+	<label>Full Name</label>
+	<input class="roinput" type="text" readonly="readonly" value="${user.fullname}" />
+      </li>
+      <li>
+	<label>Email</label>
+	<input class="roinput" type="text" readonly="readonly" value="${user.email}" />
+      </li>
+      <li>
+	<label>Address</label>
+	<input class="roinput" type="text" readonly="readonly" value="${user.address}" />
+      </li>
+      <li>
+	<label>Initial Honey Combs</label>
+	<input class="roinput" type="text" readonly="readonly" value="${user.balance}" />
+      </li>
+      <li>
+	<label>Reputation</label>
+	<input class="roinput" type="text" readonly="readonly" value="${user.reputation}" />
+      </li>
+      <input class="login_button" type="submit" name="create" method="POST" value="Confirm" />
+      <input class="login_ubtton" type="button" value="Edit" onclick="window.history.back()" />
+    </ul>
   </form>
 </div>

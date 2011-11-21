@@ -1,32 +1,33 @@
 #{extends 'main.html' /}
 #{set title:'Register' /}
 
-#{form @Users.doCreateUserEntry()}
-<p>
-  #{error 'user.fullname' /}
-  <label>Full Name</label>
-  <input type="text" name="user.fullname" value="${flash['user.fullname']}" />
-<p>
-  #{error 'user.email' /}
-  <label>Email</label>
-  <input type="text" name="user.email" value="${flash['user.email']}" />
-</p>
-<p>
-  #{error 'user.password' /}
-  <label>Password</label>
-  <input type="password" name="user.password" />
-</p>
-<p>
-  #{error 'user.address' /}
-  <label>Address</label>
-  <input type="text" name="user.address" value="${flash['user.address']}" />
-</p>
-<p>
-  <label>Photo</label>
-  <input type="file" name="user.avatar" />
-</p>
-<p>
-  <input type="submit" name="submit" value="Submit" />
-</p>
 
-#{/form}
+<div class="about-me">
+  <h3>Register</h3>
+  #{form @Users.doCreateUserEntry()}
+
+  <ul class="long_login">
+    <li>
+      <label>Full Name</label>
+      <input type="text" name="user.fullname" value="${flash['user.fullname']}" />
+      #{error 'user.fullname' /}
+    </li>
+    <li>
+      <label>Email</label>
+      <input type="text" name="user.email" value="${flash['user.email']}" />
+      #{error 'user.email' /}
+    </li>
+    <li>
+      <label>Password</label>
+      <input type="password" name="user.password" />
+      #{error 'user.password' /}
+    </li>
+    <li>
+      <label>Address</label>
+      <input type="text" name="user.address" value="${flash['user.address']}" />
+      #{error 'user.address' /}
+    </li>
+  <input type="submit" class="login_button" name="submit" value="Submit" />
+  </ul>
+  #{/form}
+</div>

@@ -1474,3 +1474,28 @@ span.title {
 
 
 /* end: definitions by isa engiz */
+
+
+/* minimalist definitions */
+
+.roinput {
+    background-color: #BBB;
+    font-weight: bold;
+}
+
+ul.long_login {
+	margin:0px;
+	padding:0px 0px 0px 10px;
+	list-style:none;
+	border:0px solid #eee;
+}
+ul.long_login li {
+	margin:0px;
+}
+
+ul.long_login label {
+	display:inline-block;
+	width:150px;
+}
+ul.long_login .long_login_button {
+	padding:10px 20px 10px 20px;
