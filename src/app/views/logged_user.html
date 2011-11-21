@@ -10,31 +10,22 @@
     <div class="sidemenu">
       <h3>Menu</h3>
       Welcome, ${user.fullname}!<br />
-      <a href="@{Secure.logout()}">Logout</a>
+      <a href="@{Secure.logout()}"><input type="submit" class="login_button" value="Logout" /></a>
       <ul>
         <li><a href="@{Offers.create(user)}">Create Offer</a></li>
         <li><a href="@{Requests.create(user)}">Create Request</a></li>
+	<li><a href="@{Offers.search(user)}">Search Offers</a></li>
+	<li><a href="@{Requests.search(user)}">Search Requests</a></li>
         <li><a href="@{Users.listOffers(user)}">My Offers</a></li>
         <li><a href="@{Users.listRequests(user)}">My Requests</a></li>
-        <li><a href="#">My Profile</a></li>
-        <li><a href="#">Update Account</a></li>
+<!--        <li><a href="#">My Profile</a></li>-->
+<!--        <li><a href="#">Update Account</a></li>-->
       </ul>
     </div>
     
     <div class="popular">
       <h3>Recent Comments</h3>
-      <ul>
-        <li><a href="#">Hey, this offer was great.</a> <br />
-          <span>Posted on December 22, 2010</span> </li>
-        <li><a href="#">I think this guy will be very popular in LETS.</a> <br />
-          <span>Posted on December 20, 2010</span> </li>
-        <li><a href="#">Offer from Elizabeth was great! I am looking forward to have new offers from her!</a> <br />
-          <span>Posted on December 15, 2010</span> </li>
-        <li><a href="#">I think this was not the service what i was looking for.</a> <br />
-          <span>Posted on December 14, 2010</span> </li>
-        <li><a href="#">Average at all. 3 stars from me... sorry buddy.</a> <br />
-          <span>Posted on December 12, 2010</span> </li>
-      </ul>
+      <p>No recent comments</p>
     </div>
   </div>
 </div>

@@ -14,7 +14,7 @@
   <div class="post" style="padding:top:0px">
     <h3 style="padding-top:0px;">Create New Request</h3>
     <p>Use the form below to create a new request.</p>
-    <form action="@{Requests.doCreate()}" method="POST" class="utility_form">
+    <form action="@{Requests.doCreate(user, requestItem)}" method="POST" class="utility_form">
 
       <fieldset>
         <legend>Descriptions</legend>
@@ -22,18 +22,17 @@
         <ul>
 	  <input type="hidden" name="requestItem.userEmail" value="${user.email}" />
           <li>
-	    #{error 'requestItem.title' /}
             <label>Title</label>
             <input type="text" name="requestItem.title" value="${flash['requestItem.title']}" />
+	    #{error 'requestItem.title' /}
           </li>
           <li>
-	    #{error 'requestItem.tags' /}
             <label>Tags</label>
             <input type="text" name="requestItem.tags" value="${flash['requestItem.tags']}" />
+	    #{error 'requestItem.tags' /}
           </li>
           <li>
-	    #{error 'requestItem.description' /}
-            <label>Description</label>
+            <label>Description<br/> #{error 'requestItem.description' /}</label>
             <textarea name="requestItem.description">${flash['requestItem.description']}</textarea>
           </li>
         </ul>
@@ -43,30 +42,30 @@
         <legend>Limitations</legend>
         <ul>
           <li>
-	    #{error 'requestItem.endDate' /}
             <label>Valid Until</label>
             <input type="text" name="requestItem.endDate" class="date_pick" value="${flash['requestItem.endDate']}" />
+	    #{error 'requestItem.endDate' /}
           </li>
         </ul>
         
       </fieldset>
       
-      <fieldset>
-        <legend>Photos</legend>
-        <ul>
-          <li>
-            <label>Photo</label>
-            <input type="file" name="photo" />
-          </li>
-          <li>
-            <label>Added Photos</label>
-            <div class="photos">
-              <img src="@{'public/images/icons/user.png'}" />
-              <img src="@{'public/images/icons/user.png'}" />
-            </div>
-          </li>
-        </ul>
-      </fieldset>
+      <!-- <fieldset> -->
+      <!--   <legend>Photos</legend> -->
+      <!--   <ul> -->
+      <!--     <li> -->
+      <!--       <label>Photo</label> -->
+      <!--       <input type="file" name="photo" /> -->
+      <!--     </li> -->
+      <!--     <li> -->
+      <!--       <label>Added Photos</label> -->
+      <!--       <div class="photos"> -->
+      <!--         <img src="@{'public/images/icons/user.png'}" /> -->
+      <!--         <img src="@{'public/images/icons/user.png'}" /> -->
+      <!--       </div> -->
+      <!--     </li> -->
+      <!--   </ul> -->
+      <!-- </fieldset> -->
       
       <input type="submit" value="Proceed" />
 

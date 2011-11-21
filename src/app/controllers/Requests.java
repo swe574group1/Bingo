@@ -53,26 +53,25 @@ public class Requests extends Controller
 	render(user);
     }
 
-    public static void doCreate(@Valid Request requestItem, User user) {
+    public static void doCreate(User user, @Valid Request requestItem) {
 	if (validation.hasErrors()) {
 	    params.flash();
 	    validation.keep();
 	    create(user);
 	}
-	finalize(requestItem, user);
+	finalize(requestItem);
     }
 
-    public static void finalize(Request requestItem, User user) {
-	render(requestItem, user);
+    public static void finalize(Request requestItem) {
+	render(requestItem);
     }
 
     public static void save(Request requestItem) {
 	requestItem.save();
-	show(requestItem.id);
+	show(requestItem);
     }
 
-    public static void show(Long id) {
-	Request requestItem = Request.findById(id);
+    public static void show(Request requestItem) {
 	render(requestItem);
     }
 
@@ -81,14 +80,14 @@ public class Requests extends Controller
 	render(requests);
     }
     
-    public static void showDetails(Long id) {
+    public static void showDetails(User user, Long id) {
 	Request requestItem = Request.findById(id);
-	render(requestItem);
+	render(user, requestItem);
     }
 
-    public static void search() {
+    public static void search(User user) {
 	List<Request> requests = Request.all().fetch();
-	render(requests);
+	render(user, requests);
     }
 
 }

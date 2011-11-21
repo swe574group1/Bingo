@@ -1,24 +1,27 @@
 #{extends 'main.html' /}
 #{set title:'Offer Created' /}
-<div id="main">
-  <h3>Your offer was succesfully created.</h3>
-  <h4>Details:</h4>
-  <p>
-    <span class="title">Name:</span> ${offerItem.title}
-  </p>
-  <p>
-    <span class="title">Tags:</span> ${offerItem.tags}
-  </p>
-  <p>
-    <span class="title">Description:</span> ${offerItem.description}
-  </p>
-  <p>
-    <span class="title">Honey Combs:</span> ${offerItem.credit}
-  </p>
-  <p>
-    <span class="title">Valid Until:</span> ${offerItem.endDate}
-  </p>
-  <p>
-    <a href="@{Application.index()}">Main Page</a>
-  </p>
+<div id="content">
+  <div id="main" style="padding-top:0px">
+    <div class="post" style="padding:top:0px">
+      <h3 style="padding-top:0px;">Your offer was successfully created</h3>
+      <form>
+	<input readonly="readonly" type="hidden" name="offerItem.userEmail" value="${offerItem.userEmail}" />
+	<ul class="long_login">
+	  <li>
+	    <label>Offer Title</label>
+	    <input class="roinput" type="text" readonly="readonly" value="${offerItem.title}" />
+	  </li>
+	  <li>
+	    <label>Offer Tags</label>
+	    <input class="roinput" type="text" readonly="readonly" value="${offerItem.tags}" />
+	  </li>
+	  <li>
+	    <label>Offer Description</label>
+	    <input class="roinput" type="text" readonly="readonly" value="${offerItem.description}" />
+	  </li>
+	  <a href="@{Application.index()}"><input type="button" value="Main Page" /></a>
+      </form>
+      
+    </div>
+  </div>
 </div>

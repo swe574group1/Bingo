@@ -77,14 +77,14 @@ public class Offers extends Controller
 	render(offerItem);
     }
 
-    public static void showDetails(Long id) {
+    public static void showDetails(User user, Long id) {
 	Offer offerItem = Offer.findById(id);
-	render(offerItem);
+	render(user, offerItem);
     }
 
-    public static void search() {
+    public static void search(User user) {
 	List<Offer> offers = Offer.all().fetch();
-	render(offers);
+	render(user, offers);
     }
 
 }

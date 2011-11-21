@@ -20,24 +20,23 @@
     <ul>
       <input type="hidden" name="offerItem.userEmail" value="${user.email}" />
       <li>
-	#{error 'offerItem.title' /}
         <label>Title</label>
         <input type="text" name="offerItem.title" value="${flash['offerItem.title']}" />
+	#{error 'offerItem.title' /}
       </li>
       <li>
-	#{error 'offerItem.tags' /}
         <label>Tags</label>
         <input type="text" name="offerItem.tags" value="${flash['offerItem.tags']}" />
+	#{error 'offerItem.tags' /}
       </li>
       <li>
-	#{error 'offerItem.description' /}
-        <label>Description</label>
+        <label>Description<br />#{error 'offerItem.description' /}</label>
         <textarea name="offerItem.description">${flash['offerItem.description']}</textarea>
       </li>
       <li>
-	#{error 'offerItem.credit' /}
         <label>Honey Combs</label>
 	<input type="text" name="offerItem.credit" value="${flash['offerItem.credit']}" />
+	#{error 'offerItem.credit' /}
       </li>
     </ul>
   </fieldset>
@@ -46,30 +45,30 @@
     <legend>Limitations</legend>
     <ul>
       <li>
-	#{error 'offerItem.endDate' /}
         <label>Valid Until</label>
         <input type="text" name="offerItem.endDate" class="date_pick" value="${flash['offerItem.endDate']}" />
+	#{error 'offerItem.endDate' /}
       </li>
     </ul>
     
   </fieldset>
   
-  <fieldset>
-    <legend>Photos</legend>
-    <ul>
-      <li>
-        <label>Photo</label>
-        <input type="file" name="photo" />
-      </li>
-      <li>
-        <label>Added Photos</label>
-        <div class="photos">
-          <img src="@{'public/images/icons/user.png'}" />
-          <img src="@{'public/images/icons/user.png'}" />
-        </div>
-      </li>
-    </ul>
-  </fieldset>
+  <!-- <fieldset> -->
+  <!--   <legend>Photos</legend> -->
+  <!--   <ul> -->
+  <!--     <li> -->
+  <!--       <label>Photo</label> -->
+  <!--       <input type="file" name="photo" /> -->
+  <!--     </li> -->
+  <!--     <li> -->
+  <!--       <label>Added Photos</label> -->
+  <!--       <div class="photos"> -->
+  <!--         <img src="@{'public/images/icons/user.png'}" /> -->
+  <!--         <img src="@{'public/images/icons/user.png'}" /> -->
+  <!--       </div> -->
+  <!--     </li> -->
+  <!--   </ul> -->
+  <!-- </fieldset> -->
   
   <input type="submit" value="Proceed" />
 

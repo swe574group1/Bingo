@@ -1,44 +1,41 @@
-#{extends 'main.html' /}
+#{extends 'logged_user.html' /}
 #{set title:'Detail' /}
 
 <div id="main" style="padding-top:0px">
   <div class="post" style="padding:top:0px">
     <div class="right">
-      <h3>${requestItem.title}</h3>
-
-      <h4>Description</h4>
-      <p>${requestItem.description}</p>
-      
       <div class="restrictions">
+	<h4>Details for Request</h4>
         <ul>
-          <!-- <li> -->
-          <!--   <label>Minimum Attendee Number</label> 1 -->
-          <!-- </li> -->
+	  <li>
+	    <label>Title</label>
+	    ${requestItem.title}
+	  </li>
+	  <li>
+	    <label>Description</label>
+	    ${requestItem.description}
+	  </li>
           <li>
             <label>Valid Until</label>
 	    ${requestItem.endDate}
-          </li>
-          <li>
-            <label>Location</label> Istanbul / Sisli / Pangalti
           </li>
         </ul>
       </div>
     </div>
     
     <div class="left">
-      <a href="#"><img src="images/icons/user.png" class="owner_image" /></a>
       <div class="post-meta">
         <ul>
-          <li class="user"><a href="#">${requestItem.userEmail}</a></li>
-          <li class="time"><a href="#">10 Units</a></li>
-          <li class="comment"><a href="#">27 Applicants</a></li>
+          <li class="user">${requestItem.userEmail}
         </ul>
       </div>
     </div>
     
     <div class="post-meta">
       <h4>tags</h4>
-      ${requestItem.tags}
+      <p>
+	${requestItem.tags}
+      </p>
     </div>
     
   </div>

@@ -1,44 +1,42 @@
-#{extends 'main.html' /}
-#{set title:'Detail' /}
+#{extends 'logged_user.html' /}
+#{set title:'Offer Detail' /}
 
 <div id="main" style="padding-top:0px">
   <div class="post" style="padding:top:0px">
     <div class="right">
-      <h3>${offerItem.title}</h3>
-
-      <h4>Description</h4>
-      <p>${offerItem.description}</p>
-      
       <div class="restrictions">
-        <ul>
-          <!-- <li> -->
-          <!--   <label>Minimum Attendee Number</label> 1 -->
-          <!-- </li> -->
+	<h4>Details for Offer</h4>
+	<ul>
+	  <li>
+	    <label>Title</label>
+	    ${offerItem.title}
+	  </li>
+	  <li>
+	    <label>Description</label>
+	    ${offerItem.description}
+	  </li>
           <li>
             <label>Valid Until</label>
 	    ${offerItem.endDate}
-          </li>
-          <li>
-            <label>Location</label> Istanbul / Sisli / Pangalti
           </li>
         </ul>
       </div>
     </div>
     
     <div class="left">
-      <a href="#"><img src="images/icons/user.png" class="owner_image" /></a>
       <div class="post-meta">
         <ul>
-          <li class="user"><a href="#">${offerItem.userEmail}</a></li>
-          <li class="time"><a href="#">10 Units</a></li>
-          <li class="comment"><a href="#">27 Applicants</a></li>
+          <li class="user">${offerItem.userEmail}</li>
+          <li class="time">${offerItem.credit}</li>
         </ul>
       </div>
     </div>
     
     <div class="post-meta">
       <h4>tags</h4>
-      ${offerItem.tags}
+      <p>
+	${offerItem.tags}
+      </p>
     </div>
     
   </div>
