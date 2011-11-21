@@ -1,0 +1,4 @@
+function getStr(){
+return true;
+
+}
