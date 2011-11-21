@@ -41,6 +41,11 @@
 	#{if isLoggedIn}
 	<div id="gallery" class="clear">
 	  <h3>Recent Users </h3>
+	  <p>
+	  #{list items:models.User.findAll(), as:'newuser'}
+	  ${newuser.fullname}&nbsp;&nbsp;&nbsp;
+	  #{/list}
+	  </p>
 	</div>
 	#{/if}
 	<div class="col-a">
@@ -65,9 +70,9 @@
 	  <h3>Statistics</h3>
 	  <div class="footer-list">
             <ul>
-	      <li>55 New Users This Month!</li>
-	      <li>222 open offers! </li>
-	      <li>124 open requests! </li>
+	      <li>${(models.User.findAll()).size()} New Users This Month!</li>
+	      <li>${(models.Offer.findAll()).size()} open offers! </li>
+	      <li>${(models.Request.findAll()).size()} open requests! </li>
 	      <li>56  services in 1 week! </li>
 	      <li>2023 users available! </li>
             </ul>
