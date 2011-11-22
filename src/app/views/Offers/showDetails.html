@@ -26,7 +26,7 @@
     <div class="left">
       <div class="post-meta">
         <ul>
-          <li class="user">${offerItem.userEmail}</li>
+          <li class="user">${offerItem.user.fullname}</li>
           <li class="time">${offerItem.credit}</li>
         </ul>
       </div>
@@ -35,7 +35,7 @@
     <div class="post-meta">
       <h4>tags</h4>
       <p>
-	${offerItem.tags}
+	${offerItem.tags.join(', ')}
       </p>
     </div>
     

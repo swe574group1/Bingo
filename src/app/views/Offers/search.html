@@ -13,10 +13,10 @@
   #{list items:offers, as:'offer'}
   <tr>
     <td>${offer.title}</td>
-    <td>${offer.userEmail}</td>
+    <td>${offer.user.fullname}</td>
     <td>${offer.endDate}</td>
     <td>${offer.credit}</td>
-    <td><a href="@{Offers.showDetails(user, offer.id)}">Details</a></td>
+    <td><a href="@{Offers.showDetails(offer.id)}">Details</a></td>
   </tr>
 </a>
 #{/list}

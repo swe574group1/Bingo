@@ -3,9 +3,9 @@ package models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -24,13 +24,9 @@ public class Offer extends Model
     @Lob
     public String description;
 
-    /*    @Required
-    @ManyToMany
-    public List<Tag> tags;*/
-
-    //Simple tags field to test validation
     @Required
-    public String tags;
+    @OneToMany(mappedBy="offer", cascade=CascadeType.ALL)
+    public List<Tag> tags;
 
     /* Commenting out to test validation
     @Required
@@ -58,11 +54,8 @@ public class Offer extends Model
     @Required
     public Integer credit;
 
-    // @Required
-    // @ManyToOne
-    //public User user;
-
-    public String userEmail;
+    @ManyToOne
+    public User user;
 
     public UploadedFile image;
     
@@ -71,4 +64,6 @@ public class Offer extends Model
 
     // @Required
     // public Boolean allowMultipleAttendees; */
+
+    public Boolean isFinalized;
 }

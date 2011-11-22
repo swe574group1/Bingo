@@ -9,17 +9,8 @@ import play.mvc.Controller;
 import play.mvc.With;
 import play.data.validation.*;
 
-public class Application extends Controller
+public class Application extends BaseController
 {   
-    @Before
-    static void setConnectedUser() {
-	boolean isConnected = Security.isConnected();
-	renderArgs.put("isLoggedIn", isConnected);
-	if(isConnected) {
-	    User user = User.find("byEmail", Security.connected()).first();
-	    renderArgs.put("user", user);
-	}
-    }
     public static void index()
 	{
 	    List<User> newUsers = User.getNewUsers(5);

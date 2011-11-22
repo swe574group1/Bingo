@@ -1,25 +1,27 @@
 package models;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-import play.data.validation.Required;
-import play.db.jpa.GenericModel;
 import play.db.jpa.Model;
 
 @Entity
-public class Tag extends GenericModel
+public class Tag extends Model
 {
-    @Id
-    @Required
-    public String id;
+    @ManyToOne
+    public Offer offer;
 
-    public String getId() {
-        return id;
-    }
+    public String name;
 
+    public Tag(Offer offer, String name)
+	{
+    	this.offer = offer;
+    	this.name = name;
+	}
+    
     @Override
-    public Object _key() {
-        return getId();
+    public String toString()
+    {
+    	return name;
     }
 }

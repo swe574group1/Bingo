@@ -5,7 +5,6 @@
     <div class="post" style="padding:top:0px">
       <h3 style="padding-top:0px;">Your offer was successfully created</h3>
       <form>
-	<input readonly="readonly" type="hidden" name="offerItem.userEmail" value="${offerItem.userEmail}" />
 	<ul class="long_login">
 	  <li>
 	    <label>Offer Title</label>
@@ -13,7 +12,7 @@
 	  </li>
 	  <li>
 	    <label>Offer Tags</label>
-	    <input class="roinput" type="text" readonly="readonly" value="${offerItem.tags}" />
+	    <input class="roinput" type="text" readonly="readonly" value="${offerItem.tags.join(', ')}" />
 	  </li>
 	  <li>
 	    <label>Offer Description</label>

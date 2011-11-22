@@ -5,7 +5,8 @@ import models.*;
 import play.mvc.*;
 import play.data.validation.*;
 
-public class Users extends Controller {
+public class Users extends BaseController
+{
 
     public static void register() {
 	render(new User());

@@ -18,7 +18,7 @@ import play.mvc.*;
 import java.util.*;
 // Require Login
 @With(Secure.class)
-public class Handshakes extends Controller
+public class Handshakes extends BaseController
 {
 	public static void user(Long userId)
 	{

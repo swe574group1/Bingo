@@ -22,21 +22,22 @@
       <li>
         <label>Title</label>
         <input type="text" name="offerItem.title" value="${flash['offerItem.title']}" />
-	#{error 'offerItem.title' /}
+	<span class="error">#{error 'offerItem.title' /}</span>
       </li>
       <li>
         <label>Tags</label>
-        <input type="text" name="offerItem.tags" value="${flash['offerItem.tags']}" />
-	#{error 'offerItem.tags' /}
+        <input type="text" name="tags" value="${flash['offerItem.tags']}" /> Separate tags with commas
+	<span class="error">#{error 'offerItem.tags' /}</span>
       </li>
       <li>
-        <label>Description<br />#{error 'offerItem.description' /}</label>
+        <label>Description</label>
         <textarea name="offerItem.description">${flash['offerItem.description']}</textarea>
+        <span class="error">#{error 'offerItem.description' /}</span>
       </li>
       <li>
         <label>Honey Combs</label>
 	<input type="text" name="offerItem.credit" value="${flash['offerItem.credit']}" />
-	#{error 'offerItem.credit' /}
+	<span class="error">#{error 'offerItem.credit' /}</span>
       </li>
     </ul>
   </fieldset>
@@ -47,7 +48,7 @@
       <li>
         <label>Valid Until</label>
         <input type="text" name="offerItem.endDate" class="date_pick" value="${flash['offerItem.endDate']}" />
-	#{error 'offerItem.endDate' /}
+	<span class="error">#{error 'offerItem.endDate' /}</span>
       </li>
     </ul>
     

@@ -26,22 +26,22 @@
         <ul>
 	  <input type="hidden" name="offerItem.userEmail" value="${user.email}" />
           <li>
-	    #{error 'offerItem.title' /}
+	    <span class="error">#{error 'offerItem.title' /}</span>
             <label>Title</label>
             <input type="text" name="offerItem.title" value="${flash['offerItem.title']}" />
           </li>
           <li>
-	    #{error 'offerItem.tags' /}
+	    <span class="error">#{error 'offerItem.tags' /}</span>
             <label>Tags</label>
             <input type="text" name="offerItem.tags" value="${flash['offerItem.tags']}" />
           </li>
           <li>
-	    #{error 'offerItem.description' /}
+	    <span class="error">#{error 'offerItem.description' /}</span>
             <label>Description</label>
             <textarea name="offerItem.description">${flash['offerItem.description']}</textarea>
           </li>
           <li>
-	    #{error 'offerItem.credit' /}
+	    <span class="error">#{error 'offerItem.credit' /}</span>
             <label>Honey Combs</label>
 	    <input type="text" name="offerItem.credit" value="${flash['offerItem.credit']}" />
             <!-- <select name="offerItem.credit" style="width:150px;"> -->
@@ -75,7 +75,7 @@
           </li>-->
           
           <li>
-	    #{error 'offerItem.endDate' /}
+	    <span class="error">#{error 'offerItem.endDate' /}</span>
             <label>Valid Until</label>
             <input type="text" name="offerItem.endDate" class="date_pick" value="${flash['offerItem.endDate']}" />
           </li>

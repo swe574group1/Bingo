@@ -12,7 +12,7 @@ import service.SearchService.SearchQuery.SortField;
 import service.SearchService.SearchResult;
 import service.SearchService.Type;
 
-public class Requests extends Controller
+public class Requests extends BaseController
 {
     public static void user(Long userId)
 	{

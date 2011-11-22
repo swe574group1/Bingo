@@ -12,12 +12,12 @@
       Welcome, ${user.fullname}!<br />
       <a href="@{Secure.logout()}"><input type="submit" class="login_button" value="Logout" /></a>
       <ul>
-        <li><a href="@{Offers.create(user)}">Create Offer</a></li>
-        <li><a href="@{Requests.create(user)}">Create Request</a></li>
-	<li><a href="@{Offers.search(user)}">Search Offers</a></li>
-	<li><a href="@{Requests.search(user)}">Search Requests</a></li>
-        <li><a href="@{Users.listOffers(user)}">My Offers</a></li>
-        <li><a href="@{Users.listRequests(user)}">My Requests</a></li>
+        <li><a href="@{Offers.create()}">Create Offer</a></li>
+        <li><a href="@{Requests.create()}">Create Request</a></li>
+	<li><a href="@{Offers.search()}">Search Offers</a></li>
+	<li><a href="@{Requests.search()}">Search Requests</a></li>
+        <li><a href="@{Users.listOffers()}">My Offers</a></li>
+        <li><a href="@{Users.listRequests()}">My Requests</a></li>
 <!--        <li><a href="#">My Profile</a></li>-->
 <!--        <li><a href="#">Update Account</a></li>-->
       </ul>

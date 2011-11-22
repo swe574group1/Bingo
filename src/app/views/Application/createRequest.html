@@ -26,17 +26,17 @@
         <ul>
 	  <input type="hidden" name="requestItem.userEmail" value="${user.email}" />
           <li>
-	    #{error 'requestItem.title' /}
+	    <span class="error">#{error 'requestItem.title' /}</span>
             <label>Title</label>
             <input type="text" name="requestItem.title" value="${flash['requestItem.title']}" />
           </li>
           <li>
-	    #{error 'requestItem.tags' /}
+	    <span class="error">#{error 'requestItem.tags' /}</span>
             <label>Tags</label>
             <input type="text" name="requestItem.tags" value="${flash['requestItem.tags']}" />
           </li>
           <li>
-	    #{error 'requestItem.description' /}
+	    <span class="error">#{error 'requestItem.description' /}</span>
             <label>Description</label>
             <textarea name="requestItem.description">${flash['requestItem.description']}</textarea>
           </li>
@@ -63,7 +63,7 @@
           </li>-->
           
           <li>
-	    #{error 'requestItem.endDate' /}
+	    <span class="error">#{error 'requestItem.endDate' /}</span>
             <label>Valid Until</label>
             <input type="text" name="requestItem.endDate" class="date_pick" value="${flash['requestItem.endDate']}" />
           </li>
