@@ -8,41 +8,7 @@ import play.mvc.Controller;
 
 public class Requests extends BaseController
 {
-    public static void user(Long userId)
-	{
-	    if (userId == null) {
-		error("missing userId");
-	    }
-
-	    List<Request> requests = Request.find("user.id", userId).fetch();
-
-	    render(requests);
-	}
-
-    public static void detail(Long requestId)
-    	{
-    	    if (requestId == null) {
-    		error("missing requestId");
-    	    }
-
-    	    Request request = Request.findById(requestId);
-
-    	    render(request);
-     	}
     
-    /* commented out because throws exception and I have no idea how to fix */
-    // public static void search(List<String> tags, SortField sortField, SortDirection sortDirection)
-    // 	{
-    // 	    SearchQuery query = new SearchQuery();
-    // 	    query.tags = tags;
-    // 	    query.sortField = sortField;
-    // 	    query.sortDirection = sortDirection;
-    // 	    SearchResult<Request> searchResult = SearchService.search(Type.REQUEST, query);
-
-    // 	    List<Request> requests = searchResult.entities;
-    // 	    render(requests);
-    // 	}
-
     public static void create() {
 	render();
     }
@@ -72,13 +38,16 @@ public class Requests extends BaseController
 	finalize(requestItem.id);
     }
 
-    public static void finalize(Request requestItem) {
+    public static void finalize(Long requestId) {
+	Request requestItem = Request.findById(requestId);
 	render(requestItem);
     }
 
-    public static void save(Request requestItem) {
+    public static void save(Long requestId) {
+	Request requestItem = Request.findById(requestId);
+	requestItem.isFinalized = true;
 	requestItem.save();
-	show(requestItem);
+	show(requestItem.id);
     }
 
     public static void show(Request requestItem) {
@@ -90,14 +59,16 @@ public class Requests extends BaseController
 	render(requests);
     }
     
-    public static void showDetails(User user, Long id) {
+    public static void showDetails(Long id) {
+	User user = getConnectedUser();
 	Request requestItem = Request.findById(id);
 	render(user, requestItem);
     }
 
     public static void search(User user) {
-	List<Request> requests = Request.all().fetch();
-	render(user, requests);
+	User user = getConnectedUser();
+	List<Request> requests = Request.find("isFinalized", true).fetch();
+	render(user, offers);
     }
 
 }

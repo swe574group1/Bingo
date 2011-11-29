@@ -3,6 +3,7 @@ package models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
@@ -25,9 +26,8 @@ public class Request extends Model
     public String description;
 
     @Required
-    // @ManyToMany
-    // public List<Tag> tags;
-    public String tags;
+    @OneToMany(mappedBy="offer", cascade=CascadeType.ALL);
+    public List<Tag> tags;
     
     // @Required
     // @Temporal(TemporalType.TIMESTAMP)
@@ -44,14 +44,14 @@ public class Request extends Model
     // public Integer credit;
 
     // @Required
-    // @ManyToOne
-    // public User user;
-
-    public String userEmail;
+    @ManyToOne
+    public User user;
 
     // @OneToMany
     // public List<UploadedFile> images;
 
     // @Required
     // public Boolean allowMultipleAttendees;
+
+    public Boolean isFinalized;
 }
