@@ -28,42 +28,15 @@ public class Offer extends Model
     @OneToMany(mappedBy="offer", cascade=CascadeType.ALL)
     public List<Tag> tags;
 
-    /* Commenting out to test validation
-    @Required
-    @Temporal(TemporalType.TIMESTAMP) */
-//    public Date startDate;
-
     @Required
     @Temporal(TemporalType.TIMESTAMP)
     public Date endDate;
 
-    // public void setStartDate() {
-    // 	this.startDate = new Date();
-    // }
-	
-
-/*    @Required
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date endDate;
-
-    //Commenting these out to test validation
-    @Required
-    public Boolean async;
-*/
-    
     @Required
     public Integer credit;
 
     @ManyToOne
     public User user;
-
-    public UploadedFile image;
-    
-    // @OneToMany
-    // public List<UploadedFile> images;
-
-    // @Required
-    // public Boolean allowMultipleAttendees; */
 
     public Boolean isFinalized;
 }

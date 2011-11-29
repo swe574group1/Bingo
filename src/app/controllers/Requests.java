@@ -1,14 +1,17 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import models.*;
-import play.data.validation.*;
+import models.Request;
+import models.Tag;
+import models.User;
+import play.data.validation.Valid;
+import play.data.validation.Validation;
 import play.mvc.Controller;
 
 public class Requests extends BaseController
 {
-    
     public static void create() {
 	render();
     }
@@ -17,15 +20,15 @@ public class Requests extends BaseController
 	User user = getConnectedUser();
 
 	String[] tagsArr = tags.split(",");
-	List<Tag> tagList = new ArrayList<Tag>();
+	List<Tag> tagsList = new ArrayList<Tag>();
 	for (String tagString : tagsArr) {
 	    Tag tag = new Tag(requestItem, tagString);
-	    tagList.add(tag);
+	    tagsList.add(tag);
 	}
-	requestItem.tags = tagList;
+	requestItem.tags = tagsList;
 
-	validation.valid(offerItem);
-	if (validation.hasError()) {
+	validation.valid(requestItem);
+	if (validation.hasErrors()) {
 	    params.flash();
 	    validation.keep();
 	    create();
@@ -50,7 +53,8 @@ public class Requests extends BaseController
 	show(requestItem.id);
     }
 
-    public static void show(Request requestItem) {
+    public static void show(Long requestId) {
+	Request requestItem = Request.findById(requestId);
 	render(requestItem);
     }
 
@@ -65,10 +69,10 @@ public class Requests extends BaseController
 	render(user, requestItem);
     }
 
-    public static void search(User user) {
+    public static void search() {
 	User user = getConnectedUser();
 	List<Request> requests = Request.find("isFinalized", true).fetch();
-	render(user, offers);
+	render(user, requests);
     }
 
 }
