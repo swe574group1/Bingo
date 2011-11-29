@@ -8,7 +8,7 @@
       <div class="about-me">
         <h3>Login</h3>
 	#{if flash.error}
-	Wrong Email or Password!
+	<span class="error">Wrong Email or Password!</span>
 	#{/if}
         <form action="@{Secure.authenticate()}" method="POST" class="login">
         	<ul class="login">
