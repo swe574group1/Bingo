@@ -5,12 +5,6 @@ import java.util.List;
 import models.*;
 import play.data.validation.*;
 import play.mvc.Controller;
-import service.SearchService;
-import service.SearchService.SearchQuery;
-import service.SearchService.SearchQuery.SortDirection;
-import service.SearchService.SearchQuery.SortField;
-import service.SearchService.SearchResult;
-import service.SearchService.Type;
 
 public class Requests extends BaseController
 {
@@ -49,17 +43,33 @@ public class Requests extends BaseController
     // 	    render(requests);
     // 	}
 
-    public static void create(User user) {
-	render(user);
+    public static void create() {
+	render();
     }
 
-    public static void doCreate(User user, @Valid Request requestItem) {
-	if (validation.hasErrors()) {
+    public static void doCreate(String tags, Request requestItem) {
+	User user = getConnectedUser();
+
+	String[] tagsArr = tags.split(",");
+	List<Tag> tagList = new ArrayList<Tag>();
+	for (String tagString : tagsArr) {
+	    Tag tag = new Tag(requestItem, tagString);
+	    tagList.add(tag);
+	}
+	requestItem.tags = tagList;
+
+	validation.valid(offerItem);
+	if (validation.hasError()) {
 	    params.flash();
 	    validation.keep();
-	    create(user);
+	    create();
 	}
-	finalize(requestItem);
+
+	requestItem.user = user;
+	requestItem.isFinalized = false;
+	requestItem.save();
+	
+	finalize(requestItem.id);
     }
 
     public static void finalize(Request requestItem) {
