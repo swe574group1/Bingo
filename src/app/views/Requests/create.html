@@ -20,7 +20,6 @@
         <legend>Descriptions</legend>
         
         <ul>
-	  <input type="hidden" name="requestItem.userEmail" value="${user.email}" />
           <li>
             <label>Title</label>
             <input type="text" name="requestItem.title" value="${flash['requestItem.title']}" />
@@ -28,7 +27,7 @@
           </li>
           <li>
             <label>Tags</label>
-            <input type="text" name="requestItem.tags" value="${flash['requestItem.tags']}" />
+            <input type="text" name="requestItem.tags" value="${flash['requestItem.tags']}" />Separate tags with commas
 	    #{error 'requestItem.tags' /}
           </li>
           <li>
@@ -49,23 +48,6 @@
         </ul>
         
       </fieldset>
-      
-      <!-- <fieldset> -->
-      <!--   <legend>Photos</legend> -->
-      <!--   <ul> -->
-      <!--     <li> -->
-      <!--       <label>Photo</label> -->
-      <!--       <input type="file" name="photo" /> -->
-      <!--     </li> -->
-      <!--     <li> -->
-      <!--       <label>Added Photos</label> -->
-      <!--       <div class="photos"> -->
-      <!--         <img src="@{'public/images/icons/user.png'}" /> -->
-      <!--         <img src="@{'public/images/icons/user.png'}" /> -->
-      <!--       </div> -->
-      <!--     </li> -->
-      <!--   </ul> -->
-      <!-- </fieldset> -->
       
       <input type="submit" value="Proceed" />
 

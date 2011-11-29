@@ -2,17 +2,23 @@
 #{set title:'Your Offers' /}
 
 #{if offers}
-<ul>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Valid Until</th>
+    <th>Honey Combs</th>
+    <th></th>
+  </tr>
   #{list items:offers, as:'offer'}
-  <li>
-    Title: ${offer.title}<br />
-    Tags: ${offer.tags}<br />
-    Description: ${offer.description}<br />
-    Honey Combs: ${offer.credit}<br />
-    Valid Until: ${offer.endDate}
-  </li>
-  #{/list}
-</ul>
+  <tr>
+    <td>${offer.title}</td>
+    <td>${offer.endDate}</td>
+    <td>${offer.credit}</td>
+    <td><a href="@{Offers.edit(offer.id)}">Edit</a></td>
+  </tr>
+</a>
+#{/list}
+</table>
 #{/if}
 #{else}
 <p>Currently you have no offers.</p>

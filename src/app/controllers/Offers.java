@@ -69,4 +69,9 @@ public class Offers extends BaseController
     	render(user, offers);
     }
 
+    public static void edit(Long id) {
+	Offer offerItem = Offer.findById(id);
+	render(offerItem);
+    }
+
 }
