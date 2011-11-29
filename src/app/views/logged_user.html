@@ -10,7 +10,7 @@
     <div class="sidemenu">
       <h3>Menu</h3>
       Welcome, ${user.fullname}!<br />
-      <a href="@{Secure.logout()}"><input type="submit" class="login_button" value="Logout" /></a>
+      <input type="button" class="login_button" value="Logout" onclick="window.location='@{Secure.logout()}'"/>
       <ul>
         <li><a href="@{Offers.create()}">Create Offer</a></li>
         <li><a href="@{Requests.create()}">Create Request</a></li>
