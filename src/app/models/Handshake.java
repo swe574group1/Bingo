@@ -19,11 +19,11 @@ public class Handshake extends Model
         WAITING_APPROVAL, ACCEPTED, REJECTED, UNKNOWN
     }
 
-    @Required
+
     @ManyToOne
     public Offer offer;
 
-    @Required
+
     @ManyToOne
     public Request request;
 
@@ -31,19 +31,21 @@ public class Handshake extends Model
     @Temporal(TemporalType.TIMESTAMP)
     public Date creationDate;
 
-    @Required
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date actualStartDate;
+    // @Required
+    // @Temporal(TemporalType.TIMESTAMP)
+    // public Date actualStartDate;
 
-    @Required
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date actualEndDate;
+    // @Required
+    // @Temporal(TemporalType.TIMESTAMP)
+    // public Date actualEndDate;
 
-    // FIXME: do we need credit here?
-    //@Required
-    //public Credit credit;
+    // @Required
+    // @Enumerated(EnumType.STRING)
+    // public Status status;
 
-    @Required
-    @Enumerated(EnumType.STRING)
-    public Status status;
+    public Handshake(Offer offerItem, User requester) {
+	this.offer = offerItem;
+	this.request = new Request(requester);
+	this.creationDate = new Date();
+    }
 }

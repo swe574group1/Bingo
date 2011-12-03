@@ -36,4 +36,8 @@ public class Request extends Model
     public User user;
 
     public Boolean isFinalized;
+
+    public Request(User user) {
+	this.user = user;
+    }
 }
