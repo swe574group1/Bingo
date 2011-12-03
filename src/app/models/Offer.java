@@ -29,19 +29,19 @@ public class Offer extends Model
     @OneToMany(mappedBy="offer", cascade=CascadeType.ALL)
     public List<Tag> tags;
 
-    public String getTags() {
-	ListIterator tagIterator = tags.listIterator();
-	String tidyTagList = "";
-	if (tagIterator.hasNext()) {
-	    tidyTagList += tagIterator.next();
-	} else {
-	    return tidyTagList;
-	}
-	while (tagIterator.hasNext()) {
-	    tidyTagList += ", " + tagIterator.next();
-	}
-	return tidyTagList;
-    }
+//    public String getTags() {
+//	ListIterator tagIterator = tags.listIterator();
+//	String tidyTagList = "";
+//	if (tagIterator.hasNext()) {
+//	    tidyTagList += tagIterator.next();
+//	} else {
+//	    return tidyTagList;
+//	}
+//	while (tagIterator.hasNext()) {
+//	    tidyTagList += ", " + tagIterator.next();
+//	}
+//	return tidyTagList;
+//    }
 
     @Required
     @Temporal(TemporalType.TIMESTAMP)
@@ -52,8 +52,6 @@ public class Offer extends Model
 
     @ManyToOne
     public User user;
-
-    public Boolean isFinalized;
 
     public Offer(User user) {
 	this.user = user;

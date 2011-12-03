@@ -12,7 +12,7 @@
   #{list items:offers, as:'offer'}
   <tr>
     <td>${offer.title}</td>
-    <td>${offer.endDate}</td>
+    <td>${offer.endDate.format('dd MMMM yyyy hh:mm:ss')}</td>
     <td>${offer.credit}</td>
     <td><a href="@{Offers.edit(offer.id)}">Edit</a></td>
   </tr>

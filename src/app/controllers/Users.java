@@ -30,12 +30,6 @@ public class Users extends BaseController
 	render();
     }
 
-    public static void listOffers() {
-	User user = getConnectedUser();
-	List<Offer> offers = Offer.find("byId", user.id).fetch();
-	render(user, offers);
-    }
-
     public static void listRequests() {
 	User user = getConnectedUser();
 	List<Request> requests = Request.find("byId", user.id).fetch();
