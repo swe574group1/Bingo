@@ -56,4 +56,7 @@ public class Offer extends Model
     public Offer(User user) {
 	this.user = user;
     }
+
+    public Offer() {
+    }
 }

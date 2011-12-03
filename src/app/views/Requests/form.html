@@ -1,0 +1,61 @@
+#{extends 'logged_user.html' /}
+#{set title:'Create Request' /}
+
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/datepicker.css'}">
+#{/set}
+
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/datepicker.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+<script src="@{'/public/javascripts/create-offer.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+#{/set}
+
+#{if requestItem.id}
+<h3 style="padding-top:0px;">Edit Request</h3>
+<p>Use the form below to edit your request.</p>
+#{/if}
+#{else}
+<h3 style="padding-top:0px;">Create New Request</h3>
+<p>Use the form below to create a new request.</p>
+#{/else}
+
+<form action="@{Requests.doCreate()}" method="POST" class="utility_form">
+	<input type="hidden" name="requestItem.id" value="${requestItem.id}" />
+
+  <fieldset>
+    <legend>Descriptions</legend>
+    
+    <ul>
+      <li>
+        <label>Title</label>
+        <input type="text" name="requestItem.title" value="${requestItem.title}" />
+	<span class="error">#{error 'requestItem.title' /}</span>
+      </li>
+      <li>
+        <label>Tags</label>
+        <input type="text" name="tags" value="${requestItem.getTags()}" /> Separate tags with commas
+	<span class="error">#{error 'requestItem.tags' /}</span>
+      </li>
+      <li>
+        <label>Description</label>
+        <textarea name="requestItem.description">${requestItem.description}</textarea>
+        <span class="error">#{error 'requestItem.description' /}</span>
+      </li>
+    </ul>
+  </fieldset>
+  
+  <fieldset>
+    <legend>Limitations</legend>
+    <ul>
+      <li>
+        <label>Valid Until</label>
+        <input type="text" name="requestItem.endDate" class="date_pick" value="${requestItem.endDate}" />
+	<span class="error">#{error 'requestItem.endDate' /}</span>
+      </li>
+    </ul>
+    
+  </fieldset>
+   
+  <input type="submit" value="Save" />
+
+</form>
