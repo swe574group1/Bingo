@@ -54,4 +54,8 @@ public class Offer extends Model
     public User user;
 
     public Boolean isFinalized;
+
+    public Offer(User user) {
+	this.user = user;
+    }
 }

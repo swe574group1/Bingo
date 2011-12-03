@@ -2,6 +2,7 @@ package models;
 
 import java.util.Date;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -27,6 +28,20 @@ public class Request extends Model
     @Required
     @OneToMany(mappedBy="request", cascade=CascadeType.ALL)
     public List<Tag> tags;
+
+    public String getTags() {
+	ListIterator tagIterator = tags.listIterator();
+	String tidyTagList = "";
+	if (tagIterator.hasNext()) {
+	    tidyTagList += tagIterator.next();
+	} else {
+	    return tidyTagList;
+	}
+	while (tagIterator.hasNext()) {
+	    tidyTagList += ", " + tagIterator.next();
+	}
+	return tidyTagList;
+    }
     
     @Required
     @Temporal(TemporalType.TIMESTAMP)

@@ -26,7 +26,7 @@
     <div class="left">
       <div class="post-meta">
         <ul>
-          <li class="user">${requestItem.userEmail}
+          <li class="user">${requestItem.user.fullname}
         </ul>
       </div>
     </div>
@@ -34,7 +34,7 @@
     <div class="post-meta">
       <h4>tags</h4>
       <p>
-	${requestItem.tags}
+	${requestItem.getTags()}
       </p>
     </div>
     

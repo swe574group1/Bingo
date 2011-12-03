@@ -22,7 +22,7 @@ public class Requests extends BaseController
 	String[] tagsArr = tags.split(",");
 	List<Tag> tagsList = new ArrayList<Tag>();
 	for (String tagString : tagsArr) {
-	    Tag tag = new Tag(requestItem, tagString);
+	    Tag tag = new Tag(requestItem, tagString.trim());
 	    tagsList.add(tag);
 	}
 	requestItem.tags = tagsList;
@@ -33,7 +33,6 @@ public class Requests extends BaseController
 	    validation.keep();
 	    create();
 	}
-
 	requestItem.user = user;
 	requestItem.isFinalized = false;
 	requestItem.save();
@@ -58,21 +57,29 @@ public class Requests extends BaseController
 	render(requestItem);
     }
 
-    public static void listBelongingToUser(String email) {
-	List<Request> requests = Request.find("byUserEmail", email).fetch();
-	render(requests);
-    }
-    
     public static void showDetails(Long id) {
 	User user = getConnectedUser();
 	Request requestItem = Request.findById(id);
+	Boolean someoneElsesRequest = isSomeoneElses(id);
 	render(user, requestItem);
     }
-
+    
     public static void search() {
 	User user = getConnectedUser();
 	List<Request> requests = Request.find("isFinalized", true).fetch();
 	render(user, requests);
+    }
+
+    public static void edit(Long id) {
+	Request requestItem = Request.findById(id);
+	render(requestItem);
+    }
+
+    public static Boolean isSomeoneElses(Long requestId) {
+	User currentUser = getConnectedUser();
+	Request currentRequest = Request.findById(requestId);
+	User owner = currentRequest.user;
+	return !(currentUser.equals(owner));
     }
 
 }

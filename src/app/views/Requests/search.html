@@ -14,9 +14,9 @@
   #{list items:requests, as:'request'}
   <tr>
     <td>${request.title}</td>
-    <td>${request.userEmail}</td>
+    <td>${request.user.fullname}</td>
     <td>${request.endDate}</td>
-    <td><a href="@{Requests.showDetails(user, request.id)}">Details</a></td>
+    <td><a href="@{Requests.showDetails(request.id)}">Details</a></td>
   </tr>
   #{/list}
 </table>

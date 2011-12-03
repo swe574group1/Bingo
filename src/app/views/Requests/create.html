@@ -10,49 +10,44 @@
 <script src="@{'/public/javascripts/create-offer.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 #{/set}
 
-<div id="main" style="padding-top:0px">
-  <div class="post" style="padding:top:0px">
-    <h3 style="padding-top:0px;">Create New Request</h3>
-    <p>Use the form below to create a new request.</p>
-    <form action="@{Requests.doCreate(user, requestItem)}" method="POST" class="utility_form">
+<h3 style="padding-top:0px;">Create New Request</h3>
+<p>Use the form below to create a new request.</p>
+<form action="@{Requests.doCreate()}" method="POST" class="utility_form">
 
-      <fieldset>
-        <legend>Descriptions</legend>
-        
-        <ul>
-          <li>
-            <label>Title</label>
-            <input type="text" name="requestItem.title" value="${flash['requestItem.title']}" />
-	    #{error 'requestItem.title' /}
-          </li>
-          <li>
-            <label>Tags</label>
-            <input type="text" name="requestItem.tags" value="${flash['requestItem.tags']}" />Separate tags with commas
-	    #{error 'requestItem.tags' /}
-          </li>
-          <li>
-            <label>Description<br/> #{error 'requestItem.description' /}</label>
-            <textarea name="requestItem.description">${flash['requestItem.description']}</textarea>
-          </li>
-        </ul>
-      </fieldset>
-      
-      <fieldset>
-        <legend>Limitations</legend>
-        <ul>
-          <li>
-            <label>Valid Until</label>
-            <input type="text" name="requestItem.endDate" class="date_pick" value="${flash['requestItem.endDate']}" />
-	    #{error 'requestItem.endDate' /}
-          </li>
-        </ul>
-        
-      </fieldset>
-      
-      <input type="submit" value="Proceed" />
-
-    </form>
+  <fieldset>
+    <legend>Descriptions</legend>
     
-  </div>
+    <ul>
+      <li>
+        <label>Title</label>
+        <input type="text" name="requestItem.title" value="${flash['requestItem.title']}" />
+	<span class="error">#{error 'requestItem.title' /}</span>
+      </li>
+      <li>
+        <label>Tags</label>
+        <input type="text" name="tags" value="${flash['requestItem.tags']}" />Separate tags with commas
+	<span class="error">#{error 'requestItem.tags' /}</span>
+      </li>
+      <li>
+        <label>Description<br/> #{error 'requestItem.description' /}</label>
+        <textarea name="requestItem.description">${flash['requestItem.description']}</textarea>
+	<span class="error">#{error 'requestItem.description' /}</span>
+      </li>
+    </ul>
+  </fieldset>
+  
+  <fieldset>
+    <legend>Limitations</legend>
+    <ul>
+      <li>
+        <label>Valid Until</label>
+        <input type="text" name="requestItem.endDate" class="date_pick" value="${flash['requestItem.endDate']}" />
+	#{error 'requestItem.endDate' /}
+      </li>
+    </ul>
+    
+  </fieldset>
+  
+  <input type="submit" value="Proceed" />
 
-</div>
+</form>

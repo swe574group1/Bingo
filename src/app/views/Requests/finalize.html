@@ -5,8 +5,7 @@
   <div id="main" style="padding-top:0px">
     <div class="post" style="padding:top:0px">
       <h3 style="padding-top:0px;">Finalizing Request</h3>
-      <form action="@{Requests.save(requestItem)}" method="POST">
-	<input type="hidden" name="requestItem.userEmail" value="${requestItem.userEmail}" />
+      <form action="@{Requests.save(requestItem.id)}" method="POST">
 	<p>
 	  Request Title:
 	</p>
@@ -14,7 +13,7 @@
 	<p>
 	  Request Tags:
 	</p>
-	${requestItem.tags}
+	${requestItem.getTags()}
 	<p>
 	  Request Description:
 	</p>

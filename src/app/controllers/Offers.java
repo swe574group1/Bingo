@@ -22,7 +22,7 @@ public class Offers extends BaseController
 	String[] tagsArr = tags.split(",");
 	List<Tag> tagsList = new ArrayList<Tag>();
 	for (String tagString : tagsArr) {
-	    Tag tag = new Tag(offerItem, tagString);
+	    Tag tag = new Tag(offerItem, tagString.trim());
 	    tagsList.add(tag);
 	}
 	offerItem.tags = tagsList;
@@ -75,7 +75,7 @@ public class Offers extends BaseController
 	render(offerItem);
     }
 
-    public static boolean isSomeoneElses(Long offerId) {
+    public static Boolean isSomeoneElses(Long offerId) {
 	User currentUser = getConnectedUser();
 	Offer currentOffer = Offer.findById(offerId);
 	User owner = currentOffer.user;
