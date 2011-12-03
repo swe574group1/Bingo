@@ -55,4 +55,8 @@ public class Request extends Model
     public Request(User user) {
 	this.user = user;
     }
+
+    public Request() {
+	
+    }
 }

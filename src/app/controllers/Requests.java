@@ -13,11 +13,19 @@ import play.mvc.Controller;
 public class Requests extends BaseController
 {
     public static void create() {
-	render();
+	Request requestItem = new Request();
+	requestItem.tags = new ArrayList<Tag>();
+	renderTemplate("Requests/form.html", requestItem);
     }
 
     public static void doCreate(String tags, Request requestItem) {
 	User user = getConnectedUser();
+
+	boolean isCreate = requestItem.id == null;
+	
+	if (!isCreate) {
+	    Tag.delete("request.id", requestItem.id);
+	}
 
 	String[] tagsArr = tags.split(",");
 	List<Tag> tagsList = new ArrayList<Tag>();
@@ -29,25 +37,17 @@ public class Requests extends BaseController
 
 	validation.valid(requestItem);
 	if (validation.hasErrors()) {
-	    params.flash();
-	    validation.keep();
-	    create();
+	    renderTemplate("Requests/form.html", requestItem);
 	}
+	
 	requestItem.user = user;
-	requestItem.isFinalized = false;
 	requestItem.save();
 	
-	finalize(requestItem.id);
-    }
-
-    public static void finalize(Long requestId) {
-	Request requestItem = Request.findById(requestId);
-	render(requestItem);
+	show(requestItem.id);
     }
 
     public static void save(Long requestId) {
 	Request requestItem = Request.findById(requestId);
-	requestItem.isFinalized = true;
 	requestItem.save();
 	show(requestItem.id);
     }
