@@ -35,9 +35,13 @@
     <div class="post-meta">
       <h4>tags</h4>
       <p>
-	${offerItem.tags.join(', ')}
+	${offerItem.getTags()}
       </p>
     </div>
-    
+
   </div>
+  #{if someoneElsesOffer}
+  <input type="button" onclick="window.location=''" value="Apply" />
+  #{/if}
+
 </div>

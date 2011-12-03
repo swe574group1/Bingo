@@ -60,7 +60,8 @@ public class Offers extends BaseController
     public static void showDetails(Long id) {
     	User user = getConnectedUser();
     	Offer offerItem = Offer.findById(id);
-    	render(user, offerItem);
+	Boolean someoneElsesOffer = isSomeoneElses(id);
+    	render(user, offerItem, someoneElsesOffer);
     }
 
     public static void search() {
@@ -72,6 +73,13 @@ public class Offers extends BaseController
     public static void edit(Long id) {
 	Offer offerItem = Offer.findById(id);
 	render(offerItem);
+    }
+
+    public static boolean isSomeoneElses(Long offerId) {
+	User currentUser = getConnectedUser();
+	Offer currentOffer = Offer.findById(offerId);
+	User owner = currentOffer.user;
+	return !(currentUser.equals(owner));
     }
 
 }
