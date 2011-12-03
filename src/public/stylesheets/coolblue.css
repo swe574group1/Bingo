@@ -1499,3 +1499,15 @@ ul.long_login label {
 }
 ul.long_login .long_login_button {
 	padding:10px 20px 10px 20px;
+}
+
+div.recentuser {
+    width: 120px;
+    height: 120px;
+    display: inline;
+}
+
+img.avatar {
+    max-width: 100px;
+    max-height: 100px;
+}

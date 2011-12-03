@@ -10,6 +10,12 @@
     <div class="sidemenu">
       <h3>Menu</h3>
       Welcome, ${user.fullname}!<br />
+      #{if user.photo.exists()}
+      <img class="avatar" src="@{Application.showUserPhoto(user.id)}" alt="${user.fullname}" />
+      #{/if}
+      #{else}
+      <img src="/public/images/lbi02.png" alt="Default User Avatar" />
+      #{/else}
       <input type="button" class="login_button" value="Logout" onclick="window.location='@{Secure.logout()}'"/>
       <ul>
         <li><a href="@{Offers.create()}">Create Offer</a></li>

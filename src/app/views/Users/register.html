@@ -3,7 +3,7 @@
 
 <div id="content" class="about-me">
   <h3>Register</h3>
-  #{form @Users.doCreateUserEntry()}
+  <form action="@{Users.doCreateUserEntry()}" method="POST" enctype="multipart/form-data">
 
   <ul class="long_login">
     <li>
@@ -26,7 +26,11 @@
       <input type="text" name="user.address" value="${flash['user.address']}" />
       <span class="error">#{error 'user.address' /}</span>
     </li>
+    <li>
+      <label>Photo</label>
+      <input type="file" name="user.photo" />
+    </li>
   <input type="submit" class="login_button" name="submit" value="Submit" />
   </ul>
-  #{/form}
+  </form>
 </div>

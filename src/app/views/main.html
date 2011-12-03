@@ -43,7 +43,12 @@
 	  <h3>Recent Users </h3>
 	  <p>
 	  #{list items:models.User.findAll(), as:'newuser'}
-	  ${newuser.fullname}&nbsp;&nbsp;&nbsp;
+	  #{if newuser.photo.exists()}
+	  <div class="recentuser">
+	    <img class="avatar" src="@{Application.showUserPhoto(newuser.id)}" alt="newuser.fullname" />
+	    ${newuser.fullname}
+	  </div>
+	  #{/if}&nbsp;&nbsp;&nbsp;
 	  #{/list}
 	  </p>
 	</div>

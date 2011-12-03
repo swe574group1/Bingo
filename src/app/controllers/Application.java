@@ -37,4 +37,9 @@ public class Application extends BaseController
 	render();
     }
 
+    public static void showUserPhoto(Long userId) {
+	User user = User.findById(userId);
+	renderBinary(user.photo.get());
+    }
+
 }

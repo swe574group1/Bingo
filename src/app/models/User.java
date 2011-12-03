@@ -11,6 +11,7 @@ import javax.persistence.TemporalType;
 
 import play.data.validation.Required;
 import play.db.jpa.Model;
+import play.db.jpa.Blob;
 
 @Entity
 public class User extends Model
@@ -88,4 +89,5 @@ public class User extends Model
 	 this.reputation = INITIAL_REPUTATION;
      }	 
 
+     public Blob photo;
 }
