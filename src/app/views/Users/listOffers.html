@@ -1,0 +1,24 @@
+#{extends 'logged_user.html' /}
+#{set title:'Your Offers' /}
+
+#{if offers}
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Valid Until</th>
+    <th>Honey Combs</th>
+    <th></th>
+  </tr>
+  #{list items:offers, as:'offer'}
+  <tr>
+    <td>${offer.title}</td>
+    <td>${offer.endDate}</td>
+    <td>${offer.credit}</td>
+    <td><a href="@{Offers.edit(offer.id)}">Edit</a></td>
+  </tr>
+  #{/list}
+</table>
+#{/if}
+#{else}
+<p>Currently you have no offers.</p>
+#{/else}

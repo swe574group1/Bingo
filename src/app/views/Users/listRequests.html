@@ -2,16 +2,21 @@
 #{set title:'Your Requests' /}
 
 #{if requests}
-<ul>
-  #{list items:requests, as:'request'}
-  <li>
-    Title: ${request.title}<br />
-    Tags: ${request.tags}<br />
-    Description: ${request.description}<br />
-    Valid Until: ${request.endDate}
-  </li>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Valid Until</th>
+    <th></th>
+  </tr>
+  #{list items:offers, as:'offer'}
+  <tr>
+    <td>${request.title}</td>
+    <td>${request.endDate}</td>
+    <td>${request.credit}</td>
+    <td><a href="@{Requests.edit(request.id)}">Edit</a></td>
+  </tr>
   #{/list}
-</ul>
+</table>
 #{/if}
 #{else}
 <p>Currently you have no requests.</p>
