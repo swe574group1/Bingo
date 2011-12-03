@@ -59,8 +59,9 @@ public class Handshakes extends BaseController
 
     public static void bindToOffer(Long id, User user) {
 	Offer offer = Offer.findById(id);
-	Handshake theirHandshake = new Handshake(offer, user);
-	render(theirHandshake);
+	Handshake handshakeItem = new Handshake(offer, user);
+	handshakeItem.save();
+	render(handshakeItem);
     }
 
 }

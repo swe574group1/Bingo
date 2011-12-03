@@ -1,7 +1,7 @@
 package models;
 
 import java.util.Date;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -19,12 +19,10 @@ public class Handshake extends Model
         WAITING_APPROVAL, ACCEPTED, REJECTED, UNKNOWN
     }
 
-
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     public Offer offer;
 
-
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     public Request request;
 
     @Required
