@@ -31,10 +31,10 @@ public class Users extends BaseController
     }
 
     public static void profile(Long userId) {
-	User user = User.findById(userId);
+	User observedUser = User.findById(userId);
 	User connectedUser = getConnectedUser();
-	Boolean isOwnProfile = (user == connectedUser);
-	render(user, isOwnProfile);
+	Boolean isOwnProfile = (observedUser == connectedUser);
+	render(observedUser, isOwnProfile);
     }
 
     public static void ownProfile() {
