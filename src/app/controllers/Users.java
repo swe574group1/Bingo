@@ -30,10 +30,8 @@ public class Users extends BaseController
 	render();
     }
 
-    public static void listRequests() {
-	User user = getConnectedUser();
-	List<Request> requests = Request.find("byId", user.id).fetch();
-	render(user, requests);
+    public static void profile(Long userId) {
+	User user = User.findById(userId);
+	render(user);
     }
-
 }
