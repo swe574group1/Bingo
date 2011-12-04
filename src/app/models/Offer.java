@@ -14,9 +14,10 @@ import javax.persistence.TemporalType;
 
 import play.data.validation.Required;
 import play.db.jpa.Model;
+import service.Matchable;
 
 @Entity
-public class Offer extends Model
+public class Offer extends Model implements Matchable
 {
     @Required
     public String title;
@@ -58,5 +59,11 @@ public class Offer extends Model
     }
 
     public Offer() {
+    }
+
+    @Override
+    public List<Tag> getTags()
+    {
+        return tags;
     }
 }

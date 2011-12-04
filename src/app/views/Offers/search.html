@@ -1,9 +1,12 @@
 #{extends 'logged_user.html' /}
 #{set title:'Search Offers' /}
 
-#{if offers}
-<label>Search</label>
-<input type="text" />
+<form action="@{Offers.search()}">
+	<label for="phrase">Search</label>
+	<input type="text" name="phrase" id="phrase" value="${phrase}" />
+</form>
+
+#{if foundOffers}
 <table>
   <tr>
     <th>Title</th>
@@ -12,7 +15,7 @@
     <th>Honey Combs</th>
     <th></th>
   </tr>
-  #{list items:offers, as:'offer'}
+  #{list items:foundOffers, as:'offer'}
   <tr>
     <td>${offer.title}</td>
     <td>${offer.user.fullname}</td>

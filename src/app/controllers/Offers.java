@@ -6,9 +6,8 @@ import java.util.List;
 import models.Offer;
 import models.Tag;
 import models.User;
-import play.data.validation.Valid;
-import play.data.validation.Validation;
-import play.mvc.Controller;
+import service.MatchService;
+import service.Utils;
 
 public class Offers extends BaseController
 {
@@ -27,14 +26,14 @@ public class Offers extends BaseController
     		// prevent tags to be appended to existing tags on edit
     		Tag.delete("offer.id", offerItem.id);
     	}
-		String[] tagsArr = tags.split(",");
+		List<String> tagsListString = Utils.parseTags(tags);
 		List<Tag> tagsList = new ArrayList<Tag>();
-		for (String tagString : tagsArr) {
-		    Tag tag = new Tag(offerItem, tagString.trim().toLowerCase());
+		for (String tagString : tagsListString) {
+		    Tag tag = new Tag(offerItem, tagString);
 		    tagsList.add(tag);
 		}
 		offerItem.tags = tagsList;
-	
+
 		validation.valid(offerItem);
 		if (validation.hasErrors()) {
 		    renderTemplate("Offers/form.html", offerItem);
@@ -64,10 +63,13 @@ public class Offers extends BaseController
     	render(user, offerItem, someoneElsesOffer);
     }
 
-    public static void search() {
+    public static void search(String phrase) {
     	User user = getConnectedUser();
-    	List<Offer> offers = Offer.findAll();
-    	render(user, offers);
+
+    	List<Offer> allOffers = Offer.findAll();
+    	List<Offer> foundOffers = MatchService.match(allOffers, phrase);
+
+    	render(user, foundOffers, phrase);
     }
 
     public static void edit(Long id) {

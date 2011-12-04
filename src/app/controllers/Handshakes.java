@@ -1,24 +1,13 @@
 package controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import models.Handshake;
-import models.Request;
 import models.Offer;
-import models.Tag;
+import models.Request;
 import models.User;
-import play.data.validation.Required;
-import play.mvc.Controller;
-import service.SearchService;
-import service.SearchService.SearchQuery;
-import service.SearchService.SearchQuery.SortDirection;
-import service.SearchService.SearchQuery.SortField;
-import service.SearchService.SearchResult;
-import service.SearchService.Type;
-import play.*;
-import play.mvc.*;
- 
-import java.util.*;
+import play.mvc.With;
 // Require Login
 @With(Secure.class)
 public class Handshakes extends BaseController
@@ -45,17 +34,17 @@ public class Handshakes extends BaseController
 	    render(handshake);
 	}
 
-    public static void search(List<String> tags, SortField sortField, SortDirection sortDirection)
-	{
-	    SearchQuery query = new SearchQuery();
-	    query.tags = tags;
-	    query.sortField = sortField;
-	    query.sortDirection = sortDirection;
-	    SearchResult<Handshake> searchResult = SearchService.search(Type.HANDSHAKE, query);
-
-	    List<Handshake> handshakes = searchResult.entities;
-	    render(handshakes);
-	}
+//    public static void search(List<String> tags, SortField sortField, SortDirection sortDirection)
+//	{
+//	    SearchQuery query = new SearchQuery();
+//	    query.tags = tags;
+//	    query.sortField = sortField;
+//	    query.sortDirection = sortDirection;
+//	    SearchResult<Handshake> searchResult = MatchService.search(Type.HANDSHAKE, query);
+//
+//	    List<Handshake> handshakes = searchResult.entities;
+//	    render(handshakes);
+//	}
 
     public static void bindToOffer(Long id) {
         User user = getConnectedUser();
