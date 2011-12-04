@@ -14,9 +14,10 @@ import javax.persistence.TemporalType;
 
 import play.data.validation.Required;
 import play.db.jpa.Model;
+import service.Matchable;
 
 @Entity
-public class Request extends Model
+public class Request extends Model implements Matchable
 {
     @Required
     public String title;
@@ -28,20 +29,6 @@ public class Request extends Model
     @Required
     @OneToMany(mappedBy="request", cascade=CascadeType.ALL)
     public List<Tag> tags;
-
-    public String getTags() {
-	ListIterator tagIterator = tags.listIterator();
-	String tidyTagList = "";
-	if (tagIterator.hasNext()) {
-	    tidyTagList += tagIterator.next();
-	} else {
-	    return tidyTagList;
-	}
-	while (tagIterator.hasNext()) {
-	    tidyTagList += ", " + tagIterator.next();
-	}
-	return tidyTagList;
-    }
     
     @Required
     @Temporal(TemporalType.TIMESTAMP)
@@ -59,4 +46,11 @@ public class Request extends Model
     public Request() {
 	
     }
+
+    @Override
+    public List<Tag> getTags()
+    {
+        return tags;
+    }
+
 }

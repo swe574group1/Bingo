@@ -1,11 +1,14 @@
 #{extends 'logged_user.html' /}
 #{set title:'Search Offers' /}
 
+#{if allOffers}
 <form action="@{Offers.search()}">
-	<label for="phrase">Search</label>
-	<input type="text" name="phrase" id="phrase" value="${phrase}" />
+  <label for="phrase">Search</label>
+  <input type="text" name="phrase" id="phrase" value="${phrase}" />
 </form>
+#{/if}
 
+#{if phrase}
 #{if foundOffers}
 <table>
   <tr>
@@ -23,11 +26,35 @@
     <td>${offer.credit}</td>
     <td><a href="@{Offers.showDetails(offer.id)}">Details</a></td>
   </tr>
-</a>
-#{/list}
+  #{/list}
 </table>
 #{/if}
 #{else}
-There are no offers available.
+No offers are able the match the keyword.
 #{/else}
-
+#{/if}
+#{else}
+#{if allOffers}
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Offerer</th>
+    <th>Valid Until</th>
+    <th>Honey Combs</th>
+    <th></th>
+  </tr>
+  #{list items:allOffers, as:'offer'}
+  <tr>
+    <td>${offer.title}</td>
+    <td>${offer.user.fullname}</td>
+    <td>${offer.endDate}</td>
+    <td>${offer.credit}</td>
+    <td><a href="@{Offers.showDetails(offer.id)}">Details</a></td>
+  </tr>
+  #{/list}
+</table>
+#{/if}
+#{else}
+There are no available offers.
+#{/else}
+#{/else}

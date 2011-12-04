@@ -6,9 +6,8 @@ import java.util.List;
 import models.Request;
 import models.Tag;
 import models.User;
-import play.data.validation.Valid;
-import play.data.validation.Validation;
-import play.mvc.Controller;
+import service.MatchService;
+import service.Utils;
 
 public class Requests extends BaseController
 {
@@ -27,10 +26,10 @@ public class Requests extends BaseController
 	    Tag.delete("request.id", requestItem.id);
 	}
 
-	String[] tagsArr = tags.split(",");
+	List<String> tagsListString = Utils.parseTags(tags);
 	List<Tag> tagsList = new ArrayList<Tag>();
-	for (String tagString : tagsArr) {
-	    Tag tag = new Tag(requestItem, tagString.trim());
+	for (String tagString : tagsListString) {
+	    Tag tag = new Tag(requestItem, tagString);
 	    tagsList.add(tag);
 	}
 	requestItem.tags = tagsList;
@@ -61,13 +60,16 @@ public class Requests extends BaseController
 	User user = getConnectedUser();
 	Request requestItem = Request.findById(id);
 	Boolean someoneElsesRequest = isSomeoneElses(id);
-	render(user, requestItem);
+	render(user, requestItem, someoneElsesRequest);
     }
     
-    public static void search() {
+    public static void search(String phrase) {
 	User user = getConnectedUser();
-	List<Request> requests = Request.find("isFinalized", true).fetch();
-	render(user, requests);
+
+	List<Request> allRequests = Request.findAll();
+	List<Request> foundRequests = MatchService.match(allRequests, phrase);
+
+	render(user, foundRequests, allRequests, phrase);
     }
 
     public static void edit(Long id) {

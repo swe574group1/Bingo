@@ -69,7 +69,7 @@ public class Offers extends BaseController
     	List<Offer> allOffers = Offer.findAll();
     	List<Offer> foundOffers = MatchService.match(allOffers, phrase);
 
-    	render(user, foundOffers, phrase);
+    	render(user, foundOffers, allOffers, phrase);
     }
 
     public static void edit(Long id) {

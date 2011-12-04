@@ -1,17 +1,24 @@
 #{extends 'logged_user.html' /}
 #{set title:'Search Requests' /}
 
-#{if requests}
-<label>Search</label>
-<input type="text" />
+#{if allRequests}
+<form action="@{Requests.search()}">
+  <label for="phrase">Search</label>
+  <input type="text" name="phrase" id="phrase" value="${phrase}" />
+</form>
+#{/if}
+
+#{if phrase}
+#{if foundRequests}
 <table>
   <tr>
     <th>Title</th>
     <th>Requester</th>
     <th>Valid Until</th>
-    <th>Details</th>
+    <th>Honey Combs</th>
+    <th></th>
   </tr>
-  #{list items:requests, as:'request'}
+  #{list items:foundRequests, as:'request'}
   <tr>
     <td>${request.title}</td>
     <td>${request.user.fullname}</td>
@@ -22,5 +29,30 @@
 </table>
 #{/if}
 #{else}
-There are no requests available.
+No requests are able the match the keyword.
+#{/else}
+#{/if}
+#{else}
+#{if allRequests}
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Requester</th>
+    <th>Valid Until</th>
+    <th>Honey Combs</th>
+    <th></th>
+  </tr>
+  #{list items:allRequests, as:'request'}
+  <tr>
+    <td>${request.title}</td>
+    <td>${request.user.fullname}</td>
+    <td>${request.endDate}</td>
+    <td><a href="@{Requests.showDetails(request.id)}">Details</a></td>
+  </tr>
+  #{/list}
+</table>
+#{/if}
+#{else}
+There are no available requests.
+#{/else}
 #{/else}
