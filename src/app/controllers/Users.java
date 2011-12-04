@@ -32,6 +32,23 @@ public class Users extends BaseController
 
     public static void profile(Long userId) {
 	User user = User.findById(userId);
+	User connectedUser = getConnectedUser();
+	Boolean isOwnProfile = (user == connectedUser);
+	render(user, isOwnProfile);
+    }
+
+    public static void ownProfile() {
+	User currentUser = getConnectedUser();
+	profile(currentUser.id);
+    }
+
+    public static void editProfile() {
+	User connectedUser = getConnectedUser();
+	showEditableProfile(connectedUser.id);
+    }
+
+    public static void showEditableProfile(Long userId) {
+	User user = User.findById(userId);
 	render(user);
     }
 }

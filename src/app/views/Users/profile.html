@@ -1,0 +1,69 @@
+#{extends 'logged_user.html' /}
+#{set title:'Profile' /}
+
+<div id="main" style="padding-top:0px">
+  <div class="post" style="padding:top:0px">
+    <div class="right">
+      <h3>${user.fullname}</h3>
+      #{if isOwnProfile}
+      <input type="button" value="Edit Profile" onclick="window.location='@{Users.editProfile()}'" />
+      #{/if}
+      
+      <p></p>
+      
+      
+      
+      <div class="user_tabs">
+        <ul>
+          <li>
+            <a href="#" class="active">Handshakes</a>
+          </li>
+        </ul>
+      </div>
+      
+      <table class="show_data" style="margin-left:0px; width:560px;">
+        <tr class="first">
+          <td>Title</td>
+          <td>Honey Combs Made</td>
+          <td>Offerer</td>
+          <td>Requester</td>
+          <td>Details</td>
+        </tr>
+        <tr>
+
+        </tr>
+	
+      </table>
+      <!-- <div class="pager" style="margin-right:0px;"> -->
+      <!--   <a href="#">Start</a> -->
+      <!--   ... -->
+      <!--   <a href="#">6</a> -->
+      <!--   <a href="#">7</a> -->
+      <!--   <a href="#" class="current_page">8</a> -->
+      <!--   <a href="#">9</a> -->
+      <!--   <a href="#">10</a> -->
+      <!--   ... -->
+      <!--   <a href="#">End</a> -->
+      <!-- </div> -->
+      
+      
+    </div>
+    <div class="left">
+
+      <div class="post-meta">
+        <ul>
+          <li>Name: ${user.fullname}</li>
+	  <li>Honey Combs: ${user.balance}</li>
+	  <li>Reputation: ${user.reputation}</li>
+	  <li>City: ${user.address}</li>
+          <li>Member Since: ${user.registrationDate}</li>
+        </ul>
+      </div>
+      <div class="post-meta">
+        <h4>${user.fullname} in Clouds</h4>
+        <div class=" tag_cloud">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

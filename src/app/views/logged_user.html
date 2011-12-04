@@ -10,12 +10,14 @@
     <div class="sidemenu">
       <h3>Menu</h3>
       Welcome, ${user.fullname}!<br />
+      <a href="@{Users.ownProfile()}">
       #{if user.photo.exists()}
-      <img class="avatar" src="@{Application.showUserPhoto(user.id)}" alt="${user.fullname}" />
+      <img class="avatar" src="@{Application.showUserPhoto(user.id)}" alt="${user.fullname}" title="Your Profile Photo" />
       #{/if}
       #{else}
-      <img src="/public/images/lbi02.png" alt="Default User Avatar" />
+      <img src="/public/images/lbi02.png" alt="Default User Avatar" title="Your Profile Photo" />
       #{/else}
+      </a>
       <input type="button" class="login_button" value="Logout" onclick="window.location='@{Secure.logout()}'"/>
       <ul>
         <li><a href="@{Offers.create()}">Create Offer</a></li>
@@ -24,8 +26,7 @@
 	<li><a href="@{Requests.search()}">Search Requests</a></li>
         <li><a href="@{Offers.list()}">My Offers</a></li>
         <li><a href="@{Requests.list()}">My Requests</a></li>
-<!--        <li><a href="#">My Profile</a></li>-->
-<!--        <li><a href="#">Update Account</a></li>-->
+	<li><a href="@{Users.ownProfile()}">My Profile</a></li>
       </ul>
     </div>
     

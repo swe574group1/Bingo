@@ -1,4 +1,0 @@
-function getStr(){
-return true;
-
-}
