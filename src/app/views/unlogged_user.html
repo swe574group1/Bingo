@@ -32,32 +32,16 @@
       
       
       <div class="sidemenu">
-        <h3>Popular Services In Last 30 Days</h3>
+        <h3>Popular Services For the Last 30 Days</h3>
           <div class=" tag_cloud" style="text-transform:none !important;">
             <ul>
-              <li class="tag_3"><a href="#">Reading</a></li>
-              <li class="tag_2"><a href="#">English</a></li>
-              <li class="tag_1"><a href="#">Driving</a></li>
-              <li class="tag_4"><a href="#">teaching</a></li>
-              <li class="tag_3"><a href="#">technology</a></li>
-              <li class="tag_1"><a href="#">computer</a></li>
-              <li class="tag_2"><a href="#">tennis</a></li>
-              <li class="tag_1"><a href="#">writing</a></li>
-              <li class="tag_5"><a href="#">lesson</a></li>
-              <li class="tag_2"><a href="#">swimming</a></li>
-              <li class="tag_3"><a href="#">riding</a></li>
-              
+	      #{list items:models.Tag.find().fetch(6), as:'poptag'}
+	      ${poptag}
+	      #{/list}
             </ul>
           </div>
       </div>
-      
-      
-      
-      
-      
-      
-      
-      <!-- /sidebar -->
+
     </div>
 </div>
 

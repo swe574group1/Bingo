@@ -78,32 +78,24 @@
 	      <li>${(models.User.findAll()).size()} New Users This Month!</li>
 	      <li>${(models.Offer.findAll()).size()} open offers! </li>
 	      <li>${(models.Request.findAll()).size()} open requests! </li>
-	      <li>56  services in 1 week! </li>
-	      <li>2023 users available! </li>
+	      <li>${Handshake.findAll().size()} handshakes</li>
             </ul>
 	  </div>
 	  
 	</div>
+	#{if isLoggedIn}
 	<div class="col-b">
 	  <h3>Tag Cloud</h3>
 	  <div class=" tag_cloud">
             <ul>
-	      <li class="tag_3"><a href="#">Reading</a></li>
-	      <li class="tag_2"><a href="#">English</a></li>
-	      <li class="tag_1"><a href="#">Driving</a></li>
-	      <li class="tag_4"><a href="#">teaching</a></li>
-	      <li class="tag_3"><a href="#">technology</a></li>
-	      <li class="tag_1"><a href="#">computer</a></li>
-	      <li class="tag_2"><a href="#">tennis</a></li>
-	      <li class="tag_1"><a href="#">writing</a></li>
-	      <li class="tag_5"><a href="#">lesson</a></li>
-	      <li class="tag_2"><a href="#">swimming</a></li>
-	      <li class="tag_3"><a href="#">riding</a></li>
-	      
+	      #{list items:models.Tag.find().fetch(6), as:'tag'}
+	      <a href="@{Offers.search(tag)}">${tag}</a>
+	      #{/list}
             </ul>
 	  </div>
 	  
 	</div>
+	#{/if}
 
       </div>
     </div>
