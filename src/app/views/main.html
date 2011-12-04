@@ -41,17 +41,15 @@
 	#{if isLoggedIn}
 	<div id="gallery" class="clear">
 	  <h3>Recent Users </h3>
-	  #{list items:models.User.findAll(), as:'newuser'}
-	  #{if user.photo.exists()}
+	  #{list items:models.User.find("order by registrationDate DESC").fetch(6), as:'newuser'}
 	  <a href="@{Users.profile(newuser.id)}">
-	    <img class="avatar" src="@{Application.showUserPhoto(newuser.id)}" alt="${newuser.fullname} Photo" title="${newuser.fullname}"/>
-	  </a>
+	  #{if newuser.photo.exists()}
+	  <img class="avatar" src="@{Application.showUserPhoto(newuser.id)}" alt="${newuser.fullname} Photo" title="${newuser.fullname}"/>
 	  #{/if}
 	  #{else}
-	  <a href="@{Users.profile(newuser.id)}">
-	    <img class="avatar" src="/public/images/lbi02.png" alt="Default Avatar" title="${newuser.fullname}"/>
-	    </a>
+	  <img class="avatar" src="/public/images/lbi02.png" alt="Default Avatar" title="${newuser.fullname}"/>
 	  #{/else}
+	  </a>
 	  #{/list}
 	</div>
 	#{/if}
