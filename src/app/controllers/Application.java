@@ -14,7 +14,8 @@ public class Application extends BaseController
     public static void index()
 	{
 	    List<User> newUsers = User.getNewUsers(5);
-	    render(newUsers);
+	    List<Handshake> newHandshakes = Handshake.findAll();
+	    render(newUsers, newHandshakes);
 	}
 
     public static void register() {

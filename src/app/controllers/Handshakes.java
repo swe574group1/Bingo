@@ -57,11 +57,20 @@ public class Handshakes extends BaseController
 	    render(handshakes);
 	}
 
-    public static void bindToOffer(Long id, User user) {
-	Offer offer = Offer.findById(id);
-	Handshake handshakeItem = new Handshake(offer, user);
-	handshakeItem.save();
-	render(handshakeItem);
+    public static void bindToOffer(Long id) {
+        User user = getConnectedUser();
+    	Offer offer = Offer.findById(id);
+
+        Request request = new Request(user);
+        request.save();
+
+    	Handshake handshakeItem = new Handshake();
+    	handshakeItem.offer = offer;
+    	handshakeItem.request = request;
+    	handshakeItem.creationDate = new Date();
+    	handshakeItem.save();
+
+    	render(handshakeItem);
     }
 
 }
