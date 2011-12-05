@@ -1,23 +1,23 @@
 #{extends 'logged_user.html' /}
-#{set title:'Offer Detail' /}
+#{set title:'Handshake Details' /}
 
 <div id="main" style="padding-top:0px">
   <div class="post" style="padding:top:0px">
     <div class="right">
       <div class="restrictions">
-	<h4>Details for Offer</h4>
+	<h4>Details for Handshake</h4>
 	<ul>
 	  <li>
 	    <label>Title</label>
-	    ${offerItem.title}
+	    ${handshake.offer.title}
 	  </li>
 	  <li>
 	    <label>Description</label>
-	    ${offerItem.description}
+	    ${handshake.offer.description}
 	  </li>
           <li>
-            <label>Valid Until</label>
-	    ${offerItem.endDate.format('dd MMMM yyyy')}
+            <label>Honey Combs Made</label>
+	    ${handshake.offer.credit}
           </li>
         </ul>
       </div>
@@ -26,8 +26,8 @@
     <div class="left">
       <div class="post-meta">
         <ul>
-          <li><h4>User</h4>${offerItem.user.fullname}</li>
-          <li><h4>Honey Combs</h4>${offerItem.credit}</li>
+          <li><h4>Offerer</h4>${handshake.offer.user.fullname}</li> 
+          <li><h4>Requester</h4>${handshake.request.user.fullname}</li>
         </ul>
       </div>
     </div>
@@ -35,13 +35,16 @@
     <div class="post-meta">
       <h4>tags</h4>
       <p>
-	${offerItem.tags.join(', ')}
+	#{if handshake.offer.tags}
+	${handshake.offer.tags.join(', ')}
+	#{/if}
+	#{else}
+	${handshake.request.tags.join(', ')}
+	#{/else}
       </p>
     </div>
 
   </div>
-  #{if someoneElsesOffer}
-  <input type="button" onclick="window.location='@{Handshakes.bindToOffer(offerItem.id)}'" value="Apply" />
-  #{/if}
 
 </div>
+

@@ -39,4 +39,12 @@
     </div>
     
   </div>
+  #{if someoneElsesRequest}
+  <form action="@{Handshakes.bindToRequest()}">
+    <label>Honey Combs:</label>
+    <input type="hidden" name="id" value="${requestItem.id}" />
+    <input type="text" name="credits" />
+    <input type="submit" name="submit" value="Apply" />
+  </form>
+  #{/if}
 </div>

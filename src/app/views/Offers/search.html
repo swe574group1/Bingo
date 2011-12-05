@@ -22,7 +22,7 @@
   <tr>
     <td>${offer.title}</td>
     <td>${offer.user.fullname}</td>
-    <td>${offer.endDate}</td>
+    <td>${offer.endDate.format('dd MMMM yyyy')}</td>
     <td>${offer.credit}</td>
     <td><a href="@{Offers.showDetails(offer.id)}">Details</a></td>
   </tr>
@@ -47,7 +47,7 @@ No offers are able the match the keyword.
   <tr>
     <td>${offer.title}</td>
     <td>${offer.user.fullname}</td>
-    <td>${offer.endDate}</td>
+    <td>${offer.endDate.format('dd MMMM yyyy')}</td>
     <td>${offer.credit}</td>
     <td><a href="@{Offers.showDetails(offer.id)}">Details</a></td>
   </tr>

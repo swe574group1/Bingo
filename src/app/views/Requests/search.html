@@ -22,7 +22,7 @@
   <tr>
     <td>${request.title}</td>
     <td>${request.user.fullname}</td>
-    <td>${request.endDate}</td>
+    <td>${request.endDate.format('dd MMMM yyyy')}</td>
     <td><a href="@{Requests.showDetails(request.id)}">Details</a></td>
   </tr>
   #{/list}
@@ -39,14 +39,13 @@ No requests are able the match the keyword.
     <th>Title</th>
     <th>Requester</th>
     <th>Valid Until</th>
-    <th>Honey Combs</th>
     <th></th>
   </tr>
   #{list items:allRequests, as:'request'}
   <tr>
     <td>${request.title}</td>
     <td>${request.user.fullname}</td>
-    <td>${request.endDate}</td>
+    <td>${request.endDate.format('dd MMMM yyyy')}</td>
     <td><a href="@{Requests.showDetails(request.id)}">Details</a></td>
   </tr>
   #{/list}

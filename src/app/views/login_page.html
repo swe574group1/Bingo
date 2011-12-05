@@ -4,17 +4,31 @@
 #{extends 'logged_user.html' /}
 <div class="post" style="padding:top:0px">
   <h3 style="padding-top:0px;">Recent HandShakes</h3>
+  #{if models.Handshake.findAll()}
+  <table>
+    <th>Title</th>
+    <th>Offerer</th>
+    <th>Requester</th>
+    <th>Honey Combs Made</th>
+    <th></th>
+    #{list items:models.Handshake.findAll(), as:'handshake'}
+    <tr>
+      <td>${handshake.offer.title}</td>
+      <td>${handshake.offer.user.fullname}</td>
+      <td>${handshake.request.user.fullname}</td>
+      <td>${handshake.offer.credit}</td>
+      <td><a href="@{Handshakes.show(handshake.id)}">Details</a></td>
+    </tr>
+    #{/list}
+  </table>
+  #{/if}
+  #{else}
+  <p>
+    There are no recent handshakes.
+  </p>
+  #{/else}
+    
 
-<table>
-	#{list items:newHandshakes, as:'handshake'}
-	  <tr>
-	    <td>${handshake.offer.title}</td>
-	    <td><a href="#">Details</a></td>
-	  </tr>
-	#{/list}
-</table>
-
-<!--  <div align="right" style="margin-right:30px;"><a href="#">See All &raquo;</a></div>-->
 </div>
 
 <div class="post">     
@@ -52,7 +66,7 @@
       <p>No one has achieved Working Bee status.</p>
     </div>
   </div>
-      
+  
   <div class="index_tab_content" id="index_tab_content_4">
     <div class="active_users">
       <p>No one has achieved Bumble Bee status.</p>
@@ -81,7 +95,7 @@
     </ul>
   </div>
   
-      
+  
   <div class="index_tab_content" id="index_tab_content_1">
     <div class="images">
       <div align="center"><img src="@{'/public/images/cooking1.jpg'}" /></div>
