@@ -7,18 +7,18 @@
 
   <div id="sidebar"  style="border:0px solid #aaa; padding-top:0px;">
     
-    <div class="sidemenu">
+    <div class="sidemenu" align="left">
       <h3>Menu</h3>
       Welcome, ${user.fullname}!<br />
       <a href="@{Users.ownProfile()}">
       #{if user.photo.exists()}
-      <img class="avatar" src="@{Application.showUserPhoto(user.id)}" alt="${user.fullname}" title="Your Profile Photo" />
+      <img class="avatar" src="@{Application.showUserPhoto(user.id)}" alt="${user.fullname}" title="Your Profile Photo" style="margin-top:10px; display:block;" />
       #{/if}
       #{else}
-      <img src="/public/images/lbi02.png" alt="Default User Avatar" title="Your Profile Photo" />
+      <img src="/public/images/lbi02.png" alt="Default User Avatar" title="Your Profile Photo" style="margin-top:10px; display:block;"  />
       #{/else}
-      </a>
-      <input type="button" class="login_button" value="Logout" onclick="window.location='@{Secure.logout()}'"/>
+      </a><br />
+      <input type="button" class="login_button" value="Logout" style="margin-top:-5px;" onclick="window.location='@{Secure.logout()}'"/>
       <ul>
         <li><a href="@{Offers.create()}">Create Offer</a></li>
         <li><a href="@{Requests.create()}">Create Request</a></li>

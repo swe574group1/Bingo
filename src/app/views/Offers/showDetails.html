@@ -4,6 +4,7 @@
 <div id="main" style="padding-top:0px">
   <div class="post" style="padding:top:0px">
     <div class="right">
+		<h3>${offerItem.title}</h3>
       <div class="restrictions">
 	<h4>Details for Offer</h4>
 	<ul>
@@ -24,9 +25,10 @@
     </div>
     
     <div class="left">
+    	<a href="#"><img src="/public/images/lbi02.png" class=""></a>
       <div class="post-meta">
         <ul>
-          <li><h4>User</h4>${offerItem.user.fullname}</li>
+          <li class="user">${offerItem.user.fullname}</li>
           <li><h4>Honey Combs</h4>${offerItem.credit}</li>
         </ul>
       </div>

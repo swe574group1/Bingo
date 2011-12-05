@@ -39,15 +39,15 @@
     <div id="footer-outer" class="clear">
       <div id="footer-wrap">
 	#{if isLoggedIn}
-	<div id="gallery" class="clear">
+	<div id="gallery" class="clear" style="margin-top:10px">
 	  <h3>Recent Users </h3>
 	  #{list items:models.User.find("order by registrationDate DESC").fetch(6), as:'newuser'}
 	  <a href="@{Users.profile(newuser.id)}">
 	  #{if newuser.photo.exists()}
-	  <img class="avatar" src="@{Application.showUserPhoto(newuser.id)}" alt="${newuser.fullname} Photo" title="${newuser.fullname}"/>
+	  <img class="avatar" src="@{Application.showUserPhoto(newuser.id)}" alt="${newuser.fullname} Photo" title="${newuser.fullname}" style="margin-right:5px;"  />
 	  #{/if}
 	  #{else}
-	  <img class="avatar" src="/public/images/lbi02.png" alt="Default Avatar" title="${newuser.fullname}"/>
+	  <img class="avatar" src="/public/images/lbi02.png" alt="Default Avatar" title="${newuser.fullname}"style="margin-right:5px;" />
 	  #{/else}
 	  </a>
 	  #{/list}

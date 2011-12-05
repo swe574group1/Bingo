@@ -1,22 +1,22 @@
 #{extends 'logged_user.html' /}
 #{set title:'Search Offers' /}
-
+<h3>Offers</h3>
 #{if allOffers}
-<form action="@{Offers.search()}">
-  <label for="phrase">Search</label>
-  <input type="text" name="phrase" id="phrase" value="${phrase}" />
+<form action="@{Offers.search()}" style="width:655px; padding:15px 5px 15px 20px;">
+  <label for="phrase" style="float:left; width:100px; margin-top:10px">Search</label>
+  <input type="text" name="phrase" id="phrase" value="${phrase}" style="width:500px" />
 </form>
 #{/if}
 
 #{if phrase}
 #{if foundOffers}
-<table>
+<table style="width:92%">
   <tr>
     <th>Title</th>
     <th>Offerer</th>
     <th>Valid Until</th>
     <th>Honey Combs</th>
-    <th></th>
+    <th>Details</th>
   </tr>
   #{list items:foundOffers, as:'offer'}
   <tr>
@@ -35,13 +35,13 @@ No offers are able the match the keyword.
 #{/if}
 #{else}
 #{if allOffers}
-<table>
+<table style="width:92%">
   <tr>
     <th>Title</th>
     <th>Offerer</th>
     <th>Valid Until</th>
     <th>Honey Combs</th>
-    <th></th>
+    <th>Details</th>
   </tr>
   #{list items:allOffers, as:'offer'}
   <tr>
