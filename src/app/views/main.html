@@ -75,10 +75,10 @@
 	  <h3>Statistics</h3>
 	  <div class="footer-list">
             <ul>
-	      <li>${(models.User.findAll()).size()} New Users This Month!</li>
-	      <li>${(models.Offer.findAll()).size()} open offers! </li>
-	      <li>${(models.Request.findAll()).size()} open requests! </li>
-	      <li>${Handshake.findAll().size()} handshakes</li>
+	      <li>${(models.User.findAll()).size()} Users!</li>
+	      <li>${(models.Offer.findAll()).size()} Offers! </li>
+	      <li>${(models.Request.findAll()).size()} Requests! </li>
+	      <li>${models.Handshake.findAll().size()} Handshakes!</li>
             </ul>
 	  </div>
 	  
@@ -88,10 +88,17 @@
 	  <h3>Tag Cloud</h3>
 	  <div class=" tag_cloud">
             <ul>
+	      <p>Offers</p>
 	      #{list items:models.Tag.find().fetch(6), as:'tag'}
 	      <a href="@{Offers.search(tag)}">${tag}</a>
 	      #{/list}
             </ul>
+            <ul>
+	      <p>Requests</p>
+	      #{list items:models.Tag.find().fetch(6), as:'tag'}
+	      <a href="@{Requests.search(tag)}">${tag}</a>
+	      #{/list}
+	    </ul>
 	  </div>
 	  
 	</div>
