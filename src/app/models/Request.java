@@ -53,4 +53,11 @@ public class Request extends Model implements Matchable
         return tags;
     }
 
+    public Request(User user, Offer offer) {
+	this.user = user;
+	this.title = offer.title;
+	this.description = offer.description;
+	this.endDate = offer.endDate;
+    }
+
 }

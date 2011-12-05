@@ -2,7 +2,6 @@ package models;
 
 import java.util.Date;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -45,6 +44,15 @@ public class Offer extends Model implements Matchable
     }
 
     public Offer() {
+    }
+
+    public Offer(User user, Integer credits, Request request) {
+	this.user = user;
+	this.credit = credits;
+	this.title = request.title;
+	this.description = request.description;
+	this.endDate = request.endDate;
+	this.credit = credits;
     }
 
     @Override

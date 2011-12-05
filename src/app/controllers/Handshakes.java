@@ -12,45 +12,11 @@ import play.mvc.With;
 @With(Secure.class)
 public class Handshakes extends BaseController
 {
-    public static void user(Long userId)
-	{
-	    if (userId == null) {
-		error("missing userId");
-	    }
-
-	    List<Handshake> handshakes = Handshake.find("offer.user.id = ? or request.user.id = ?", userId, userId).fetch();
-
-	    render(handshakes);
-	}
-
-    public static void detail(Long requestId)
-	{
-	    if (requestId == null) {
-		error("missing requestId");
-	    }
-
-	    Handshake handshake = Handshake.findById(requestId);
-
-	    render(handshake);
-	}
-
-//    public static void search(List<String> tags, SortField sortField, SortDirection sortDirection)
-//	{
-//	    SearchQuery query = new SearchQuery();
-//	    query.tags = tags;
-//	    query.sortField = sortField;
-//	    query.sortDirection = sortDirection;
-//	    SearchResult<Handshake> searchResult = MatchService.search(Type.HANDSHAKE, query);
-//
-//	    List<Handshake> handshakes = searchResult.entities;
-//	    render(handshakes);
-//	}
-
     public static void bindToOffer(Long id) {
         User user = getConnectedUser();
     	Offer offer = Offer.findById(id);
 
-        Request request = new Request(user);
+        Request request = new Request(user, offer.title, offer.description);
         request.save();
 
     	Handshake handshakeItem = new Handshake();
@@ -59,7 +25,28 @@ public class Handshakes extends BaseController
     	handshakeItem.creationDate = new Date();
     	handshakeItem.save();
 
-    	render(handshakeItem);
+    	renderTemplate("Handshakes/bind.html", handshakeItem);
+    }
+
+    public static void bindToRequest(Long id, Integer credits) {
+	User user = getConnectedUser();
+	Request request = Request.findById(id);
+
+	Offer offer = new Offer(user, credits, request);
+	offer.save();
+
+	Handshake handshakeItem = new Handshake();
+	handshakeItem.offer = offer;
+	handshakeItem.request = request;
+	handshakeItem.creationDate = new Date();
+	handshakeItem.save();
+
+	renderTemplate("Handshakes/bind.html", handshakeItem);
+    }
+
+    public static void show(Long id) {
+	Handshake handshake = Handshake.findById(id);
+	render(handshake);
     }
 
 }
