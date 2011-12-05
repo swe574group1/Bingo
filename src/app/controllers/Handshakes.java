@@ -16,7 +16,7 @@ public class Handshakes extends BaseController
         User user = getConnectedUser();
     	Offer offer = Offer.findById(id);
 
-        Request request = new Request(user, offer.title, offer.description);
+        Request request = new Request(user, offer);
         request.save();
 
     	Handshake handshakeItem = new Handshake();
