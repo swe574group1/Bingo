@@ -1,9 +1,21 @@
 #{extends 'main.html' /}
+#{if isOldRequest}
+#{set title:'Request Edited' /}
+#{/if}
+#{else}
 #{set title:'Request Created' /}
+#{/else}
 <div id="content">
   <div id="main" style="padding-top:0px">
     <div class="post" style="padding:top:0px">
-      <h3 style="padding-top:0px;">Your request was successfully created</h3>
+      <h3 style="padding-top:0px;">
+	#{if isOldRequest}
+	Your request was successfully edited
+	#{/if}
+	#{else}
+	Your request was successfully created
+	#{/else}
+      </h3>
       <form>
 	<ul class="long_login">
 	  <li>
@@ -12,13 +24,13 @@
 	  </li>
 	  <li>
 	    <label>Request Tags</label>
-	    <input class="roinput" type="text" readonly="readonly" value="${requestItem.tags.join(', ')}" />
+	    <input class="roinput" type="text" readonly="readonly" value="${requestItem.tags.join(' ')}" />
 	  </li>
 	  <li>
 	    <label>Request Description</label>
 	    <input class="roinput" type="text" readonly="readonly" value="${requestItem.description}" />
 	  </li>
-	  <a href="@{Application.index()}"><input type="button" value="Main Page" /></a>
+	  <input type="button" value="Main Page" onclick="window.location='@{Application.index()}'" />
       </form>
       
     </div>

@@ -56,6 +56,12 @@ public class Requests extends BaseController
 	render(requestItem);
     }
 
+    public static void showAfterEdit(Long requestId) {
+	Request requestItem = Request.findById(requestId);
+	Boolean isOldRequest = true;
+	render(requestItem, isOldRequest);
+    }
+
     public static void showDetails(Long id) {
 	User user = getConnectedUser();
 	Request requestItem = Request.findById(id);
