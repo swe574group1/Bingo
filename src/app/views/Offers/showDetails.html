@@ -25,7 +25,14 @@
     </div>
     
     <div class="left">
-    	<a href="#"><img src="/public/images/lbi02.png" class=""></a>
+      <a href="@{Users.profile(offerOwner.id)}">
+	#{if offerOwner.photo.exists()}
+	<img src="@{Application.showUserPhoto(offerOwner.id)}" alt="${offerOwner.fullname}" class="avatar" />
+	#{/if}
+	#{else}
+    	<img src="/public/images/lbi02.png" class="avatar">
+	#{/else}
+      </a>
       <div class="post-meta">
         <ul>
           <li class="user">${offerItem.user.fullname}</li>
@@ -37,7 +44,7 @@
     <div class="post-meta">
       <h4>tags</h4>
       <p>
-	${offerItem.tags.join(', ')}
+	${offerItem.tags.join(' ')}
       </p>
     </div>
 

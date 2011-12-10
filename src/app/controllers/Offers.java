@@ -65,8 +65,9 @@ public class Offers extends BaseController
     public static void showDetails(Long id) {
     	User user = getConnectedUser();
     	Offer offerItem = Offer.findById(id);
-	Boolean someoneElsesOffer = isSomeoneElses(id);
-    	render(user, offerItem, someoneElsesOffer);
+	User offerOwner = offerItem.user;
+	Boolean someoneElsesOffer = (user != offerItem.user);
+    	render(user, offerItem, offerOwner, someoneElsesOffer);
     }
 
     public static void search(String phrase) {
