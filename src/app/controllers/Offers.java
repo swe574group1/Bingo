@@ -56,6 +56,12 @@ public class Offers extends BaseController
 	render(offerItem);
     }
 
+    public static void showAfterEdit(Long id) {
+	Offer offerItem = Offer.findById(id);
+	Boolean isOldOffer = true;
+	render(offerItem, isOldOffer);
+    }
+
     public static void showDetails(Long id) {
     	User user = getConnectedUser();
     	Offer offerItem = Offer.findById(id);

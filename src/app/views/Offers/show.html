@@ -1,9 +1,21 @@
 #{extends 'main.html' /}
+#{if isOldOffer}
+#{set title:'Offer Edited' /}
+#{/if}
+#{else}
 #{set title:'Offer Created' /}
+#{/else}
 <div id="content">
   <div id="main" style="padding-top:0px">
     <div class="post" style="padding:top:0px">
-      <h3 style="padding-top:0px;">Your offer was successfully created</h3>
+      <h3 style="padding-top:0px;">
+	#{if isOldOffer}
+	Your offer was successfully created
+	#{/if}
+	#{else}
+	Your offer was successfully edited
+	#{/else}
+      </h3>
       <form>
 	<ul class="long_login">
 	  <li>
@@ -12,13 +24,13 @@
 	  </li>
 	  <li>
 	    <label>Offer Tags</label>
-	    <input class="roinput" type="text" readonly="readonly" value="${offerItem.tags.join(', ')}" />
+	    <input class="roinput" type="text" readonly="readonly" value="${offerItem.tags.join(' ')}" />
 	  </li>
 	  <li>
 	    <label>Offer Description</label>
 	    <input class="roinput" type="text" readonly="readonly" value="${offerItem.description}" />
 	  </li>
-	  <a href="@{Application.index()}"><input type="button" value="Main Page" /></a>
+	  <input type="button" value="Main Page" onclick="window.location='@{Application.index()}'"/>
       </form>
       
     </div>
