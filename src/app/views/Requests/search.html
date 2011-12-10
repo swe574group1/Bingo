@@ -21,7 +21,7 @@
   <tr>
     <td>${request.title}</td>
     <td>${request.user.fullname}</td>
-    <td>${request.endDate.format('dd MMMM yyyy')}</td>
+    <td>${request.endDate.format()}</td>
     <td><a href="@{Requests.showDetails(request.id)}">Details</a></td>
   </tr>
   #{/list}
