@@ -84,13 +84,6 @@ public class Offers extends BaseController
     	renderTemplate("Offers/form.html", offerItem);
     }
 
-    public static boolean isSomeoneElses(Long offerId) {
-	User currentUser = getConnectedUser();
-	Offer currentOffer = Offer.findById(offerId);
-	User owner = currentOffer.user;
-	return !(currentUser.equals(owner));
-    }
-
     public static void list() {
 	User user = getConnectedUser();
 	List<Offer> offers = Offer.find("user.id", user.id).fetch();

@@ -65,8 +65,9 @@ public class Requests extends BaseController
     public static void showDetails(Long id) {
 	User user = getConnectedUser();
 	Request requestItem = Request.findById(id);
-	Boolean someoneElsesRequest = isSomeoneElses(id);
-	render(user, requestItem, someoneElsesRequest);
+	User requestOwner = requestItem.user;
+	Boolean someoneElsesRequest = (user != requestOwner);
+	render(user, requestItem, requestOwner, someoneElsesRequest);
     }
     
     public static void search(String phrase) {
@@ -81,13 +82,6 @@ public class Requests extends BaseController
     public static void edit(Long id) {
     	Request requestItem = Request.findById(id);
     	renderTemplate("Requests/form.html", requestItem);
-    }
-
-    public static Boolean isSomeoneElses(Long requestId) {
-	User currentUser = getConnectedUser();
-	Request currentRequest = Request.findById(requestId);
-	User owner = currentRequest.user;
-	return !(currentUser.equals(owner));
     }
 
     public static void list() {

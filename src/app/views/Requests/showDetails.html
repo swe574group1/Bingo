@@ -1,9 +1,10 @@
 #{extends 'logged_user.html' /}
-#{set title:'Detail' /}
+#{set title:'Request Detail' /}
 
 <div id="main" style="padding-top:0px">
   <div class="post" style="padding:top:0px">
     <div class="right">
+      <h3>${requestItem.title}</h3>
       <div class="restrictions">
 	<h4>Details for Request</h4>
         <ul>
@@ -17,13 +18,21 @@
 	  </li>
           <li>
             <label>Valid Until</label>
-	    ${requestItem.endDate}
+	    ${requestItem.endDate.format()}
           </li>
         </ul>
       </div>
     </div>
     
     <div class="left">
+      <a href="@{Users.profile(requestOwner.id)}">
+	#{if requestOwner.photo.exists()}
+	<img src="@{Application.showUserPhoto(requestOwner.id)}" alt="${requestOwner.fullname}" class="avatar" />
+	#{/if}
+	#{else}
+	<img src="/public/images/lbi02.png" class="avatar" />
+	#{/else}
+      </a>
       <div class="post-meta">
         <ul>
           <li><h4>User</h4>${requestItem.user.fullname}</li>
@@ -34,7 +43,7 @@
     <div class="post-meta">
       <h4>tags</h4>
       <p>
-	${requestItem.tags.join(', ')}
+	${requestItem.tags.join(' ')}
       </p>
     </div>
     
