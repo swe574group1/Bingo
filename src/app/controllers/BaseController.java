@@ -20,6 +20,27 @@ public class BaseController extends Controller
 		}
     }
 
+    @Before
+    static void setTagCloud() {
+    	List<TagCloudItem> tagCloud = new ArrayList<TagCloudItem>();
+    	
+    	
+    	
+    	TagCloudItem a = new TagCloudItem();
+    	a.name = "Basketbol";
+    	a.CssClass = "tag_1";
+    	
+    	tagCloud.add(a);
+    	
+    	TagCloudItem b = new TagCloudItem();
+    	b.name = "Yüzme";
+    	b.CssClass = "tag_2";
+    	
+    	tagCloud.add(b);
+       	
+    	renderArgs.put("tagCloud", tagCloud);  
+    }
+    
     static User getConnectedUser() {
 		if (Security.isConnected()) {
 		    return User.find("byEmail", Security.connected()).first();

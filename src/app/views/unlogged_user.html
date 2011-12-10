@@ -30,15 +30,23 @@
         </form>
       </div>
       
-      
+     
       <div class="sidemenu">
-        <h3>Popular Services For the Last 30 Days</h3>
-          <div class=" tag_cloud" style="text-transform:none !important;">
-            <ul>
-	      #{list items:models.Tag.find().fetch(6), as:'poptag'}
+        <h3>Popular Services For the Last 30 Days</h3>                 
+          <div class=" tag_cloud" style="text-transform:none !important;">  
+          <ul>
+             <br/>
+           #{list items:tagCloud, as:'tagItem'}
+           <li class = "${tagItem.CssClass}">  
+             ${tagItem.name}           
+           </li>
+           #{/list}
+          </ul>          
+            <!-- <ul>
+	      #{list items:models.Tag.find('select name from Tag group by name order by count(*) desc').fetch(6), as:'poptag'}
 	      ${poptag}
 	      #{/list}
-            </ul>
+            </ul> -->
           </div>
       </div>
 
