@@ -11,7 +11,7 @@
     <th>Requester</th>
     <th>Honey Combs Made</th>
     <th></th>
-    #{list items:models.Handshake.findAll(), as:'handshake'}
+    #{list items:newHandshakes, as:'handshake'}
     <tr>
       <td>${handshake.offer.title}</td>
       <td>${handshake.offer.user.fullname}</td>
@@ -27,7 +27,6 @@
     There are no recent handshakes.
   </p>
   #{/else}
-    
 
 </div>
 

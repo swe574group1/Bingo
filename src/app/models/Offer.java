@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -18,6 +20,10 @@ import service.Matchable;
 @Entity
 public class Offer extends Model implements Matchable
 {
+    public enum Status {
+        WAITING, HANDSHAKED
+    }
+
     @Required
     public String title;
 
@@ -38,6 +44,10 @@ public class Offer extends Model implements Matchable
 
     @ManyToOne
     public User user;
+
+    @Required
+    @Enumerated(EnumType.STRING)
+    public Status status;
 
     public Offer(User user) {
 	this.user = user;

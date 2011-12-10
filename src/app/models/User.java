@@ -18,10 +18,6 @@ public class User extends Model
  {
      public int INITIAL_BALANCE = 10;
      public int INITIAL_REPUTATION = 1;
-     
-     // public enum Status {
-     // 	 WAITING_CONFIRMATION, ACTIVE, PASSIVE
-     // 	     };
 
      @Required
      public String email;

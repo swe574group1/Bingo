@@ -3,6 +3,8 @@ package models;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -14,7 +16,7 @@ import play.db.jpa.Model;
 public class Handshake extends Model
 {
     public enum Status {
-        WAITING_APPROVAL, ACCEPTED, REJECTED, UNKNOWN
+        WAITING_APPROVAL, ACCEPTED, REJECTED, STARTED, CANCELLED, DONE, UNKNOWN
     }
 
     @OneToOne
@@ -35,7 +37,10 @@ public class Handshake extends Model
     // @Temporal(TemporalType.TIMESTAMP)
     // public Date actualEndDate;
 
-    // @Required
-    // @Enumerated(EnumType.STRING)
-    // public Status status;
+    @Required
+    @Enumerated(EnumType.STRING)
+    public Status status;
+
+    public Integer ratingOfOfferer;
+    public Integer ratingOfRequester;
 }

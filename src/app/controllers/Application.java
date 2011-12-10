@@ -1,20 +1,17 @@
 package controllers;
 
-import java.util.*;
+import java.util.List;
 
-import models.*;
-import play.data.validation.*;
-import play.mvc.Before;
-import play.mvc.Controller;
-import play.mvc.With;
-import play.data.validation.*;
+import models.Handshake;
+import models.Handshake.Status;
+import models.User;
 
 public class Application extends BaseController
 {   
     public static void index()
 	{
 	    List<User> newUsers = User.getNewUsers(5);
-	    List<Handshake> newHandshakes = Handshake.findAll();
+	    List<Handshake> newHandshakes = Handshake.find("status", Status.DONE).fetch();
 	    render(newUsers, newHandshakes);
 	}
 

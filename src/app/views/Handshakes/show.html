@@ -19,6 +19,10 @@
             <label>Honey Combs Made</label>
 	    ${handshake.offer.credit}
           </li>
+          <li>
+            <label>Status</label>
+	    ${handshake.status}
+          </li>
         </ul>
       </div>
     </div>
@@ -46,5 +50,14 @@
 
   </div>
 
+#{if handshake.status == models.Handshake.Status.WAITING_APPROVAL}
+<button onclick="window.location='@{Handshakes.accept(handshake.id)}'">Accept</button>
+#{/if}
+#{if handshake.status == models.Handshake.Status.ACCEPTED}
+<button onclick="window.location='@{Handshakes.start(handshake.id)}'">Start</button>
+<button onclick="window.location='@{Handshakes.cancel(handshake.id)}'">Cancel</button>
+#{/if}
+#{if handshake.status == models.Handshake.Status.STARTED}
+<button onclick="window.location='@{Handshakes.end(handshake.id)}'">End</button>
+#{/if}
 </div>
-

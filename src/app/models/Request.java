@@ -6,11 +6,15 @@ import java.util.ListIterator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import models.Offer.Status;
 
 import play.data.validation.Required;
 import play.db.jpa.Model;
@@ -19,6 +23,10 @@ import service.Matchable;
 @Entity
 public class Request extends Model implements Matchable
 {
+    public enum Status {
+        WAITING, HANDSHAKED
+    }
+
     @Required
     public String title;
 
@@ -38,6 +46,10 @@ public class Request extends Model implements Matchable
     public User user;
 
     public Boolean isFinalized;
+
+    @Required
+    @Enumerated(EnumType.STRING)
+    public Status status;
 
     public Request(User user) {
 	this.user = user;

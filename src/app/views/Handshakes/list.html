@@ -1,0 +1,29 @@
+#{extends 'logged_user.html' /}
+#{set title:'Your Handshakes' /}
+<h3>My Handshakes</h3>
+#{if handshakes}
+<table style="width:92%">
+  <tr>
+    <th>Title</th>
+    <th>Offerer</th>
+    <th>Requester</th>
+    <th>Honey Combs</th>
+    <th>Status</th>
+    <th></th>
+  </tr>
+  #{list items:handshakes, as:'handshake'}
+  <tr>
+      <td>${handshake.offer.title}</td>
+      <td>${handshake.offer.user.fullname}</td>
+      <td>${handshake.request.user.fullname}</td>
+      <td>${handshake.offer.credit}</td>
+      <td>${handshake.status}</td>
+      <td><a href="@{Handshakes.show(handshake.id)}">Details</a></td>
+  </tr>
+</a>
+#{/list}
+</table>
+#{/if}
+#{else}
+<p>Currently you have no handshakes.</p>
+#{/else}
