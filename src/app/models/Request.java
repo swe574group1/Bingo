@@ -47,7 +47,7 @@ public class Request extends Model implements Matchable
 
     public Boolean isFinalized;
 
-    @Required
+    // @Required
     @Enumerated(EnumType.STRING)
     public Status status;
 

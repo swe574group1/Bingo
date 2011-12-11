@@ -45,7 +45,7 @@ public class Offer extends Model implements Matchable
     @ManyToOne
     public User user;
 
-    @Required
+    // @Required
     @Enumerated(EnumType.STRING)
     public Status status;
 
