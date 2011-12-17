@@ -6,8 +6,11 @@
 <div id="main" style="padding-top:0px">
   <div class="post" style="padding:top:0px">
     <div class="right">
+    <h3>${handshake.offer.title}</h3>
+    <p>${handshake.offer.description}</p>
       <div class="restrictions">
 	<h4>Details for Handshake</h4>
+	
 	<ul>
 	  <li>
 	    <label>Title</label>
@@ -25,7 +28,9 @@
             <label>Status</label>
 	    ${handshake.status}
           </li>
+          
         </ul>
+        
       </div>
     </div>
     
@@ -48,7 +53,22 @@
 	${handshake.request.tags.join(', ')}
 	#{/else}
       </p>
+      
+      
+      <div class="apply_menu">
+      #{if handshake.status == models.Handshake.Status.WAITING_APPROVAL}
+<a class="apply" style="width:130px" href="@{Handshakes.accept(handshake.id)}">Accept</a>
+#{/if}
+#{if handshake.status == models.Handshake.Status.ACCEPTED}
+<a style="width:130px" class="apply" href="@{Handshakes.start(handshake.id)}">Start</a>
+<a style="width:130px" class="cancel" href="@{Handshakes.cancel(handshake.id)}">Cancel</a>
+#{/if}
+#{if handshake.status == models.Handshake.Status.STARTED}
+<a style="width:130px" class="apply" href="@{Handshakes.end(handshake.id)}">End</a>
+#{/if}
+</div>
     </div>
+    
 
   </div>
   
@@ -263,14 +283,5 @@
   
   
 
-#{if handshake.status == models.Handshake.Status.WAITING_APPROVAL}
-<button onclick="window.location='@{Handshakes.accept(handshake.id)}'">Accept</button>
-#{/if}
-#{if handshake.status == models.Handshake.Status.ACCEPTED}
-<button onclick="window.location='@{Handshakes.start(handshake.id)}'">Start</button>
-<button onclick="window.location='@{Handshakes.cancel(handshake.id)}'">Cancel</button>
-#{/if}
-#{if handshake.status == models.Handshake.Status.STARTED}
-<button onclick="window.location='@{Handshakes.end(handshake.id)}'">End</button>
-#{/if}
+
 </div>
