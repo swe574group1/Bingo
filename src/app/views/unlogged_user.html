@@ -13,18 +13,18 @@
         <form action="@{Secure.authenticate()}" method="POST" class="login">
         	<ul class="login">
             	<li>
-                  <label>Email</label>
-                  <input type="text" name="username" value="${flash.username}" />
+                  <label style="width:100px;">Email</label>
+                  <input type="text" name="username" value="${flash.username}" style="width:180px" />
                 </li>
                 <li>
-                  <label>Password</label>
-                    <input type="password" name="password" />
+                  <label style="width:100px;">Password</label>
+                    <input type="password" name="password" style="width:180px" />
                 </li>
                 <li>
-                  <input type="submit" class="login_button" value="Login" />
+                  <input type="submit" class="login_button" value="Login" style="float:left; width:90px;" />
                 </li>
                 <li>
-                  <input type="button" class="login_button" value="Register" onclick="window.location='@{Users.register()}'" />
+                  <input type="button" class="login_button" style="margin-left:10px; width:90px;" value="Register" onclick="window.location='@{Users.register()}'" />
                 </li>
             </ul>
         </form>
