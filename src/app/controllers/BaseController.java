@@ -38,32 +38,20 @@ public class BaseController extends Controller
        		
        		TagCloudItem t_Item = new TagCloudItem();
        		t_Item.name = (String) a[0];
-       		t_Item.count = (Integer)a[1];
-       	    /*t_Item.hyperlink = "www.google.com";*/
+       		t_Item.count = (Long)a[1];
+       	    t_Item.hyperlink = "www.google.com";
        		
-       		switch(listFlag)
-       		{
-       			case 1 : t_Item.CssClass = "tag_1"; break;
-       			case 2 : t_Item.CssClass = "tag_2"; break;
-       			case 3 : t_Item.CssClass = "tag_2"; break;
-       			case 4 : t_Item.CssClass = "tag_3"; break;
-       			case 5 : t_Item.CssClass = "tag_3"; break;       			
-       			case 6 : t_Item.CssClass = "tag_4"; break;
-       			case 7 : t_Item.CssClass = "tag_4"; break;
-       			case 8 : t_Item.CssClass = "tag_5"; break;
-       			case 9 : t_Item.CssClass = "tag_5"; break;
-       			default : t_Item.CssClass = "tag_5"; 
-       		}       	
+      	    Integer cssFlag = 0;
+       	    
+       	    if(listFlag%2 == 0)
+       	    	cssFlag = (listFlag + 2)/2;
+       	    else cssFlag = (listFlag + 1)/2;
+       	    
+       	    t_Item.CssClass = "tag_" + cssFlag.toString();       	    		
        		
-       		if(listFlag < 10)
+       		if(listFlag < 13)
        			tagCloud.add(t_Item);
        	}  
-    	
-       	
-    	TagCloudItem t_Item = new TagCloudItem();
-   		t_Item.name = "test";
-   		t_Item.count = 1;
-   		tagCloud.add(t_Item);
        	
     	Collections.shuffle(tagCloud);
     	
