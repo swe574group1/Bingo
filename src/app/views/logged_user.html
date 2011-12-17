@@ -12,10 +12,10 @@
       Welcome, ${user.fullname}!<br />
       <a href="@{Users.ownProfile()}">
       #{if user.photo.exists()}
-      <img class="avatar" src="@{Application.showUserPhoto(user.id)}" alt="${user.fullname}" title="Your Profile Photo" style="margin-top:10px; display:block;" />
+      <img style="height:120px; width:120px;" class="avatar" src="@{Application.showUserPhoto(user.id)}" alt="${user.fullname}" title="Your Profile Photo" style="margin-top:10px; display:block;" />
       #{/if}
       #{else}
-      <img src="/public/images/lbi02.png" alt="Default User Avatar" title="Your Profile Photo" style="margin-top:10px; display:block;"  />
+      <img style="height:120px; width:120px;" src="/public/images/lbi02.png" alt="Default User Avatar" title="Your Profile Photo" style="margin-top:10px; display:block;"  />
       #{/else}
       </a><br />
       <input type="button" class="login_button" value="Logout" style="margin-top:-5px;" onclick="window.location='@{Secure.logout()}'"/>
