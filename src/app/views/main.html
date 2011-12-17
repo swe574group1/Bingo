@@ -15,9 +15,12 @@
   <body>
 
     <div id="header-wrap">
-      <div id="header"> <a name="top"></a>
-	<h1 id="logo-text"><a href="@{Application.index()}">Let It Bee</a></h1>
-	<p id="slogan">Why Pay When You Can Share?</p>
+    
+      <div id="header" style="border:0px solid red;"> <a name="top"></a>
+	<h1 id="logo-text" style="border:0px solid green;">
+	<div style="position:absolute; border:0px solid orange; width:990px; height:140px;margin-top:58px; background-image:url(@{'/public/images/bg1.png'}); background-repeat:none;"></div>
+	</h1>
+	
 	<div  id="nav">
 	  <ul>
             <li #{if title == 'Home'}id="current"#{/if}><a href="@{Application.index()}">Home</a></li>
