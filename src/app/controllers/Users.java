@@ -10,6 +10,7 @@ public class Users extends BaseController
 
     public static void register() {
         User user = new User();
+        
         renderTemplate("Users/form.html", user);
     }
 
@@ -21,6 +22,7 @@ public class Users extends BaseController
     	    validation.keep();
     	    register();
     	}
+    	user.badge=BadgeType.NEW_BEE;
     	user.save();
 
     	if (isCreate) {

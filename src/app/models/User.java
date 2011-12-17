@@ -69,6 +69,11 @@ public class User extends Model
      // @Required
      // @Enumerated(EnumType.STRING)
      // public Status status;
+     
+     
+     @Enumerated(EnumType.STRING)
+     public BadgeType badge;
+     
 
      public static List<User> getNewUsers(int maxUsers) {
 	 return find("order by registrationDate DESC").fetch(maxUsers);
@@ -87,3 +92,4 @@ public class User extends Model
 
      public Blob photo;
 }
+

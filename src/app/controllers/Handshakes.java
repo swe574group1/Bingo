@@ -1,8 +1,10 @@
 package controllers;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import models.BadgeType;
 import models.Handshake;
 import models.Handshake.Status;
 import models.Offer;
@@ -82,9 +84,31 @@ public class Handshakes extends BaseController
     }
     
     public static void end(Long handshakeId) {
+    	
         Handshake handshake = Handshake.findById(handshakeId);
         handshake.status = Status.DONE;
         handshake.save();
+        updateBadgeForHandshake(handshake);
+        
         show(handshakeId);
     }
+    private static void updateBadgeForHandshake(Handshake handshake){
+    	updateBadgeForUser(handshake.offer.user);
+    	updateBadgeForUser(handshake.request.user);
+    }
+    private static void updateBadgeForUser(User user){
+    	Date now = new Date();
+    	Timestamp sixMonthAgo = new Timestamp(now.getTime() - 86400000*30*6);
+
+    	long count=Handshake.count("(offer.user.id = ? or request.user.id = ?) and creationDate> ?", user.id, user.id,sixMonthAgo);
+    	user.badge=BadgeType.NEW_BEE;
+    	if(count>=5)
+    		user.badge=BadgeType.BUSY_BEE;
+    	if(count>=30)
+    		user.badge=BadgeType.WORKING_BEE;
+    	if(count>=60)
+    		user.badge=BadgeType.BUMBLE_BEE;
+    	user.save();
+    	
+    } 
 }
