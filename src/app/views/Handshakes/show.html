@@ -1,6 +1,8 @@
 #{extends 'logged_user.html' /}
 #{set title:'Handshake Details' /}
 
+<script src="@{'/public/javascripts/handshake-detail.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+
 <div id="main" style="padding-top:0px">
   <div class="post" style="padding:top:0px">
     <div class="right">
@@ -49,6 +51,217 @@
     </div>
 
   </div>
+  
+  
+  
+  <div class="post-bottom-section">
+        <div class="tab_left">
+        	<ul>
+            	<li>
+                	<a href="#" class="active" target_content="content-1">Comments (3)</a>
+                </li>
+                <li>
+                	<a href="#" target_content="content-2">Similar Handshakes</a>
+                </li>
+                <li>
+                	<a href="#" target_content="content-3">Similar Offers</a>
+                </li>
+                <li>
+                	<a href="#" target_content="content-4">Similar Requests</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right tab_right">
+          
+          
+          <div id="content-1" class="tab_content">
+          <span class="title">Comments</span>
+              <ol class="commentlist">
+                <li class="depth-1">
+                  <div class="comment-info"> <img alt="" src="images/gravatar.jpg" class="avatar" height="40" width="40" /> <cite> <a href="#">Erwin</a> Says: <br />
+                    <span class="comment-data"><a href="#">January 31st, 2010 at 10:00 pm</a></span> </cite> </div>
+                  <div class="comment-text">
+                    <p>Comments are great!</p>
+                    
+                  </div>
+                  
+                </li>
+                <li class="thread-alt depth-1">
+                  <div class="comment-info"> <img alt="" src="images/gravatar.jpg" class="avatar" height="40" width="40" /> <cite> <a href="#">Erwin</a> Says: <br />
+                    <span class="comment-data"><a href="#">January 31st, 2010 at 8:00 pm</a></span> </cite> </div>
+                  <div class="comment-text">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum.</p>
+                    
+                  </div>
+                  
+                </li>
+                <li class="depth-1">
+                  <div class="comment-info"> <img alt="" src="images/gravatar.jpg" class="avatar" height="40" width="40" /> <cite> <a href="#">Erwin</a> Says: <br />
+                    <span class="comment-data"><a href="#">January 31st, 2010 at 6:08 pm</a></span> </cite> </div>
+                  <div class="comment-text">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu posuere nunc justo tempus leo.</p>
+                  </div>
+                  
+                </li>
+              </ol>
+              <form action="#" method="post" id="commentform">
+            
+            
+            
+            <p>
+              <label for="message">Your Message</label>
+              <br />
+              <textarea id="message" name="message" rows="10" cols="20" tabindex="4"></textarea>
+            </p>
+            <p class="no-border">
+              <input class="button" type="submit" value="Submit Comment" tabindex="5" />
+            </p>
+          </form>
+          </div>
+          
+          
+          
+          
+          <div id="content-2" class="tab_content nonvisible">
+          <span class="title">Similar Handshakes</span>
+          <table class="show_data">
+        	<tr class="first">
+            	<td>Title</td>
+                <td>Place</td>
+                <td>Service Time</td>
+                <td>Credits Exchanged</td>
+                <td>Offerer</td>
+                <td>Requester</td>
+                <td>Details</td>
+            </tr>
+            <tr>
+            	<td><a href="#">Cooking Lesson</a></td>
+                <td>Sisli</td>
+                <td>1 day ago</td>
+                <td>10</td>
+                <td><a href="#">Isa Engiz</a></td>
+                <td><a href="#">Cihan Demirci</a></td>
+                <td><a href="#"><img src="images/icons/zoom.png" class="zoom_icon" /></a></td>
+            </tr>
+            <tr class="background">
+            	<td><a href="#">Plumbing Help</a></td>
+                <td>Bebek</td>
+                <td>2 days ago</td>
+                <td>20</td>
+                <td><a href="#">Isa Engiz</a></td>
+                <td><a href="#">Onur Ceryan</a></td>
+                <td><a href="#"><img src="images/icons/zoom.png" class="zoom_icon" /></a></td>
+            </tr>
+            <tr>
+            	<td><a href="#">Read for my child</a></td>
+                <td>Beylikduzu</td>
+                <td>2 days ago</td>
+                <td>3</td>
+                <td><a href="#">Eylem Ozekin</a></td>
+                <td><a href="#">Onur Ceryan</a></td>
+                <td><a href="#"><img src="images/icons/zoom.png" class="zoom_icon" /></a></td>
+            </tr>
+        </table>
+          </div>
+          
+          
+          
+          
+          
+          <div id="content-3" class="tab_content nonvisible">
+          <span class="title">Similar Offers</span>
+          <table class="show_data">
+        	<tr class="first">
+            	<td>Title</td>
+                <td>Place</td>
+                <td>Service Time</td>
+                <td>Credits Exchanged</td>
+                <td>Offerer</td>
+                <td>Requester</td>
+                <td>Details</td>
+            </tr>
+            <tr>
+            	<td><a href="#">Cooking Lesson</a></td>
+                <td>Sisli</td>
+                <td>1 day ago</td>
+                <td>10</td>
+                <td><a href="#">Isa Engiz</a></td>
+                <td><a href="#">Cihan Demirci</a></td>
+                <td><a href="#"><img src="images/icons/zoom.png" class="zoom_icon" /></a></td>
+            </tr>
+            <tr class="background">
+            	<td><a href="#">Plumbing Help</a></td>
+                <td>Bebek</td>
+                <td>2 days ago</td>
+                <td>20</td>
+                <td><a href="#">Isa Engiz</a></td>
+                <td><a href="#">Onur Ceryan</a></td>
+                <td><a href="#"><img src="images/icons/zoom.png" class="zoom_icon" /></a></td>
+            </tr>
+            <tr>
+            	<td><a href="#">Read for my child</a></td>
+                <td>Beylikduzu</td>
+                <td>2 days ago</td>
+                <td>3</td>
+                <td><a href="#">Eylem Ozekin</a></td>
+                <td><a href="#">Onur Ceryan</a></td>
+                <td><a href="#"><img src="images/icons/zoom.png" class="zoom_icon" /></a></td>
+            </tr>
+        </table>
+          </div>
+          
+          
+          
+          
+          
+          <div id="content-4" class="tab_content nonvisible">
+          <span class="title">Similar Requests</span>
+          <table class="show_data">
+        	<tr class="first">
+            	<td>Title</td>
+                <td>Place</td>
+                <td>Service Time</td>
+                <td>Credits Exchanged</td>
+                <td>Offerer</td>
+                <td>Requester</td>
+                <td>Details</td>
+            </tr>
+            <tr>
+            	<td><a href="#">Cooking Lesson</a></td>
+                <td>Sisli</td>
+                <td>1 day ago</td>
+                <td>10</td>
+                <td><a href="#">Isa Engiz</a></td>
+                <td><a href="#">Cihan Demirci</a></td>
+                <td><a href="#"><img src="images/icons/zoom.png" class="zoom_icon" /></a></td>
+            </tr>
+            <tr class="background">
+            	<td><a href="#">Plumbing Help</a></td>
+                <td>Bebek</td>
+                <td>2 days ago</td>
+                <td>20</td>
+                <td><a href="#">Isa Engiz</a></td>
+                <td><a href="#">Onur Ceryan</a></td>
+                <td><a href="#"><img src="images/icons/zoom.png" class="zoom_icon" /></a></td>
+            </tr>
+            <tr>
+            	<td><a href="#">Read for my child</a></td>
+                <td>Beylikduzu</td>
+                <td>2 days ago</td>
+                <td>3</td>
+                <td><a href="#">Eylem Ozekin</a></td>
+                <td><a href="#">Onur Ceryan</a></td>
+                <td><a href="#"><img src="images/icons/zoom.png" class="zoom_icon" /></a></td>
+            </tr>
+        </table>
+          </div>
+          
+        </div>
+      </div>
+  
+  
+  
+  
 
 #{if handshake.status == models.Handshake.Status.WAITING_APPROVAL}
 <button onclick="window.location='@{Handshakes.accept(handshake.id)}'">Accept</button>
