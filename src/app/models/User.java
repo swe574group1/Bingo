@@ -5,6 +5,7 @@ import java.util.*;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -74,6 +75,9 @@ public class User extends Model
      @Enumerated(EnumType.STRING)
      public BadgeType badge;
      
+
+     @OneToMany(mappedBy="user")
+     public List<Comment> comments;
 
      public static List<User> getNewUsers(int maxUsers) {
 	 return find("order by registrationDate DESC").fetch(maxUsers);

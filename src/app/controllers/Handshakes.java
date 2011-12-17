@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import models.BadgeType;
+import models.Comment;
 import models.Handshake;
 import models.Handshake.Status;
 import models.Offer;
@@ -53,13 +54,22 @@ public class Handshakes extends BaseController
 
     public static void show(Long id) {
 	Handshake handshake = Handshake.findById(id);
-	render(handshake);
+	List<Comment> comments = Comment.find("handshake = ?", handshake).fetch();
+	render(handshake, comments);
     }
 
     public static void list() {
         User user = getConnectedUser();
         List<Handshake> handshakes = Handshake.find("offer.user.id = ? or request.user.id = ?", user.id, user.id).fetch();
         render(handshakes);
+    }
+
+    public static void search(String phrase) {
+        User user = getConnectedUser();
+
+        List<Handshake> allHandshakes = Handshake.findAll();
+
+        render(user, allHandshakes, phrase);
     }
 
     public static void accept(Long handshakeId) {
@@ -92,10 +102,23 @@ public class Handshakes extends BaseController
         
         show(handshakeId);
     }
+
+    public static void saveComment(Long handshakeId)
+    {
+        User user = getConnectedUser();
+        Comment comment = new Comment();
+        comment.user = user;
+        comment.handshake = Handshake.findById(handshakeId);
+        comment.date = new Date();
+        comment.text = request.params.get("message");
+        comment.save();
+    }
+
     private static void updateBadgeForHandshake(Handshake handshake){
     	updateBadgeForUser(handshake.offer.user);
     	updateBadgeForUser(handshake.request.user);
     }
+
     private static void updateBadgeForUser(User user){
     	Date now = new Date();
     	Timestamp sixMonthAgo = new Timestamp(now.getTime() - 86400000*30*6);
@@ -110,5 +133,5 @@ public class Handshakes extends BaseController
     		user.badge=BadgeType.BUMBLE_BEE;
     	user.save();
     	
-    } 
+    }
 }
