@@ -1030,20 +1030,36 @@ ul.login .login_button {
 	border:0px !important;
 }
 .tag_cloud .tag_1 {
-	font-size:20px;
+	font-size:30px;
 }
 .tag_cloud .tag_2 {
-	font-size:16px;
+	font-size:20px;
+	font-weight:bold;
+	font-style:italic;
 }
 .tag_cloud .tag_3 {
-	font-size:12px;
-	font-weight:bold;
+	font-size:20px;
 }
 .tag_cloud .tag_4 {
-	font-size:12px;
+	font-size:16px;
+	font-weight:bold;
 }
 .tag_cloud .tag_5 {
+	font-size:16px;
+}
+.tag_cloud .tag_6 {
+	font-size:12px;
+}
+.tag_cloud .tag_7 {
 	font-size:10px;
+	font-style:bold;
+	font-style:italic;
+}
+.tag_cloud .tag_8 {
+	font-size:10px;
+}
+.tag_cloud .tag_9 {
+	font-size:8px;
 }
 
 .utility_form {
