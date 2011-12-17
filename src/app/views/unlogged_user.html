@@ -7,10 +7,11 @@
       <div id="sidebar"  style="border:0px solid #aaa; padding-top:0px;">
       <div class="about-me">
         <h3>Login</h3>
-	#{if flash.error}
-	<span class="error">Wrong Email or Password!</span>
-	#{/if}
+	
         <form action="@{Secure.authenticate()}" method="POST" class="login">
+        	#{if flash.error}
+			<p class="ikaz" style="padding:5px 5px; margin:5px;">Wrong Email or Password! Please try again.</span>
+			#{/if}
         	<ul class="login">
             	<li>
                   <label style="width:100px;">Email</label>
