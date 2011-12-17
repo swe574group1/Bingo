@@ -10,6 +10,6 @@ public class TagCloudItem
 {
     public String name;
     public String CssClass;
-    public Integer count;
-    /*public String hyperlink;*/
+    public Long count;
+    public String hyperlink;
 }
