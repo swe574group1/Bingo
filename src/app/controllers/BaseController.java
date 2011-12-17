@@ -39,7 +39,7 @@ public class BaseController extends Controller
        		TagCloudItem t_Item = new TagCloudItem();
        		t_Item.name = (String) a[0];
        		t_Item.count = (Long)a[1];
-       		t_Item.hyperlink = "www.google.com";
+       	    /*t_Item.hyperlink = "www.google.com";*/
        		
        		switch(listFlag)
        		{
