@@ -18,7 +18,6 @@
       <img style="height:120px; width:120px;" src="/public/images/lbi02.png" alt="Default User Avatar" title="Your Profile Photo" style="margin-top:10px; display:block;"  />
       #{/else}
       </a><br />
-      <input type="button" class="login_button" value="Logout" style="margin-top:-5px;" onclick="window.location='@{Secure.logout()}'"/>
       <ul>
         <li><a href="@{Offers.create()}">Create Offer</a></li>
         <li><a href="@{Requests.create()}">Create Request</a></li>
@@ -28,6 +27,8 @@
         <li><a href="@{Offers.list()}">My Offers</a></li>
         <li><a href="@{Requests.list()}">My Requests</a></li>
 	<li><a href="@{Users.ownProfile()}">My Profile</a></li>
+	<li><a href="@{Users.editProfile()}">Edit Profile</a></li>
+	<li><a href="@{Secure.logout()}">Logout</a></li>
       </ul>
     </div>
     
