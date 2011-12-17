@@ -21,11 +21,15 @@
     </tr>
     #{/list}
   </table>
+  
+  
   #{/if}
   #{else}
   <p>
     There are no recent handshakes.
   </p>
+  
+  
   #{/else}
 
 </div>
@@ -74,6 +78,46 @@
 </div>
 #{/if}
 
+<style>
+.linearBg2 {
+  /* fallback */
+  background-color: #eee;
+  background: url(images/linear_bg_2.png);
+  background-repeat: repeat-x;
+  
+  /* Safari 4-5, Chrome 1-9 */
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1a82f7), to(#2F2727));
+  
+  /* Safari 5.1, Chrome 10+ */
+  background: -webkit-linear-gradient(top, #eee, #fff);
+  
+  /* Firefox 3.6+ */
+  background: -moz-linear-gradient(top, #eee, #fff);
+  
+  /* IE 10 */
+  background: -ms-linear-gradient(top, #eee, #fff);
+  
+  /* Opera 11.10+ */
+  background: -o-linear-gradient(top, #eee, #fff);
+}
+.linearBg2 a {
+color:#2c76a5;
+}
+</style>
+<div class="tag_cloud linearBg2" style="border:0px solid #eee; width:360px; display:inline-block;">
+  <h4>Offers in Clauds</h4>
+    <ul>
+	  <li class="tag_2"><a href="#">Isa</a></li>
+	  <li class="tag_3"><a href="#">Isa</a></li>
+    </ul>
+</div>
+<div class="tag_cloud linearBg2" style="border:0px solid #eee; width:360px; display:inline-block;">
+  <h4>Requests in Clauds</h4>
+    <ul>
+	  <li class="tag_2"><a href="#">Isa</a></li>
+	  <li class="tag_3"><a href="#">Isa</a></li>
+    </ul>
+</div>
 
 
 #{else}
