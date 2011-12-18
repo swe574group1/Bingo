@@ -75,6 +75,41 @@
     </div>
   </div>
 </div>
+
+<div class="postalt" style="border:0px solid green; width:98%">
+<div class="user_tabs" style="margin-top:30px; border:opx solid red; text-align:middle; width:100%">
+  <div class="tag_cloud_big linearBg2" style="border:0px solid green; width:360px; display:inline-block; text-align: center; ">
+  <h4>Offers in Clouds</h4>    
+</div>
+<div class="tag_cloud_big linearBg2" style="border:0px solid green; width:360px; display:inline-block; text-align: center; ">
+  <h4>Requests in Clouds</h4>    
+</div>
+  </div>
+
+<div class="index_tab_content3" id="index_tab_content_1" style="width:99.5%">
+<div class="tag_cloud_big linearBg2" style="border:0px solid green; width:350px; display:inline-block; text-align: center; ">
+       <br/>
+       <ul>          
+        #{list items:tagCloudBigOffer, as:'tagItem'}
+        <li class = "${tagItem.CssClass}">  
+          <a href="${tagItem.hyperlink}" style="color:gray">${tagItem.name}</a> 
+        </li>
+        #{/list}
+       </ul>   
+       <br/>  
+</div>
+<div class="tag_cloud_big linearBg2" style="border:0px solid green; width:350px; display:inline-block;text-align: center; ">
+     <br/>
+     <ul>        
+        #{list items:tagCloudBigRequest, as:'tagItem'}
+          <a href="${tagItem.hyperlink}" style="color:gray">${tagItem.name}</a> 
+        </li>
+        #{/list}
+       </ul> 
+       <br/>
+</div>
+</div>
+</div>
 #{/if}
 
 #{else}
@@ -105,20 +140,6 @@
 color:#2c76a5;
 }
 </style>
-<div id ="divCloud1" class="tag_cloud linearBg2" style="border:0px solid #eee; width:360px; display:inline-block;">
-  <h4>Offers in Clouds</h4>
-    <ul>
-	  <li class="tag_2"><a href="#">Isa</a></li>
-	  <li class="tag_3"><a href="#">Isa</a></li>
-    </ul>
-</div>
-<div id="divCloud2" class="tag_cloud linearBg2" style="border:0px solid #eee; width:360px; display:inline-block;">
-  <h4>Requests in Clouds</h4>
-    <ul>
-	  <li class="tag_2"><a href="#">Isa</a></li>
-	  <li class="tag_3"><a href="#">Isa</a></li>
-    </ul>
-</div>
 
 <div class="post" style="padding-top:12px; padding:top:00px">
  <div class="user_tabs2" >
