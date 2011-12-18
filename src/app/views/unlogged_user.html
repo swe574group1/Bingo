@@ -48,10 +48,15 @@
 	      #{list items:models.Tag.find('select name from Tag group by name order by count(*) desc').fetch(6), as:'poptag'}
 	      ${poptag}
 	      #{/list}
-            </ul> -->
+            </ul>-->
           </div>
       </div> 
 
     </div>
 </div>
 
+<script>
+document.getElementById("divCloud1").style.display = "none";
+document.getElementById("divCloud2").style.display = "none";
+document.getElementById("divCloud1").style.visibility = "hidden";
+document.getElementById("divCloud2").style.visibility = "hidden";</script>
