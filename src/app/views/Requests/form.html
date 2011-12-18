@@ -19,6 +19,98 @@
 <p>Use the form below to create a new request.</p>
 #{/else}
 
+<script>
+
+function changeForCounty()
+{	
+	var ddlC = document.getElementById("ddlCounty");
+	
+	if(ddlC.options[ddlC.selectedIndex].text == "All")
+	{
+		document.getElementById("txtCountyName").value = "";
+		document.getElementById("txtDistrictName").value = "";
+		//document.getElementById("txtCountyId").value = "";		
+	}
+	else
+	{
+		document.getElementById("txtCountyName").value = ddlC.options[ddlC.selectedIndex].text;
+		document.getElementById("txtDistrictName").value = "";
+		//document.getElementById("txtCountyId").value = ddlC.options[ddlC.selectedIndex].value;
+	}
+		
+	fillDistricts(ddlC.options[ddlC.selectedIndex].value);
+}
+
+function changeForDistrict()
+{	
+	var ddlD = document.getElementById("ddlDistrict");
+	if(ddlD.options[ddlD.selectedIndex].text == "All")
+	{
+		document.getElementById("txtDistrictName").value = "";
+		//document.getElementById("txtDistrictId").value = "";
+	}
+	else
+	{
+		document.getElementById("txtDistrictName").value = ddlD.options[ddlD.selectedIndex].text;
+		//document.getElementById("txtDistrictId").value = ddlD.options[ddlD.selectedIndex].value;
+	}
+		
+}
+
+function fillDistricts(p_county)
+{
+	var ddlDis = document.getElementById("ddlDistrict");
+	
+	if(p_county == "0")
+	{			
+		var tmp = ddlDis.length;
+		for(var i=0; i < tmp; i++)
+		{	
+			ddlDis.remove(0);
+		}
+		
+		addElement("All","0",ddlDis)
+		document.getElementById("txtDistrictName").value = "";
+		document.getElementById("txtDistrictId").value = "";
+	}
+	else 
+	{
+		var tmp = ddlDis.length;
+		for(var i=0; i < tmp; i++)
+		{	
+			ddlDis.remove(0);
+		}
+		addElement("All","0",ddlDis)
+		
+		var ddlAllDistrict = document.getElementById("ddlAllDistrict");
+		for(var i=0; i < ddlAllDistrict.length; i++)
+		{
+			var searchStr = "##" + p_county + "##";	
+			if(ddlAllDistrict.options[i].text.indexOf(searchStr) > -1)
+			{
+				addElement(ddlAllDistrict.options[i].text.replace(searchStr,""),ddlAllDistrict.options[i].value, ddlDis);
+			}
+		}	
+	}	
+}
+
+function addElement(text,value,ddl)
+{ 
+	var elOptNew = document.createElement('option');
+	elOptNew.text = text;
+	elOptNew.value = value;
+	
+  	try 
+	{
+		ddl.add(elOptNew, null); // standards compliant; doesn't work in IE
+	}
+  	catch(ex) {
+	    ddl.add(elOptNew); // IE only
+	}
+}
+
+</script>
+
 <form action="@{Requests.doCreate()}" method="POST" class="utility_form">
 	<input type="hidden" name="requestItem.id" value="${requestItem.id}" />
 
@@ -41,6 +133,49 @@
         <textarea name="requestItem.description">${requestItem.description}</textarea>
         <span class="error">#{error 'requestItem.description' /}</span>
       </li>
+      <li>
+        <label>Honey Combs</label>
+			<select name="requestItem.credit">
+	  			<option>1</option>
+	  			<option>7</option>
+	  			<option>19</option>
+			</select>
+      </li>       
+       <li>
+       <label>County</label>
+       		<select id="ddlCounty" onchange="changeForCounty();">
+	        #{list items:counties, as:'countyItem'}
+		    <option value="${countyItem.county_id}">	      	    
+		         ${countyItem.name}        
+		    </option>	    
+		    #{/list}
+		    </select>       		
+     	</li>      
+       <li>
+       <label>District</label>
+       		<select onchange="changeForDistrict();" id="ddlDistrict">
+	  			<option>All</option>
+			</select>
+       </li>       
+       <select id="ddlAllDistrict" style="display:none; visibility:hidden;" 
+        #{list items:districts, as:'districtItem'}
+	    <option value="${districtItem.district_id}">	      	    
+	          ##${districtItem.county_id}##${districtItem.name}        
+	    </option>	    
+	    #{/list}
+	    </select>         
+       <li style="visibility: hidden; display:none"> 
+       <label>City</label>
+       	<input type="text" id="txtCityName" name="requestItem.city_name" value="${requestItem.city_name}" />
+       	</li>  
+        <li style="visibility: hidden; display:none"> 
+       <label>County</label>
+       	<input type="text" id="txtCountyName" name="requestItem.county_name" value="${requestItem.county_name}" />
+       	</li>
+        <li style="visibility: hidden; display:none"> 
+       <label>District</label>
+       <input type="text" id="txtDistrictName" name="requestItem.district_name" value="${requestItem.district_name}" />
+        </li>
     </ul>
   </fieldset>
   
@@ -59,3 +194,7 @@
   <input type="submit" value="Save" />
 
 </form>
+
+<script>
+document.getElementById("txtCityName").value = "Istanbul";
+</script>

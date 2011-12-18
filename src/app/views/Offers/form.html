@@ -23,47 +23,81 @@
 
 function changeForCounty()
 {	
-	if(document.getElementById("ddlCounty").value == "All")
-		document.getElementById("txtCounty").value = "";
-	else 
-		document.getElementById("txtCounty").value = document.getElementById("ddlCounty").value;
+	var ddlC = document.getElementById("ddlCounty");
+	
+	if(ddlC.options[ddlC.selectedIndex].text == "All")
+	{
+		document.getElementById("txtCountyName").value = "";
+		document.getElementById("txtDistrictName").value = "";
+		//document.getElementById("txtCountyId").value = "";		
+	}
+	else
+	{
+		document.getElementById("txtCountyName").value = ddlC.options[ddlC.selectedIndex].text;
+		document.getElementById("txtDistrictName").value = "";
+		//document.getElementById("txtCountyId").value = ddlC.options[ddlC.selectedIndex].value;
+	}
 		
-	fillDistricts(document.getElementById("ddlCounty").value);
+	fillDistricts(ddlC.options[ddlC.selectedIndex].value);
 }
 
 function changeForDistrict()
 {	
-	if(document.getElementById("ddlDistrict").value == "All")
-		document.getElementById("txtDistrict").value = "";
-	else 
-		document.getElementById("txtDistrict").value = document.getElementById("ddlDistrict").value;
+	var ddlD = document.getElementById("ddlDistrict");
+	if(ddlD.options[ddlD.selectedIndex].text == "All")
+	{
+		document.getElementById("txtDistrictName").value = "";
+		//document.getElementById("txtDistrictId").value = "";
+	}
+	else
+	{
+		document.getElementById("txtDistrictName").value = ddlD.options[ddlD.selectedIndex].text;
+		//document.getElementById("txtDistrictId").value = ddlD.options[ddlD.selectedIndex].value;
+	}
+		
 }
 
 function fillDistricts(p_county)
 {
 	var ddlDis = document.getElementById("ddlDistrict");
 	
-	if(p_county == "All")
-	{				
+	if(p_county == "0")
+	{			
 		var tmp = ddlDis.length;
 		for(var i=0; i < tmp; i++)
 		{	
 			ddlDis.remove(0);
 		}
 		
-		addElement("All",ddlDis)
-		document.getElementById("txtDistrict").value = "";
+		addElement("All","0",ddlDis)
+		document.getElementById("txtDistrictName").value = "";
+		document.getElementById("txtDistrictId").value = "";
 	}
 	else 
 	{
-		//addElement("12321",ddlDis)
+		var tmp = ddlDis.length;
+		for(var i=0; i < tmp; i++)
+		{	
+			ddlDis.remove(0);
+		}
+		addElement("All","0",ddlDis)
+		
+		var ddlAllDistrict = document.getElementById("ddlAllDistrict");
+		for(var i=0; i < ddlAllDistrict.length; i++)
+		{
+			var searchStr = "##" + p_county + "##";	
+			if(ddlAllDistrict.options[i].text.indexOf(searchStr) > -1)
+			{
+				addElement(ddlAllDistrict.options[i].text.replace(searchStr,""),ddlAllDistrict.options[i].value, ddlDis);
+			}
+		}	
 	}	
 }
 
-function addElement(value,ddl)
+function addElement(text,value,ddl)
 { 
 	var elOptNew = document.createElement('option');
-	elOptNew.text = value;
+	elOptNew.text = text;
 	elOptNew.value = value;
 	
   	try 
@@ -107,36 +141,42 @@ function addElement(value,ddl)
 	  			<option>7</option>
 	  			<option>19</option>
 			</select>
-      </li>
-       
-       
+      </li>       
        <li>
        <label>County</label>
-       		<select onchange="changeForCounty();" id="ddlCounty"> 
-	  			<option>All</option>
-	  			<option>Sisli</option>
-	  			<option>Taksim</option>
-			</select>
-     	</li>
-      
+       		<select id="ddlCounty" onchange="changeForCounty();">
+	        #{list items:counties, as:'countyItem'}
+		    <option value="${countyItem.county_id}">	      	    
+		         ${countyItem.name}        
+		    </option>	    
+		    #{/list}
+		    </select>       		
+     	</li>      
        <li>
        <label>District</label>
        		<select onchange="changeForDistrict();" id="ddlDistrict">
 	  			<option>All</option>
 			</select>
-      </li>
-       
-       
-       <li style="display:none; visibility:hidden"> -->
+       </li>       
+       <select id="ddlAllDistrict" style="display:none; visibility:hidden;" 
+        #{list items:districts, as:'districtItem'}
+	    <option value="${districtItem.district_id}">	      	    
+	          ##${districtItem.county_id}##${districtItem.name}        
+	    </option>	    
+	    #{/list}
+	    </select>         
+       <li style="visibility: hidden; display:none"> 
+       <label>City</label>
+       	<input type="text" id="txtCityName" name="offerItem.city_name" value="${offerItem.city_name}" />
+       	</li>  
+        <li style="visibility: hidden; display:none"> 
        <label>County</label>
-       	<input type="text" id="txtCounty" name="offerItem.county" value="${offerItem.county}" />
-		<span class="error">#{error 'offerItem.county' /}</span>
-     	</li>
-       <li style="display:none; visibility:hidden"> -->
+       	<input type="text" id="txtCountyName" name="offerItem.county_name" value="${offerItem.county_name}" />
+       	</li>
+        <li style="visibility: hidden; display:none"> 
        <label>District</label>
-       <input type="text" id="txtDistrict" name="offerItem.district" value="${offerItem.district}" />
-		<span class="error">#{error 'offerItem.district' /}</span>
-      </li>
+       <input type="text" id="txtDistrictName" name="offerItem.district_name" value="${offerItem.district_name}" />
+        </li>
     </ul>
   </fieldset>
   
@@ -156,3 +196,6 @@ function addElement(value,ddl)
 
 </form>
 
+<script>
+document.getElementById("txtCityName").value = "Istanbul";
+</script>
