@@ -684,7 +684,7 @@ ul.subscribe-stuff li img {
     padding: 0;
 }
 .left .post-meta h4 {
-   text-align: right;
+   text-align: center;
    margin: 0 5px 10px 5px;
    padding: 0;
    color: #555;
@@ -697,9 +697,9 @@ ul.subscribe-stuff li img {
 .left .post-meta ul li {
 	list-style: none;
 	border-bottom: 1px solid #F1F1F1;
-   padding: 3px 5px;
+    padding: 3px 5px;
 	margin: 0;
-   text-align: right;
+    text-align: right;
 	color: #147DB6;
 }
 * html body .left .post-meta ul li { height: 1%; }
