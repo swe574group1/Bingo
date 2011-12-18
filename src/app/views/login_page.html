@@ -87,22 +87,23 @@
   </div>
 
 <div class="index_tab_content3" id="index_tab_content_1" style="width:99.5%">
-<div class="tag_cloud_big linearBg2" style="border:0px solid green; width:350px; display:inline-block; text-align: center; ">
+<div class="tag_cloud_big linearBg2" style="border:0px solid green; width:350px; display:inline-block; text-align: center; vertical-align:top;">
        <br/>
        <ul>          
         #{list items:tagCloudBigOffer, as:'tagItem'}
         <li class = "${tagItem.CssClass}">  
-          <a href="${tagItem.hyperlink}" style="color:gray">${tagItem.name}</a> 
+           <a href="${tagItem.hyperlink}" style="color:gray">${tagItem.name}</a>          
         </li>
         #{/list}
        </ul>   
        <br/>  
 </div>
-<div class="tag_cloud_big linearBg2" style="border:0px solid green; width:350px; display:inline-block;text-align: center; ">
+<div class="tag_cloud_big linearBg2" style="border:0px solid green; width:350px; display:inline-block;text-align:center; vertical-align:top; ">
      <br/>
      <ul>        
         #{list items:tagCloudBigRequest, as:'tagItem'}
-          <a href="${tagItem.hyperlink}" style="color:gray">${tagItem.name}</a> 
+         <li class = "${tagItem.CssClass}">  
+         	<a href="${tagItem.hyperlink}" style="color:gray">${tagItem.name}</a>
         </li>
         #{/list}
        </ul> 
