@@ -623,6 +623,10 @@ ul.subscribe-stuff li img {
 }
 .right h2 { margin-top: 0; }
 
+.postalt {
+   border-bottom: 1px solid #eee;
+}
+
 /* share */
 .right .share-box {
    margin: 20px 12px 0 20px;
@@ -1052,6 +1056,40 @@ ul.login .login_button {
 	font-size:7px;
 }
 
+
+.tag_cloud_big li {
+	display:inline;
+	text-decoration:none !important;
+	border:0px !important;
+}
+.tag_cloud_big li a {
+	display:inline;
+	text-decoration:none !important;
+	border:0px !important;
+}
+
+.tag_cloud_big .tag_big_1 {
+	font-size:26px;
+}
+.tag_cloud_big .tag_big_2 {
+	font-size:20px;
+}
+.tag_cloud_big .tag_big_3 {
+	font-size:16px;
+}
+.tag_cloud_big .tag_big_4 {
+	font-size:14px;
+}
+.tag_cloud_big .tag_big_5 {
+	font-size:12px;
+}
+.tag_cloud_big .tag_big_6 {
+	font-size:9px;
+}
+.tag_cloud_big .tag_big_7 {
+	font-size:7px;
+}
+
 .utility_form {
 	width:85%;
 	background-color:#fff;
@@ -1470,6 +1508,10 @@ span.title {
 
 .nonvisible {
 	display:none;
+}
+
+.index_tab_content3 {
+	border:2px solid #eee;
 }
 
 .index_tab_content {
