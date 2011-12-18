@@ -1371,6 +1371,60 @@ img.owner_image {
 	background-color:#888;
 }
 
+
+.user_tabs2 {
+	background-color:#eee;
+	border:#ddd;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-top-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+.user_tabs2 ul
+{
+	margin:0px;
+	padding:0px;
+	padding-top:14px;
+	padding-left:10px;
+}
+.user_tabs2 li {
+	padding:0px;
+	margin:0px;
+	display:inline;
+	
+}
+.user_tabs2 a {
+	color:#888;
+	padding:2px 10px;
+	padding-top:5px;
+	border:1px solid #aaa;
+	background-color:#ccc;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-top-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+.user_tabs2 a:hover {
+	color:#fff;
+	text-decoration:none;
+	background-color:#888;
+}
+.user_tabs2 a.active {
+	background-color:#fff;
+	border-bottom:0px;
+	font-weight:bold;
+	
+}
+.user_tabs2 a.active:hover {
+	color:#fff;
+	text-decoration:none;
+	background-color:#888;
+}
+
 .tab_left {
 	border:0px solid red;
 	float:left;
@@ -1438,6 +1492,31 @@ span.title {
 .index_tab_content .service p {
 	margin:5px 5px 5px 40px;
 }
+
+.index_tab_content2 {
+	border-left:1px solid #eee;
+	border-right:1px solid #eee;
+	border-top:1px solid #eee;
+	border-bottom: none;
+}
+.index_tab_content2 .images {
+	display:inline-block;
+	width:150px;
+	border:0px solid #eee;
+	float:left;
+	padding-top:20px;
+}
+.index_tab_content2 .service {
+	display:inline-block;
+	border:0px solid #ddd;
+	width:560px;
+	float:left;
+	padding:10px;
+}
+.index_tab_content2 .service p {
+	margin:5px 5px 5px 40px;
+}
+
 
 .interview {
 	border:1px solid #eee;
