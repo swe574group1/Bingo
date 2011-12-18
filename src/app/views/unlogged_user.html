@@ -31,14 +31,15 @@
         </form>
       </div>
       
+      <br/>
      
       <div class="sidemenu">
-        <h3>Popular Services For the Last 30 Days</h3>                 
+        <h3>Popular Offers For the Last 30 Days</h3>                 
           <div class="tag_cloud" style="text-transform:none !important;">  
-          <ul>
+          <ul class="login">
           <br/>
              
-           #{list items:tagCloud, as:'tagItem'}
+           #{list items:tagCloudOffer, as:'tagItem'}
            <li class = "${tagItem.CssClass}">  
              ${tagItem.name}           
            </li>
@@ -51,9 +52,27 @@
             </ul>-->
           </div>
       </div> 
+      
+      <br/>
+      
+      <div class="sidemenu">
+        <h3>Popular Requests For the Last 30 Days</h3>                 
+          <div class="tag_cloud" style="text-transform:none !important;">  
+          <ul>
+          <br/>
+             
+           #{list items:tagCloudRequest, as:'tagItem'}
+           <li class = "${tagItem.CssClass}">  
+             ${tagItem.name}           
+           </li>
+           #{/list}
+          </ul>         
+          </div>
+      </div> 
 
     </div>
 </div>
+
 
 <script>
 document.getElementById("divCloud1").style.display = "none";
