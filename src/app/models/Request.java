@@ -51,6 +51,10 @@ public class Request extends Model implements Matchable
     @Enumerated(EnumType.STRING)
     public Status status;
 
+    public String county;
+    
+    public String district;
+    
     public Request(User user) {
 	this.user = user;
     }

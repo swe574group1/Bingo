@@ -48,6 +48,10 @@ public class Offer extends Model implements Matchable
     // @Required
     @Enumerated(EnumType.STRING)
     public Status status;
+    
+    public String county;
+    
+    public String district;
 
     public Offer(User user) {
 	this.user = user;
