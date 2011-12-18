@@ -144,7 +144,7 @@ public class BaseController extends Controller
        		TagCloudItem t_Item = new TagCloudItem();
        		t_Item.name = (String) a[0];
        		t_Item.count = (Long)a[1];
-       		t_Item.hyperlink = "controller.search('onur')";
+       		t_Item.hyperlink = "/offers/search?phrase=" + t_Item.name;
        		
       	    Integer cssFlag = 0;
        	    
@@ -179,7 +179,7 @@ public class BaseController extends Controller
        		TagCloudItem t_Item = new TagCloudItem();
        		t_Item.name = (String) a[0];
        		t_Item.count = (Long)a[1];
-       		t_Item.hyperlink = "controller.search('onur')";
+       		t_Item.hyperlink = "/requests/search?phrase=" + t_Item.name;
        		
       	    Integer cssFlag = 0;
        	    
