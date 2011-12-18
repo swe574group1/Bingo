@@ -14,5 +14,5 @@ public class District extends Model
 
     @Required
     @ManyToOne
-    public District district;
+    public County county;
 }
