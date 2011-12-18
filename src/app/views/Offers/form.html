@@ -19,6 +19,65 @@
 <p>Use the form below to create a new offer.</p>
 #{/else}
 
+<script>
+
+function changeForCounty()
+{	
+	if(document.getElementById("ddlCounty").value == "All")
+		document.getElementById("txtCounty").value = "";
+	else 
+		document.getElementById("txtCounty").value = document.getElementById("ddlCounty").value;
+		
+	fillDistricts(document.getElementById("ddlCounty").value);
+}
+
+function changeForDistrict()
+{	
+	if(document.getElementById("ddlDistrict").value == "All")
+		document.getElementById("txtDistrict").value = "";
+	else 
+		document.getElementById("txtDistrict").value = document.getElementById("ddlDistrict").value;
+}
+
+function fillDistricts(p_county)
+{
+	var ddlDis = document.getElementById("ddlDistrict");
+	
+	if(p_county == "All")
+	{				
+		var tmp = ddlDis.length;
+		for(var i=0; i < tmp; i++)
+		{	
+			ddlDis.remove(0);
+		}
+		
+		addElement("All",ddlDis)
+		document.getElementById("txtDistrict").value = "";
+	}
+	else 
+	{
+		//addElement("12321",ddlDis)
+	}	
+}
+
+function addElement(value,ddl)
+{ 
+	var elOptNew = document.createElement('option');
+	elOptNew.text = value;
+	elOptNew.value = value;
+	
+  	try 
+	{
+		ddl.add(elOptNew, null); // standards compliant; doesn't work in IE
+	}
+  	catch(ex) {
+	    ddl.add(elOptNew); // IE only
+	}
+}
+
+</script>
+
+
 <form action="@{Offers.doCreate()}" method="POST" class="utility_form">
 	<input type="hidden" name="offerItem.id" value="${offerItem.id}" />
 
@@ -43,11 +102,40 @@
       </li>
       <li>
         <label>Honey Combs</label>
-	<select name="offerItem.credit">
-	  <option>1</option>
-	  <option>7</option>
-	  <option>19</option>
-	</select>
+			<select name="offerItem.credit">
+	  			<option>1</option>
+	  			<option>7</option>
+	  			<option>19</option>
+			</select>
+      </li>
+       
+       
+       <li>
+       <label>County</label>
+       		<select onchange="changeForCounty();" id="ddlCounty"> 
+	  			<option>All</option>
+	  			<option>Sisli</option>
+	  			<option>Taksim</option>
+			</select>
+     	</li>
+      
+       <li>
+       <label>District</label>
+       		<select onchange="changeForDistrict();" id="ddlDistrict">
+	  			<option>All</option>
+			</select>
+      </li>
+       
+       
+       <li style="display:none; visibility:hidden"> -->
+       <label>County</label>
+       	<input type="text" id="txtCounty" name="offerItem.county" value="${offerItem.county}" />
+		<span class="error">#{error 'offerItem.county' /}</span>
+     	</li>
+       <li style="display:none; visibility:hidden"> -->
+       <label>District</label>
+       <input type="text" id="txtDistrict" name="offerItem.district" value="${offerItem.district}" />
+		<span class="error">#{error 'offerItem.district' /}</span>
       </li>
     </ul>
   </fieldset>
@@ -67,3 +155,4 @@
   <input type="submit" value="Save" />
 
 </form>
+
