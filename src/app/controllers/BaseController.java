@@ -128,6 +128,76 @@ public class BaseController extends Controller
     	renderArgs.put("tagCloudRequest", tagCloud);  
     }
     
+    @Before
+    static void setOfferTagCloudBig() {
+    	
+    	Query query = JPA.em().createQuery("select name, count(*) from Tag where request_id is null group by name order by count(*) desc");
+    	List<Object[]> list = query.getResultList();
+       	
+    	List<TagCloudItem> tagCloud = new ArrayList<TagCloudItem>(); 
+    	Integer listFlag = 0;
+    	
+    	for(Object[] a : list)
+       	{
+    		listFlag ++;
+       		
+       		TagCloudItem t_Item = new TagCloudItem();
+       		t_Item.name = (String) a[0];
+       		t_Item.count = (Long)a[1];
+       		t_Item.hyperlink = "controller.search('onur')";
+       		
+      	    Integer cssFlag = 0;
+       	    
+       	    if(listFlag%2 == 0)
+       	    	cssFlag = (listFlag + 2)/2;
+       	    else cssFlag = (listFlag + 1)/2;
+       	    
+       	    t_Item.CssClass = "tag_big_" + cssFlag.toString();       	    		
+       		
+       		if(listFlag < 13)
+       			tagCloud.add(t_Item);
+       	}  
+       	
+    	Collections.shuffle(tagCloud);
+    	
+    	renderArgs.put("tagCloudBigOffer", tagCloud);  
+    }
+    
+    @Before
+    static void setRequestTagCloudBig() {
+    	
+    	Query query = JPA.em().createQuery("select name, count(*) from Tag where offer_id is null group by name order by count(*) desc");
+    	List<Object[]> list = query.getResultList();
+       	
+    	List<TagCloudItem> tagCloud = new ArrayList<TagCloudItem>(); 
+    	Integer listFlag = 0;
+    	
+    	for(Object[] a : list)
+       	{
+    		listFlag ++;
+       		
+       		TagCloudItem t_Item = new TagCloudItem();
+       		t_Item.name = (String) a[0];
+       		t_Item.count = (Long)a[1];
+       		t_Item.hyperlink = "controller.search('onur')";
+       		
+      	    Integer cssFlag = 0;
+       	    
+       	    if(listFlag%2 == 0)
+       	    	cssFlag = (listFlag + 2)/2;
+       	    else cssFlag = (listFlag + 1)/2;
+       	    
+       	    t_Item.CssClass = "tag_big_" + cssFlag.toString();       	    		
+       		
+       		if(listFlag < 13)
+       			tagCloud.add(t_Item);
+       	}  
+       	
+    	Collections.shuffle(tagCloud);
+    	
+    	renderArgs.put("tagCloudBigRequest", tagCloud);  
+    }
+    
     static User getConnectedUser() {
 		if (Security.isConnected()) {
 		    return User.find("byEmail", Security.connected()).first();
