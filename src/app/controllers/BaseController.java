@@ -244,6 +244,56 @@ public class BaseController extends Controller
     	renderArgs.put("tagCloudBigRequest", tagCloud);  
     }
     
+    
+    @Before
+    static void setDistricts() {
+    	
+    	Query query = JPA.em().createQuery("select name,id,county.id from District order by county_id, name");
+    	List<Object[]> list = query.getResultList();
+       	
+    	List<DistrictItem> districts = new ArrayList<DistrictItem>(); 
+    	
+    	for(Object[] a : list)
+       	{    		       		
+    		DistrictItem t_Item = new DistrictItem();
+       		t_Item.name = (String) a[0];
+       		t_Item.district_id = (Long)a[1];
+       		t_Item.county_id = (Long)a[2];
+       		
+       		districts.add(t_Item);
+       	}  
+       	    	
+    	renderArgs.put("districts", districts);  
+    }       
+    
+    @Before
+    static void setCounties() {
+    	
+    	Query query = JPA.em().createQuery("select name,id,city.id from County order by city_id, name");
+    	List<Object[]> list = query.getResultList();
+       	
+    	List<CountyItem> counties = new ArrayList<CountyItem>(); 
+    	
+    	CountyItem t_Item_All = new CountyItem();
+    	t_Item_All.name = "All";
+    	t_Item_All.county_id = Long.getLong("0");
+    	t_Item_All.city_id = Long.getLong("0");
+   		
+   		counties.add(t_Item_All);
+    	
+    	for(Object[] a : list)
+       	{    		       		
+    		CountyItem t_Item = new CountyItem();
+       		t_Item.name = (String) a[0];
+       		t_Item.county_id = (Long)a[1];
+       		t_Item.city_id = (Long)a[2];
+       		
+       		counties.add(t_Item);
+       	}  
+       	    	
+    	renderArgs.put("counties", counties);  
+    }       
+    
     static User getConnectedUser() {
 		if (Security.isConnected()) {
 		    return User.find("byEmail", Security.connected()).first();

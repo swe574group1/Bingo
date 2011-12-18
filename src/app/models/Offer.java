@@ -49,9 +49,20 @@ public class Offer extends Model implements Matchable
     @Enumerated(EnumType.STRING)
     public Status status;
     
-    public String county;
+    @ManyToOne
+    public City city;
     
-    public String district;
+    @ManyToOne
+    public County county;
+    
+    @ManyToOne
+    public District district;
+    
+    public String city_name;
+    
+    public String county_name;
+    
+    public String district_name;
 
     public Offer(User user) {
 	this.user = user;

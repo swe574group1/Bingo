@@ -42,6 +42,9 @@ public class Request extends Model implements Matchable
     @Temporal(TemporalType.TIMESTAMP)
     public Date endDate;
 
+    @Required
+    public Integer credit;
+    
     @ManyToOne
     public User user;
 
@@ -51,9 +54,20 @@ public class Request extends Model implements Matchable
     @Enumerated(EnumType.STRING)
     public Status status;
 
-    public String county;
+    @ManyToOne
+    public City city;
     
-    public String district;
+    @ManyToOne
+    public County county;
+    
+    @ManyToOne
+    public District district;
+    
+    public String city_name;
+    
+    public String county_name;
+    
+    public String district_name;
     
     public Request(User user) {
 	this.user = user;
