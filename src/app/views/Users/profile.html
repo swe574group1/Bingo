@@ -63,10 +63,25 @@
           <li>Member Since: ${observedUser.registrationDate.format('dd MMMM yyyy')}</li>
         </ul>
       </div>
-      <div class="post-meta">
-        <h4>${observedUser.fullname} in Clouds</h4>
-        <div class=" tag_cloud">
-        </div>
+      <div class="post-meta" style="text-align: left;">
+        <h4>${observedUser.fullname}<br/>in Clouds</h4>
+          <div class="tag_cloud" style="text-transform:none !important; text-align:center">  
+          <ul>
+          <br/>                 
+	        #{list items:tagUserCloud, as:'tagItem'}
+	        <li class = "${tagItem.CssClass}">  
+	           <a href="${tagItem.hyperlink}" style="color:#147DB6">${tagItem.name}</a>          
+	        </li>
+	        #{/list}
+          </ul>          
+            <!-- <ul>
+	      #{list items:models.Tag.find('select name from Tag group by name order by count(*) desc').fetch(6), as:'poptag'}
+	      ${poptag}
+	      #{/list}
+            </ul>-->
+          </div>
+        
+        
       </div>
     </div>
   </div>
