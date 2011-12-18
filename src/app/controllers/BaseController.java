@@ -61,7 +61,7 @@ public class BaseController extends Controller
 		    				addCount += (Long) c[1];	
 		    				indexB = listRequest.indexOf(c);
 		    			}
-		    		}
+		    		} 
 		    		
 		    		if(indexB > -1)
 			    		listRequest.remove(indexB);			    		
