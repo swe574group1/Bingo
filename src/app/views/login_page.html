@@ -142,6 +142,7 @@ color:#2c76a5;
 }
 </style>
 
+<!-- 
 <div class="post" style="padding-top:12px; padding:top:00px">
  <div class="user_tabs2" >
     <ul>
@@ -156,26 +157,33 @@ color:#2c76a5;
 </div>
 </div>
 </div>
-<!-- <br style="clear:both;"/>-->
+<br style="clear:both;"/>-->
 
 <div class="post" style="padding-top:5px; padding:top:00px">
   
   <div class="user_tabs" style="margin-top:10px;">
     <ul>
-      <li>
-        <a href="#" class="active" no="1">A Hard Day's Cooking Night</a>
+      <li>            
+       <a id="user_tab_a_1" href="#" class="active" no="1" onmousedown="abortTimer();">Making it happen!</a>    
       </li>
       <li>
-        <a href="#" no="2">Mowers of Lawn</a>
+        <a id="user_tab_a_2" href="#" no="2" onmousedown="abortTimer();">A Hard Day's Cooking Night</a>
       </li>
       <li>
-        <a href="#" no="3">Ain't No Spot When He Cleans</a>
+        <a id="user_tab_a_3" href="#" no="3" onmousedown="abortTimer();">Mowers of Lawn</a>
+      </li>
+      <li>
+        <a id="user_tab_a_4" href="#" no="4" onmousedown="abortTimer();">Ain't No Spot When He Cleans</a>
       </li>
     </ul>
   </div>
-  
-  
-  <div class="index_tab_content" id="index_tab_content_1">
+  <div class="index_tab_content" id="index_tab_content_1">    
+    <div onmousedown="abortTimer();" onmouseover="abortTimer();" style="text-align:center; vertical-align:middle; padding-top: 20px;padding-bottom:5px;">
+		<iframe width="420" height="315" src="http://www.youtube.com/embed/RdopMqrftXs" frameborder="0" allowfullscreen></iframe>
+	</div>    
+    <div style="clear:both;"></div>
+  </div>
+  <div class="index_tab_content nonvisible" id="index_tab_content_2">
     <div class="images">
       <div align="center"><img src="@{'/public/images/cooking1.jpg'}" /></div>
       <div align="center"><img src="@{'/public/images/cooking2.jpg'}" /></div>
@@ -193,7 +201,7 @@ color:#2c76a5;
     <div style="clear:both;"></div>
   </div>
   
-  <div class="index_tab_content nonvisible" id="index_tab_content_2">
+  <div class="index_tab_content nonvisible" id="index_tab_content_3">
     <div class="images">
       <div align="center"><img src="@{'/public/images/lawn1.jpg'}" /></div>
       <div align="center"><img src="@{'/public/images/lawn2.jpg'}" /></div>
@@ -212,7 +220,7 @@ color:#2c76a5;
     <div style="clear:both;"></div>
   </div>
   
-  <div class="index_tab_content nonvisible" id="index_tab_content_3">
+  <div class="index_tab_content nonvisible" id="index_tab_content_4">
     <div class="images">
       <div align="center"><img src="@{'/public/images/garage1.jpg'}" /></div>
       <div align="center"><img src="@{'/public/images/garage2.jpg'}" /></div>
@@ -230,8 +238,8 @@ color:#2c76a5;
     </div>
 
     <div style="clear:both;"></div>
+    </div>
   </div>
-</div>
 <div class="post">
   <h4>Humble Bee of The Month</h4>
   <div class="interview">
@@ -259,3 +267,22 @@ color:#2c76a5;
   
 </div>
 #{/else}
+
+
+<script>
+var clickIndex = 1;
+
+var tid = setTimeout(mycode, 3000); 
+function mycode() { 
+	 clickIndex ++;
+	 if (clickIndex == 5) clickIndex = 1;
+	 
+	 $('#user_tab_a_' + clickIndex.toString()).click();
+	 tid = setTimeout(mycode, 3000); 
+} 
+
+function abortTimer() 
+{ 		 
+	clearTimeout(tid); 
+} 
+</script>
