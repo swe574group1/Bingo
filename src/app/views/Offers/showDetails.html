@@ -53,7 +53,9 @@
 
   </div>
   #{if someoneElsesOffer}
-  <input type="button" onclick="window.location='@{Handshakes.bindToOffer(offerItem.id)}'" value="Apply" />
+  <div class="apply_menu">
+    <a class="apply" href="@{Handshakes.bindToOffer(offerItem.id)}">Apply</a>
+  </div>
   #{/if}
 
 </div>
