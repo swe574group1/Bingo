@@ -1606,6 +1606,7 @@ span.title {
 /* minimalist definitions */
 
 .roinput {
+    width: 200px;
     background-color: #BBB;
     font-weight: bold;
 }
