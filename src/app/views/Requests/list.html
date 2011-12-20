@@ -11,7 +11,7 @@
   #{list items:requests, as:'request'}
   <tr>
     <td>${request.title}</td>
-    <td>${request.endDate.format()}</td>
+    <td>${request.endDate.format('dd MMMM yyyy')}</td>
     <td><a href="@{Requests.edit(request.id)}">Edit</a></td>
   </tr>
 </a>
