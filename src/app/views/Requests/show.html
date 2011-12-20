@@ -28,8 +28,24 @@
 	  </li>
 	  <li>
 	    <label>Request Description</label>
-	    <input class="roinput" type="text" readonly="readonly" value="${requestItem.description}" />
+	    <textarea class="roinput" readonly="readonly" >${requestItem.description}</textarea>
 	  </li>
+	  <li>
+	    <label>Valid Until</label>
+	    <input class="roinput" type="text" readonly="readonly" value="${requestItem.endDate.format('dd MMMM yyyy')}" />
+	  </li>
+	  #{if requestItem.county}
+	  <li>
+	    <label>District</label>
+	    <input class="roinput" type="text" readonly="readonly" value="${requestItem.county}" />
+	  </li>
+	  #{/if}
+	  #{if requestItem.district}
+	  <li>
+	    <label>Neighborhood</label>
+	    <input class="roinput" type="text" readonly="readonly" value="${requestItem.district}" />
+	  </li>
+	  #{/if}
 	  <input type="button" value="Main Page" onclick="window.location='@{Application.index()}'" />
       </form>
       

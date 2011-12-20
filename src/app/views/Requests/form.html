@@ -142,7 +142,7 @@ function addElement(text,value,ddl)
 			</select>
       </li>       
        <li>
-       <label>County</label>
+       <label>District</label><!--County in database-->
        		<select id="ddlCounty" onchange="changeForCounty();">
 	        #{list items:counties, as:'countyItem'}
 		    <option value="${countyItem.county_id}">	      	    
@@ -152,7 +152,7 @@ function addElement(text,value,ddl)
 		    </select>       		
      	</li>      
        <li>
-       <label>District</label>
+       <label>Neighborhood</label><!--District in database-->
        		<select onchange="changeForDistrict();" id="ddlDistrict">
 	  			<option>All</option>
 			</select>
@@ -169,11 +169,11 @@ function addElement(text,value,ddl)
        	<input type="text" id="txtCityName" name="requestItem.city_name" value="${requestItem.city_name}" />
        	</li>  
         <li style="visibility: hidden; display:none"> 
-       <label>County</label>
+       <label>District</label><!--County in database-->
        	<input type="text" id="txtCountyName" name="requestItem.county_name" value="${requestItem.county_name}" />
        	</li>
         <li style="visibility: hidden; display:none"> 
-       <label>District</label>
+       <label>Neighborhood</label><!--District in database-->
        <input type="text" id="txtDistrictName" name="requestItem.district_name" value="${requestItem.district_name}" />
         </li>
     </ul>
