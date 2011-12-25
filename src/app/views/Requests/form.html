@@ -161,7 +161,7 @@ function addElement(text,value,ddl)
 	  			<option>All</option>
 			</select>
        </li>       
-       <select id="ddlAllDistrict" style="display:none; visibility:hidden;" 
+       <select id="ddlAllDistrict" style="display:none; visibility:hidden;">
         #{list items:districts, as:'districtItem'}
 	    <option value="${districtItem.district_id}">	      	    
 	          ##${districtItem.county_id}##${districtItem.name}        
@@ -201,9 +201,39 @@ function addElement(text,value,ddl)
       <li>
         <label>Valid Until</label>
         <input type="text" name="requestItem.endDate" class="date_pick" value="${requestItem.endDate}" />
-	<span class="error">#{error 'requestItem.endDate' /}</span>
-      </li>
+		<span class="error">#{error 'requestItem.endDate' /}</span>
+      </li>      
     </ul>
+    
+    <ul style="padding-top:4px;">
+    <li>
+        <label>Recoccurance Days</label>
+       		<label style="width:360px;display:block;padding-left:15px;text-indent:-15px;">Monday
+       		<input style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" value="${requestItem.is_rec_monday}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tuesday&nbsp;
+       		<input style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" value="${requestItem.is_rec_tuesday}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wednesday
+       		<input style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" value="${requestItem.is_rec_wednesday}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thursday
+       		<input style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" value="${requestItem.is_rec_thursday}"/></label>  
+       		<label style="padding-top:7px;padding-bottom:7px; width:360px;display:block;padding-left:215px;text-indent:-15px;">Friday&nbsp;&nbsp;
+       		<input style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" value="${requestItem.is_rec_friday}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saturday
+       		<input style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" value="${requestItem.is_rec_saturday}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sunday
+       		<input style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" value="${requestItem.is_rec_sunday}"/></label>  
+		</li>
+    </ul> 
+    <ul style="padding-top:4px;">
+    	<li>
+        <label>Recoccurance Time</label>
+       		 <select id="ddlRecTimeFrom">
+			</select>
+		</li>
+    </ul> 
+    
     
   </fieldset>
    

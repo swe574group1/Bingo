@@ -69,6 +69,15 @@ public class Request extends Model implements Matchable
     
     public String district_name;
     
+    public Boolean is_recoccurant;  
+    public Boolean is_rec_monday;    
+    public Boolean is_rec_tuesday;
+    public Boolean is_rec_wednesday;
+    public Boolean is_rec_thursday;
+    public Boolean is_rec_friday;
+    public Boolean is_rec_saturday;
+    public Boolean is_rec_sunday;
+       
     public Request(User user) {
 	this.user = user;
     }

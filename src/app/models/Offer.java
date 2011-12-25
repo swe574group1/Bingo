@@ -63,7 +63,16 @@ public class Offer extends Model implements Matchable
     public String county_name;
     
     public String district_name;
-
+    
+    public Boolean is_recoccurant;  
+    public Boolean is_rec_monday;    
+    public Boolean is_rec_tuesday;
+    public Boolean is_rec_wednesday;
+    public Boolean is_rec_thursday;
+    public Boolean is_rec_friday;
+    public Boolean is_rec_saturday;
+    public Boolean is_rec_sunday;
+    
     public Offer(User user) {
 	this.user = user;
     }
