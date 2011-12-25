@@ -69,7 +69,8 @@ public class Request extends Model implements Matchable
     
     public String district_name;
     
-    public Boolean is_recoccurant;  
+    public Boolean is_all_days;  
+    public Boolean is_all_hours;  
     public Boolean is_rec_monday;    
     public Boolean is_rec_tuesday;
     public Boolean is_rec_wednesday;

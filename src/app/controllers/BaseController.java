@@ -294,6 +294,26 @@ public class BaseController extends Controller
     	renderArgs.put("counties", counties);  
     }       
     
+    @Before
+    static void setRecoccuranceHour() {
+    	
+    	Query query = JPA.em().createQuery("select hour_min,val from Recoccurancehour order by val");
+    	List<Object[]> list = query.getResultList();
+       	
+    	List<Recoccurancehouritem> hours = new ArrayList<Recoccurancehouritem>(); 
+    	
+    	for(Object[] a : list)
+       	{    		       		
+    		Recoccurancehouritem t_Item = new Recoccurancehouritem();
+       		t_Item.hour_min = (String) a[0];
+       		t_Item.val = (Long)a[1];
+       		
+       		hours.add(t_Item);
+       	}  
+       	    	
+    	renderArgs.put("recoccurancehouritems", hours);  
+    }      
+    
     static User getConnectedUser() {
 		if (Security.isConnected()) {
 		    return User.find("byEmail", Security.connected()).first();
