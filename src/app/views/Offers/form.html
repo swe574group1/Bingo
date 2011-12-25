@@ -29,13 +29,17 @@ function changeForCounty()
 	{
 		document.getElementById("txtCountyName").value = "";
 		document.getElementById("txtDistrictName").value = "";
-		//document.getElementById("txtCountyId").value = "";		
+		
+		document.getElementById("txtCountyId").value = "";		
+		document.getElementById("txtDistrictId").value = "";	
 	}
 	else
 	{
 		document.getElementById("txtCountyName").value = ddlC.options[ddlC.selectedIndex].text;
 		document.getElementById("txtDistrictName").value = "";
-		//document.getElementById("txtCountyId").value = ddlC.options[ddlC.selectedIndex].value;
+		
+		document.getElementById("txtCountyId").value = ddlC.options[ddlC.selectedIndex].value;	
+		document.getElementById("txtDistrictId").value = "";
 	}
 		
 	fillDistricts(ddlC.options[ddlC.selectedIndex].value);
@@ -47,12 +51,12 @@ function changeForDistrict()
 	if(ddlD.options[ddlD.selectedIndex].text == "All")
 	{
 		document.getElementById("txtDistrictName").value = "";
-		//document.getElementById("txtDistrictId").value = "";
+		document.getElementById("txtDistrictId").value = "";
 	}
 	else
 	{
 		document.getElementById("txtDistrictName").value = ddlD.options[ddlD.selectedIndex].text;
-		//document.getElementById("txtDistrictId").value = ddlD.options[ddlD.selectedIndex].value;
+		document.getElementById("txtDistrictId").value = ddlD.options[ddlD.selectedIndex].value;
 	}
 		
 }
@@ -176,6 +180,18 @@ function addElement(text,value,ddl)
         <li style="visibility: hidden; display:none"> 
        <label>District</label>
        <input type="text" id="txtDistrictName" name="offerItem.district_name" value="${offerItem.district_name}" />
+        </li>
+       <li style="visibility: hidden; display:none">  
+       <label>City_Id</label>
+       	<input type="text" id="txtCityId" name="offerItem.city.id" value="${offerItem.city}" />
+       	</li>  
+       <li style="visibility: hidden; display:none">
+       <label>County_Id</label>
+       	<input type="text" id="txtCountyId" name="offerItem.county.id" value="${offerItem.county}" />
+       	</li>
+       <li style="visibility: hidden; display:none">
+       <label>District_Id</label>
+       <input type="text" id="txtDistrictId" name="offerItem.district.id" value="${offerItem.district}" />
         </li>
     </ul>
   </fieldset>
