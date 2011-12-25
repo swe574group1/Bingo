@@ -113,6 +113,47 @@ function addElement(text,value,ddl)
 	}
 }
 
+function enableDays()
+{
+	if(document.getElementById("chkAllDays").checked == "0")
+	{
+		document.getElementById("spnDays").disabled = "";
+		document.getElementById("lblDays").disabled = "";
+		document.getElementById("spnAllDaysIden").disabled = "disabled"; 
+		
+		document.getElementById("chkMonday").disabled = "";
+		document.getElementById("chkTuesday").disabled = "";
+		document.getElementById("chkWednesday").disabled = "";
+		document.getElementById("chkThursday").disabled = "";
+		document.getElementById("chkFriday").disabled = "";
+		document.getElementById("chkSaturday").disabled = "";
+		document.getElementById("chkSunday").disabled = "";	
+	}
+	else
+	{
+		document.getElementById("spnDays").disabled = "disabled";
+		document.getElementById("lblDays").disabled = "disabled";	
+		document.getElementById("spnAllDaysIden").disabled = ""; 
+		
+		document.getElementById("chkMonday").disabled = "disabled";
+		document.getElementById("chkTuesday").disabled = "disabled";
+		document.getElementById("chkWednesday").disabled = "disabled";
+		document.getElementById("chkThursday").disabled = "disabled";
+		document.getElementById("chkFriday").disabled = "disabled";
+		document.getElementById("chkSaturday").disabled = "disabled";
+		document.getElementById("chkSunday").disabled = "disabled";	
+		
+		document.getElementById("chkMonday").checked = "";
+		document.getElementById("chkTuesday").checked = "";
+		document.getElementById("chkWednesday").checked = "";
+		document.getElementById("chkThursday").checked = "";
+		document.getElementById("chkFriday").checked = "";
+		document.getElementById("chkSaturday").checked = "";
+		document.getElementById("chkSunday").checked = "";		
+	
+	}
+}
+
 </script>
 
 <form action="@{Requests.doCreate()}" method="POST" class="utility_form">
@@ -168,19 +209,19 @@ function addElement(text,value,ddl)
 	    </option>	    
 	    #{/list}
 	    </select>         
-       <li style="visibility: hidden; display:none"> 
+       <li style="visibility: hidden; display:none">
        <label>City</label>
        	<input type="text" id="txtCityName" name="requestItem.city_name" value="${requestItem.city_name}" />
        	</li>  
-        <li style="visibility: hidden; display:none"> 
+       <li style="visibility: hidden; display:none">
        <label>County</label>
        	<input type="text" id="txtCountyName" name="requestItem.county_name" value="${requestItem.county_name}" />
        	</li>
-        <li style="visibility: hidden; display:none"> 
+       <li style="visibility: hidden; display:none">
        <label>District</label>
        <input type="text" id="txtDistrictName" name="requestItem.district_name" value="${requestItem.district_name}" />
         </li>
-       <li style="visibility: hidden; display:none">  
+       <li style="visibility: hidden; display:none">
        <label>City_Id</label>
        	<input type="text" id="txtCityId" name="requestItem.city.id" value="${requestItem.city}" />
        	</li>  
@@ -203,30 +244,29 @@ function addElement(text,value,ddl)
         <input type="text" name="requestItem.endDate" class="date_pick" value="${requestItem.endDate}" />
 		<span class="error">#{error 'requestItem.endDate' /}</span>
       </li>      
-    </ul>
-    
+    </ul>    
     <ul style="padding-top:4px;">
     <li>
         <label>Recoccurance Days</label>
-       		<label style="width:360px;display:block;padding-left:15px;text-indent:-15px;">All days&nbsp;&nbsp;
-       		<input checked="checked" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_all_days" value="${requestItem.is_all_days}"/>
-            <span id="spnAllDays" disabled="disabled">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Monday
-       		<input disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" value="${requestItem.is_rec_monday}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tuesday
-       		<input disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" value="${requestItem.is_rec_tuesday}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wednesday
-       		<input disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" value="${requestItem.is_rec_wednesday}"/></span></label>  
-       		<label disabled="disabled" style="padding-top:7px;padding-bottom:7px; width:360px;display:block;padding-left:215px;text-indent:-15px;">Thursday
-       		<input disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" value="${requestItem.is_rec_thursday}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Friday&nbsp;&nbsp;
-       		<input disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" value="${requestItem.is_rec_friday}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saturday
-       		<input disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" value="${requestItem.is_rec_saturday}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sunday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       		<input disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" value="${requestItem.is_rec_sunday}"/></label>  
+       		<label style="width:360px;display:block;padding-left:15px;text-indent:-15px;"><span id="spnAllDaysIden">All days&nbsp;&nbsp;</span>
+       		<input checked="checked" onclick="enableDays();" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   id="chkAllDays" value="1" type="checkbox" name="requestItem.is_all_days"/>
+            <span id="spnDays" disabled="disabled">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Monday
+       		<input id="chkMonday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" value="0"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tuesday
+       		<input id="chkTuesday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" value="0"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wednesday
+       		<input id="chkWednesday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" value="0"/></span></label>  
+       		<label id="lblDays"disabled="disabled" style="padding-top:7px;padding-bottom:7px; width:360px;display:block;padding-left:215px;text-indent:-15px;">Thursday
+       		<input id="chkThursday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" value="0"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Friday&nbsp;&nbsp;
+       		<input id="chkFriday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" value="0"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saturday
+       		<input id="chkSaturday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" value="0"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sunday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       		<input id="chkSunday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" value="0"/></label>  
 		</li>
     </ul> 
     <ul style="padding-top:4px;">
@@ -234,7 +274,7 @@ function addElement(text,value,ddl)
         <label>Recoccurance Time</label>       		
        		<label style="width:360px;display:block;padding-left:15px;text-indent:-15px;">All hours
        		<input checked="checked" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-13px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_all_hours" value="${requestItem.is_all_hours}"/>&nbsp;&nbsp;&nbsp;&nbsp;       			          		
+       			   value="1" type="checkbox" name="requestItem.is_all_hours"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   			          		
        		<select id="ddlRecTimeFrom" disabled="disabled">
        		 #{list items:recoccurancehouritems, as:'recoccurancehouritem'}
 		    <option value="${recoccurancehouritem.val}">	      	    
@@ -261,4 +301,33 @@ function addElement(text,value,ddl)
 <script>
 document.getElementById("txtCityName").value = "Istanbul";
 document.getElementById("txtCityId").value = "1";
+
+if(document.getElementById("txtCountyName").value != "")
+{
+	var ddlC = document.getElementById("ddlCounty");
+	for(var i = 0; i< ddlC.length; i++)
+	{
+		if(ddlC.options[i].text == document.getElementById("txtCountyName").value)
+		{
+			ddlC.options[i].selected = true;
+			fillDistricts(ddlC.options[i].value);
+			document.getElementById("txtCountyId").value = ddlC.options[i].value;
+			break;
+		}		
+	}
+}
+if(document.getElementById("txtDistrictName").value != "")
+{
+	var ddlD = document.getElementById("ddlDistrict");
+	for(var i = 0; i< ddlD.length; i++)
+	{
+		if(ddlD.options[i].text == document.getElementById("txtDistrictName").value)
+		{
+			ddlD.options[i].selected = true;
+			document.getElementById("txtDistrictId").value = ddlD.options[i].value;
+			break;
+		}		
+	}
+}
+	
 </script>

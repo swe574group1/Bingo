@@ -113,6 +113,47 @@ function addElement(text,value,ddl)
 	}
 }
 
+function enableDays()
+{
+	if(document.getElementById("chkAllDays").checked == "0")
+	{
+		document.getElementById("spnDays").disabled = "";
+		document.getElementById("lblDays").disabled = "";
+		document.getElementById("spnAllDaysIden").disabled = "disabled"; 
+		
+		document.getElementById("chkMonday").disabled = "";
+		document.getElementById("chkTuesday").disabled = "";
+		document.getElementById("chkWednesday").disabled = "";
+		document.getElementById("chkThursday").disabled = "";
+		document.getElementById("chkFriday").disabled = "";
+		document.getElementById("chkSaturday").disabled = "";
+		document.getElementById("chkSunday").disabled = "";	
+	}
+	else
+	{
+		document.getElementById("spnDays").disabled = "disabled";
+		document.getElementById("lblDays").disabled = "disabled";	
+		document.getElementById("spnAllDaysIden").disabled = ""; 
+		
+		document.getElementById("chkMonday").disabled = "disabled";
+		document.getElementById("chkTuesday").disabled = "disabled";
+		document.getElementById("chkWednesday").disabled = "disabled";
+		document.getElementById("chkThursday").disabled = "disabled";
+		document.getElementById("chkFriday").disabled = "disabled";
+		document.getElementById("chkSaturday").disabled = "disabled";
+		document.getElementById("chkSunday").disabled = "disabled";	
+		
+		document.getElementById("chkMonday").checked = "";
+		document.getElementById("chkTuesday").checked = "";
+		document.getElementById("chkWednesday").checked = "";
+		document.getElementById("chkThursday").checked = "";
+		document.getElementById("chkFriday").checked = "";
+		document.getElementById("chkSaturday").checked = "";
+		document.getElementById("chkSunday").checked = "";		
+	
+	}
+}
+
 </script>
 
 
@@ -215,4 +256,32 @@ function addElement(text,value,ddl)
 <script>
 document.getElementById("txtCityName").value = "Istanbul";
 document.getElementById("txtCityId").value = "1";
+
+if(document.getElementById("txtCountyName").value != "")
+{
+	var ddlC = document.getElementById("ddlCounty");
+	for(var i = 0; i< ddlC.length; i++)
+	{
+		if(ddlC.options[i].text == document.getElementById("txtCountyName").value)
+		{
+			ddlC.options[i].selected = true;
+			fillDistricts(ddlC.options[i].value);
+			document.getElementById("txtCountyId").value = ddlC.options[i].value;
+			break;
+		}		
+	}
+}
+if(document.getElementById("txtDistrictName").value != "")
+{
+	var ddlD = document.getElementById("ddlDistrict");
+	for(var i = 0; i< ddlD.length; i++)
+	{
+		if(ddlD.options[i].text == document.getElementById("txtDistrictName").value)
+		{
+			ddlD.options[i].selected = true;
+			document.getElementById("txtDistrictId").value = ddlD.options[i].value;
+			break;
+		}		
+	}
+}
 </script>
