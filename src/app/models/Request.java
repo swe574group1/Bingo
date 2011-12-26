@@ -69,8 +69,7 @@ public class Request extends Model implements Matchable
     
     public String district_name;
     
-    public Boolean is_all_days;  
-    public Boolean is_all_hours;  
+    public Boolean reoccure;       
     public Boolean is_rec_monday;    
     public Boolean is_rec_tuesday;
     public Boolean is_rec_wednesday;
@@ -78,6 +77,8 @@ public class Request extends Model implements Matchable
     public Boolean is_rec_friday;
     public Boolean is_rec_saturday;
     public Boolean is_rec_sunday;
+    
+    public Boolean is_all_hours; 
        
     public Request(User user) {
 	this.user = user;
