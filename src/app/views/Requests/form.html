@@ -123,11 +123,9 @@ function enableDays()
 		document.getElementById("lblAllhours").disabled = "";
 		document.getElementById("spnDays").style.color = "#666666";
 		document.getElementById("lblDays").style.color = "#666666";	
-		document.getElementById("lblAllhours").style.color = "#666666";	
-		document.getElementById("chkAllHours").disabled = "";
+		document.getElementById("lblAllhours").style.color = "#666666";
 		
 		document.getElementById("chkAllDays").checked = 1;
-		document.getElementById("chkAllHours").checked = 1;
 		
 		document.getElementById("chkMonday").disabled = "";
 		document.getElementById("chkTuesday").disabled = "";
@@ -136,6 +134,9 @@ function enableDays()
 		document.getElementById("chkFriday").disabled = "";
 		document.getElementById("chkSaturday").disabled = "";
 		document.getElementById("chkSunday").disabled = "";	
+		
+		document.getElementById("ddlRecTimeFrom").disabled = "";
+		document.getElementById("ddlRecTimeTo").disabled = "";
 	}
 	else
 	{
@@ -144,11 +145,9 @@ function enableDays()
 		document.getElementById("lblAllhours").disabled = "disabled";
 		document.getElementById("spnDays").style.color = "lightgray";	
 		document.getElementById("lblDays").style.color = "lightgray";	
-		document.getElementById("lblAllhours").style.color = "lightgray";	
-		document.getElementById("chkAllHours").disabled = "disabled";
+		document.getElementById("lblAllhours").style.color = "lightgray";
 		
 		document.getElementById("chkAllDays").checked = 0;
-		document.getElementById("chkAllHours").checked = 0;
 				
 		document.getElementById("chkMonday").disabled = "disabled";
 		document.getElementById("chkTuesday").disabled = "disabled";
@@ -166,11 +165,14 @@ function enableDays()
 		document.getElementById("chkSaturday").checked = 0;
 		document.getElementById("chkSunday").checked = 0;		
 	
+		document.getElementById("ddlRecTimeFrom").disabled = "disabled";
+		document.getElementById("ddlRecTimeTo").disabled = "disabled";
 	}
 }
 
 function openCloseHours()
 {	
+	/*
 	if(document.getElementById("chkAllHours").checked == 1)
 	{
 		document.getElementById("ddlRecTimeFrom").disabled = "disabled";
@@ -180,9 +182,15 @@ function openCloseHours()
 	{		
 		document.getElementById("ddlRecTimeFrom").disabled = "";
 		document.getElementById("ddlRecTimeTo").disabled = "";
-	}
+	}*/
 }
 
+
+function setTimeValue(obj)
+{ 
+	var ddl = obj;
+	if()
+}
 </script>
 
 <form action="@{Requests.doCreate()}" method="POST" class="utility_form">
@@ -278,28 +286,28 @@ function openCloseHours()
     <li>
         <label>Recoccurance</label>       		
        		<label style="width:400px;display:block;padding-left:15px;text-indent:-15px;">
-       		<span id="spnAllDaysIden">Will this offer reoccure?&nbsp;</span>
+       		<span id="spnAllDaysIden">Will this offer reoccure?&nbsp;&nbsp;&nbsp;</span>
        		<select id="ddlReoccurance" onchange="enableDays();">
 	  			<option value="0" selected="selected">No</option>
 	  			<option value="1">Yes</option>	  			
 			</select>
-       		<input id="chkAllDays" style="display:none;visibility:hidden" type="checkbox" name="requestItem.reoccure" ${requestItem.reoccure ? 'checked':''}  />	
+       		<input id="chkAllDays" type="checkbox" style="display:none;visibility:hidden" name="requestItem.reoccure" ${requestItem.reoccure ? 'checked':''}  />	
        		</label>
        		<label style="width:400px;display:block;padding-left:215px;text-indent:-15px;padding-top:7px;">
-            <span id="spnDays" style="color:lightgray" disabled="disabled">Monday
+            <span id="spnDays" style="color:lightgray" disabled="disabled">Monday&nbsp;&nbsp;
        		<input id="chkMonday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_monday" ${requestItem.is_rec_monday ? 'checked':''} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tuesday
+       			   type="checkbox" name="requestItem.is_rec_monday" ${requestItem.is_rec_monday ? 'checked':''} />&nbsp;&nbsp;&nbsp;&nbsp;Tuesday
        		<input id="chkTuesday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
        			   type="checkbox" name="requestItem.is_rec_tuesday" ${requestItem.is_rec_tuesday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Wednesday
        		<input id="chkWednesday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
        			   type="checkbox" name="requestItem.is_rec_wednesday" ${requestItem.is_rec_wednesday ? 'checked':''}/></span></label>  
        		<label id="lblDays" disabled="disabled" style="color:lightgray;padding-top:7px;padding-bottom:7px; width:400px;display:block;padding-left:215px;text-indent:-15px;">Thursday
        		<input id="chkThursday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_thursday" ${requestItem.is_rec_thursday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Friday
+       			   type="checkbox" name="requestItem.is_rec_thursday" ${requestItem.is_rec_thursday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Friday&nbsp;&nbsp;&nbsp;
        		<input id="chkFriday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_friday" ${requestItem.is_rec_friday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saturday
+       			   type="checkbox" name="requestItem.is_rec_friday" ${requestItem.is_rec_friday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Saturday&nbsp;&nbsp;&nbsp;
        		<input id="chkSaturday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_saturday" ${requestItem.is_rec_saturday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sunday
+       			   type="checkbox" name="requestItem.is_rec_saturday" ${requestItem.is_rec_saturday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Sunday
        		<input id="chkSunday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
        			   type="checkbox" name="requestItem.is_rec_sunday" ${requestItem.is_rec_sunday ? 'checked':''}/></label>  
 		</li>
@@ -307,10 +315,10 @@ function openCloseHours()
     <ul style="padding-top:4px;">
     	<li>
         <label>&nbsp;</label>       		
-       		<label id="lblAllhours" disabled="disabled" style="color:lightgray; width:360px;display:block;padding-left:15px;text-indent:-15px;">All hours&nbsp;&nbsp;       		
-       		<input disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-13px;*overflow:hidden;border:none;" 
-       			   onclick="openCloseHours();" id="chkAllHours" type="checkbox" name="requestItem.is_all_hours" ${requestItem.reoccure ? 'checked':''} />&nbsp;&nbsp;&nbsp;&nbsp;          		
-       		<select id="ddlRecTimeFrom" disabled="disabled">
+       		<label id="lblAllhours" disabled="disabled" style="color:lightgray; width:360px;display:block;padding-left:15px;text-indent:-15px;">Reoccuring between hour&nbsp;       		
+       		<!--<input disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-13px;*overflow:hidden;border:none;" 
+       			   onclick="openCloseHours();" id="chkAllHours" type="checkbox" name="requestItem.is_all_hours" ${requestItem.reoccure ? 'checked':''} />&nbsp;&nbsp;&nbsp;&nbsp; -->          		
+       		<select onchanged="setTimeValue(this)" id="ddlRecTimeFrom" disabled="disabled">
        		 #{list items:recoccurancehouritems, as:'recoccurancehouritem'}
 		    <option value="${recoccurancehouritem.val}">	      	    
 		          ${recoccurancehouritem.hour_min}  
@@ -318,7 +326,7 @@ function openCloseHours()
 		    #{/list}
 			</select>
 			- 
-			<select id="ddlRecTimeTo" disabled="disabled">
+			<select onchanged="setTimeValue(this)" id="ddlRecTimeTo" disabled="disabled">
        		 #{list items:recoccurancehouritems, as:'recoccurancehouritem'}
 		    <option value="${recoccurancehouritem.val}">	      	    
 		          ${recoccurancehouritem.hour_min}  
@@ -383,7 +391,6 @@ if(document.getElementById("chkAllDays").checked == 1)
 	 document.getElementById("spnDays").style.color = "#666666";
 	 document.getElementById("lblDays").style.color = "#666666";
 	 document.getElementById("lblAllhours").style.color = "#666666";	
-	 document.getElementById("chkAllHours").disabled = "";
 	
 	 document.getElementById("chkMonday").disabled = "";
 	 document.getElementById("chkTuesday").disabled = "";
@@ -393,7 +400,8 @@ if(document.getElementById("chkAllDays").checked == 1)
 	 document.getElementById("chkSaturday").disabled = "";
 	 document.getElementById("chkSunday").disabled = "";
 	 
-	 document.getElementById("chkAllHours").checked = 1;		
+	 document.getElementById("ddlRecTimeFrom").disabled = "";
+	 document.getElementById("ddlRecTimeTo").disabled = "";
 }	
 	
 </script>

@@ -74,6 +74,11 @@ public class Offer extends Model implements Matchable
     public Boolean is_rec_sunday;    
 
     public Boolean is_all_hours; 
+
+    public String reocc_start_hour;    
+    public String reocc_end_hour;
+    public Integer reocc_start_hour_val;
+    public Integer reocc_end_hour_val;
     
     public Offer(User user) {
 	this.user = user;

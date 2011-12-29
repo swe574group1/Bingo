@@ -1607,14 +1607,14 @@ span.title {
 /* minimalist definitions */
 
 .roinput {
-    width: 200px;
+    width: 325px;
     background-color: #BBB;
     font-weight: bold;
 }
 
 ul.long_login {
 	margin:0px;
-	padding:0px 0px 0px 10px;
+	padding:0px 0px 0px 5px;
 	list-style:none;
 	border:0px solid #eee;
 }
@@ -1624,7 +1624,7 @@ ul.long_login li {
 
 ul.long_login label {
 	display:inline-block;
-	width:150px;
+	width:110px;
 }
 ul.long_login .long_login_button {
 	padding:10px 20px 10px 20px;

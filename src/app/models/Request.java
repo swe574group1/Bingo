@@ -80,6 +80,11 @@ public class Request extends Model implements Matchable
     
     public Boolean is_all_hours; 
        
+    public String reocc_start_hour;    
+    public String reocc_end_hour;
+    public Integer reocc_start_hour_val;
+    public Integer reocc_end_hour_val;
+    
     public Request(User user) {
 	this.user = user;
     }

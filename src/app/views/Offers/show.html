@@ -27,7 +27,7 @@
 	    <input class="roinput" type="text" readonly="readonly" value="${offerItem.tags.join(' ')}" />
 	  </li>
 	  <li>
-	    <label>Offer Description</label>
+	    <label style="vertical-align: top; padding-top: 7px;">Offer Description</label>
 	    <textarea class="roinput" readonly="readonly">${offerItem.description}</textarea>
 	  </li>
 	  <li>
@@ -38,18 +38,19 @@
 	    <label>Honey Combs</label>
 	    <input class="roinput" type="text" readonly="readonly" value="${offerItem.credit}" />
 	  </li>
-	    #{if offerItem.county_name}
+	  #{if offerItem.county_name}
 	  <li>
 	    <label>County</label>
 	    <input class="roinput" type="text" readonly="readonly" value="${offerItem.county_name}" />
-	    #{/if}
 	  </li>
+	  #{/if}
+	  #{if offerItem.district_name}
 	  <li>
-	    #{if offerItem.district_name}
 	    <label>District</label>
 	    <input class="roinput" type="text" readonly="readonly" value="${offerItem.district_name}" />
-	    #{/if}
 	  </li>
+	  #{/if}	  
+	  
 	  <input type="button" value="Home" onclick="window.location='@{Application.index()}'"/>
       </form>
       
