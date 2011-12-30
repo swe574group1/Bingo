@@ -18,7 +18,7 @@
 	  </li>
           <li>
             <label>Valid Until</label>
-	    ${offerItem.endDate.format()}
+	    ${offerItem.endDate.format('dd MMMM yyyy')}
           </li>
         </ul>
       </div>
@@ -52,10 +52,16 @@
     </div>
 
   </div>
-  #{if someoneElsesOffer}
   <div class="apply_menu">
+    #{if (someoneElsesOffer && !hasApplied) }
     <a class="apply" href="@{Handshakes.bindToOffer(offerItem.id)}">Apply</a>
+    #{/if}
+    #{if hasApplied}
+    <a class="cancel" href="@{Handshakes.cancelApplicationToOffer(handshakeId)}">Cancel</a>
+    #{/if}
   </div>
-  #{/if}
+
+
+  
 
 </div>

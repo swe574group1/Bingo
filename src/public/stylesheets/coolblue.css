@@ -1285,6 +1285,7 @@ img.owner_image {
 	border-radius:8px;
 	padding:15px 10px 15px 30px;
 	font-size:24px;
+	width: 100px;
 }
 .apply_menu a.cancel:hover {
 	background-color:#C00;

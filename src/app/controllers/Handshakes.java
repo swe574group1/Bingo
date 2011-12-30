@@ -31,7 +31,15 @@ public class Handshakes extends BaseController
     	handshakeItem.creationDate = new Date();
     	handshakeItem.save();
 
-    	renderTemplate("Handshakes/bind.html", handshakeItem);
+	Boolean created = true;
+    	renderTemplate("Handshakes/bind.html", handshakeItem, created);
+    }
+
+    public static void cancelApplicationToOffer(Long handshakeId) {
+	Handshake handshakeItem = Handshake.findById(handshakeId);
+	handshakeItem.delete();
+	Boolean cancelled = true;
+	renderTemplate("Handshakes/bind.html", cancelled);
     }
 
     public static void bindToRequest(Long id, Integer credits) {

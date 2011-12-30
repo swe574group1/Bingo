@@ -3,11 +3,17 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Query;
+
 import models.Offer;
+import models.Request;
 import models.Tag;
 import models.User;
+import models.Handshake;
 import service.MatchService;
 import service.Utils;
+
+import play.db.jpa.JPA;
 
 public class Offers extends BaseController
 {
@@ -63,11 +69,26 @@ public class Offers extends BaseController
     }
 
     public static void showDetails(Long id) {
-    	User user = getConnectedUser();
-    	Offer offerItem = Offer.findById(id);
-	User offerOwner = offerItem.user;
-	Boolean someoneElsesOffer = (user != offerItem.user);
-    	render(user, offerItem, offerOwner, someoneElsesOffer);
+    	User user = getConnectedUser(); // user who is inspecting the offer
+    	Offer offerItem = Offer.findById(id); // the offer being inspected
+	User offerOwner = offerItem.user; // owner of the offer
+
+	Long handshakeId = new Long(0L); // variable to store the id of the matched handshake
+	Query handshakeQuery = JPA.em().createQuery("from " + Handshake.class.getName() + " where offer.id=" + offerItem.id); // handshakes which have been initiated with the current offer's id
+	List<Object[]> handshakeList = handshakeQuery.getResultList(); // list of matching handshaking
+	Boolean hasApplied = false; // inititate hasApplied boolean to false
+	for(Object singleHandshake : handshakeList) { // iterate over handshakes
+	    Handshake handshakeItem = (Handshake) singleHandshake; // type casting
+	    Request requestItem = handshakeItem.request; // the request belonging to the current iteration's handshake
+	    hasApplied = (requestItem.user == user); // if the user of the request is equal to the current user, set hasApplied to true
+	    if (hasApplied) { // store the matched handhshake's id and break out of the for loop if we know user has applied to the current offer
+		handshakeId = handshakeItem.id;
+		break;
+	    }
+	}
+	
+	Boolean someoneElsesOffer = (user != offerItem.user); // find out if the offer does not belong to the inspecting user
+    	render(user, offerItem, offerOwner, someoneElsesOffer, hasApplied, handshakeId);
     }
 
     public static void search(String phrase) {
