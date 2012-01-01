@@ -74,6 +74,7 @@ public class Offer extends Model implements Matchable
     public Boolean is_rec_sunday;    
 
     public Boolean is_all_hours; 
+    public Boolean is_virtual; 
 
     public String reocc_start_hour;    
     public String reocc_end_hour;

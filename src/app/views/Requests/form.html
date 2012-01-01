@@ -167,6 +167,20 @@ function enableDays()
 	
 		document.getElementById("ddlRecTimeFrom").disabled = "disabled";
 		document.getElementById("ddlRecTimeTo").disabled = "disabled";
+		
+      	document.getElementById("txt_reocc_start").value = '00:00'
+        document.getElementById("txt_reocc_start_val").value = '1'
+	    document.getElementById("txt_reocc_start").value = '00:00'
+		document.getElementById("txt_reocc_start_val").value = '1'
+		 
+		document.getElementById("txt_reocc_end").value = '00:00'
+	    document.getElementById("txt_reocc_end_val").value = '1'
+	    document.getElementById("txt_reocc_end").value = '00:00'
+		document.getElementById("txt_reocc_end_val").value = '1'
+		
+		document.getElementById("ddlRecTimeFrom").options[0].selected = true;
+		document.getElementById("ddlRecTimeTo").options[0].selected = true;
+    	
 	}
 }
 
@@ -186,10 +200,19 @@ function openCloseHours()
 }
 
 
-function setTimeValue(obj)
+function setTimeValue(obj, ind)
 { 
 	var ddl = obj;
-	if()
+	if(ind == 1)
+	{
+		document.getElementById("txt_reocc_start").value = ddl.options[ddl.selectedIndex].text;	
+		document.getElementById("txt_reocc_start_val").value = ddl.options[ddl.selectedIndex].value;	
+	}
+	else 
+	{
+		document.getElementById("txt_reocc_end").value = ddl.options[ddl.selectedIndex].text;	
+		document.getElementById("txt_reocc_end_val").value = ddl.options[ddl.selectedIndex].value;	
+	}
 }
 </script>
 
@@ -286,14 +309,14 @@ function setTimeValue(obj)
     <li>
         <label>Recoccurance</label>       		
        		<label style="width:400px;display:block;padding-left:15px;text-indent:-15px;">
-       		<span id="spnAllDaysIden">Will this offer reoccure?&nbsp;&nbsp;&nbsp;</span>
+       		<span id="spnAllDaysIden">Will this offer recur?&nbsp;</span>
        		<select id="ddlReoccurance" onchange="enableDays();">
 	  			<option value="0" selected="selected">No</option>
 	  			<option value="1">Yes</option>	  			
 			</select>
        		<input id="chkAllDays" type="checkbox" style="display:none;visibility:hidden" name="requestItem.reoccure" ${requestItem.reoccure ? 'checked':''}  />	
        		</label>
-       		<label style="width:400px;display:block;padding-left:215px;text-indent:-15px;padding-top:7px;">
+       		<label style="width:400px;display:block;padding-left:215px;text-indent:-15px;padding-top:12px;">
             <span id="spnDays" style="color:lightgray" disabled="disabled">Monday&nbsp;&nbsp;
        		<input id="chkMonday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
        			   type="checkbox" name="requestItem.is_rec_monday" ${requestItem.is_rec_monday ? 'checked':''} />&nbsp;&nbsp;&nbsp;&nbsp;Tuesday
@@ -315,10 +338,10 @@ function setTimeValue(obj)
     <ul style="padding-top:4px;">
     	<li>
         <label>&nbsp;</label>       		
-       		<label id="lblAllhours" disabled="disabled" style="color:lightgray; width:360px;display:block;padding-left:15px;text-indent:-15px;">Reoccuring between hour&nbsp;       		
+       		<label id="lblAllhours" disabled="disabled" style="color:lightgray; width:360px;display:block;padding-left:15px;padding-top:4px;padding-bottom:7px;text-indent:-15px;">Reccuring between&nbsp;&nbsp;   		
        		<!--<input disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-13px;*overflow:hidden;border:none;" 
        			   onclick="openCloseHours();" id="chkAllHours" type="checkbox" name="requestItem.is_all_hours" ${requestItem.reoccure ? 'checked':''} />&nbsp;&nbsp;&nbsp;&nbsp; -->          		
-       		<select onchanged="setTimeValue(this)" id="ddlRecTimeFrom" disabled="disabled">
+       		<select onchange="setTimeValue(this,1)" id="ddlRecTimeFrom" disabled="disabled">
        		 #{list items:recoccurancehouritems, as:'recoccurancehouritem'}
 		    <option value="${recoccurancehouritem.val}">	      	    
 		          ${recoccurancehouritem.hour_min}  
@@ -326,7 +349,7 @@ function setTimeValue(obj)
 		    #{/list}
 			</select>
 			- 
-			<select onchanged="setTimeValue(this)" id="ddlRecTimeTo" disabled="disabled">
+			<select onchange="setTimeValue(this,2)" id="ddlRecTimeTo" disabled="disabled">
        		 #{list items:recoccurancehouritems, as:'recoccurancehouritem'}
 		    <option value="${recoccurancehouritem.val}">	      	    
 		          ${recoccurancehouritem.hour_min}  
@@ -336,10 +359,17 @@ function setTimeValue(obj)
 		</li>
     </ul>     
   </fieldset>
-   
-  <input type="submit" value="Save" />
+
+<input type="text" id="txt_reocc_start" name="requestItem.reocc_start_hour" value="${requestItem.reocc_start_hour}"/>
+<input type="text" id="txt_reocc_end" name="requestItem.reocc_end_hour" value="${requestItem.reocc_end_hour}"/>
+<input type="text" id="txt_reocc_start_val" name="requestItem.reocc_start_hour_val" value="${requestItem.reocc_start_hour_val}"/>
+<input type="text" id="txt_reocc_end_val" name="requestItem.reocc_end_hour_val" value="${requestItem.reocc_end_hour_val}"/>
+<input type="submit" value="Save" />
+
+<!--  style="visibility:hidden;display: none" -->
 
 </form>
+
 
 <script>
 document.getElementById("txtCityName").value = "Istanbul";
@@ -403,5 +433,51 @@ if(document.getElementById("chkAllDays").checked == 1)
 	 document.getElementById("ddlRecTimeFrom").disabled = "";
 	 document.getElementById("ddlRecTimeTo").disabled = "";
 }	
+
+if(document.getElementById("txt_reocc_start_val").value !="")
+{
+	var obj = document.getElementById("ddlRecTimeFrom");
+	try
+	{
+		for(var i = 0; i < obj.length; i++)
+		{
+			if(obj.options[i].value == document.getElementById("txt_reocc_start_val").value)
+			{
+				obj.options[i].selected = true;
+				break;
+			}		
+		}
+	}catch(err){}
+}
+
+if(document.getElementById("txt_reocc_end_val").value !="")
+{
+	alert(1);
+	var obj = document.getElementById("ddlRecTimeTo");
+		
+	try
+	{
+		for(var i = 0; i< obj.length; i++)
+		{
+			if(obj.options[i].value == document.getElementById("txt_reocc_end_val").value)
+			{
+				obj.options[i].selected = true;
+				break;
+			}		
+		}
+	}catch(err){}
+}
 	
+if(document.getElementById("txt_reocc_start").value =="")
+{
+	document.getElementById("txt_reocc_start").value = '00:00'
+	document.getElementById("txt_reocc_start_val").value = '1'
+}
+
+if(document.getElementById("txt_reocc_end").value =="")
+{
+	document.getElementById("txt_reocc_end").value = '00:00'
+	document.getElementById("txt_reocc_end_val").value = '1'
+}
+
 </script>
