@@ -20,9 +20,8 @@
 #{/else}
 
 <script>
-
 function changeForCounty()
-{	
+{		
 	var ddlC = document.getElementById("ddlCounty");
 	
 	if(ddlC.options[ddlC.selectedIndex].text == "All")
@@ -115,11 +114,18 @@ function addElement(text,value,ddl)
 
 function enableDays()
 {
-	if(document.getElementById("chkAllDays").checked == "0")
+	var ddlR = document.getElementById("ddlReoccurance") ;
+		
+	if(ddlR.options[ddlR.selectedIndex].value == 1)
 	{
 		document.getElementById("spnDays").disabled = "";
 		document.getElementById("lblDays").disabled = "";
-		document.getElementById("spnAllDaysIden").disabled = "disabled"; 
+		document.getElementById("lblAllhours").disabled = "";
+		document.getElementById("spnDays").style.color = "#666666";
+		document.getElementById("lblDays").style.color = "#666666";	
+		document.getElementById("lblAllhours").style.color = "#666666";
+		
+		document.getElementById("chkAllDays").checked = 1;
 		
 		document.getElementById("chkMonday").disabled = "";
 		document.getElementById("chkTuesday").disabled = "";
@@ -128,13 +134,21 @@ function enableDays()
 		document.getElementById("chkFriday").disabled = "";
 		document.getElementById("chkSaturday").disabled = "";
 		document.getElementById("chkSunday").disabled = "";	
+		
+		document.getElementById("ddlRecTimeFrom").disabled = "";
+		document.getElementById("ddlRecTimeTo").disabled = "";
 	}
 	else
 	{
 		document.getElementById("spnDays").disabled = "disabled";
 		document.getElementById("lblDays").disabled = "disabled";	
-		document.getElementById("spnAllDaysIden").disabled = ""; 
+		document.getElementById("lblAllhours").disabled = "disabled";
+		document.getElementById("spnDays").style.color = "lightgray";	
+		document.getElementById("lblDays").style.color = "lightgray";	
+		document.getElementById("lblAllhours").style.color = "lightgray";
 		
+		document.getElementById("chkAllDays").checked = 0;
+				
 		document.getElementById("chkMonday").disabled = "disabled";
 		document.getElementById("chkTuesday").disabled = "disabled";
 		document.getElementById("chkWednesday").disabled = "disabled";
@@ -143,14 +157,89 @@ function enableDays()
 		document.getElementById("chkSaturday").disabled = "disabled";
 		document.getElementById("chkSunday").disabled = "disabled";	
 		
-		document.getElementById("chkMonday").checked = "";
-		document.getElementById("chkTuesday").checked = "";
-		document.getElementById("chkWednesday").checked = "";
-		document.getElementById("chkThursday").checked = "";
-		document.getElementById("chkFriday").checked = "";
-		document.getElementById("chkSaturday").checked = "";
-		document.getElementById("chkSunday").checked = "";		
+		document.getElementById("chkMonday").checked = 0;
+		document.getElementById("chkTuesday").checked = 0;
+		document.getElementById("chkWednesday").checked = 0;
+		document.getElementById("chkThursday").checked = 0;
+		document.getElementById("chkFriday").checked = 0;
+		document.getElementById("chkSaturday").checked = 0;
+		document.getElementById("chkSunday").checked = 0;		
 	
+		document.getElementById("ddlRecTimeFrom").disabled = "disabled";
+		document.getElementById("ddlRecTimeTo").disabled = "disabled";
+		
+      	document.getElementById("txt_reocc_start").value = '00:00'
+        document.getElementById("txt_reocc_start_val").value = '1'
+	    document.getElementById("txt_reocc_start").value = '00:00'
+		document.getElementById("txt_reocc_start_val").value = '1'
+		 
+		document.getElementById("txt_reocc_end").value = '00:00'
+	    document.getElementById("txt_reocc_end_val").value = '1'
+	    document.getElementById("txt_reocc_end").value = '00:00'
+		document.getElementById("txt_reocc_end_val").value = '1'
+		
+		document.getElementById("ddlRecTimeFrom").options[0].selected = true;
+		document.getElementById("ddlRecTimeTo").options[0].selected = true;    	
+	}
+}
+
+function enableVirtualization(obj)
+{	
+	if(obj.options[obj.selectedIndex].value == 1)
+	{	
+		document.getElementById("chkVirtualization").checked = 1;
+		
+		document.getElementById("ddlCounty").options[0].selected = true;	
+		document.getElementById("txtCountyName").value = "";	
+		document.getElementById("txtCountyId").value = "";	
+		fillDistricts(0);
+		
+		document.getElementById("liCounty").style.visibility = "hidden";
+		document.getElementById("liCounty").style.display = "none";
+		
+		document.getElementById("liDistrict").style.visibility = "hidden";
+		document.getElementById("liDistrict").style.display = "none";
+	}
+	else 
+	{
+		document.getElementById("chkVirtualization").checked = 0;
+		
+		document.getElementById("liCounty").style.visibility = "visible";
+		document.getElementById("liCounty").style.display = "";		
+		
+		document.getElementById("liDistrict").style.visibility = "visible";
+		document.getElementById("liDistrict").style.display = "";
+	}		
+}
+
+function openCloseHours()
+{	
+	/*
+	if(document.getElementById("chkAllHours").checked == 1)
+	{
+		document.getElementById("ddlRecTimeFrom").disabled = "disabled";
+		document.getElementById("ddlRecTimeTo").disabled = "disabled";
+	} 
+	else
+	{		
+		document.getElementById("ddlRecTimeFrom").disabled = "";
+		document.getElementById("ddlRecTimeTo").disabled = "";
+	}*/
+}
+
+
+function setTimeValue(obj, ind)
+{ 
+	var ddl = obj;
+	if(ind == 1)
+	{
+		document.getElementById("txt_reocc_start").value = ddl.options[ddl.selectedIndex].text;	
+		document.getElementById("txt_reocc_start_val").value = ddl.options[ddl.selectedIndex].value;	
+	}
+	else 
+	{
+		document.getElementById("txt_reocc_end").value = ddl.options[ddl.selectedIndex].text;	
+		document.getElementById("txt_reocc_end_val").value = ddl.options[ddl.selectedIndex].value;	
 	}
 }
 
@@ -165,75 +254,85 @@ function enableDays()
     
     <ul>
       <li>
-        <label>Title</label>
+        <label style="padding-top:7px">Title</label>
         <input type="text" name="offerItem.title" value="${offerItem.title}" />
 	<span class="error">#{error 'offerItem.title' /}</span>
       </li>
       <li>
-        <label>Tags</label>
+        <label style="padding-top:7px">Tags</label>
         <input type="text" name="tags" value="${offerItem.tags.join(' ')}" /> Separate tags with spaces
 	<span class="error">#{error 'offerItem.tags' /}</span>
       </li>
-      <li>
-        <label>Description</label>
-        <textarea name="offerItem.description">${offerItem.description}</textarea>
-        <span class="error">#{error 'offerItem.description' /}</span>
+     <li>
+        <label style="padding-top:7px">Description</label>
+        <textarea rows="5" style="width:330px" name="offerItem.description">${offerItem.description}</textarea>
+        <span style="position: absolute; padding-top:40px" class="error">&nbsp;#{error 'offerItem.description' /}</span>
       </li>
       <li>
-        <label>Honey Combs</label>
+        <label style="padding-top:7px">Honey Combs</label>
 			<select name="offerItem.credit">
 	  			<option>1</option>
 	  			<option>7</option>
 	  			<option>19</option>
 			</select>
-      </li>       
-       <li>
-       <label>County</label>
-       		<select id="ddlCounty" onchange="changeForCounty();">
-	        #{list items:counties, as:'countyItem'}
-		    <option value="${countyItem.county_id}">	      	    
-		         ${countyItem.name}        
-		    </option>	    
-		    #{/list}
-		    </select>       		
-     	</li>      
-       <li>
-       <label>District</label>
-       		<select onchange="changeForDistrict();" id="ddlDistrict">
-	  			<option>All</option>
-			</select>
-       </li>       
-       <select id="ddlAllDistrict" style="display:none; visibility:hidden;" 
-        #{list items:districts, as:'districtItem'}
-	    <option value="${districtItem.district_id}">	      	    
-	          ##${districtItem.county_id}##${districtItem.name}        
+      </li>  
+      <li>
+      <label style="padding-top:7px">Virtualization</label>  
+     		<select id="ddlVirtualization" onchange="enableVirtualization(this);">
+  			<option value="0" selected="selected">No</option>
+  			<option value="1">Yes</option>	  			
+		</select>
+      		Via online interaction, chat, webcam etc.
+      		<input id="chkVirtualization" style="visibility: hidden; display: none" type="checkbox" name="offerItem.is_virtual" ${offerItem.is_virtual ? 'checked':''}  />	
+    	</li>      
+      <li>     
+      <li>
+      <label>County</label>
+      		<select id="ddlCounty" onchange="changeForCounty();">
+        #{list items:counties, as:'countyItem'}
+	    <option value="${countyItem.county_id}">	      	    
+	         ${countyItem.name}        
 	    </option>	    
 	    #{/list}
-	    </select>         
+	    </select>       		
+    	</li>      
+      <li>
+      <label>District</label>
+      		<select onchange="changeForDistrict();" id="ddlDistrict">
+  			<option>All</option>
+		</select>
+      </li>       
+      <select id="ddlAllDistrict" style="display:none; visibility:hidden;" 
+       #{list items:districts, as:'districtItem'}
+    <option value="${districtItem.district_id}">	      	    
+          ##${districtItem.county_id}##${districtItem.name}        
+    </option>	    
+    #{/list}
+    </select>         
+      <li style="visibility: hidden; display:none"> 
+      <label>City</label>
+      	<input type="text" id="txtCityName" name="offerItem.city_name" value="${offerItem.city_name}" />
+      	</li>  
        <li style="visibility: hidden; display:none"> 
-       <label>City</label>
-       	<input type="text" id="txtCityName" name="offerItem.city_name" value="${offerItem.city_name}" />
-       	</li>  
-        <li style="visibility: hidden; display:none"> 
-       <label>County</label>
-       	<input type="text" id="txtCountyName" name="offerItem.county_name" value="${offerItem.county_name}" />
-       	</li>
-        <li style="visibility: hidden; display:none"> 
-       <label>District</label>
-       <input type="text" id="txtDistrictName" name="offerItem.district_name" value="${offerItem.district_name}" />
-        </li>
-       <li style="visibility: hidden; display:none">  
-       <label>City_Id</label>
-       	<input type="text" id="txtCityId" name="offerItem.city.id" value="${offerItem.city}" />
-       	</li>  
-       <li style="visibility: hidden; display:none">
-       <label>County_Id</label>
-       	<input type="text" id="txtCountyId" name="offerItem.county.id" value="${offerItem.county}" />
-       	</li>
-       <li style="visibility: hidden; display:none">
-       <label>District_Id</label>
-       <input type="text" id="txtDistrictId" name="offerItem.district.id" value="${offerItem.district}" />
-        </li>
+      <label>County</label>
+      	<input type="text" id="txtCountyName" name="offerItem.county_name" value="${offerItem.county_name}" />
+      	</li>
+       <li style="visibility: hidden; display:none"> 
+      <label>District</label>
+      <input type="text" id="txtDistrictName" name="offerItem.district_name" value="${offerItem.district_name}" />
+       </li>
+      <li style="visibility: hidden; display:none">  
+      <label>City_Id</label>
+      	<input type="text" id="txtCityId" name="offerItem.city.id" value="${offerItem.city}" />
+      	</li>  
+      <li style="visibility: hidden; display:none">
+      <label>County_Id</label>
+      	<input type="text" id="txtCountyId" name="offerItem.county.id" value="${offerItem.county}" />
+      	</li>
+      <li style="visibility: hidden; display:none">
+      <label>District_Id</label>
+      <input type="text" id="txtDistrictId" name="offerItem.district.id" value="${offerItem.district}" />
+       </li>
     </ul>
   </fieldset>
   
@@ -241,13 +340,68 @@ function enableDays()
     <legend>Limitations</legend>
     <ul>
       <li>
-        <label>Valid Until</label>
-        <input type="text" name="offerItem.endDate" class="date_pick" value="${offerItem.endDate}" />
+        <label style="padding-top:7px">Valid Until</label>
+        <input id="txt_val_until" readonly="readonly" type="text" name="offerItem.endDate" class="date_pick" value="${offerItem.endDate}" />
 	<span class="error">#{error 'offerItem.endDate' /}</span>
       </li>
     </ul>
-    
+    <ul style="padding-top:4px;">
+   	 <li>
+        <label style="padding-top:10px">Recoccurance</label>    
+       		<select id="ddlReoccurance" onchange="enableDays();">
+	  			<option value="0" selected="selected">No</option>
+	  			<option value="1">Yes</option>	  			
+			</select>&nbsp;Will this offer recur?
+       		<input id="chkAllDays" type="checkbox" style="display:none;visibility:hidden" name="offerItem.reoccure" ${offerItem.reoccure ? 'checked':''}  />	
+
+       		<label style="width:400px;display:block;padding-left:215px;text-indent:-15px;padding-top:12px;">
+            <span id="spnDays" style="color:lightgray" disabled="disabled">Monday&nbsp;&nbsp;
+       		<input id="chkMonday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="offerItem.is_rec_monday" ${offerItem.is_rec_monday ? 'checked':''} />&nbsp;&nbsp;&nbsp;&nbsp;Tuesday
+       		<input id="chkTuesday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="offerItem.is_rec_tuesday" ${offerItem.is_rec_tuesday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Wednesday
+       		<input id="chkWednesday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="offerItem.is_rec_wednesday" ${offerItem.is_rec_wednesday ? 'checked':''}/></span></label>  
+       		<label id="lblDays" disabled="disabled" style="color:lightgray;padding-top:7px;padding-bottom:7px; width:400px;display:block;padding-left:215px;text-indent:-15px;">Thursday
+       		<input id="chkThursday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="offerItem.is_rec_thursday" ${offerItem.is_rec_thursday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Friday&nbsp;&nbsp;&nbsp;
+       		<input id="chkFriday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="offerItem.is_rec_friday" ${offerItem.is_rec_friday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Saturday&nbsp;&nbsp;&nbsp;
+       		<input id="chkSaturday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="offerItem.is_rec_saturday" ${offerItem.is_rec_saturday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Sunday
+       		<input id="chkSunday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="offerItem.is_rec_sunday" ${offerItem.is_rec_sunday ? 'checked':''}/></label>  
+		</li>
+    </ul> 
+    <ul style="padding-top:4px;">
+    	<li>
+        <label>&nbsp;</label>       		
+       		<label id="lblAllhours" disabled="disabled" style="color:lightgray; width:360px;display:block;padding-left:15px;padding-top:4px;padding-bottom:7px;text-indent:-15px;">Reccuring between&nbsp;&nbsp;   		
+       		<!--<input disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-13px;*overflow:hidden;border:none;" 
+       			   onclick="openCloseHours();" id="chkAllHours" type="checkbox" name="offerItem.is_all_hours" ${offerItem.reoccure ? 'checked':''} />&nbsp;&nbsp;&nbsp;&nbsp; -->          		
+       		<select onchange="setTimeValue(this,1)" id="ddlRecTimeFrom" disabled="disabled">
+       		 #{list items:recoccurancehouritems, as:'recoccurancehouritem'}
+		    <option value="${recoccurancehouritem.val}">	      	    
+		          ${recoccurancehouritem.hour_min}  
+		    </option>	    
+		    #{/list}
+			</select>
+			- 
+			<select onchange="setTimeValue(this,2)" id="ddlRecTimeTo" disabled="disabled">
+       		 #{list items:recoccurancehouritems, as:'recoccurancehouritem'}
+		    <option value="${recoccurancehouritem.val}">	      	    
+		          ${recoccurancehouritem.hour_min}  
+		    </option>	    
+		    #{/list}
+			</select></label>
+		</li>
+    </ul>       
   </fieldset>
+   
+<input type="text" style="visibility:hidden; display: none" id="txt_reocc_start" name="offerItem.reocc_start_hour" value="${offerItem.reocc_start_hour}"/>
+<input type="text" style="visibility:hidden; display: none" id="txt_reocc_end" name="offerItem.reocc_end_hour" value="${offerItem.reocc_end_hour}"/>
+<input type="text" style="visibility:hidden; display: none" id="txt_reocc_start_val" name="offerItem.reocc_start_hour_val" value="${offerItem.reocc_start_hour_val}"/>
+<input type="text" style="visibility:hidden; display: none" id="txt_reocc_end_val" name="offerItem.reocc_end_hour_val" value="${offerItem.reocc_end_hour_val}"/>
    
   <input type="submit" value="Save" />
 
@@ -259,29 +413,125 @@ document.getElementById("txtCityId").value = "1";
 
 if(document.getElementById("txtCountyName").value != "")
 {
-	var ddlC = document.getElementById("ddlCounty");
-	for(var i = 0; i< ddlC.length; i++)
+	try
 	{
-		if(ddlC.options[i].text == document.getElementById("txtCountyName").value)
+		var ddlC = document.getElementById("ddlCounty");
+		for(var i = 0; i< ddlC.length; i++)
 		{
-			ddlC.options[i].selected = true;
-			fillDistricts(ddlC.options[i].value);
-			document.getElementById("txtCountyId").value = ddlC.options[i].value;
-			break;
-		}		
-	}
+			if(ddlC.options[i].text == document.getElementById("txtCountyName").value)
+			{
+				ddlC.options[i].selected = true;
+				fillDistricts(ddlC.options[i].value);
+				document.getElementById("txtCountyId").value = ddlC.options[i].value;
+				break;
+			}		
+		}
+	}catch(err){}
 }
+
 if(document.getElementById("txtDistrictName").value != "")
 {
-	var ddlD = document.getElementById("ddlDistrict");
-	for(var i = 0; i< ddlD.length; i++)
+	try
 	{
-		if(ddlD.options[i].text == document.getElementById("txtDistrictName").value)
+		var ddlD = document.getElementById("ddlDistrict");
+		for(var i = 0; i< ddlD.length; i++)
 		{
-			ddlD.options[i].selected = true;
-			document.getElementById("txtDistrictId").value = ddlD.options[i].value;
-			break;
-		}		
-	}
+			if(ddlD.options[i].text == document.getElementById("txtDistrictName").value)
+			{
+				ddlD.options[i].selected = true;
+				document.getElementById("txtDistrictId").value = ddlD.options[i].value;
+				break;
+			}		
+		}
+	}catch(err){}
+}
+
+if(document.getElementById("chkAllDays").checked == 1)
+{
+	 document.getElementById("ddlReoccurance").options[0].selected = "false";
+	 document.getElementById("ddlReoccurance").options[1].selected = "true";
+	 
+	 document.getElementById("lblAllhours").disabled = "";
+	 document.getElementById("spnDays").disabled = "";
+	 document.getElementById("lblDays").disabled = "";
+	 document.getElementById("spnDays").style.color = "#666666";
+	 document.getElementById("lblDays").style.color = "#666666";
+	 document.getElementById("lblAllhours").style.color = "#666666";	
+	
+	 document.getElementById("chkMonday").disabled = "";
+	 document.getElementById("chkTuesday").disabled = "";
+	 document.getElementById("chkWednesday").disabled = "";
+	 document.getElementById("chkThursday").disabled = "";
+	 document.getElementById("chkFriday").disabled = "";
+	 document.getElementById("chkSaturday").disabled = "";
+	 document.getElementById("chkSunday").disabled = "";
+	 
+	 document.getElementById("ddlRecTimeFrom").disabled = "";
+	 document.getElementById("ddlRecTimeTo").disabled = "";
+}	
+
+if(document.getElementById("chkVirtualization").checked == 1)
+{
+	document.getElementById("ddlVirtualization").options[1].selected = true;	
+	document.getElementById("ddlCounty").options[0].selected = true;	
+	document.getElementById("txtCountyName").value = "";	
+	document.getElementById("txtCountyId").value = "";	
+	fillDistricts(0);
+	
+	document.getElementById("liCounty").style.visibility = "hidden";
+	document.getElementById("liCounty").style.display = "none";
+	
+	document.getElementById("liDistrict").style.visibility = "hidden";
+	document.getElementById("liDistrict").style.display = "none";
+}
+
+if(document.getElementById("txt_reocc_start_val").value !="")
+{
+	var obj = document.getElementById("ddlRecTimeFrom");
+	try
+	{
+		for(var i = 0; i < obj.length; i++)
+		{
+			if(obj.options[i].value == document.getElementById("txt_reocc_start_val").value)
+			{
+				obj.options[i].selected = true;
+				break;
+			}		
+		}
+	}catch(err){}
+}
+
+if(document.getElementById("txt_reocc_end_val").value !="")
+{
+	var obj = document.getElementById("ddlRecTimeTo");
+		
+	try
+	{
+		for(var i = 0; i< obj.length; i++)
+		{
+			if(obj.options[i].value == document.getElementById("txt_reocc_end_val").value)
+			{
+				obj.options[i].selected = true;
+				break;
+			}		
+		}
+	}catch(err){}
+}
+	
+if(document.getElementById("txt_reocc_start").value =="")
+{
+	document.getElementById("txt_reocc_start").value = '00:00'
+	document.getElementById("txt_reocc_start_val").value = '1'
+}
+
+if(document.getElementById("txt_reocc_end").value =="")
+{
+	document.getElementById("txt_reocc_end").value = '00:00'
+	document.getElementById("txt_reocc_end_val").value = '1'
+}
+
+if(document.getElementById("txt_val_until").value.indexOf(" 00:00:00.0") > -1)
+{
+	document.getElementById("txt_val_until").value = document.getElementById("txt_val_until").value.replace(" 00:00:00.0","");
 }
 </script>

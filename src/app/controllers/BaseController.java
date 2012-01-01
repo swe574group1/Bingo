@@ -27,7 +27,6 @@ public class BaseController extends Controller
     static void setUserTagCloud() {
     	    	
     	User user = getConnectedUser();
-		renderArgs.put("isLoggedIn", user != null);
 		if (user != null) {
 			
 			Query queryOffer = JPA.em().createQuery("SELECT p.name, count(*) " 

@@ -28,12 +28,17 @@
 	  </li>
 	  <li>
 	    <label style="vertical-align: top; padding-top: 7px;">Description</label>
-	    <textarea class="roinput" readonly="readonly" >${requestItem.description}</textarea>
+	    <textarea rows="4" class="roinput" readonly="readonly">${requestItem.description}</textarea>
+	  </li>	  
+	  <li>
+	    <label>Honey Combs</label>
+	    <input class="roinput" type="text" readonly="readonly" value="${requestItem.credit}" />
 	  </li>
 	  <li>
-	    <label style="vertical-align: top; padding-top: 5px;">Valid Until</label>
-	    <input class="roinput" type="text" readonly="readonly" value="${requestItem.endDate.format('dd MMMM yyyy')}" />
-	  </li>
+	    <label>Virtualization</label>
+	    <input id="txtVirtual" class="roinput" type="text" readonly="readonly" />
+	    <input type="checkbox" style="visibility: hidden; display: none" id="chkVir" ${requestItem.is_virtual ? 'checked':''} />
+	  </li>	 
 	  #{if requestItem.county}
 	  <li>
 	    <label>County</label>
@@ -46,14 +51,18 @@
 	    <input class="roinput" type="text" readonly="readonly" value="${requestItem.district_name}" />
 	  </li>
 	  #{/if}
+	   <li>
+	    <label style="vertical-align: top; padding-top: 5px;">Valid Until</label>
+	    <input class="roinput" type="text" readonly="readonly" value="${requestItem.endDate.format('dd MMMM yyyy')}" />
+	  </li>  
 	  <li>
 	    <label>Recoccurance</label>
 	    <input id="txtRec" class="roinput" type="text" readonly="readonly" />
 	    <input type="checkbox" style="visibility: hidden; display: none" id="chkRec" ${requestItem.reoccure ? 'checked':''} />
 	  </li>	  
-	  <li>
-	  		<label id="lblDays1" style="width:400px;display:block;padding-left:128px;text-indent:-15px;padding-top:6px;">
-            <span id="spnDays">Monday&nbsp;&nbsp;
+	  <li>	  		
+	  		<label id="lblDays1" style=" width:400px;display:block;padding-left:128px;text-indent:-15px;padding-top:6px;">
+            <span  id="spnDays">Monday&nbsp;&nbsp;
        		<input id="chkMonday" onclick='disableClick(this);' style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
        			   type="checkbox" name="requestItem.is_rec_monday" ${requestItem.is_rec_monday ? 'checked':''} />&nbsp;&nbsp;Tuesday
        		<input id="chkTuesday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
@@ -86,14 +95,21 @@
 		 	document.getElementById("txtRec").value = "Yes";
 	  	}
 	  	
+	  	if(document.getElementById("chkVir").checked == 0)
+	  	{	  		
+	  		document.getElementById("txtVirtual").value = "No";	  		
+	  	}
+	  	else 
+ 		{
+		 	document.getElementById("txtVirtual").value = "Yes";
+	  	}
+	  	
 	  	function disableClick(input){
   		 input.checked == true ? input.checked = false : input.checked = true;
   		}
-
-      </script>
+      </script>  	  
 	  	  
-	  	  
-	  <input type="button" value="Main Page" onclick="window.location='@{Application.index()}'" />
+	  <input style="visibility:hidden; display:none" type="button" value="Main Page" onclick="window.location='@{Application.index()}'" />
       </form>
       
     </div>

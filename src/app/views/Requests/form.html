@@ -21,6 +21,20 @@
 
 <script>
 
+function nochange()
+{
+	alert(1);
+	return false;
+}
+
+function numbersonly(e){
+	var unicode=e.charCode? e.charCode : e.keyCode
+	if (unicode!=8){ //if the key isn't the backspace key (which we should allow)
+	if (unicode<48||unicode>57) //if not a number
+	return false //disable key press
+	}
+
+
 function changeForCounty()
 {		
 	var ddlC = document.getElementById("ddlCounty");
@@ -116,7 +130,8 @@ function addElement(text,value,ddl)
 function enableDays()
 {
 	var ddlR = document.getElementById("ddlReoccurance") ;
-	if(ddlR.options[ddlR.selectedIndex].value == "1")
+		
+	if(ddlR.options[ddlR.selectedIndex].value == 1)
 	{
 		document.getElementById("spnDays").disabled = "";
 		document.getElementById("lblDays").disabled = "";
@@ -179,9 +194,37 @@ function enableDays()
 		document.getElementById("txt_reocc_end_val").value = '1'
 		
 		document.getElementById("ddlRecTimeFrom").options[0].selected = true;
-		document.getElementById("ddlRecTimeTo").options[0].selected = true;
-    	
+		document.getElementById("ddlRecTimeTo").options[0].selected = true;    	
 	}
+}
+
+function enableVirtualization(obj)
+{	
+	if(obj.options[obj.selectedIndex].value == 1)
+	{	
+		document.getElementById("chkVirtualization").checked = 1;
+		
+		document.getElementById("ddlCounty").options[0].selected = true;	
+		document.getElementById("txtCountyName").value = "";	
+		document.getElementById("txtCountyId").value = "";	
+		fillDistricts(0);
+		
+		document.getElementById("liCounty").style.visibility = "hidden";
+		document.getElementById("liCounty").style.display = "none";
+		
+		document.getElementById("liDistrict").style.visibility = "hidden";
+		document.getElementById("liDistrict").style.display = "none";
+	}
+	else 
+	{
+		document.getElementById("chkVirtualization").checked = 0;
+		
+		document.getElementById("liCounty").style.visibility = "visible";
+		document.getElementById("liCounty").style.display = "";		
+		
+		document.getElementById("liDistrict").style.visibility = "visible";
+		document.getElementById("liDistrict").style.display = "";
+	}		
 }
 
 function openCloseHours()
@@ -224,98 +267,105 @@ function setTimeValue(obj, ind)
     
     <ul>
       <li>
-        <label>Title</label>
+        <label style="padding-top:7px">Title</label>
         <input type="text" name="requestItem.title" value="${requestItem.title}" />
 	<span class="error">#{error 'requestItem.title' /}</span>
       </li>
       <li>
-        <label>Tags</label>
+        <label style="padding-top:7px">Tags</label>
         <input type="text" name="tags" value="${requestItem.tags.join(' ')}" /> Separate tags with spaces
 	<span class="error">#{error 'requestItem.tags' /}</span>
       </li>
       <li>
-        <label>Description</label>
-        <textarea name="requestItem.description">${requestItem.description}</textarea>
-        <span class="error">#{error 'requestItem.description' /}</span>
+        <label style="padding-top:7px">Description</label>
+        <textarea rows="5" style="width:330px" name="requestItem.description">${requestItem.description}</textarea>
+        <span style="position: absolute; padding-top:40px" class="error">&nbsp;#{error 'requestItem.description' /}</span>
       </li>
       <li>
-        <label>Honey Combs</label>
+        <label style="padding-top:7px">Honey Combs</label>
 			<select name="requestItem.credit">
 	  			<option>1</option>
 	  			<option>7</option>
 	  			<option>19</option>
 			</select>
-      </li>       
-       <li>
-       <label>County</label>
-       		<select id="ddlCounty" onchange="changeForCounty();">
-	        #{list items:counties, as:'countyItem'}
-		    <option value="${countyItem.county_id}">	      	    
-		         ${countyItem.name}        
-		    </option>	    
-		    #{/list}
-		    </select>       		
-     	</li>      
-       <li>
-       <label>District</label>
-       		<select onchange="changeForDistrict();" id="ddlDistrict">
-	  			<option>All</option>
-			</select>
-       </li>       
-       <select id="ddlAllDistrict" style="display:none; visibility:hidden;">
-        #{list items:districts, as:'districtItem'}
-	    <option value="${districtItem.district_id}">	      	    
-	          ##${districtItem.county_id}##${districtItem.name}        
+      </li>     
+      <li>
+      <label style="padding-top:7px">Virtualization</label>  
+     		<select id="ddlVirtualization" onchange="enableVirtualization(this);">
+  			<option value="0" selected="selected">No</option>
+  			<option value="1">Yes</option>	  			
+		</select>
+      		Via online interaction, chat, webcam etc.
+      		<input id="chkVirtualization" style="visibility: hidden; display: none" type="checkbox" name="requestItem.is_virtual" ${requestItem.is_virtual ? 'checked':''}  />	
+    	</li>      
+      <li>
+      <li id="liCounty">
+      <label style="padding-top:7px">County</label>
+      		<select id="ddlCounty" onchange="changeForCounty();">
+        #{list items:counties, as:'countyItem'}
+	    <option value="${countyItem.county_id}">	      	    
+	         ${countyItem.name}        
 	    </option>	    
 	    #{/list}
-	    </select>         
-       <li style="visibility: hidden; display:none">
-       <label>City</label>
-       	<input type="text" id="txtCityName" name="requestItem.city_name" value="${requestItem.city_name}" />
-       	</li>  
-       <li style="visibility: hidden; display:none">
-       <label>County</label>
-       	<input type="text" id="txtCountyName" name="requestItem.county_name" value="${requestItem.county_name}" />
-       	</li>
-       <li style="visibility: hidden; display:none">
-       <label>District</label>
-       <input type="text" id="txtDistrictName" name="requestItem.district_name" value="${requestItem.district_name}" />
-        </li>
-       <li style="visibility: hidden; display:none">
-       <label>City_Id</label>
-       	<input type="text" id="txtCityId" name="requestItem.city.id" value="${requestItem.city}" />
-       	</li>  
-       <li style="visibility: hidden; display:none">
-       <label>County_Id</label>
-       	<input type="text" id="txtCountyId" name="requestItem.county.id" value="${requestItem.county}" />
-       	</li>
-       <li style="visibility: hidden; display:none">
-       <label>District_Id</label>
-       <input type="text" id="txtDistrictId" name="requestItem.district.id" value="${requestItem.district}" />
-        </li>
+	    </select>       		
+    	</li>      
+      <li id="liDistrict">
+      <label style="padding-top:7px">District</label>
+      		<select onchange="changeForDistrict();" id="ddlDistrict">
+  			<option>All</option>
+		</select>
+      </li>       
+      <select id="ddlAllDistrict" style="display:none; visibility:hidden;">
+       #{list items:districts, as:'districtItem'}
+    <option value="${districtItem.district_id}">	      	    
+          ##${districtItem.county_id}##${districtItem.name}        
+    </option>	    
+    #{/list}
+    </select>         
+      <li style="visibility: hidden; display:none">
+      <label>City</label>
+      	<input type="text" id="txtCityName" name="requestItem.city_name" value="${requestItem.city_name}" />
+      	</li>  
+      <li style="visibility: hidden; display:none">
+      <label>County</label>
+      	<input type="text" id="txtCountyName" name="requestItem.county_name" value="${requestItem.county_name}" />
+      	</li>
+      <li style="visibility: hidden; display:none">
+      <label>District</label>
+      <input type="text" id="txtDistrictName" name="requestItem.district_name" value="${requestItem.district_name}" />
+       </li>
+      <li style="visibility: hidden; display:none">
+      <label>City_Id</label>
+      	<input type="text" id="txtCityId" name="requestItem.city.id" value="${requestItem.city}" />
+      	</li>  
+      <li style="visibility: hidden; display:none">
+      <label>County_Id</label>
+      	<input type="text" id="txtCountyId" name="requestItem.county.id" value="${requestItem.county}" />
+      	</li>
+      <li style="visibility: hidden; display:none">
+      <label>District_Id</label>
+      <input type="text" id="txtDistrictId" name="requestItem.district.id" value="${requestItem.district}" />
+       </li>
     </ul>
-  </fieldset>
-  
+  </fieldset>  
   <fieldset>
     <legend>Limitations</legend>
     <ul>
       <li>
-        <label>Valid Until</label>
-        <input type="text" name="requestItem.endDate" class="date_pick" value="${requestItem.endDate}" />
+        <label style="padding-top:7px">Valid Until</label>
+        <input id="txt_val_until" readonly="readonly" type="text" name="requestItem.endDate" class="date_pick" value="${requestItem.endDate}" />
 		<span class="error">#{error 'requestItem.endDate' /}</span>
       </li>      
     </ul>    
     <ul style="padding-top:4px;">
-    <li>
-        <label>Recoccurance</label>       		
-       		<label style="width:400px;display:block;padding-left:15px;text-indent:-15px;">
-       		<span id="spnAllDaysIden">Will this offer recur?&nbsp;</span>
+   	 <li>
+        <label style="padding-top:10px">Recoccurance</label>    
        		<select id="ddlReoccurance" onchange="enableDays();">
 	  			<option value="0" selected="selected">No</option>
 	  			<option value="1">Yes</option>	  			
-			</select>
+			</select>&nbsp;Will this offer recur?
        		<input id="chkAllDays" type="checkbox" style="display:none;visibility:hidden" name="requestItem.reoccure" ${requestItem.reoccure ? 'checked':''}  />	
-       		</label>
+
        		<label style="width:400px;display:block;padding-left:215px;text-indent:-15px;padding-top:12px;">
             <span id="spnDays" style="color:lightgray" disabled="disabled">Monday&nbsp;&nbsp;
        		<input id="chkMonday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
@@ -360,16 +410,12 @@ function setTimeValue(obj, ind)
     </ul>     
   </fieldset>
 
-<input type="text" id="txt_reocc_start" name="requestItem.reocc_start_hour" value="${requestItem.reocc_start_hour}"/>
-<input type="text" id="txt_reocc_end" name="requestItem.reocc_end_hour" value="${requestItem.reocc_end_hour}"/>
-<input type="text" id="txt_reocc_start_val" name="requestItem.reocc_start_hour_val" value="${requestItem.reocc_start_hour_val}"/>
-<input type="text" id="txt_reocc_end_val" name="requestItem.reocc_end_hour_val" value="${requestItem.reocc_end_hour_val}"/>
+<input type="text" style="visibility:hidden; display: none" id="txt_reocc_start" name="requestItem.reocc_start_hour" value="${requestItem.reocc_start_hour}"/>
+<input type="text" style="visibility:hidden; display: none" id="txt_reocc_end" name="requestItem.reocc_end_hour" value="${requestItem.reocc_end_hour}"/>
+<input type="text" style="visibility:hidden; display: none" id="txt_reocc_start_val" name="requestItem.reocc_start_hour_val" value="${requestItem.reocc_start_hour_val}"/>
+<input type="text" style="visibility:hidden; display: none" id="txt_reocc_end_val" name="requestItem.reocc_end_hour_val" value="${requestItem.reocc_end_hour_val}"/>
 <input type="submit" value="Save" />
-
-<!--  style="visibility:hidden;display: none" -->
-
 </form>
-
 
 <script>
 document.getElementById("txtCityName").value = "Istanbul";
@@ -434,6 +480,21 @@ if(document.getElementById("chkAllDays").checked == 1)
 	 document.getElementById("ddlRecTimeTo").disabled = "";
 }	
 
+if(document.getElementById("chkVirtualization").checked == 1)
+{
+	document.getElementById("ddlVirtualization").options[1].selected = true;	
+	document.getElementById("ddlCounty").options[0].selected = true;	
+	document.getElementById("txtCountyName").value = "";	
+	document.getElementById("txtCountyId").value = "";	
+	fillDistricts(0);
+	
+	document.getElementById("liCounty").style.visibility = "hidden";
+	document.getElementById("liCounty").style.display = "none";
+	
+	document.getElementById("liDistrict").style.visibility = "hidden";
+	document.getElementById("liDistrict").style.display = "none";
+}
+
 if(document.getElementById("txt_reocc_start_val").value !="")
 {
 	var obj = document.getElementById("ddlRecTimeFrom");
@@ -452,7 +513,6 @@ if(document.getElementById("txt_reocc_start_val").value !="")
 
 if(document.getElementById("txt_reocc_end_val").value !="")
 {
-	alert(1);
 	var obj = document.getElementById("ddlRecTimeTo");
 		
 	try
@@ -480,4 +540,8 @@ if(document.getElementById("txt_reocc_end").value =="")
 	document.getElementById("txt_reocc_end_val").value = '1'
 }
 
+if(document.getElementById("txt_val_until").value.indexOf(" 00:00:00.0") > -1)
+{
+	document.getElementById("txt_val_until").value = document.getElementById("txt_val_until").value.replace(" 00:00:00.0","");
+}
 </script>
