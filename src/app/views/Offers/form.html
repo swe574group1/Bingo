@@ -20,6 +20,7 @@
 #{/else}
 
 <script>
+
 function changeForCounty()
 {		
 	var ddlC = document.getElementById("ddlCounty");
@@ -227,7 +228,6 @@ function openCloseHours()
 	}*/
 }
 
-
 function setTimeValue(obj, ind)
 { 
 	var ddl = obj;
@@ -297,7 +297,7 @@ function setTimeValue(obj, ind)
 	    </select>       		
     	</li>      
       <li>
-      <label style="padding-top:7px">District</label>
+      <label>District</label>
       		<select onchange="changeForDistrict();" id="ddlDistrict">
   			<option>All</option>
 		</select>
@@ -518,6 +518,7 @@ if(document.getElementById("txt_reocc_end_val").value !="")
 	}catch(err){}
 }
 	
+
 if(document.getElementById("txt_reocc_start").value =="")
 {
 	document.getElementById("txt_reocc_start").value = '00:00'
