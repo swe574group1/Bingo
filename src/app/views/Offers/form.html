@@ -286,7 +286,7 @@ function setTimeValue(obj, ind)
       		<input id="chkVirtualization" style="visibility: hidden; display: none" type="checkbox" name="offerItem.is_virtual" ${offerItem.is_virtual ? 'checked':''}  />	
     	</li>      
       <li>     
-      <li>
+      <li id="liCounty">
       <label style="padding-top:7px">County</label>
       		<select id="ddlCounty" onchange="changeForCounty();">
         #{list items:counties, as:'countyItem'}
@@ -296,7 +296,7 @@ function setTimeValue(obj, ind)
 	    #{/list}
 	    </select>       		
     	</li>      
-      <li>
+      <li id="liDistrict">
       <label>District</label>
       		<select onchange="changeForDistrict();" id="ddlDistrict">
   			<option>All</option>
