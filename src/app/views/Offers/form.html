@@ -287,7 +287,7 @@ function setTimeValue(obj, ind)
     	</li>      
       <li>     
       <li>
-      <label>County</label>
+      <label style="padding-top:7px">County</label>
       		<select id="ddlCounty" onchange="changeForCounty();">
         #{list items:counties, as:'countyItem'}
 	    <option value="${countyItem.county_id}">	      	    
@@ -297,7 +297,7 @@ function setTimeValue(obj, ind)
 	    </select>       		
     	</li>      
       <li>
-      <label>District</label>
+      <label style="padding-top:7px">District</label>
       		<select onchange="changeForDistrict();" id="ddlDistrict">
   			<option>All</option>
 		</select>
