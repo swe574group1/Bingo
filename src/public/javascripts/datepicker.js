@@ -140,7 +140,7 @@ DateInput.prototype = {
     };
     if (!date) date = new Date();
     
-    this.selectedDate = date;    
+    this.selectedDate = date;
     this.selectedDateString = this.dateToString(this.selectedDate);
     this.selectMonth(this.selectedDate);
   },
