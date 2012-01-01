@@ -29,6 +29,10 @@ public class Handshakes extends BaseController
     	handshakeItem.offer = offer;
     	handshakeItem.request = request;
     	handshakeItem.creationDate = new Date();
+
+	handshakeItem.requesterId = request.user.id;
+	handshakeItem.offererId = offer.user.id;
+	
     	handshakeItem.save();
 
 	Boolean created = true;
@@ -55,6 +59,11 @@ public class Handshakes extends BaseController
 	handshakeItem.offer = offer;
 	handshakeItem.request = request;
 	handshakeItem.creationDate = new Date();
+
+	handshakeItem.requesterId = request.user.id;
+	handshakeItem.offererId = offer.user.id;
+
+	
 	handshakeItem.save();
 
 	renderTemplate("Handshakes/bind.html", handshakeItem);

@@ -1,9 +1,13 @@
 package controllers;
 
+import javax.persistence.Query;
+
 import java.util.List;
 import models.*;
 import play.mvc.*;
 import play.data.validation.*;
+
+import play.db.jpa.JPA;
 
 public class Users extends BaseController
 {
@@ -41,6 +45,9 @@ public class Users extends BaseController
 	User observedUser = User.findById(userId);
 	User connectedUser = getConnectedUser();
 	Boolean isOwnProfile = (observedUser == connectedUser);
+
+	Query participatedHandshakes = JPA.em().createQuery("from " + Handshake.class.getName() + " where offererId=" + userId + " or requesterId=" + userId);
+	
 	render(observedUser, isOwnProfile);
     }
 

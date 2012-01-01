@@ -12,6 +12,7 @@ import play.mvc.With;
 import play.data.validation.*;
 import play.db.jpa.JPA;
 
+
 public class BaseController extends Controller
 {
     @Before

@@ -25,6 +25,9 @@ public class Handshake extends Model
     @OneToOne
     public Request request;
 
+    public Long offererId;
+    public Long requesterId;
+
     @Required
     @Temporal(TemporalType.TIMESTAMP)
     public Date creationDate;
