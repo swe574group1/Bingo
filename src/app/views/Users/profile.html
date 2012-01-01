@@ -24,20 +24,29 @@
           </li>
         </ul>
       </div>
-      
+
+      #{if handshakes}
       <table class="show_data" style="margin-left:0px; width:560px;">
         <tr class="first">
-          <td>Title</td>
-          <td>Honey Combs Made</td>
-          <td>Offerer</td>
-          <td>Requester</td>
-          <td>Details</td>
+          <th>Title</th>
+          <th>Honey Combs Made</th>
+          <th>Offerer</th>
+          <th>Requester</th>
+          <th>Details</th>
         </tr>
-        <tr>
 
-        </tr>
-	
+	#{list items:handshakes, as:'handshake'}
+	<tr>
+	  <td>${handshake.offer.title}</td>
+	  <td>${handshake.offer.credit}</td>
+	  <td>${handshake.offer.user.fullname}</td>
+	  <td>${handshake.request.user.fullname}</td>
+	  <td><a href="@{Handshakes.show(handshake.id)}">Details</a></td>
+	</tr>
+	#{/list}
+
       </table>
+      #{/if}
       <!-- <div class="pager" style="margin-right:0px;"> -->
       <!--   <a href="#">Start</a> -->
       <!--   ... -->

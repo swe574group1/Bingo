@@ -35,7 +35,7 @@
 	    <input class="roinput" type="text" readonly="readonly" value="${offerItem.credit}" />
 	  </li>
 	  <li>
-	    <label>Virtualization</label>
+	    <label>Is Virtual?</label>
 	    <input id="txtVirtual" class="roinput" type="text" readonly="readonly" />
 	    <input type="checkbox" style="visibility: hidden; display: none" id="chkVir" ${offerItem.is_virtual ? 'checked':''} />
 	  </li>	 
@@ -56,7 +56,7 @@
 	    <input class="roinput" type="text" readonly="readonly" value="${offerItem.endDate.format('dd MMMM yyyy')}" />
 	  </li>	 	  
 	  <li>
-	    <label>Recoccurance</label>
+	    <label>Is Reoccurrent?</label>
 	    <input id="txtRec" class="roinput" type="text" readonly="readonly" />
 	    <input type="checkbox" style="visibility: hidden; display: none" id="chkRec" ${offerItem.reoccure ? 'checked':''} />
 	  </li>	  

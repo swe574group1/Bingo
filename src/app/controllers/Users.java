@@ -2,6 +2,7 @@ package controllers;
 
 import javax.persistence.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 import models.*;
 import play.mvc.*;
@@ -47,8 +48,9 @@ public class Users extends BaseController
 	Boolean isOwnProfile = (observedUser == connectedUser);
 
 	Query participatedHandshakes = JPA.em().createQuery("from " + Handshake.class.getName() + " where offererId=" + userId + " or requesterId=" + userId);
-	
-	render(observedUser, isOwnProfile);
+	List<Object[]> relevantHandshakeList = participatedHandshakes.getResultList();
+	List<Handshake> handshakes = new ArrayList(relevantHandshakeList);
+	render(observedUser, isOwnProfile, handshakes);
     }
 
     public static void ownProfile() {
