@@ -37,8 +37,28 @@
     <div class="left">
       <div class="post-meta">
         <ul>
-          <li><h4>Offerer</h4>${handshake.offer.user.fullname}</li> 
+          <li><h4>Offerer</h4>${handshake.offer.user.fullname}</li>
+
+	  <a href="@{Users.profile(handshake.offer.user.id)}">
+	  #{if handshake.offer.user.photo.exists()}
+	  <img alt=" ${handshake.offer.user.fullname}'s avatar" src="@{Application.showUserPhoto(handshake.offer.user.id)}" class="lepetitavatar"/>
+	  #{/if}
+	  #{else}
+	  <img alt="Default Avatar" src="/public/images/lbi02.png" class="lepetitavatar" />
+	  #{/else}
+	  </a>
+
           <li><h4>Requester</h4>${handshake.request.user.fullname}</li>
+
+	  <a href="@{Users.profile(handshake.request.user.id)}">
+	  #{if handshake.request.user.photo.exists()}
+	  <img alt=" ${handshake.request.user.fullname}'s avatar" src="@{Application.showUserPhoto(handshake.request.user.id)}" class="lepetitavatar"/>
+	  #{/if}
+	  #{else}
+	  <img alt="Default Avatar" src="/public/images/lbi02.png" class="lepetitavatar" />
+	  #{/else}
+	  </a>
+
         </ul>
       </div>
     </div>
@@ -103,12 +123,15 @@
           #{list items:comments, as:'comment'}
           <li class="depth-1">
             <div class="comment-info">
+	      
+	      <a href="@{Users.profile(comment.user.id)}">
 	      #{if user.photo.exists()}
 	      <img alt=" ${comment.user.fullname}'s avatar" src="@{Application.showUserPhoto(user.id)}" class="lepetitavatar"/>
 	      #{/if}
 	      #{else}
 	      <img alt="Default Avatar" src="/public/images/lbi02.png" class="lepetitavatar" />
 	      #{/else}
+	      </a>
 	      <cite> <a href="@{Users.profile(comment.user.id)}">${comment.user.fullname}</a> Says: <br />
                 <span class="comment-data">${comment.date.format('dd MMMM yyyy, hh:mm')}</span>
 	      </cite>

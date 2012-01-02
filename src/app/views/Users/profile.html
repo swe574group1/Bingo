@@ -44,7 +44,14 @@
 
 	#{list items:handshakes, as:'handshake'}
 	<tr>
-	  <td>${handshake.offer.title}</td>
+	  <td>
+	  #{if handshake.isOriginallyAnOffer}
+	  ${handshake.offer.title}
+	  #{/if}
+	  #{else}
+	  ${handshake.request.title}
+	  #{/else}
+	  <td>
 	  <td>${handshake.offer.credit}</td>
 	  <td>${handshake.offer.user.fullname}</td>
 	  <td>${handshake.request.user.fullname}</td>
