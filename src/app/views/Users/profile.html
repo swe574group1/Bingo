@@ -20,12 +20,19 @@
       <div class="user_tabs">
         <ul>
           <li>
-            <a href="#" class="active">Handshakes</a>
+            <a href="#" class="active" no="1">Handshakes</a>
           </li>
+	  <li>
+	    <a href="#" no="2">Offers</a>
+	  </li>
+	  <li>
+	    <a href="#" no="3">Requests</a>
+	  </li>
         </ul>
       </div>
 
       #{if handshakes}
+      <div class="index_tab_content" id="index_tab_content_1" style="display:block">
       <table class="show_data" style="margin-left:0px; width:560px;">
         <tr class="first">
           <th>Title</th>
@@ -46,7 +53,46 @@
 	#{/list}
 
       </table>
+      </div>
       #{/if}
+
+      #{if offers}
+      <div class="index_tab_content" id="index_tab_content_2" style="display:none">
+      	<table class="show_data" style="margin-left:0px; width:560px;">
+      	  <tr class="first">
+            <th>Title</th>
+            <th>Details</th>
+          </tr>
+
+      	  #{list items:offers, as:'offer'}
+      	  <tr>
+      	    <td>${offer.title}</td>
+      	    <td><a href="@{Offers.showDetails(offer.id)}">Details</a></td>
+      	  </tr>
+      	  #{/list}
+     	</table>
+	
+      </div>
+      #{/if}
+
+      #{if requests}
+      <div class="index_tab_content" id="index_tab_content_3" style="display:none">
+      	<table class="show_data" style="margin-left:0px; width:560px;">
+      	  <tr class="first">
+            <th>Title</th>
+            <th>Details</th>
+          </tr>
+
+      	  #{list items:requests, as:'request'}
+      	  <tr>
+      	    <td>${request.title}</td>
+      	    <td><a href="@{Requests.showDetails(request.id)}">Details</a></td>
+      	  </tr>
+      	  #{/list}
+     	</table>
+      </div>
+      #{/if}
+
       <!-- <div class="pager" style="margin-right:0px;"> -->
       <!--   <a href="#">Start</a> -->
       <!--   ... -->

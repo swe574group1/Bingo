@@ -91,7 +91,7 @@ public class Request extends Model implements Matchable
     }
 
     public Request() {
-	
+	this.status = Status.WAITING;
     }
 
     @Override
@@ -105,6 +105,7 @@ public class Request extends Model implements Matchable
 	this.title = offer.title;
 	this.description = offer.description;
 	this.endDate = offer.endDate;
+	this.status = Status.WAITING;
     }
 
 }

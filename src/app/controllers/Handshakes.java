@@ -19,9 +19,12 @@ public class Handshakes extends BaseController
     public static void bindToOffer(Long id) {
         User user = getConnectedUser();
     	Offer offer = Offer.findById(id);
+	offer.status = Offer.Status.HANDSHAKED;
+	offer.save();
 
         Request request = new Request(user, offer);
         request.title = "REQUEST FOR: " + offer.title;
+	request.status = Request.Status.HANDSHAKED;
         request.save();
 
     	Handshake handshakeItem = new Handshake();

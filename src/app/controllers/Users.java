@@ -50,7 +50,16 @@ public class Users extends BaseController
 	Query participatedHandshakes = JPA.em().createQuery("from " + Handshake.class.getName() + " where offererId=" + userId + " or requesterId=" + userId);
 	List<Object[]> relevantHandshakeList = participatedHandshakes.getResultList();
 	List<Handshake> handshakes = new ArrayList(relevantHandshakeList);
-	render(observedUser, isOwnProfile, handshakes);
+
+	Query openOffers = JPA.em().createQuery("from " + Offer.class.getName() + " where status='WAITING'");
+	List<Object[]> offerList = openOffers.getResultList();
+	List<Offer> offers = new ArrayList(offerList);
+
+	Query openRequests = JPA.em().createQuery("from " + Request.class.getName() + " where status='WAITING'");
+	List<Object[]> requestList = openRequests.getResultList();
+	List<Request> requests = new ArrayList(requestList);
+
+	render(observedUser, isOwnProfile, handshakes, offers, requests);
     }
 
     public static void ownProfile() {

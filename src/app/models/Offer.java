@@ -86,6 +86,7 @@ public class Offer extends Model implements Matchable
     }
 
     public Offer() {
+	this.status = Status.WAITING;
     }
 
     public Offer(User user, Integer credits, Request request) {
@@ -95,6 +96,7 @@ public class Offer extends Model implements Matchable
 	this.description = request.description;
 	this.endDate = request.endDate;
 	this.credit = credits;
+	this.status = Status.WAITING;
     }
 
     @Override
