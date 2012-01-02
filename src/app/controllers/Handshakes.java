@@ -3,6 +3,10 @@ package controllers;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Query;
+
+import play.db.jpa.JPA;
+
 
 import models.BadgeType;
 import models.Comment;
@@ -84,6 +88,7 @@ public class Handshakes extends BaseController
 	Handshake handshake = Handshake.findById(id);
 	List<Comment> comments = Comment.find("handshake = ?", handshake).fetch();
 	Boolean originallyOffer = handshake.isOriginallyAnOffer;
+	
 	render(currentUser, handshake, comments, originallyOffer);
     }
 

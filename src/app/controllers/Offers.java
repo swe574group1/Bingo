@@ -15,6 +15,7 @@ import service.Utils;
 
 import play.db.jpa.JPA;
 
+
 public class Offers extends BaseController
 {
     public static void create() {
@@ -76,6 +77,7 @@ public class Offers extends BaseController
 	Long handshakeId = new Long(0L); // variable to store the id of the matched handshake
 	Query handshakeQuery = JPA.em().createQuery("from " + Handshake.class.getName() + " where offer.id=" + offerItem.id); // handshakes which have been initiated with the current offer's id
 	List<Object[]> handshakeList = handshakeQuery.getResultList(); // list of matching handshakes
+
 	Boolean hasApplied = false; // inititate hasApplied boolean to false
 	
 	for(Object singleHandshake : handshakeList) { // iterate over handshakes
@@ -87,6 +89,8 @@ public class Offers extends BaseController
 		break;
 	    }
 	}
+
+
 	
 	Boolean someoneElsesOffer = (user != offerItem.user);
     	render(user, offerItem, offerOwner, someoneElsesOffer, hasApplied, handshakeId);
