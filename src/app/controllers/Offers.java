@@ -20,7 +20,6 @@ public class Offers extends BaseController
     public static void create() {
     	Offer offerItem = new Offer();
     	offerItem.tags = new ArrayList<Tag>();
-	offerItem.save();
     	renderTemplate("Offers/form.html", offerItem);
     }
 

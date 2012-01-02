@@ -46,4 +46,9 @@ public class Handshake extends Model
 
     public Integer ratingOfOfferer;
     public Integer ratingOfRequester;
+
+    public Boolean offererStart;
+    public Boolean requesterStart;
+
+    public Boolean isOriginallyAnOffer;
 }

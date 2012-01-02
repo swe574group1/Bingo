@@ -9,6 +9,15 @@
     #{if cancelled}
     <h3>The application for the handshake has been cancelled</h3>
     #{/if}
+    #{if accepted}
+    <h3>You have accepted the application.</h3>
+    #{/if}
+    #{if startedByBoth}
+    <h3>Both parties have acknowledged that the handshake has been started. Honey combs have been divided among the bees.</h3>
+    #{/if}
+    #{elseif startedByOne}
+    <h3>You have acknowledged the start of the handshake. The other party must also acknowledge in order to commence dividing of honey combs.</h3>
+    #{/elseif}
     #{if handshakeItem}
     <h4>Handshake Details</h4>
     <table>
@@ -22,7 +31,12 @@
       </tr>
       <tr>
 	<td>
+	  #{if handshakeItem.isOriginallyAnOffer}
 	  ${handshakeItem.offer.title}
+	  #{/if}
+	  #{else}
+	  ${handshakeItem.request.title}
+	  #{/else}
 	</td>
 	<td>
 	  ${handshakeItem.offer.user.fullname}
@@ -42,7 +56,7 @@
 	  #{/else}
 	</td>
 	<td>
-	  ${handshakeItem.creationDate.format()}
+	  ${handshakeItem.creationDate.format('dd MMMM yyyy')}
 	</td>
       </tr>
     </table>

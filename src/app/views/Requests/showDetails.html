@@ -49,18 +49,11 @@
     
   </div>
   #{if someoneElsesRequest}
-  <form action="@{Handshakes.bindToRequest()}">
-    <label>Honey Combs:</label>
-    <select name="requestItem.credit">
-      <option>1</option>
-      <option>7</option>
-      <option>19</option>
-    </select>
-
-    <input type="submit" name="submit" value="Apply" />
-  </form>
-  #{if hasApplied}
-  <a class="cancel" href="@{Handshakes.cancelApplication(handshakeId)}">Cancel</a>
-  #{/if}
-  #{/if}
+  <div class="apply_menu">
+    <a class="apply" href="@{Handshakes.bindToRequest(requestItem.id)}">Apply</a>
+    #{if hasApplied}
+    <a class="cancel" href="@{Handshakes.cancelApplication(handshakeId)}">Cancel</a>
+    #{/if}
+    #{/if}
+  </div>
 </div>

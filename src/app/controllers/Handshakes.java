@@ -36,6 +36,9 @@ public class Handshakes extends BaseController
 	handshakeItem.requesterId = request.user.id;
 	handshakeItem.offererId = offer.user.id;
 	
+	handshakeItem.isOriginallyAnOffer = true;
+	handshakeItem.offererStart = false;
+	handshakeItem.requesterStart = false;
     	handshakeItem.save();
 
 	Boolean created = true;
@@ -49,16 +52,16 @@ public class Handshakes extends BaseController
 	renderTemplate("Handshakes/bind.html", cancelled);
     }
 
-    public static void bindToRequest(Long id, Integer credits) {
+    public static void bindToRequest(Long id) {
 	User user = getConnectedUser();
 	Request request = Request.findById(id);
 
-	Offer offer = new Offer(user, credits, request);
+	Offer offer = new Offer(user, 7, request); // magic number 7: fixed honey comb for applying to requests
 	offer.title = "OFFER FOR: " + request.title;
 	offer.save();
 
 	Handshake handshakeItem = new Handshake();
-    handshakeItem.status = Status.WAITING_APPROVAL;
+	handshakeItem.status = Status.WAITING_APPROVAL;
 	handshakeItem.offer = offer;
 	handshakeItem.request = request;
 	handshakeItem.creationDate = new Date();
@@ -66,16 +69,22 @@ public class Handshakes extends BaseController
 	handshakeItem.requesterId = request.user.id;
 	handshakeItem.offererId = offer.user.id;
 
-	
+	handshakeItem.isOriginallyAnOffer = false;
+	handshakeItem.offererStart = false;
+	handshakeItem.requesterStart = false;
+
 	handshakeItem.save();
 
-	renderTemplate("Handshakes/bind.html", handshakeItem);
+	Boolean created = true;
+	renderTemplate("Handshakes/bind.html", handshakeItem, created);
     }
 
     public static void show(Long id) {
+	User currentUser = getConnectedUser();
 	Handshake handshake = Handshake.findById(id);
 	List<Comment> comments = Comment.find("handshake = ?", handshake).fetch();
-	render(handshake, comments);
+	Boolean originallyOffer = handshake.isOriginallyAnOffer;
+	render(currentUser, handshake, comments, originallyOffer);
     }
 
     public static void list() {
@@ -93,17 +102,41 @@ public class Handshakes extends BaseController
     }
 
     public static void accept(Long handshakeId) {
-        Handshake handshake = Handshake.findById(handshakeId);
-        handshake.status = Status.ACCEPTED;
-        handshake.save();
-        show(handshakeId);
+        Handshake handshakeItem = Handshake.findById(handshakeId);
+        handshakeItem.status = Status.ACCEPTED;
+        handshakeItem.save();
+	Boolean accepted = true;
+        renderTemplate("Handshakes/bind.html", handshakeItem, accepted);
     }
     
     public static void start(Long handshakeId) {
-        Handshake handshake = Handshake.findById(handshakeId);
-        handshake.status = Status.STARTED;
-        handshake.save();
-        show(handshakeId);
+        Handshake handshakeItem = Handshake.findById(handshakeId);
+
+	Boolean startedByBoth, startedByOne;
+	
+	User user = getConnectedUser();
+	if (user.id == handshakeItem.offererId) {
+	    handshakeItem.offererStart = true;
+	} else if (user.id == handshakeItem.requesterId) {
+	    handshakeItem.requesterStart = true;
+	}
+        handshakeItem.save();
+
+	startedByOne = (handshakeItem.offererStart || handshakeItem.requesterStart);
+	startedByBoth = (handshakeItem.offererStart && handshakeItem.requesterStart);
+	
+	if (startedByBoth) {
+	    User offerer = User.findById(handshakeItem.offererId);
+	    User requester = User.findById(handshakeItem.requesterId);
+	    offerer.balance += handshakeItem.offer.credit;
+	    requester.balance -= handshakeItem.offer.credit;
+	    offerer.save();
+	    requester.save();
+	    handshakeItem.status = Status.STARTED;
+	    handshakeItem.save();
+	}
+
+        renderTemplate("Handshakes/bind.html", handshakeItem, startedByBoth, startedByOne);
     }
     
     public static void cancel(Long handshakeId) {

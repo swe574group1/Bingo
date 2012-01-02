@@ -19,7 +19,6 @@ public class Requests extends BaseController
     public static void create() {
 	Request requestItem = new Request();
 	requestItem.tags = new ArrayList<Tag>();
-	requestItem.save();
 	renderTemplate("Requests/form.html", requestItem);
     }
 
