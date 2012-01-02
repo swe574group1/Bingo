@@ -13,9 +13,22 @@
   </tr>
   #{list items:handshakes, as:'handshake'}
   <tr>
-      <td>${handshake.offer.title}</td>
-      <td>${handshake.offer.user.fullname}</td>
-      <td>${handshake.request.user.fullname}</td>
+      <td>
+	<a href="@{Handshakes.show(handshake.id)}">
+	#{if handshake.isOriginallyAnOffer}
+	${handshake.offer.title}
+	#{/if}
+	#{else}
+	${handshake.request.title}
+	#{/else}
+	</a>
+      </td>
+      <td>
+	<a href="@{Users.profile(handshake.offer.user.id)}">${handshake.offer.user.fullname}</a>
+      </td>
+      <td>
+	<a href="@{Users.profile(handshake.request.user.id)}">${handshake.request.user.fullname}</a>
+      </td>
       <td>${handshake.offer.credit}</td>
       <td>${handshake.status}</td>
       <td><a href="@{Handshakes.show(handshake.id)}">Details</a></td>
