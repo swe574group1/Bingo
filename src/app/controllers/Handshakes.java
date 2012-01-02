@@ -165,6 +165,7 @@ public class Handshakes extends BaseController
         comment.date = new Date();
         comment.text = request.params.get("message");
         comment.save();
+	show(handshakeId);
     }
 
     private static void updateBadgeForHandshake(Handshake handshake){

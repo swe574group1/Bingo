@@ -102,8 +102,17 @@
         <ol class="commentlist">
           #{list items:comments, as:'comment'}
           <li class="depth-1">
-            <div class="comment-info"> <img alt="" src="images/gravatar.jpg" class="avatar" height="40" width="40" /> <cite> <a href="#">${comment.user.fullname}</a> Says: <br />
-                <span class="comment-data"><a href="#">${comment.date}</a></span> </cite> </div>
+            <div class="comment-info">
+	      #{if user.photo.exists()}
+	      <img alt=" ${comment.user.fullname}'s avatar" src="@{Application.showUserPhoto(user.id)}" class="lepetitavatar"/>
+	      #{/if}
+	      #{else}
+	      <img alt="Default Avatar" src="/public/images/lbi02.png" class="lepetitavatar" />
+	      #{/else}
+	      <cite> <a href="@{Users.profile(comment.user.id)}">${comment.user.fullname}</a> Says: <br />
+                <span class="comment-data">${comment.date.format('dd MMMM yyyy, hh:mm')}</span>
+	      </cite>
+	    </div>
             <div class="comment-text">
               <p>${comment.text}</p>
             </div>
