@@ -42,7 +42,7 @@ public class Handshakes extends BaseController
     	renderTemplate("Handshakes/bind.html", handshakeItem, created);
     }
 
-    public static void cancelApplicationToOffer(Long handshakeId) {
+    public static void cancelApplication(Long handshakeId) {
 	Handshake handshakeItem = Handshake.findById(handshakeId);
 	handshakeItem.delete();
 	Boolean cancelled = true;

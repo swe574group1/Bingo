@@ -18,7 +18,7 @@
 	  </li>
           <li>
             <label>Valid Until</label>
-	    ${requestItem.endDate.format()}
+	    ${requestItem.endDate.format('dd MMMM yyyy')}
           </li>
         </ul>
       </div>
@@ -51,9 +51,16 @@
   #{if someoneElsesRequest}
   <form action="@{Handshakes.bindToRequest()}">
     <label>Honey Combs:</label>
-    <input type="hidden" name="id" value="${requestItem.id}" />
-    <input type="text" name="credits" />
+    <select name="requestItem.credit">
+      <option>1</option>
+      <option>7</option>
+      <option>19</option>
+    </select>
+
     <input type="submit" name="submit" value="Apply" />
   </form>
+  #{if hasApplied}
+  <a class="cancel" href="@{Handshakes.cancelApplication(handshakeId)}">Cancel</a>
+  #{/if}
   #{/if}
 </div>
