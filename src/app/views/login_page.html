@@ -13,7 +13,12 @@
     <th></th>
     #{list items:newHandshakes, as:'handshake'}
     <tr>
+      #{if handshake.isOriginallyAnOffer}
       <td>${handshake.offer.title}</td>
+      #{/if}
+      #{else}
+      <td>${handshake.request.title}</td>
+      #{/else}
       <td>${handshake.offer.user.fullname}</td>
       <td>${handshake.request.user.fullname}</td>
       <td>${handshake.offer.credit}</td>

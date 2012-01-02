@@ -10,8 +10,10 @@ public class Application extends BaseController
 {   
     public static void index()
 	{
-	    List<User> newUsers = User.getNewUsers(5);
-	    List<Handshake> newHandshakes = Handshake.find("status", Status.DONE).fetch();
+	    int recentUserCount = 5;
+	    int recentHandshakeCount = 5;
+	    List<User> newUsers = User.getNewUsers(recentUserCount);
+	    List<Handshake> newHandshakes = Handshake.find("status!='WAITING_APPROVAL' or status !='DONE' order by creationDate desc").fetch(recentHandshakeCount);
 	    render(newUsers, newHandshakes);
 	}
 
