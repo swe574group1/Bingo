@@ -2,6 +2,8 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.AbstractMap;
+import java.util.HashMap;
 
 import javax.persistence.Query;
 
@@ -90,10 +92,19 @@ public class Offers extends BaseController
 	    }
 	}
 
+	Query applicationsQuery = JPA.em().createQuery("from " + Handshake.class.getName() + " where offererId=" + offerOwner.id + " and offer_id=" + offerItem.id + " and status='WAITING_APPROVAL'");
+	List<Object[]> applications = applicationsQuery.getResultList();
+	List<Handshake> applicationList = new ArrayList(applications);
 
+	AbstractMap<User, Handshake> userApplications = new HashMap();
+	
+	for (Handshake handshakeItem : applicationList) {
+	    User applicant = User.findById(handshakeItem.requesterId);
+	    userApplications.put(applicant, handshakeItem);
+	}
 	
 	Boolean someoneElsesOffer = (user != offerItem.user);
-    	render(user, offerItem, offerOwner, someoneElsesOffer, hasApplied, handshakeId);
+    	render(user, offerItem, offerOwner, someoneElsesOffer, hasApplied, userApplications);
     }
 
     public static void search(String phrase) {

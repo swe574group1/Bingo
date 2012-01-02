@@ -1646,3 +1646,8 @@ img.lepetitavatar {
     max-width: 40px;
     max-height: 40px;
 }
+
+img.lemiddleavatar {
+    max-width: 70px;
+    max-height: 70px;
+}

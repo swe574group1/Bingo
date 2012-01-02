@@ -61,4 +61,17 @@
     #{/if}
   </div>
 
+  #{if offerOwner}
+  <ul>
+  #{if userApplications}
+  #{list items: userApplications, as:'userApplication'}
+  <li>
+    ${userApplication.getKey().fullname}
+    <a href="@{Handshakes.accept(userApplication.getValue().id)}">Accept</a>
+  </li>
+  #{/list}
+  #{/if}
+  </ul>
+  #{/if}
+
 </div>

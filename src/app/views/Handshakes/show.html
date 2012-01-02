@@ -7,12 +7,12 @@
   <div class="post" style="padding:top:0px">
     <div class="right">
       <h3>
-      #{if handshake.isOriginallyAnOffer}
-      ${handshake.offer.title}
-      #{/if}
-      #{else}
-      ${handshake.request.title}
-      #{/else}
+	#{if handshake.isOriginallyAnOffer}
+	${handshake.offer.title}
+	#{/if}
+	#{else}
+	${handshake.request.title}
+	#{/else}
       </h3>
       <p>${handshake.offer.description}</p>
       <div class="restrictions">
@@ -48,7 +48,7 @@
 
 	  <a href="@{Users.profile(handshake.offer.user.id)}">
 	  #{if handshake.offer.user.photo.exists()}
-	  <img alt=" ${handshake.offer.user.fullname}'s avatar" src="@{Application.showUserPhoto(handshake.offer.user.id)}" class="lepetitavatar"/>
+	  <img alt=" ${handshake.offer.user.fullname}'s avatar" src="@{Application.showUserPhoto(handshake.offer.user.id)}" class="lemiddleavatar"/>
 	  #{/if}
 	  #{else}
 	  <img alt="Default Avatar" src="/public/images/lbi02.png" class="lepetitavatar" />
@@ -59,7 +59,7 @@
 
 	  <a href="@{Users.profile(handshake.request.user.id)}">
 	  #{if handshake.request.user.photo.exists()}
-	  <img alt=" ${handshake.request.user.fullname}'s avatar" src="@{Application.showUserPhoto(handshake.request.user.id)}" class="lepetitavatar"/>
+	  <img alt=" ${handshake.request.user.fullname}'s avatar" src="@{Application.showUserPhoto(handshake.request.user.id)}" class="lemiddleavatar"/>
 	  #{/if}
 	  #{else}
 	  <img alt="Default Avatar" src="/public/images/lbi02.png" class="lepetitavatar" />

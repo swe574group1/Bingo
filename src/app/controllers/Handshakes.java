@@ -3,6 +3,7 @@ package controllers;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Query;
 
 import play.db.jpa.JPA;
@@ -23,13 +24,9 @@ public class Handshakes extends BaseController
     public static void bindToOffer(Long id) {
         User user = getConnectedUser();
     	Offer offer = Offer.findById(id);
-	offer.status = Offer.Status.HANDSHAKED;
-	offer.save();
 
         Request request = new Request(user, offer);
         request.title = "REQUEST FOR: " + offer.title;
-	request.status = Request.Status.HANDSHAKED;
-        request.save();
 
     	Handshake handshakeItem = new Handshake();
         handshakeItem.status = Status.WAITING_APPROVAL;
@@ -43,6 +40,9 @@ public class Handshakes extends BaseController
 	handshakeItem.isOriginallyAnOffer = true;
 	handshakeItem.offererStart = false;
 	handshakeItem.requesterStart = false;
+
+	offer.save();
+	request.save();
     	handshakeItem.save();
 
 	Boolean created = true;
@@ -110,6 +110,25 @@ public class Handshakes extends BaseController
         Handshake handshakeItem = Handshake.findById(handshakeId);
         handshakeItem.status = Status.ACCEPTED;
         handshakeItem.save();
+
+	Offer offer = Offer.findById(handshakeItem.offer.id);
+	offer.status = Offer.Status.HANDSHAKED;
+	offer.save();
+	
+
+	Request request = Request.findById(handshakeItem.request.id);
+	request.status = Request.Status.HANDSHAKED;
+        request.save();
+
+	/* mark applications which were not accepted as obsolete */
+	Query rejectedHandshakeQuery = JPA.em().createQuery("from " + Handshake.class.getName() + " where offer_id=" + handshakeItem.offer.id + " and request_id!=" + handshakeItem.request.id);
+	List<Object[]> rejectedList = rejectedHandshakeQuery.getResultList();
+	List<Handshake> rejectedHandshakes = new ArrayList(rejectedList);
+	for (Handshake rejected : rejectedHandshakes) {
+	    rejected.status = Status.REJECTED;
+	    rejected.save();
+	}
+	
 	Boolean accepted = true;
         renderTemplate("Handshakes/bind.html", handshakeItem, accepted);
     }
