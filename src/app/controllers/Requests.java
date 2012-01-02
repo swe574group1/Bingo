@@ -95,7 +95,9 @@ public class Requests extends BaseController
     public static void search(String phrase) {
 	User user = getConnectedUser();
 
-	List<Request> allRequests = Request.findAll();
+	Query openRequestsQuery = JPA.em().createQuery("from " + Request.class.getName() + " where status is 'WAITING'");
+	List<Object[]> openRequestsList = openRequestsQuery.getResultList();
+	List<Request> allRequests = new ArrayList(openRequestsList);
 	List<Request> foundRequests = MatchService.match(allRequests, phrase);
 
 	render(user, foundRequests, allRequests, phrase);
