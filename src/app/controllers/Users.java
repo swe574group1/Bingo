@@ -51,11 +51,11 @@ public class Users extends BaseController
 	List<Object[]> relevantHandshakeList = participatedHandshakes.getResultList();
 	List<Handshake> handshakes = new ArrayList(relevantHandshakeList);
 
-	Query openOffers = JPA.em().createQuery("from " + Offer.class.getName() + " where status='WAITING'");
+	Query openOffers = JPA.em().createQuery("from " + Offer.class.getName() + " where status='WAITING' and user_Id=" + userId);
 	List<Object[]> offerList = openOffers.getResultList();
 	List<Offer> offers = new ArrayList(offerList);
 
-	Query openRequests = JPA.em().createQuery("from " + Request.class.getName() + " where status='WAITING'");
+	Query openRequests = JPA.em().createQuery("from " + Request.class.getName() + " where status='WAITING' and user_Id=" + userId);
 	List<Object[]> requestList = openRequests.getResultList();
 	List<Request> requests = new ArrayList(requestList);
 
