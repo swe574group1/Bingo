@@ -61,27 +61,39 @@
 	    <input type="checkbox" style="visibility: hidden; display: none" id="chkRec" ${offerItem.reoccure ? 'checked':''} />
 	  </li>	  
 	  <li>
-	  		<label id="lblDays1" style="width:400px;display:block;padding-left:128px;text-indent:-15px;padding-top:6px;">
-            <span id="spnDays">Monday&nbsp;&nbsp;
+	  		<label id="lblDays1" class="roinput" style=" position:relative;left:113px; width:339px; display:block;padding-top:6px;">
+            <span id="spnDays">&nbsp;Monday&nbsp;&nbsp;
        		<input id="chkMonday" onclick='disableClick(this);' style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="offerItem.is_rec_monday" ${offerItem.is_rec_monday ? 'checked':''} />&nbsp;&nbsp;Tuesday
+       			   type="checkbox" name="offerItem.is_rec_monday" ${offerItem.is_rec_monday ? 'checked':''} />&nbsp;Tuesday
        		<input id="chkTuesday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="offerItem.is_rec_tuesday" ${offerItem.is_rec_tuesday ? 'checked':''}/>&nbsp;&nbsp;Wednesday
+       			   type="checkbox" name="offerItem.is_rec_tuesday" ${offerItem.is_rec_tuesday ? 'checked':''}/>&nbsp;Wednesday
        		<input id="chkWednesday" onclick='disableClick(this);' style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
        			   type="checkbox" name="offerItem.is_rec_wednesday" ${offerItem.is_rec_wednesday ? 'checked':''}/></span></label>  
-       		<label id="lblDays2" onclick='disableClick(this);'  style="padding-top:7px;padding-bottom:7px; width:400px;display:block;padding-left:128px;text-indent:-15px;">Thursday
+       		<label id="lblDays2" class="roinput" onclick='disableClick(this);' style="position:relative;left:113px; width:339px; padding-top:7px;padding-bottom:7px; display:block;">&nbsp;Thursday
        		<input id="chkThursday" onclick='disableClick(this);' style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="offerItem.is_rec_thursday" ${offerItem.is_rec_thursday ? 'checked':''}/>&nbsp;&nbsp;Friday&nbsp;&nbsp;&nbsp;
+       			   type="checkbox" name="offerItem.is_rec_thursday" ${offerItem.is_rec_thursday ? 'checked':''}/>&nbsp;Friday&nbsp;&nbsp;&nbsp;
        		<input id="chkFriday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="offerItem.is_rec_friday" ${offerItem.is_rec_friday ? 'checked':''}/>&nbsp;&nbsp;Saturday&nbsp;&nbsp;&nbsp;
+       			   type="checkbox" name="offerItem.is_rec_friday" ${offerItem.is_rec_friday ? 'checked':''}/>&nbsp;Saturday&nbsp;&nbsp;&nbsp;
        		<input id="chkSaturday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="offerItem.is_rec_saturday" ${offerItem.is_rec_saturday ? 'checked':''}/>&nbsp;&nbsp;Sunday
+       			   type="checkbox" name="offerItem.is_rec_saturday" ${offerItem.is_rec_saturday ? 'checked':''}/>&nbsp;Sunday
        		<input id="chkSunday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
        			   type="checkbox" name="offerItem.is_rec_sunday" ${offerItem.is_rec_sunday ? 'checked':''}/></label>
 	  </li>
+	   	<li id="liRecTime">    		
+	      		<label>Rec. Between</label> 		
+	      	    <input class="roinput" type="text" readonly="readonly" value="${offerItem.reocc_start_hour} - ${offerItem.reocc_end_hour}"  />
+	      	    <input style="display:none; visibility: hidden" id="txtRecFrom" type="text" readonly="readonly" value="${offerItem.reocc_start_hour}"  />
+	      	    <input style="display:none; visibility: hidden" id="txtRecTo" type="text" readonly="readonly" value="${offerItem.reocc_end_hour}"  />
+	    </li>  
 	  
 	  <script>
-	  	if(document.getElementById("chkRec").checked == 0)
+	  	if(document.getElementById("txtRecFrom").value == document.getElementById("txtRecTo").value)	
+		{
+	  		document.getElementById("liRecTime").style.visibility = "hidden";
+	  		document.getElementById("liRecTime").style.display= "none";
+	  	}
+	  
+	  if(document.getElementById("chkRec").checked == 0)
 	  	{
 	  		document.getElementById("lblDays1").style.visibility = "hidden";
 	  		document.getElementById("lblDays1").style.display= "none";
