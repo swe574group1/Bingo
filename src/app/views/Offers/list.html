@@ -7,13 +7,15 @@
     <th>Title</th>
     <th>Valid Until</th>
     <th>Honey Combs</th>
-    <th></th>
+    <th colspan="2" style="text-align: center">Actions</th>
   </tr>
   #{list items:offers, as:'offer'}
   <tr>
-    <td><a href="@{Offers.showDetails(offer.id)}">${offer.title}</a></td>
+    <!--  <td><a href="@{Offers.showDetails(offer.id)}">${offer.title}</a></td> -->
+    <td>${offer.title}</td>
     <td>${offer.endDate.format('dd MMMM yyyy')}</td>
     <td>${offer.credit}</td>
+    <td><a href="@{Offers.showDetails(offer.id)}">Show</a></td>
     <td><a href="@{Offers.edit(offer.id)}">Edit</a></td>
   </tr>
 </a>
