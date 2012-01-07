@@ -93,16 +93,18 @@
 	${requestItem.tags.join(' ')}
       </p>
     </div>
-    
-  </div>
-  #{if someoneElsesRequest}
+    </div>
+  
+  #{if someoneElsesRequest}  
   <div class="apply_menu">
     <a class="apply" href="@{Handshakes.bindToRequest(requestItem.id)}">Apply</a>
     #{if hasApplied}
     <a class="cancel" href="@{Handshakes.cancelApplication(handshakeId)}">Cancel</a>
     #{/if}
+    </div>    
     #{/if}
-  </div>
+  
+  
 </div>
 
 <script>
