@@ -107,7 +107,7 @@ public class BaseController extends Controller
     @Before
     static void setOfferTagCloud() {
     	
-    	Query query = JPA.em().createQuery("select name, count(*) from Tag where is_offer is not null or offer_id is not null group by name order by count(*) desc");
+    	Query query = JPA.em().createQuery("select name, count(*) from Tag where is_offer is not null and offer_id is not null group by name order by count(*) desc");
     	List<Object[]> list = query.getResultList();
        	
     	List<TagCloudItem> tagCloud = new ArrayList<TagCloudItem>(); 
@@ -142,7 +142,7 @@ public class BaseController extends Controller
     @Before
     static void setRequestTagCloud() {
     	
-    	Query query = JPA.em().createQuery("select name, count(*) from Tag where is_request is not null or request_id is not null group by name order by count(*) desc");
+    	Query query = JPA.em().createQuery("select name, count(*) from Tag where is_request is not null and request_id is not null group by name order by count(*) desc");
     	List<Object[]> list = query.getResultList();
        	
     	List<TagCloudItem> tagCloud = new ArrayList<TagCloudItem>(); 
@@ -177,7 +177,7 @@ public class BaseController extends Controller
     @Before
     static void setOfferTagCloudBig() {
     	
-    	Query query = JPA.em().createQuery("select name, count(*) from Tag where is_offer is not null or offer_id is not null group by name order by count(*) desc");
+    	Query query = JPA.em().createQuery("select name, count(*) from Tag where is_offer is not null and offer_id is not null group by name order by count(*) desc");
     	List<Object[]> list = query.getResultList();
        	
     	List<TagCloudItem> tagCloud = new ArrayList<TagCloudItem>(); 
@@ -212,7 +212,7 @@ public class BaseController extends Controller
     @Before
     static void setRequestTagCloudBig() {
     	
-    	Query query = JPA.em().createQuery("select name, count(*) from Tag where is_request is not null or request is not null group by name order by count(*) desc");
+    	Query query = JPA.em().createQuery("select name, count(*) from Tag where is_request is not null and request is not null group by name order by count(*) desc");
     	List<Object[]> list = query.getResultList();
        	
     	List<TagCloudItem> tagCloud = new ArrayList<TagCloudItem>(); 
