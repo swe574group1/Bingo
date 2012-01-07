@@ -9,17 +9,64 @@
 	<h4>Details for Offer</h4>
 	<ul>
 	  <li>
-	    <label>Title</label>
+	    <label style="width:150px;">Title</label>
 	    ${offerItem.title}
 	  </li>
 	  <li>
-	    <label>Description</label>
+	    <label style="width:150px;">Description</label>
 	    ${offerItem.description}
 	  </li>
-          <li>
-            <label>Valid Until</label>
-	    ${offerItem.endDate.format('dd MMMM yyyy')}
-          </li>
+	  <li>
+	    <label style="width:150px;">Is Virtual?</label>
+	    <span id="txtVirtual"></span>
+	    <input type="checkbox" style="visibility: hidden; display: none" id="chkVir" ${offerItem.is_virtual ? 'checked':''} />
+	  </li>	 
+	  #{if offerItem.county_name}
+	  <li>
+	    <label style="width:150px;">County</label>
+	    	${offerItem.county_name}
+	  </li>
+	  #{/if}
+	  #{if offerItem.district_name}
+	  <li>
+	    <label style="width:150px;">District</label>
+	    	${offerItem.district_name}
+	  </li>
+	  #{/if}	
+	  <li>
+         <label style="width:150px;">Valid Until</label>
+	  		${offerItem.endDate.format('dd MMMM yyyy')}
+      </li>          
+      <li>
+	    <label style="width:150px;">Is Reoccurrent?</label>
+	    <span id="txtRec"></span>
+	    <input type="checkbox" style="visibility: hidden; display: none" id="chkRec" ${offerItem.reoccure ? 'checked':''} />
+	  </li>		    
+	  <li id="liDays">
+	  		<label id="lblDays1" style="color:inherit; font-weight:normal; position:relative;left:150px; width:339px; display:block;padding-top:6px;">
+            <span id="spnDays">&nbsp;Monday&nbsp;&nbsp;
+       		<input id="chkMonday" onclick='disableClick(this);' style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="offerItem.is_rec_monday" ${offerItem.is_rec_monday ? 'checked':''} />&nbsp;&nbsp;&nbsp;Tuesday
+       		<input id="chkTuesday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="offerItem.is_rec_tuesday" ${offerItem.is_rec_tuesday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;Wednesday
+       		<input id="chkWednesday" onclick='disableClick(this);' style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="offerItem.is_rec_wednesday" ${offerItem.is_rec_wednesday ? 'checked':''}/></span></label>  
+       		<label id="lblDays2" onclick='disableClick(this);' style="color:inherit; font-weight:normal; position:relative;left:150px; width:339px; padding-top:7px;padding-bottom:7px; display:block;">&nbsp;Thursday
+       		<input id="chkThursday" onclick='disableClick(this);' style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="offerItem.is_rec_thursday" ${offerItem.is_rec_thursday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;Friday&nbsp;&nbsp;&nbsp;
+       		<input id="chkFriday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="offerItem.is_rec_friday" ${offerItem.is_rec_friday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;Saturday&nbsp;&nbsp;&nbsp;&nbsp;
+       		<input id="chkSaturday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="offerItem.is_rec_saturday" ${offerItem.is_rec_saturday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;Sunday
+       		<input id="chkSunday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="offerItem.is_rec_sunday" ${offerItem.is_rec_sunday ? 'checked':''}/></label>
+	  </li>	  
+	  <li id="liRecTime">    		
+	      		<label style="width:150px;">Recurring Between</label> 		
+	      	    <span>${offerItem.reocc_start_hour} - ${offerItem.reocc_end_hour}</span>
+	      	    <input style="display:none; visibility: hidden" id="txtRecFrom" type="text" readonly="readonly" value="${offerItem.reocc_start_hour}"  />
+	      	    <input style="display:none; visibility: hidden" id="txtRecTo" type="text" readonly="readonly" value="${offerItem.reocc_end_hour}"  />
+	  </li>  
         </ul>
       </div>
     </div>
@@ -75,3 +122,39 @@
   #{/if}
 
 </div>
+
+<script>
+	function disableClick(input){
+		 input.checked == true ? input.checked = false : input.checked = true;
+		}
+	if(document.getElementById("chkVir").checked == 0)
+	{	  		
+		document.getElementById("txtVirtual").innerHTML = "No";	  		
+	}
+	else 
+	{
+ 	document.getElementById("txtVirtual").innerHTML = "Yes";
+	}
+	
+ 	if(document.getElementById("chkRec").checked == 0)
+  	{ 		
+ 		document.getElementById("liDays").style.visibility = "hidden";
+  		document.getElementById("liDays").style.display= "none";
+ 		
+  		document.getElementById("lblDays1").style.visibility = "hidden";
+  		document.getElementById("lblDays1").style.display= "none";
+  		document.getElementById("lblDays2").style.visibility = "hidden";
+  		document.getElementById("lblDays2").style.display = "none";
+  		
+  		document.getElementById("txtRec").innerHTML = "No";	  		
+  	}
+  	else 
+	{
+	 	document.getElementById("txtRec").innerHTML = "Yes";
+  	}
+	if(document.getElementById("txtRecFrom").value == document.getElementById("txtRecTo").value)	
+	{
+  		document.getElementById("liRecTime").style.visibility = "hidden";
+  		document.getElementById("liRecTime").style.display= "none";
+  	}
+</script>
