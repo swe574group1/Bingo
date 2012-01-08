@@ -111,7 +111,7 @@ public class Offers extends BaseController
     public static void search(String phrase, String location, String county_id, String district_id) {
     	User user = getConnectedUser();
 
-    	Query openOffersQuery = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING'");
+    	Query openOffersQuery = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING' and user_id!=" + user.id);
 		List<Object[]> openOffersList = openOffersQuery.getResultList();
     	List<Offer> allOffers = new ArrayList(openOffersList);
     	List<Offer> foundOffers = MatchService.match(allOffers, phrase);
