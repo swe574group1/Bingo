@@ -6,28 +6,48 @@
 	  <div class="post">
 	    <h3>You have been successfully registered to the system</h3>
 	    <p>You may use your email and password information to login to the system.</p>
-	    <p><a href="@{Application.index()}"><input type="button" class="login_button" value="Main Page" /></a></p>
+	   <!-- <p><a href="@{Application.index()}"><input type="button" class="login_button" value="Main Page" /></a></p> -->
+	
+	<form action="@{Secure.authenticate()}" method="POST" style="width:310px">
+        	#{if flash.error}
+			<p class="ikaz" style="padding:5px 5px; margin:5px;">Wrong Email or Password! Please try again.</span>
+			#{/if}        	
+        	<ul class="long_login">
+        	  <li>
+                  <label style="width:95px;">Email</label>
+                  <input type="text" name="username" value="${flash.username}" style="width:180px" />
+              </li>
+              <li>
+                  <label style="width:95px;">Password</label>
+                    <input type="password" name="password" style="width:180px" />
+              </li>               
+      		  <li style="padding-left:30px; padding-right:15px; text-align: right">
+      		  	<label></label>
+                  <input type="submit" class="login_button" value="Login" style="float:right; width:90px;" />
+              </li>
+			</ul>
+        </form>
 	
 	    <h4>Your User Information</h4>
 	    <ul class="long_login">
-		      <li>
-			<label>Full Name</label>
+		      <li style="padding-left:30px;">
+			<label style="length:200px;">Full Name</label>
 			<input class="roinput" type="text" readonly="readonly" value="${user.fullname}" />
 		      </li>
-		      <li>
-			<label>Email</label>
+		      <li style="padding-left:30px;">
+			<label style="length:200px;">Email</label>
 			<input class="roinput" type="text" readonly="readonly" value="${user.email}" />
 		      </li>
-		      <li>
-			<label>Address</label>
+		      <li style="padding-left:30px;">
+			<label style="length:200px;">Address</label>
 			<input class="roinput" type="text" readonly="readonly" value="${user.address}" />
 		      </li>
-		      <li>
-			<label>Initial Honey Combs</label>
-			<input class="roinput" type="text" readonly="readonly" value="${user.balance}" />
+		      <li style="padding-left:30px;">
+				<label style="length:400px;">Honey Combs</label>
+				<input class="roinput" type="text" readonly="readonly" value="${user.balance}" />
 		      </li>
-		      <li>
-			<label>Reputation</label>
+		      <li style="padding-left:30px;">
+			<label style="length:200px;">Reputation</label>
 			<input class="roinput" type="text" readonly="readonly" value="${user.reputation}" />
 		      </li>
 	    </ul>

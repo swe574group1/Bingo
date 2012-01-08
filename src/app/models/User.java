@@ -18,7 +18,7 @@ import play.db.jpa.Blob;
 public class User extends Model
  {
      public int INITIAL_BALANCE = 10;
-     public int INITIAL_REPUTATION = 1;
+     public int INITIAL_REPUTATION = 3;
 
      @Required
      public String email;
