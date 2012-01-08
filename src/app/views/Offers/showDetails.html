@@ -135,6 +135,15 @@
   #{list items: userApplications, as:'userApplication'}
   <li>
     ${userApplication.getKey().fullname}
+    <a href="@{Users.profile(userApplication.getKey().id)}">
+      #{if userApplication.getKey().photo.exists()}
+      <img alt=" ${handshake.offer.user.fullname}'s avatar" src="@{Application.showUserPhoto(handshake.offer.user.id)}" class="lemiddleavatar"/>
+      #{/if}
+      #{else}
+      <img alt="Default Avatar" src="/public/images/lbi02.png" class="lepetitavatar" />
+      #{/else}
+    </a>
+    <br>
     <a href="@{Handshakes.accept(userApplication.getValue().id)}">Accept</a>
     <a href="@{Handshakes.ignore(userApplication.getValue().id)}">Ignore</a>
   </li>
