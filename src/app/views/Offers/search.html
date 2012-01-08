@@ -2,10 +2,32 @@
 #{set title:'Search Offers' /}
 <h3>Offers</h3>
 #{if allOffers}
-<form action="@{Offers.search()}" style="width:655px; padding:15px 5px 15px 20px;">
-  <label for="phrase" style="float:left; width:70px; margin-top:10px">Search</label>
+<form  action="@{Offers.search()}" style="width:655px; padding:15px 5px 15px 20px;">
+  <label for="phrase" style="float:left; width:125px; margin-top:10px">Search</label>
   <input type="text" name="phrase" id="phrase" value="${phrase}" style="width:300px" />
   &nbsp;Leave empty to search all items
+  <br/>
+  <label style="float:left; width:125px; margin-top:10px" >Include location</label>
+  	   <select id="ddlLocation" onchange="enableLocation(this);">
+  			<option value="0" selected="selected">No</option>
+  			<option value="1">Yes</option>	  			
+		</select>  
+		<input id="txt_in_location" type="text" name="location" value="${location}" style="width:300px" />		
+	<div id="div_County_Dis">
+	   <label style="float:left; padding-left:20px; width:105px; margin-top:10px" >County</label>
+			<select id="ddlCounty" onchange="changeForCounty();">
+	        #{list items:counties, as:'countyItem'}
+		    <option value="${countyItem.county_id}">	      	    
+		         ${countyItem.name}        
+		    </option>	    
+		    #{/list}
+		    </select> 	    
+	   <br/>
+	   <label style="float:left; padding-left:20px; width:105px; margin-top:10px" >District</label>
+	  	   <select id="ddlCounty">  			
+			</select>  
+	</div>
+	<input type="submit" style="height:1px; width:1px; border:none; color:transparent; background:transparent" id="btnSubmit">&nbsp;</input>
 </form>
 #{/if}
 
@@ -60,3 +82,96 @@
  <label style="padding-left:45px;">There are no available offers.</label>
 #{/else}
 #{/else}
+
+
+<script>
+$('div').keypress( function(e) { 
+	   if(e.keyCode == '13') { 
+	     $(this).find('.btnSubmit').click(); 
+	   } 
+	}); 
+
+
+var ddlLocation = document.getElementById("ddlLocation") ;
+
+if(ddlLocation.options[ddlLocation.selectedIndex].value == 0)
+{
+	document.getElementById("div_County_Dis").style.visibility = "hidden";
+	document.getElementById("div_County_Dis").style.display = "none";
+	document.getElementById("txt_in_location").value= "0";	
+}
+else 
+{
+	document.getElementById("div_County_Dis").style.visibility = "visible";
+	document.getElementById("div_County_Dis").style.display = "";	
+	document.getElementById("txt_in_location").value= "1";
+}
+
+function enableLocation(ddl) {
+	if(ddl.options[ddl.selectedIndex].value == 0)
+	{
+		document.getElementById("div_County_Dis").style.visibility = "hidden";
+		document.getElementById("div_County_Dis").style.display = "none";	
+		document.getElementById("txt_in_location").value= "0";	
+	}
+	else 
+	{
+		document.getElementById("div_County_Dis").style.visibility = "visible";
+		document.getElementById("div_County_Dis").style.display = "";	
+		document.getElementById("txt_in_location").value= "1";
+	}
+}
+
+function fillDistricts(p_county)
+{
+	var ddlDis = document.getElementById("ddlDistrict");
+	
+	if(p_county == "0")
+	{			
+		var tmp = ddlDis.length;
+		for(var i=0; i < tmp; i++)
+		{	
+			ddlDis.remove(0);
+		}
+		
+		addElement("All","0",ddlDis)
+		document.getElementById("txtDistrictName").value = "";
+		document.getElementById("txtDistrictId").value = "";
+	}
+	else 
+	{
+		var tmp = ddlDis.length;
+		for(var i=0; i < tmp; i++)
+		{	
+			ddlDis.remove(0);
+		}
+		addElement("All","0",ddlDis)
+		
+		var ddlAllDistrict = document.getElementById("ddlAllDistrict");
+		for(var i=0; i < ddlAllDistrict.length; i++)
+		{
+			var searchStr = "##" + p_county + "##";	
+			if(ddlAllDistrict.options[i].text.indexOf(searchStr) > -1)
+			{
+				addElement(ddlAllDistrict.options[i].text.replace(searchStr,""),ddlAllDistrict.options[i].value, ddlDis);
+			}
+		}	
+	}	
+}
+
+function addElement(text,value,ddl)
+{ 
+	var elOptNew = document.createElement('option');
+	elOptNew.text = text;
+	elOptNew.value = value;
+	
+  	try 
+	{
+		ddl.add(elOptNew, null); // standards compliant; doesn't work in IE
+	}
+  	catch(ex) {
+	    ddl.add(elOptNew); // IE only
+	}
+}
+
+</script>
