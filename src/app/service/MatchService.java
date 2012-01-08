@@ -51,17 +51,23 @@ public class MatchService
             if (!found) {
 		        String Desc = item.getDescription();
 		        
-                if(Desc.toUpperCase().contains(phrase.toUpperCase())) {
-                    found = true;
-                }		        
+		        if(Desc!= null && Desc.length()>0 && phrase!=null && phrase.length()>0)
+		        {
+	                if(Desc.toUpperCase().contains(phrase.toUpperCase())) {
+	                    found = true;
+	                }
+		        }
             }
             
             if (!found) {
 		        String Title = item.getTitle();
 		        
-                if(Title.toUpperCase().contains(phrase.toUpperCase())) {
-                    found = true;
-                }		        
+		        if(Title!= null && Title.length()>0 && phrase!=null && phrase.length()>0)
+		        {
+	                if(Title.toUpperCase().contains(phrase.toUpperCase())) {
+	                    found = true;
+	                }	
+		        }
             }
             
             if (found) {
