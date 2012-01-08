@@ -133,8 +133,11 @@
   <ul>
   #{if userApplications}
   #{list items: userApplications, as:'userApplication'}
-  <li>
-    ${userApplication.getKey().fullname}
+  <div class="active_users">
+    <div class="user">
+      <div class="left_">
+        <div class="image">
+          <div align="center">
     <a href="@{Users.profile(userApplication.getKey().id)}">
       #{if userApplication.getKey().photo.exists()}
       <img alt=" ${handshake.offer.user.fullname}'s avatar" src="@{Application.showUserPhoto(handshake.offer.user.id)}" class="lemiddleavatar"/>
@@ -143,10 +146,45 @@
       <img alt="Default Avatar" src="/public/images/lbi02.png" class="lepetitavatar" />
       #{/else}
     </a>
-    <br>
-    <a href="@{Handshakes.accept(userApplication.getValue().id)}">Accept</a>
-    <a href="@{Handshakes.ignore(userApplication.getValue().id)}">Ignore</a>
-  </li>
+
+	  </div>
+        </div>
+        <div class="credits">
+          <div align="center">${userApplication.getKey().balance} Honey Combs</div>
+        </div>
+        <div class="handshake_link">
+	    <a href="@{Handshakes.accept(userApplication.getValue().id)}">Accept</a>
+        </div>
+	<br/>
+	<div class="ignore_link">
+	  <a href="@{Handshakes.ignore(userApplication.getValue().id)}">Ignore</a>
+        </div>
+
+      </div>
+      <div class="right_">
+        <ul>
+          <li>
+            User: <strong>${userApplication.getKey().fullname}</strong>
+          </li>
+          <!-- <li> -->
+          <!--   Favourite Tags: <a href="#">Books</a> <a href="#">Swimming</a> -->
+          <!-- </li> -->
+          <!-- <li> -->
+          <!--   Recent Offer: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago) -->
+          <!-- </li> -->
+          <!-- <li> -->
+          <!--   Recent Request: <a href="#">Reading Book</a> with <a href="#">Ertug Karamatli</a> (2 days ago) -->
+          <!-- </li> -->
+          <!-- <li> -->
+          <!--   14 handshake in last 3 months! -->
+          <!-- </li> -->
+        </ul>
+      </div>
+      
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+
   #{/list}
   #{/if}
   </ul>

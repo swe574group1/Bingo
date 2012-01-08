@@ -1658,3 +1658,20 @@ img.lemiddleavatar {
     max-width: 70px;
     max-height: 70px;
 }
+
+.ignore_link {
+	border:0px solid red;
+	margin:10px 0px 0px 10px;
+}
+.ignore_link a {
+	padding:10px;
+	background-color:#E32;
+	color:#fff;
+	-moz-border-radius:8px;
+	border-radius:8px;
+	
+	
+}
+.ignore_link a:hover {
+	background-color:#C32;
+}
