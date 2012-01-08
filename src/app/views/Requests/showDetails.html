@@ -152,7 +152,7 @@
           <div align="center">
     <a href="@{Users.profile(userApplication.getKey().id)}">
       #{if userApplication.getKey().photo.exists()}
-      <img alt=" ${handshake.offer.user.fullname}'s avatar" src="@{Application.showUserPhoto(handshake.offer.user.id)}" class="lemiddleavatar"/>
+      <img alt=" ${userApplication.getKey().fullname}'s avatar" src="@{Application.showUserPhoto(userApplication.getKey().id)}" class="lemiddleavatar"/>
       #{/if}
       #{else}
       <img alt="Default Avatar" src="/public/images/lbi02.png" class="lepetitavatar" />
