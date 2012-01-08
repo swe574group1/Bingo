@@ -19,6 +19,9 @@ public class Tag extends Model
     
     public String name;
 
+    public Boolean is_offer;
+    public Boolean is_request;
+    
     public Tag(Offer offer, String name)
 	{
     	this.offer = offer;
@@ -35,4 +38,5 @@ public class Tag extends Model
     {
     	return name;
     }
+
 }
