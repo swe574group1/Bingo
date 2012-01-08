@@ -132,6 +132,15 @@ public class Handshakes extends BaseController
 	Boolean accepted = true;
         renderTemplate("Handshakes/bind.html", handshakeItem, accepted);
     }
+
+    
+    public static void ignore(Long handshakeId) {
+	Handshake handshakeItem = Handshake.findById(handshakeId);
+	handshakeItem.status = Status.IGNORED;
+	handshakeItem.save();
+
+	renderTemplate("Handshakes/bind.html", handshakeItem);
+    }
     
     public static void start(Long handshakeId) {
         Handshake handshakeItem = Handshake.findById(handshakeId);
@@ -192,6 +201,7 @@ public class Handshakes extends BaseController
 	show(handshakeId);
     }
 
+    
     private static void updateBadgeForHandshake(Handshake handshake){
     	updateBadgeForUser(handshake.offer.user);
     	updateBadgeForUser(handshake.request.user);

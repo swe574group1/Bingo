@@ -136,6 +136,7 @@
   <li>
     ${userApplication.getKey().fullname}
     <a href="@{Handshakes.accept(userApplication.getValue().id)}">Accept</a>
+    <a href="@{Handshakes.ignore(userApplication.getValue().id)}">Ignore</a>
   </li>
   #{/list}
   #{/if}

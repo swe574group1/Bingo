@@ -16,7 +16,7 @@ import play.db.jpa.Model;
 public class Handshake extends Model
 {
     public enum Status {
-        WAITING_APPROVAL, ACCEPTED, REJECTED, STARTED, CANCELLED, DONE, UNKNOWN
+        WAITING_APPROVAL, ACCEPTED, REJECTED, STARTED, CANCELLED, DONE, UNKNOWN, IGNORED
     }
 
     @OneToOne
