@@ -104,4 +104,10 @@ public class Offer extends Model implements Matchable
     {
         return tags;
     }
+    
+    @Override
+    public String getDescription()
+    {
+        return description;
+    }
 }

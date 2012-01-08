@@ -162,7 +162,7 @@ public class Offers extends BaseController
     		openOffersQuery = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING'");
     		List<Object[]> openOffersList = openOffersQuery.getResultList();
         	List<Offer> allOffers = new ArrayList(openOffersList);
-        	List<Offer> foundOffers = MatchService.match(allOffers, phrase);
+        	List<Offer> foundOffers = MatchService.match(allOffers, phrase, allOffers);
         	
         	render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered);
     	}

@@ -17,22 +17,22 @@ public class MatchService
             boolean found = false;
             for(Tag tag : item.getTags()) {
                 for(String tagString : tags) {
-                    if(tag.name.toUpperCase().equals(tagString.toUpperCase())) {
+                    if(tag.name.toUpperCase().contains(tagString.toUpperCase())) {
                         found = true;
                         break;
                     }
                 }
             }
-
+            
             if (found) {
                 matchedItems.add(item);
-            }
+            } 
         }
 
         return matchedItems;
     }
 	
-	public static <M extends Matchable> List<M> match(List<M> allItems, String phrase, String location, String county_id, String district_id)
+	public static <M extends Matchable> List<M> match(List<M> allItems, String phrase, List<Offer> allOffers)
     {
 	    List<String> tags = Utils.parseTags(phrase);
 
@@ -41,16 +41,16 @@ public class MatchService
             boolean found = false;
             for(Tag tag : item.getTags()) {
                 for(String tagString : tags) {
-                    if(tag.name.toUpperCase().equals(tagString.toUpperCase())) {
+                    if(tag.name.toUpperCase().contains(tagString.toUpperCase())) {
                         found = true;
                         break;
                     }
                 }
             }
-
+            
             if (found) {
                 matchedItems.add(item);
-            }
+            }  
         }
 
         return matchedItems;
