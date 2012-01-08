@@ -88,8 +88,9 @@ public class Handshakes extends BaseController
 	Handshake handshake = Handshake.findById(id);
 	List<Comment> comments = Comment.find("handshake = ?", handshake).fetch();
 	Boolean originallyOffer = handshake.isOriginallyAnOffer;
+	Integer commentCount = comments.size();
 	
-	render(currentUser, handshake, comments, originallyOffer);
+	render(currentUser, handshake, comments, originallyOffer, commentCount);
     }
 
     public static void list() {
