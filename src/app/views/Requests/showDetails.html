@@ -110,12 +110,23 @@
       </div>
     </div>
     
+    <!-- 
     <div class="post-meta">
       <h4>tags</h4>
       <p>
 	${requestItem.tags.join(' ')}
       </p>
+    </div> -->    
+    
+     <div class="post-meta">
+      <h4>tags</h4>
+      <p>
+      #{list items:requestItem.tags, as:'requestTag'}
+      <a href="@{Requests.search(requestTag)}">${requestTag}</a>
+      #{/list}
+      </p>
     </div>
+    
     </div>
   
   #{if someoneElsesRequest}  

@@ -3,8 +3,9 @@
 <h3>Offers</h3>
 #{if allOffers}
 <form action="@{Offers.search()}" style="width:655px; padding:15px 5px 15px 20px;">
-  <label for="phrase" style="float:left; width:100px; margin-top:10px">Search</label>
-  <input type="text" name="phrase" id="phrase" value="${phrase}" style="width:500px" />
+  <label for="phrase" style="float:left; width:70px; margin-top:10px">Search</label>
+  <input type="text" name="phrase" id="phrase" value="${phrase}" style="width:300px" />
+  &nbsp;Leave empty to search all items
 </form>
 #{/if}
 
@@ -30,7 +31,8 @@
 </table>
 #{/if}
 #{else}
-No offers are able the match the keyword.
+<br/>
+ <label style="padding-left:45px;">No offers are able to match the criteria.</label>
 #{/else}
 #{/if}
 #{else}
@@ -55,6 +57,6 @@ No offers are able the match the keyword.
 </table>
 #{/if}
 #{else}
-There are no available offers.
+ <label style="padding-left:45px;">There are no available offers.</label>
 #{/else}
 #{/else}
