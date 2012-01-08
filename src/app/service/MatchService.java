@@ -42,19 +42,70 @@ public class MatchService
         boolean found = false;
         
         /* found in both Tag,Desc,Title*/
-        for(M item : allItems) {
-            Integer foundCount = 0;
-            
-            for(Tag tag : item.getTags()) {
-                for(String tagString : tags) {
-                    if(tag.name.toUpperCase().contains(tagString.toUpperCase())) {
-                    	foundCount++;
-                        break;
-                    }
-                }
-            }
-            
-            if (foundCount == 1) {
+        try
+    	{
+	        for(M item : allItems) {
+	            Integer foundCount = 0;
+	            
+	            for(Tag tag : item.getTags()) {
+	                for(String tagString : tags) {
+	                    if(tag.name.toUpperCase().contains(tagString.toUpperCase())) {
+	                    	foundCount++;
+	                        break;
+	                    }
+	                }
+	            }
+	            
+	            if (foundCount == 1) {
+			        String Desc = item.getDescription();
+			        
+			        if(Desc!= null && Desc.length()>0 && phrase!=null && phrase.length()>0)
+			        {
+		                if(Desc.toUpperCase().contains(phrase.toUpperCase())) {
+		                	foundCount++;
+		                }
+			        }
+	            }
+	            
+	            if (foundCount == 2) {
+			        String Title = item.getTitle();
+			        
+			        if(Title!= null && Title.length()>0 && phrase!=null && phrase.length()>0)
+			        {
+		                if(Title.toUpperCase().contains(phrase.toUpperCase())) {
+		                	foundCount++;
+		                }	
+			        }
+	            }
+	            
+	            if (foundCount == 3) {
+	            	found = true;
+	                matchedItems.add(item);
+	                allItems.remove(item);
+	            }
+	        }
+    	}
+    	catch(Exception ex)
+    	{
+    	}
+        /*end 3*/
+        
+        /* found in two of them*/
+    	try
+    	{
+	        for(M item : allItems) {
+	            Integer foundCount = 0;
+	            
+	            for(Tag tag : item.getTags()) {
+	                for(String tagString : tags) {
+	                    if(tag.name.toUpperCase().contains(tagString.toUpperCase())) {
+	                    	foundCount++;
+	                        break;
+	                    }
+	                }
+	            }
+	            
+	           
 		        String Desc = item.getDescription();
 		        
 		        if(Desc!= null && Desc.length()>0 && phrase!=null && phrase.length()>0)
@@ -63,9 +114,8 @@ public class MatchService
 	                	foundCount++;
 	                }
 		        }
-            }
-            
-            if (foundCount == 2) {
+	            
+	            
 		        String Title = item.getTitle();
 		        
 		        if(Title!= null && Title.length()>0 && phrase!=null && phrase.length()>0)
@@ -74,96 +124,64 @@ public class MatchService
 	                	foundCount++;
 	                }	
 		        }
-            }
-            
-            if (foundCount == 3) {
-            	found = true;
-                matchedItems.add(item);
-                allItems.remove(item);
-            }
-        }
-        /*end 3*/
-        
-        /* found in two of them*/
-        for(M item : allItems) {
-            Integer foundCount = 0;
-            
-            for(Tag tag : item.getTags()) {
-                for(String tagString : tags) {
-                    if(tag.name.toUpperCase().contains(tagString.toUpperCase())) {
-                    	foundCount++;
-                        break;
-                    }
-                }
-            }
-            
-           
-	        String Desc = item.getDescription();
-	        
-	        if(Desc!= null && Desc.length()>0 && phrase!=null && phrase.length()>0)
-	        {
-                if(Desc.toUpperCase().contains(phrase.toUpperCase())) {
-                	foundCount++;
-                }
+	       	            
+	            if (foundCount == 2) {
+	            	found = true;
+	                matchedItems.add(item);
+	                allItems.remove(item);
+	            }
 	        }
-            
-            
-	        String Title = item.getTitle();
-	        
-	        if(Title!= null && Title.length()>0 && phrase!=null && phrase.length()>0)
-	        {
-                if(Title.toUpperCase().contains(phrase.toUpperCase())) {
-                	foundCount++;
-                }	
-	        }
-       	            
-            if (foundCount == 2) {
-            	found = true;
-                matchedItems.add(item);
-                allItems.remove(item);
-            }
-        }
+    	}
+    	catch(Exception ex)
+    	{
+    	}
         /*end 2*/
         
         /* found in one of them*/
-        for(M item : allItems) {
-            Integer foundCount = 0;
-            
-            for(Tag tag : item.getTags()) {
-                for(String tagString : tags) {
-                    if(tag.name.toUpperCase().contains(tagString.toUpperCase())) {
-                    	foundCount++;
-                        break;
-                    }
-                }
-            }
-            
-           
-	        String Desc = item.getDescription();
-	        
-	        if(Desc!= null && Desc.length()>0 && phrase!=null && phrase.length()>0)
-	        {
-                if(Desc.toUpperCase().contains(phrase.toUpperCase())) {
-                	foundCount++;
-                }
-	        }
-            
-            
-	        String Title = item.getTitle();
-	        
-	        if(Title!= null && Title.length()>0 && phrase!=null && phrase.length()>0)
-	        {
-                if(Title.toUpperCase().contains(phrase.toUpperCase())) {
-                	foundCount++;
-                }	
-	        }
-       	            
-            if (foundCount > 0) {
-            	found = true;
-                matchedItems.add(item);
-                allItems.remove(item);
-            }
-        }
+    	try
+    	{
+		    for(M item : allItems) {
+		        Integer foundCount = 0;
+		        
+		        for(Tag tag : item.getTags()) {
+		            for(String tagString : tags) {
+		                if(tag.name.toUpperCase().contains(tagString.toUpperCase())) {
+		                	foundCount++;
+		                    break;
+		                }
+		            }
+		        }
+		        
+		       
+		        String Desc = item.getDescription();
+		        
+		        if(Desc!= null && Desc.length()>0 && phrase!=null && phrase.length()>0)
+		        {
+		            if(Desc.toUpperCase().contains(phrase.toUpperCase())) {
+		            	foundCount++;
+		            }
+		        }
+		        
+		        
+		        String Title = item.getTitle();
+		        
+		        if(Title!= null && Title.length()>0 && phrase!=null && phrase.length()>0)
+		        {
+		            if(Title.toUpperCase().contains(phrase.toUpperCase())) {
+		            	foundCount++;
+		            }	
+		        }
+		   	            
+		        if (foundCount > 0) {
+		        	found = true;
+		            matchedItems.add(item);
+		            allItems.remove(item);
+		        }
+		    }
+    	}
+    	catch(Exception ex)
+    	{
+    	}
         /*end 1*/
         
         return matchedItems;
