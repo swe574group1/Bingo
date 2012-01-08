@@ -8,4 +8,5 @@ public interface Matchable
 {
     List<Tag> getTags();
     String getDescription();
+    String getTitle();
 }

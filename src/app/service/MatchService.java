@@ -48,9 +48,17 @@ public class MatchService
                 }
             }
             
+            if (!found) {
+		        String Desc = item.getDescription();
+		        
+                if(Desc.toUpperCase().contains(phrase.toUpperCase())) {
+                    found = true;
+                }		        
+            }
+            
             if (found) {
                 matchedItems.add(item);
-            }  
+            }
         }
 
         return matchedItems;

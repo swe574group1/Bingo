@@ -99,13 +99,18 @@ public class Request extends Model implements Matchable
     {
         return tags;
     }
-
     
     @Override
     public String getDescription()
     {
         return description;
-    }
+    }    
+
+    @Override
+    public String getTitle()
+    {
+        return title;
+    }    
     
     public Request(User user, Offer offer) {
 	this.user = user;
