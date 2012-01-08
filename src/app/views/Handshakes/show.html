@@ -83,12 +83,6 @@
       
       
       <div class="apply_menu">
-	#{if handshake.status == models.Handshake.Status.WAITING_APPROVAL}
-	#{if (originallyOffer && currentUser.id == handshake.offererId) ||
-	    (!originallyOffer && currentUser.id == handshake.requesterId)}
-	<a class="apply" style="width:130px" href="@{Handshakes.accept(handshake.id)}">Accept</a>
-	#{/if}
-	#{/if}
 	#{if handshake.status == models.Handshake.Status.ACCEPTED}
 	<a style="width:130px" class="apply" href="@{Handshakes.start(handshake.id)}">Start</a>
 	<a style="width:130px" class="cancel" href="@{Handshakes.cancel(handshake.id)}">Cancel</a>
