@@ -4,16 +4,18 @@
 #{if allOffers}
 <form  action="@{Offers.search()}" style="width:655px; padding:15px 5px 15px 20px;">
   <label for="phrase" style="float:left; width:125px; margin-top:10px">Search</label>
-  <input type="text" name="phrase" id="phrase" value="${phrase}" style="width:300px" />
-  &nbsp;Leave empty to search all items
+  <input type="text" name="phrase" id="phrase" value="${phrase}" style="width:290px" />
+ <input type="submit" value="Go" onmouseover="this.style.cursor='pointer'" 
+ 		style="background-color:#090; width:100px; -moz-border-radius:8px; font-weight:bold; border-radius:8px;color:white" id="btnSubmit">&nbsp;</input>
   <br/>
-  <label style="float:left; width:125px; margin-top:10px" >Include location</label>
+  <label style="float:left; width:125px; margin-top:10px">Location</label>
   	   <select id="ddlLocation" onchange="enableLocation(this);">
-  			<option value="0" selected="selected">No</option>
-  			<option value="1">Yes</option>	  			
+  			<option value="0" selected="selected">No, do not search by location.</option>
+  			<option value="1">Yes, show me results in the selected locations.</option>	
+  		    <option value="2">Show me only offers with virtual locations.</option>			
 		</select>  
-		<input id="txt_in_location" type="text" name="location" value="${location}" style="width:300px" />		
-	<div id="div_County_Dis">
+		<input id="txt_in_location" type="text" name="location" value="${location}" style="visibility:hidden; display:none" />		
+	<div id="div_County_Dis" style="display:none; visibility:hidden">
 	   <label style="float:left; padding-left:20px; width:105px; margin-top:10px" >County</label>
 			<select id="ddlCounty" onchange="changeForCounty();">
 	        #{list items:counties, as:'countyItem'}
@@ -27,7 +29,7 @@
 	  	   <select id="ddlCounty">  			
 			</select>  
 	</div>
-	<input type="submit" style="height:1px; width:1px; border:none; color:transparent; background:transparent" id="btnSubmit">&nbsp;</input>
+	
 </form>
 #{/if}
 
@@ -94,17 +96,23 @@ $('div').keypress( function(e) {
 
 var ddlLocation = document.getElementById("ddlLocation") ;
 
-if(ddlLocation.options[ddlLocation.selectedIndex].value == 0)
+if(document.getElementById("txt_in_location").value == "0")
 {
 	document.getElementById("div_County_Dis").style.visibility = "hidden";
 	document.getElementById("div_County_Dis").style.display = "none";
-	document.getElementById("txt_in_location").value= "0";	
+	ddlLocation.options[0].selected = true;
 }
-else 
+else if(document.getElementById("txt_in_location").value == "1")
 {
 	document.getElementById("div_County_Dis").style.visibility = "visible";
-	document.getElementById("div_County_Dis").style.display = "";	
-	document.getElementById("txt_in_location").value= "1";
+	document.getElementById("div_County_Dis").style.display = "";
+	ddlLocation.options[1].selected = true;
+}
+else if(document.getElementById("txt_in_location").value == "2")
+{
+	document.getElementById("div_County_Dis").style.visibility = "hidden";
+	document.getElementById("div_County_Dis").style.display = "none";
+	ddlLocation.options[2].selected = true;
 }
 
 function enableLocation(ddl) {
@@ -114,11 +122,17 @@ function enableLocation(ddl) {
 		document.getElementById("div_County_Dis").style.display = "none";	
 		document.getElementById("txt_in_location").value= "0";	
 	}
-	else 
+	else if(ddl.options[ddl.selectedIndex].value == 1)
 	{
 		document.getElementById("div_County_Dis").style.visibility = "visible";
 		document.getElementById("div_County_Dis").style.display = "";	
 		document.getElementById("txt_in_location").value= "1";
+	}
+	else if(ddl.options[ddl.selectedIndex].value == 2)
+	{	
+		document.getElementById("div_County_Dis").style.visibility = "hidden";
+		document.getElementById("div_County_Dis").style.display = "none";	
+		document.getElementById("txt_in_location").value= "2";	
 	}
 }
 
