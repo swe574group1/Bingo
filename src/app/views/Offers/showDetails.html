@@ -85,7 +85,27 @@
         <ul>
           <li class="user">          
            <a href="@{Users.profile(offerOwner.id)}">           
-          	${offerItem.user.fullname}</a></li>
+          	${offerItem.user.fullname}</a>
+          	<script type="text/javascript">
+			 $(document).ready( function() {
+				 deger = ${offerItem.user.reputation};  
+					for(i = 1; i < 6; i++)
+					{
+						if( i > deger)
+						{
+							$('#user_star_area').append('<img class="imgNon" style="width:15px;" src="/public/images/stars0.png" />');  
+						}
+						else
+						{
+							$('#user_star_area').append('<img class="imgNon" style="width:15px;" src="/public/images/stars1.png" />'); 
+						}
+					}
+				});
+			  </script>
+		      <div id="user_star_area" style="width:130px; text-align: right;">
+		      
+		      </div>          	
+          	</li>
           <li><h4>Honey Combs</h4>${offerItem.credit}</li>
         </ul>
       </div>
