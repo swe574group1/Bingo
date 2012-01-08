@@ -51,17 +51,18 @@ public class Offers extends BaseController
 		offerItem.user = user;
 		offerItem.save();
 	
-		show(offerItem.id);
+		show(offerItem.id, isCreate);
     }
     
     public static void save(Long offerId) {
     	Offer offerItem = Offer.findById(offerId);
 	offerItem.save();
-	show(offerItem.id);
+	show(offerItem.id, true);
     }
 
-    public static void show(Long id) {
+    public static void show(Long id, Boolean isCreate) {
 	Offer offerItem = Offer.findById(id);
+	Boolean isOldOffer = !isCreate;
 	render(offerItem);
     }
 
