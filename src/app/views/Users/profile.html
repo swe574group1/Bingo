@@ -115,32 +115,31 @@
 
       <div class="post-meta">
         <ul>
-        <li>
+         <li style="text-align: left">
 		  	<script type="text/javascript">
 			 $(document).ready( function() {
-				 deger = '3';  
+				 deger = ${observedUser.reputation};  
 					for(i = 1; i < 6; i++)
 					{
 						if( i > deger)
 						{
-							$('#user_star_area').append('<img class="badge-image" src="/public/images/star-closed.png" />');  
+							$('#user_star_area').append('<img class="imgNon" style="width:26px;" src="/public/images/stars0.png" />');  
 						}
 						else
 						{
-							$('#user_star_area').append('<img class="badge-image" src="/public/images/star-open.png" />'); 
+							$('#user_star_area').append('<img class="imgNon" style="width:26px;" src="/public/images/stars1.png" />'); 
 						}
 					}
 				});
 			  </script>
-		      <div id="user_star_area">
+		      <div id="user_star_area" style="width:150px; text-align: left;">
 		      
 		      </div>
 		  </li>
-          <li>Name: ${observedUser.fullname}</li>
-	  <li>Honey Combs: ${observedUser.balance}</li>
-	  <li>Reputation: ${observedUser.reputation}</li>
-	  <li>City: ${observedUser.address}</li>
-          <li>Member Since: ${observedUser.registrationDate.format('dd MMMM yyyy')}</li>
+          <li style="text-align: left">&nbsp;Name: ${observedUser.fullname}</li>
+	  <li style="text-align: left">&nbsp;Honey Combs: ${observedUser.balance}</li>	 
+	  <li style="text-align: left">&nbsp;City:<br/>&nbsp;&nbsp;${observedUser.address}</li>
+          <li style="text-align: left">&nbsp;Member Since: <br/>&nbsp;&nbsp;${observedUser.registrationDate.format('dd MMMM yyyy')}</li>
 		  
         </ul>
       </div>

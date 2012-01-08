@@ -83,12 +83,13 @@
       </a>
       <div class="post-meta">
         <ul>
-          <li class="user">${offerItem.user.fullname}</li>
+          <li class="user">          
+           <a href="@{Users.profile(offerOwner.id)}">           
+          	${offerItem.user.fullname}</a></li>
           <li><h4>Honey Combs</h4>${offerItem.credit}</li>
         </ul>
       </div>
-    </div>
-    
+    </div>    
     <div class="post-meta">
       <h4>tags</h4>
       <p>
