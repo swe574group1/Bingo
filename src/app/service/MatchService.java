@@ -17,7 +17,7 @@ public class MatchService
             boolean found = false;
             for(Tag tag : item.getTags()) {
                 for(String tagString : tags) {
-                    if(tag.name.equals(tagString)) {
+                    if(tag.name.toUpperCase().equals(tagString.toUpperCase())) {
                         found = true;
                         break;
                     }
