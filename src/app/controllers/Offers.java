@@ -109,7 +109,7 @@ public class Offers extends BaseController
     	render(user, offerItem, offerOwner, someoneElsesOffer, hasApplied, userApplications, isOfferOwner);
     }
 
-    public static void search(String phrase, String location, String county_id, String district_id) {
+    public static void search(String phrase, String location, String county_id, String district_id, String reocc, String m1, String t2, String w3, String t4, String f5, String s6, String s7) {
     	User user = getConnectedUser();
 
     	if(location == null) location = "0";
@@ -146,7 +146,7 @@ public class Offers extends BaseController
         	
         	allOffers = new ArrayList(openOffersListAll);
         	
-       		render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered);
+       		render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered, reocc, m1, t2, w3, t4, f5, s6, s7);
     	}
     	else if(location.contains("2"))
     	{   		
@@ -155,7 +155,7 @@ public class Offers extends BaseController
         	List<Offer> allOffers = new ArrayList(openOffersList);
         	List<Offer> foundOffers = MatchService.match(allOffers, phrase);
 
-       		render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered);
+       		render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered, reocc, m1, t2, w3, t4, f5, s6, s7);
     	}
     	else 
     	{
@@ -164,7 +164,7 @@ public class Offers extends BaseController
         	List<Offer> allOffers = new ArrayList(openOffersList);
         	List<Offer> foundOffers = MatchService.match(allOffers, phrase);
         	
-        	render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered);
+        	render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered, reocc, m1, t2, w3, t4, f5, s6, s7);
     	}
     }
     

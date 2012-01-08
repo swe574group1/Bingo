@@ -32,6 +32,34 @@
 			 <input style="display:none; visibility:hidden" id="txtDistrictId" type="text" name="district_id" value="${district_id}" />  		  
 	</div>
 	
+	<br/>
+  <label style="float:left; width:125px; margin-top:10px">Reoccurance</label>
+   <select id="ddlReocc" onchange="enableReocc(this);" style="width:375px">
+  			<option value="0" selected="selected">Any day, any hour is fine for me</option>
+  			<option value="1">I want to search for specific day & hour</option>
+		</select>  
+		<input id="txt_reocc" type="text" name="reocc" value="${reocc}" style="visibility:hidden; display: none"/>
+		
+		<div id="divDaysHours" style="visibility:hidden; display:none">
+		<label style="width:400px;display:block;padding-left:140px;text-indent:-15px;padding-top:12px;">
+            <span id="spnDays">Monday&nbsp;&nbsp;
+       		<input id="chkMonday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="m1" ${m1 ? 'checked':''} />&nbsp;&nbsp;&nbsp;&nbsp;Tuesday
+       		<input id="chkTuesday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="t2" ${t2 ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Wednesday
+       		<input id="chkWednesday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="w3" ${w3 ? 'checked':''}/></span></label>  
+       		<label id="lblDays" style="padding-top:7px;padding-bottom:7px; width:400px;display:block;padding-left:140px;text-indent:-15px;">Thursday
+       		<input id="chkThursday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="t4" ${t4 ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Friday&nbsp;&nbsp;&nbsp;
+       		<input id="chkFriday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="f5" ${f5 ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Saturday&nbsp;&nbsp;&nbsp;
+       		<input id="chkSaturday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="s6" ${s6 ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Sunday
+       		<input id="chkSunday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="s7" ${s7 ? 'checked':''}/></label> 
+		</div>
+		
 </form>
 #{/if}
 #{if phrase}
@@ -136,6 +164,29 @@ $('div').keypress( function(e) {
 
 
 var ddlLocation = document.getElementById("ddlLocation") ;
+var ddlReocc = document.getElementById("ddlReocc") ;
+var divDaysHours = document.getElementById("divDaysHours");
+
+if(document.getElementById("txt_reocc").value == "0")
+{
+	ddlReocc.options[0].selected = true;
+	divDaysHours.style.visibility = "hidden";
+	divDaysHours.style.display = "none";
+	
+	document.getElementById("chkMonday").checked = 0;
+	document.getElementById("chkTuesday").checked = 0;
+	document.getElementById("chkWednesday").checked = 0;
+	document.getElementById("chkThursday").checked = 0;
+	document.getElementById("chkFriday").checked = 0;
+	document.getElementById("chkSaturday").checked = 0;
+	document.getElementById("chkSunday").checked = 0;	
+}
+else if(document.getElementById("txt_reocc").value == "1")
+{
+	ddlReocc.options[1].selected = true;
+	divDaysHours.style.visibility = "visible";
+	divDaysHours.style.display = "";
+}
 
 if(document.getElementById("txt_in_location").value == "0")
 {
@@ -182,6 +233,29 @@ else if(document.getElementById("txt_in_location").value == "2")
 	document.getElementById("div_County_Dis").style.visibility = "hidden";
 	document.getElementById("div_County_Dis").style.display = "none";
 	ddlLocation.options[2].selected = true;
+}
+
+function enableReocc(ddl) {
+	if(ddl.options[ddl.selectedIndex].value == 0)
+	{
+		document.getElementById("txt_reocc").value= "0";	
+		divDaysHours.style.visibility = "hidden";
+		divDaysHours.style.display = "none";
+		
+		document.getElementById("chkMonday").checked = 0;
+		document.getElementById("chkTuesday").checked = 0;
+		document.getElementById("chkWednesday").checked = 0;
+		document.getElementById("chkThursday").checked = 0;
+		document.getElementById("chkFriday").checked = 0;
+		document.getElementById("chkSaturday").checked = 0;
+		document.getElementById("chkSunday").checked = 0;	
+	}
+	else if(ddl.options[ddl.selectedIndex].value == 1)
+	{
+		document.getElementById("txt_reocc").value= "1";	
+		divDaysHours.style.visibility = "visible";
+		divDaysHours.style.display = "";
+	}
 }
 
 function enableLocation(ddl) {
