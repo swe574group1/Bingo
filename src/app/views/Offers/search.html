@@ -23,11 +23,13 @@
 		         ${countyItem.name}        
 		    </option>	    
 		    #{/list}
-		    </select> 	    
+		    </select> 	
+		    <input style="display:none; visibility:hidden" type="text" id="txtCountyId" name="county_id" value="${county_id}" />    
 	   <br/>
 	   <label style="float:left; padding-left:20px; width:105px; margin-top:10px" >District</label>
-	  	   <select id="ddlCounty">  			
+	  	   <select onchange="changeForDistrict();" id="ddlDistrict">  			
 			</select>  
+			 <input style="display:none; visibility:hidden" id="txtDistrictId" type="text" name="district_id" value="${district_id}" />  		  
 	</div>
 	
 </form>
@@ -85,6 +87,13 @@
 #{/else}
 #{/else}
 
+<select id="ddlAllDistrict" style="display:none; visibility:hidden;" 
+       #{list items:districts, as:'districtItem'}
+    <option value="${districtItem.district_id}">	      	    
+          ##${districtItem.county_id}##${districtItem.name}        
+    </option>	    
+    #{/list}
+</select>  
 
 <script>
 $('div').keypress( function(e) { 
@@ -107,6 +116,34 @@ else if(document.getElementById("txt_in_location").value == "1")
 	document.getElementById("div_County_Dis").style.visibility = "visible";
 	document.getElementById("div_County_Dis").style.display = "";
 	ddlLocation.options[1].selected = true;
+	
+	if(document.getElementById("txtCountyId").value != "")
+	{
+		var ddlC = document.getElementById("ddlCounty");
+		for(var i = 0; i< ddlC.length; i++)
+		{
+			if(ddlC.options[i].value == document.getElementById("txtCountyId").value)
+			{
+				ddlC.options[i].selected = true;
+				fillDistricts(ddlC.options[i].value);
+				break;
+			}
+		}				
+		
+		if(document.getElementById("txtDistrictId").value != "")
+		{	
+			var ddlDD = document.getElementById("ddlDistrict");
+			for(var i = 0; i< ddlDD.length; i++)
+			{
+				if(ddlDD.options[i].value == document.getElementById("txtDistrictId").value)
+				{
+					ddlDD.options[i].selected = true;
+					break;
+				}		
+			}		
+		}		
+	}
+	else fillDistricts("0");
 }
 else if(document.getElementById("txt_in_location").value == "2")
 {
@@ -121,18 +158,36 @@ function enableLocation(ddl) {
 		document.getElementById("div_County_Dis").style.visibility = "hidden";
 		document.getElementById("div_County_Dis").style.display = "none";	
 		document.getElementById("txt_in_location").value= "0";	
+		
+		document.getElementById("txtDistrictId").value = "";
+		document.getElementById("txtCountyId").value = "";
+		
+		fillDistricts("0");	
+		
+		document.getElementById("ddlDistrict").options[0].selected = true;
+		document.getElementById("ddlCounty").options[0].selected = true;
 	}
 	else if(ddl.options[ddl.selectedIndex].value == 1)
 	{
 		document.getElementById("div_County_Dis").style.visibility = "visible";
 		document.getElementById("div_County_Dis").style.display = "";	
-		document.getElementById("txt_in_location").value= "1";
-	}
+		document.getElementById("txt_in_location").value= "1";	
+		
+		fillDistricts("0");	
+	}	
 	else if(ddl.options[ddl.selectedIndex].value == 2)
 	{	
 		document.getElementById("div_County_Dis").style.visibility = "hidden";
 		document.getElementById("div_County_Dis").style.display = "none";	
 		document.getElementById("txt_in_location").value= "2";	
+		
+		document.getElementById("txtDistrictId").value = "";
+		document.getElementById("txtCountyId").value = "";
+		
+		fillDistricts("0");	
+		
+		document.getElementById("ddlDistrict").options[0].selected = true;
+		document.getElementById("ddlCounty").options[0].selected = true;
 	}
 }
 
@@ -149,7 +204,6 @@ function fillDistricts(p_county)
 		}
 		
 		addElement("All","0",ddlDis)
-		document.getElementById("txtDistrictName").value = "";
 		document.getElementById("txtDistrictId").value = "";
 	}
 	else 
@@ -173,6 +227,20 @@ function fillDistricts(p_county)
 	}	
 }
 
+function changeForDistrict()
+{	
+	var ddlD = document.getElementById("ddlDistrict");
+	if(ddlD.options[ddlD.selectedIndex].text == "All")
+	{
+		document.getElementById("txtDistrictId").value = "";
+	}
+	else
+	{
+		document.getElementById("txtDistrictId").value = ddlD.options[ddlD.selectedIndex].value;
+	}
+		
+}
+
 function addElement(text,value,ddl)
 { 
 	var elOptNew = document.createElement('option');
@@ -186,6 +254,24 @@ function addElement(text,value,ddl)
   	catch(ex) {
 	    ddl.add(elOptNew); // IE only
 	}
+}
+
+function changeForCounty()
+{		
+	var ddlC = document.getElementById("ddlCounty");
+		
+	if(ddlC.options[ddlC.selectedIndex].text == "All")
+	{		
+		document.getElementById("txtCountyId").value = "";		
+		document.getElementById("txtDistrictId").value = "";	
+	}
+	else
+	{		
+		document.getElementById("txtCountyId").value = ddlC.options[ddlC.selectedIndex].value;	
+		document.getElementById("txtDistrictId").value = "";
+	}
+		
+	fillDistricts(ddlC.options[ddlC.selectedIndex].value);
 }
 
 </script>

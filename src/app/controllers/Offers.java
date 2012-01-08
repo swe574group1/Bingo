@@ -107,7 +107,7 @@ public class Offers extends BaseController
     	render(user, offerItem, offerOwner, someoneElsesOffer, hasApplied, userApplications);
     }
 
-    public static void search(String phrase, String location) {
+    public static void search(String phrase, String location, String county_id, String district_id) {
     	User user = getConnectedUser();
 
     	Query openOffersQuery = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING'");
@@ -115,7 +115,7 @@ public class Offers extends BaseController
     	List<Offer> allOffers = new ArrayList(openOffersList);
     	List<Offer> foundOffers = MatchService.match(allOffers, phrase);
 
-    	render(user, foundOffers, allOffers, phrase, location);
+    	render(user, foundOffers, allOffers, phrase, location, county_id, district_id);
     }
 
     public static void edit(Long id) {
