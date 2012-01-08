@@ -18,9 +18,19 @@
       <img style="height:120px; width:120px;" src="/public/images/lbi02.png" alt="Default User Avatar" title="Your Profile Photo" style="margin-top:10px; display:block;"  />
       #{/else}
       </a><br />
+      <style>
+		  .create_offer {
+	background-color:#090;
+	-moz-border-radius:8px;
+	border-radius:8px;
+}
+.create_offer a {
+	color:#fff !important;
+}
+</style>
       <ul>
-        <li><a href="@{Offers.create()}">Create Offer</a></li>
-        <li><a href="@{Requests.create()}">Create Request</a></li>
+        <li class="create_offer"><a href="@{Offers.create()}">Create Offer</a></li>
+        <li class="create_offer"><a href="@{Requests.create()}">Create Request</a></li>
 		<li><a href="@{Offers.search()}">Search Offers</a></li>
 		<li><a href="@{Requests.search()}">Search Requests</a></li>
 		<li><a href="@{Handshakes.search()}">Search Handshakes</a></li>
