@@ -2,6 +2,9 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.AbstractMap;
+import java.util.HashMap;
+
 import javax.persistence.Query;
 import models.Offer;
 
@@ -85,6 +88,17 @@ public class Requests extends BaseController
 		handshakeId = handshakeItem.id;
 		break;
 	    }
+	}
+
+	Query applicationsQuery = JPA.em().createQuery("from " + Handshake.class.getName() + " where requesterId=" + requestOwner.id + " and request_id=" + requestItem.id + " and status='WAITING_APPROVAL'");
+	List<Object[]> applications = applicationsQuery.getResultList();
+	List<Handshake> applicationList = new ArrayList(applications);
+
+	AbstractMap<User, Handshake> userApplications = new HashMap();
+	
+	for (Handshake handshakeItem : applicationList) {
+	    User applicant = User.findById(handshakeItem.requesterId);
+	    userApplications.put(applicant, handshakeItem);
 	}
 	
 	Boolean someoneElsesRequest = (user != requestOwner);
