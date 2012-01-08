@@ -118,11 +118,33 @@
 
       <div class="post-meta">
         <ul>
+        <li>
+		  	<script type="text/javascript">
+			 $(document).ready( function() {
+				 deger = '3';  
+					for(i = 1; i < 6; i++)
+					{
+						if( i > deger)
+						{
+							$('#user_star_area').append('<img class="badge-image" src="/public/images/star-closed.png" />');  
+						}
+						else
+						{
+							$('#user_star_area').append('<img class="badge-image" src="/public/images/star-open.png" />'); 
+						}
+					}
+				});
+			  </script>
+		      <div id="user_star_area">
+		      
+		      </div>
+		  </li>
           <li>Name: ${observedUser.fullname}</li>
 	  <li>Honey Combs: ${observedUser.balance}</li>
 	  <li>Reputation: ${observedUser.reputation}</li>
 	  <li>City: ${observedUser.address}</li>
           <li>Member Since: ${observedUser.registrationDate.format('dd MMMM yyyy')}</li>
+		  
         </ul>
       </div>
       <div class="post-meta" style="text-align: left;">
