@@ -95,7 +95,7 @@ public class Handshakes extends BaseController
 
     public static void list() {
         User user = getConnectedUser();
-        List<Handshake> handshakes = Handshake.find("(offer.user.id = ? or request.user.id = ?) and status!='WAITING_APPROVAL'", user.id, user.id).fetch();
+        List<Handshake> handshakes = Handshake.find("(offer.user.id = ? or request.user.id = ?) and (status!='WAITING_APPROVAL' and status!='IGNORED')", user.id, user.id).fetch();
         render(handshakes);
     }
  
