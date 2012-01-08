@@ -112,14 +112,62 @@ public class Offers extends BaseController
     public static void search(String phrase, String location, String county_id, String district_id) {
     	User user = getConnectedUser();
 
-    	Query openOffersQuery = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING' and user_id!=" + user.id);
-		List<Object[]> openOffersList = openOffersQuery.getResultList();
-    	List<Offer> allOffers = new ArrayList(openOffersList);
-    	List<Offer> foundOffers = MatchService.match(allOffers, phrase);
+    	if(location == null) location = "0";
+    	Query openOffersQuery;   
+    	String showFiltered = null;
+    	
+    	if(location.contains("1"))
+    	{
+    		Query openOffersQueryAll = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING'");
+    		List<Object[]> openOffersListAll = openOffersQueryAll.getResultList();
+    		
+    		String addStr = "";
+    		
+    		if(district_id != null && district_id.length() > 0)
+    		{
+    			addStr = " and district_id =" + district_id;
+    		}
+    		else if(county_id != null && county_id.length() > 0)
+    		{
+    			addStr = " and county_id =" + county_id;
+    		}
+    		    		
+    		openOffersQuery = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING' and (is_virtual is null or is_virtual = False) " + addStr);
+    		List<Object[]> openOffersList = openOffersQuery.getResultList();
+        	List<Offer> allOffers = new ArrayList(openOffersList);
+        	
+        	List<Offer> foundOffers = MatchService.match(allOffers, phrase);
 
-    	render(user, foundOffers, allOffers, phrase, location, county_id, district_id);
+        	if(phrase == null || phrase.length() == 0)
+        	{
+        		showFiltered= "1";
+        		foundOffers = allOffers;
+        	}
+        	
+        	allOffers = new ArrayList(openOffersListAll);
+        	
+       		render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered);
+    	}
+    	else if(location.contains("2"))
+    	{   		
+    		openOffersQuery = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING'"+ " and is_virtual = True");
+    		List<Object[]> openOffersList = openOffersQuery.getResultList();
+        	List<Offer> allOffers = new ArrayList(openOffersList);
+        	List<Offer> foundOffers = MatchService.match(allOffers, phrase);
+
+       		render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered);
+    	}
+    	else 
+    	{
+    		openOffersQuery = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING'");
+    		List<Object[]> openOffersList = openOffersQuery.getResultList();
+        	List<Offer> allOffers = new ArrayList(openOffersList);
+        	List<Offer> foundOffers = MatchService.match(allOffers, phrase);
+        	
+        	render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered);
+    	}
     }
-
+    
     public static void edit(Long id) {
     	Offer offerItem = Offer.findById(id);
     	renderTemplate("Offers/form.html", offerItem);
