@@ -100,6 +100,13 @@ public class Request extends Model implements Matchable
         return tags;
     }
 
+    
+    @Override
+    public String getDescription()
+    {
+        return description;
+    }
+    
     public Request(User user, Offer offer) {
 	this.user = user;
 	this.title = offer.title;
