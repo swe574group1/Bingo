@@ -97,12 +97,12 @@ public class Requests extends BaseController
 	AbstractMap<User, Handshake> userApplications = new HashMap();
 	
 	for (Handshake handshakeItem : applicationList) {
-	    User applicant = User.findById(handshakeItem.requesterId);
+	    User applicant = User.findById(handshakeItem.offererId);
 	    userApplications.put(applicant, handshakeItem);
 	}
 	
 	Boolean someoneElsesRequest = (user != requestOwner);
-	render(user, requestItem, requestOwner, someoneElsesRequest, hasApplied, handshakeId);
+	render(user, requestItem, requestOwner, someoneElsesRequest, hasApplied, userApplications, handshakeId);
     }
     
     public static void search(String phrase) {
