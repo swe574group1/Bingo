@@ -103,9 +103,10 @@ public class Offers extends BaseController
 	    User applicant = User.findById(handshakeItem.requesterId);
 	    userApplications.put(applicant, handshakeItem);
 	}
-	
+
+	Boolean isOfferOwner = (user == offerOwner);
 	Boolean someoneElsesOffer = (user != offerItem.user);
-    	render(user, offerItem, offerOwner, someoneElsesOffer, hasApplied, userApplications);
+    	render(user, offerItem, offerOwner, someoneElsesOffer, hasApplied, userApplications, isOfferOwner);
     }
 
     public static void search(String phrase, String location, String county_id, String district_id) {
