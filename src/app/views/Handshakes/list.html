@@ -30,7 +30,7 @@
 	<a href="@{Users.profile(handshake.request.user.id)}">${handshake.request.user.fullname}</a>
       </td>
       <td>${handshake.offer.credit}</td>
-      <td>${handshake.status}</td>
+      <td>${handshake.status.toString().toLowerCase()}</td>
       <td><a href="@{Handshakes.show(handshake.id)}">Details</a></td>
   </tr>
 </a>

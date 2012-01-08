@@ -13,7 +13,7 @@ public class Application extends BaseController
 	    int recentUserCount = 5;
 	    int recentHandshakeCount = 5;
 	    List<User> newUsers = User.getNewUsers(recentUserCount);
-	    List<Handshake> newHandshakes = Handshake.find("status!='WAITING_APPROVAL' or status !='DONE' order by creationDate desc").fetch(recentHandshakeCount);
+	    List<Handshake> newHandshakes = Handshake.find("(status='ACCEPTED' or status='STARTED' or status='DONE') order by creationDate desc").fetch(recentHandshakeCount);
 	    render(newUsers, newHandshakes);
 	}
 
