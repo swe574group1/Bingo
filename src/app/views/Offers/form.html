@@ -535,4 +535,9 @@ if(document.getElementById("txt_val_until").value.indexOf(" 00:00:00.0") > -1)
 {
 	document.getElementById("txt_val_until").value = document.getElementById("txt_val_until").value.replace(" 00:00:00.0","");
 }
+
+if(document.getElementById("txt_val_until").value.indexOf("-") == -1)
+{
+	document.getElementById("txt_val_until").value = "";
+}
 </script>
