@@ -115,6 +115,33 @@ public class Offers extends BaseController
     	if(location == null) location = "0";
     	Query openOffersQuery;   
     	String showFiltered = null;
+    	String dayHoursFilter = "";
+    	
+    	if(reocc != null && reocc.contains("1"))
+    	{
+    		dayHoursFilter = " and reoccure = True ";
+    		
+    		if(m1 != null && m1.contains("on"))
+    			dayHoursFilter += " and is_rec_monday = True ";
+    		
+    		if(t2 != null && t2.contains("on"))
+    			dayHoursFilter += " and is_rec_tuesday = True ";
+    		
+    		if(w3 != null && w3.contains("on"))
+    			dayHoursFilter += " and is_rec_wednesday = True ";
+    		
+    		if(t4 != null && t4.contains("on"))
+    			dayHoursFilter += " and is_rec_thursday = True ";
+    		
+    		if(f5 != null && f5.contains("on"))
+    			dayHoursFilter += " and is_rec_friday = True ";
+    		
+    		if(s6 != null && s6.contains("on"))
+    			dayHoursFilter += " and is_rec_saturday = True ";
+    		
+    		if(s7 != null && s7.contains("on"))
+    			dayHoursFilter += " and is_rec_sunday = True ";
+    	}
     	
     	if(location.contains("1"))
     	{
@@ -132,7 +159,7 @@ public class Offers extends BaseController
     			addStr = " and county_id =" + county_id;
     		}
     		    		
-    		openOffersQuery = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING' and (is_virtual is null or is_virtual = False) " + addStr);
+    		openOffersQuery = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING' and (is_virtual is null or is_virtual = False) " + addStr + dayHoursFilter);
     		List<Object[]> openOffersList = openOffersQuery.getResultList();
         	List<Offer> allOffers = new ArrayList(openOffersList);
         	
@@ -150,20 +177,40 @@ public class Offers extends BaseController
     	}
     	else if(location.contains("2"))
     	{   		
-    		openOffersQuery = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING'"+ " and is_virtual = True");
+    		Query openOffersQueryAll = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING'");
+    		List<Object[]> openOffersListAll = openOffersQueryAll.getResultList();
+    		
+    		openOffersQuery = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING'"+ " and is_virtual = True" + dayHoursFilter);
     		List<Object[]> openOffersList = openOffersQuery.getResultList();
         	List<Offer> allOffers = new ArrayList(openOffersList);
         	List<Offer> foundOffers = MatchService.match(allOffers, phrase);
 
+        	if(phrase == null || phrase.length() == 0)
+        	{
+        		showFiltered= "1";
+        		foundOffers = allOffers;
+        	}
+        	
+        	allOffers = new ArrayList(openOffersListAll);
        		render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered, reocc, m1, t2, w3, t4, f5, s6, s7);
     	}
     	else 
     	{
-    		openOffersQuery = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING'");
+    		Query openOffersQueryAll = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING'");
+    		List<Object[]> openOffersListAll = openOffersQueryAll.getResultList();
+    		
+    		openOffersQuery = JPA.em().createQuery("from " + Offer.class.getName() + " where status is 'WAITING'" + dayHoursFilter);
     		List<Object[]> openOffersList = openOffersQuery.getResultList();
         	List<Offer> allOffers = new ArrayList(openOffersList);
         	List<Offer> foundOffers = MatchService.match(allOffers, phrase);
         	
+        	if(phrase == null || phrase.length() == 0)
+        	{
+        		showFiltered= "1";
+        		foundOffers = allOffers;
+        	}
+        	
+        	allOffers = new ArrayList(openOffersListAll);
         	render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered, reocc, m1, t2, w3, t4, f5, s6, s7);
     	}
     }

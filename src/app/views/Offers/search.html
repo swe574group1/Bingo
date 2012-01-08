@@ -38,8 +38,7 @@
   			<option value="0" selected="selected">Any day, any hour is fine for me</option>
   			<option value="1">I want to search for specific day & hour</option>
 		</select>  
-		<input id="txt_reocc" type="text" name="reocc" value="${reocc}" style="visibility:hidden; display: none"/>
-		
+		<input id="txt_reocc" type="text" name="reocc" value="${reocc}" style="visibility:hidden; display: none"/>		
 		<div id="divDaysHours" style="visibility:hidden; display:none">
 		<label style="width:400px;display:block;padding-left:140px;text-indent:-15px;padding-top:12px;">
             <span id="spnDays">Monday&nbsp;&nbsp;
@@ -58,8 +57,7 @@
        			   type="checkbox" name="s6" ${s6 ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Sunday
        		<input id="chkSunday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
        			   type="checkbox" name="s7" ${s7 ? 'checked':''}/></label> 
-		</div>
-		
+		</div>		
 </form>
 #{/if}
 #{if phrase}
