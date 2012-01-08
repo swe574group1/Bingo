@@ -4,15 +4,15 @@
 #{if allOffers}
 <form  action="@{Offers.search()}" style="width:655px; padding:15px 5px 15px 20px;">
   <label for="phrase" style="float:left; width:125px; margin-top:10px">Search</label>
-  <input type="text" name="phrase" id="phrase" value="${phrase}" style="width:290px" />
+  <input type="text" name="phrase" id="phrase" value="${phrase}" style="width:360px" />
  <input type="submit" value="Go" onmouseover="this.style.cursor='pointer'" 
  		style="background-color:#090; width:100px; -moz-border-radius:8px; font-weight:bold; border-radius:8px;color:white" id="btnSubmit">&nbsp;</input>
   <br/>
   <label style="float:left; width:125px; margin-top:10px">Location</label>
   	   <select id="ddlLocation" onchange="enableLocation(this);">
-  			<option value="0" selected="selected">No, do not search by location.</option>
-  			<option value="1">Yes, show me results in the selected locations.</option>	
-  		    <option value="2">Show me only offers with virtual locations.</option>			
+  			<option value="0" selected="selected">No, do not search by location</option>
+  			<option value="1">Yes, show me results in the selected locations (no virtuals)</option>	
+  		    <option value="2">Show me only offers with virtual locations</option>			
 		</select>  
 		<input id="txt_in_location" type="text" name="location" value="${location}" style="visibility:hidden; display:none" />		
 	<div id="div_County_Dis" style="display:none; visibility:hidden">
