@@ -62,6 +62,38 @@
 #{/else}
 #{/if}
 #{else}
+
+#{if showFiltered}
+
+#{if foundOffers}
+<table style="width:92%">
+  <tr>
+    <th>Title</th>
+    <th>Offerer</th>
+    <th>Valid Until</th>
+    <th>Honey Combs</th>
+    <th>Details</th>
+  </tr>
+  #{list items:foundOffers, as:'offer'}
+  <tr>
+    <td>${offer.title}</td>
+    <td>${offer.user.fullname}</td>
+    <td>${offer.endDate.format('dd MMMM yyyy')}</td>
+    <td>${offer.credit}</td>
+    <td><a href="@{Offers.showDetails(offer.id)}">Details</a></td>
+  </tr>
+  #{/list}
+</table>
+#{/if}
+#{else}
+<br/>
+ <label style="padding-left:45px;">No offers are able to match the criteria.</label>
+#{/else}
+
+
+#{/if}
+#{else}
+
 #{if allOffers}
 <table style="width:92%">
   <tr>
@@ -84,6 +116,7 @@
 #{/if}
 #{else}
  <label style="padding-left:45px;">There are no available offers.</label>
+#{/else}
 #{/else}
 #{/else}
 
