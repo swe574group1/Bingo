@@ -80,7 +80,7 @@ public class Handshakes extends BaseController
 	handshakeItem.save();
 
 	Boolean created = true;
-	renderTemplate("Handshakes/bind.html", handshakeItem, created);
+	renderTemplate("Handshakes/bind.html", handshakeItem, created, combCount);
     }
 
     public static void show(Long id) {
