@@ -2,12 +2,84 @@
 #{set title:'Search Requests' /}
 <h3>Requests</h3>
 #{if allRequests}
-<form action="@{Requests.search()}" style="width:655px; padding:15px 5px 15px 20px;">
-  <label for="phrase" style="float:left; width:100px; margin-top:10px">Search</label>
-  <input type="text" name="phrase" id="phrase" value="${phrase}" style="width:500px" />
+<form  action="@{Requests.search()}" style="width:655px; padding:15px 5px 15px 20px;">
+  <label for="phrase" style="float:left; width:125px; margin-top:10px">Search</label>
+  <input type="text" name="phrase" id="phrase" value="${phrase}" style="width:360px" />
+ <input type="submit" value="Go" onmouseover="this.style.cursor='pointer'" 
+ 		style="background-color:#090; width:100px; -moz-border-radius:8px; font-weight:bold; border-radius:8px;color:white" id="btnSubmit">&nbsp;</input>
+  <br/>
+  <label style="float:left; width:125px; margin-top:10px">Location</label>
+  	   <select id="ddlLocation" onchange="enableLocation(this);">
+  			<option value="0" selected="selected">No, do not search by location</option>
+  			<option value="1">Yes, show me results in the selected locations (no virtuals)</option>	
+  		    <option value="2">Show me only requests with virtual locations</option>			
+		</select>  
+		<input id="txt_in_location" type="text" name="location" value="${location}" style="visibility:hidden; display:none" />		
+	<div id="div_County_Dis" style="display:none; visibility:hidden">
+	   <label style="float:left; padding-left:20px; width:105px; margin-top:10px" >County</label>
+			<select id="ddlCounty" onchange="changeForCounty();">
+	        #{list items:counties, as:'countyItem'}
+		    <option value="${countyItem.county_id}">	      	    
+		         ${countyItem.name}        
+		    </option>	    
+		    #{/list}
+		    </select> 	
+		    <input style="display:none; visibility:hidden" type="text" id="txtCountyId" name="county_id" value="${county_id}" />    
+	   <br/>
+	   <label style="float:left; padding-left:20px; width:105px; margin-top:10px" >District</label>
+	  	   <select onchange="changeForDistrict();" id="ddlDistrict">  			
+			</select>  
+			 <input style="display:none; visibility:hidden" id="txtDistrictId" type="text" name="district_id" value="${district_id}" />  		  
+	</div>
+	
+	<br/>
+  <label style="float:left; width:125px; margin-top:10px">Reoccurance</label>
+   <select id="ddlReocc" onchange="enableReocc(this);" style="width:375px">
+  			<option value="0" selected="selected">Any day, any hour is fine for me</option>
+  			<option value="1">I want to search for specific day & hour</option>
+		</select>  
+		<input id="txt_reocc" type="text" name="reocc" value="${reocc}" style="visibility:hidden; display: none"/>		
+		<div id="divDaysHours" style="visibility:hidden; display:none">
+		<label style="width:400px;display:block;padding-left:140px;text-indent:-15px;padding-top:12px;">
+            <span id="spnDays">Monday&nbsp;&nbsp;
+       		<input id="chkMonday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="m1" ${m1 ? 'checked':''} />&nbsp;&nbsp;&nbsp;&nbsp;Tuesday
+       		<input id="chkTuesday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="t2" ${t2 ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Wednesday
+       		<input id="chkWednesday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="w3" ${w3 ? 'checked':''}/></span></label>  
+       		<label id="lblDays" style="padding-top:7px;padding-bottom:7px; width:400px;display:block;padding-left:140px;text-indent:-15px;">Thursday
+       		<input id="chkThursday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="t4" ${t4 ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Friday&nbsp;&nbsp;&nbsp;
+       		<input id="chkFriday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="f5" ${f5 ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Saturday&nbsp;&nbsp;&nbsp;
+       		<input id="chkSaturday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="s6" ${s6 ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Sunday
+       		<input id="chkSunday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
+       			   type="checkbox" name="s7" ${s7 ? 'checked':''}/></label> 
+       			   
+       		<label style="padding-left:125px;padding-right:10px;">Between</label>
+       		<select id="ddlRecTimeFrom" onchange="setTimeValue(this,1)" >
+       		 #{list items:recoccurancehouritems, as:'recoccurancehouritem'}
+		    <option value="${recoccurancehouritem.val}">	      	    
+		          ${recoccurancehouritem.hour_min}  
+		    </option>	    
+		    #{/list}
+			</select>
+			- 
+			<select id="ddlRecTimeTo" onchange="setTimeValue(this,2)" >
+       		 #{list items:recoccurancehouritems, as:'recoccurancehouritem'}
+		    <option value="${recoccurancehouritem.val}">	      	    
+		          ${recoccurancehouritem.hour_min}  
+		    </option>	    
+		    #{/list}
+			</select>
+			<input type="text" style="display:none; visibility: hidden" id="tFrom" name="tFrom" value="${tFrom}"/>
+			<input type="text" style="display:none; visibility: hidden" id="tTo" name="tTo" value="${tTo}"/>	
+		</div>	
 </form>
-#{/if}
 
+#{/if}
 #{if phrase}
 #{if foundRequests}
 <table style="width:92%">
@@ -28,10 +100,41 @@
 </table>
 #{/if}
 #{else}
-No requests are able the match the keyword.
+<br/>
+ <label style="padding-left:45px;">No requests are able to match the criteria.</label>
 #{/else}
 #{/if}
 #{else}
+
+#{if showFiltered}
+
+#{if foundRequests}
+<table style="width:92%">
+  <tr>
+    <th>Title</th>
+    <th>Requester</th>
+    <th>Valid Until</th>
+    <th>Details</th>
+  </tr>
+  #{list items:foundRequests, as:'request'}
+  <tr>
+    <td>${request.title}</td>
+    <td>${request.user.fullname}</td>
+    <td>${request.endDate.format('dd MMMM yyyy')}</td>
+    <td><a href="@{Requests.showDetails(request.id)}">Details</a></td>
+  </tr>
+  #{/list}
+</table>
+#{/if}
+#{else}
+<br/>
+ <label style="padding-left:45px;">No requests are able to match the criteria.</label>
+#{/else}
+
+
+#{/if}
+#{else}
+
 #{if allRequests}
 <table style="width:92%">
   <tr>
@@ -51,6 +154,300 @@ No requests are able the match the keyword.
 </table>
 #{/if}
 #{else}
-There are no available requests.
+ <label style="padding-left:45px;">There are no available requests.</label>
 #{/else}
 #{/else}
+#{/else}
+
+<select id="ddlAllDistrict" style="display:none; visibility:hidden;" 
+       #{list items:districts, as:'districtItem'}
+    <option value="${districtItem.district_id}">	      	    
+          ##${districtItem.county_id}##${districtItem.name}        
+    </option>	    
+    #{/list}
+</select>  
+
+<script>
+$('div').keypress( function(e) { 
+	   if(e.keyCode == '13') { 
+	     $(this).find('.btnSubmit').click(); 
+	   } 
+	}); 
+
+
+if(document.getElementById("tFrom").value !="")
+{
+	var obj = document.getElementById("ddlRecTimeFrom");
+	try
+	{
+		for(var i = 0; i < obj.length; i++)
+		{
+			if(obj.options[i].value == document.getElementById("tFrom").value)
+			{
+				obj.options[i].selected = true;
+				break;
+			}		
+		}
+	}catch(err){}
+}
+
+if(document.getElementById("tTo").value !="")
+{
+	var obj = document.getElementById("ddlRecTimeTo");
+	try
+	{
+		for(var i = 0; i < obj.length; i++)
+		{
+			if(obj.options[i].value == document.getElementById("tTo").value)
+			{
+				obj.options[i].selected = true;
+				break;
+			}		
+		}
+	}catch(err){}
+}
+
+
+var ddlLocation = document.getElementById("ddlLocation") ;
+var ddlReocc = document.getElementById("ddlReocc") ;
+var divDaysHours = document.getElementById("divDaysHours");
+
+if(document.getElementById("txt_reocc").value == "0")
+{
+	ddlReocc.options[0].selected = true;
+	divDaysHours.style.visibility = "hidden";
+	divDaysHours.style.display = "none";
+	
+	document.getElementById("chkMonday").checked = 0;
+	document.getElementById("chkTuesday").checked = 0;
+	document.getElementById("chkWednesday").checked = 0;
+	document.getElementById("chkThursday").checked = 0;
+	document.getElementById("chkFriday").checked = 0;
+	document.getElementById("chkSaturday").checked = 0;
+	document.getElementById("chkSunday").checked = 0;	
+	
+	document.getElementById("ddlRecTimeFrom").options[0].selected = true;
+	document.getElementById("ddlRecTimeTo").options[0].selected = true;
+	
+	document.getElementById("tFrom").value = "";
+	document.getElementById("tTo").value = "";
+}
+else if(document.getElementById("txt_reocc").value == "1")
+{
+	ddlReocc.options[1].selected = true;
+	divDaysHours.style.visibility = "visible";
+	divDaysHours.style.display = "";
+}
+
+if(document.getElementById("txt_in_location").value == "0")
+{
+	document.getElementById("div_County_Dis").style.visibility = "hidden";
+	document.getElementById("div_County_Dis").style.display = "none";
+	ddlLocation.options[0].selected = true;
+}
+else if(document.getElementById("txt_in_location").value == "1")
+{
+	document.getElementById("div_County_Dis").style.visibility = "visible";
+	document.getElementById("div_County_Dis").style.display = "";
+	ddlLocation.options[1].selected = true;
+	
+	if(document.getElementById("txtCountyId").value != "")
+	{
+		var ddlC = document.getElementById("ddlCounty");
+		for(var i = 0; i< ddlC.length; i++)
+		{
+			if(ddlC.options[i].value == document.getElementById("txtCountyId").value)
+			{
+				ddlC.options[i].selected = true;
+				fillDistricts(ddlC.options[i].value);
+				break;
+			}
+		}				
+		
+		if(document.getElementById("txtDistrictId").value != "")
+		{	
+			var ddlDD = document.getElementById("ddlDistrict");
+			for(var i = 0; i< ddlDD.length; i++)
+			{
+				if(ddlDD.options[i].value == document.getElementById("txtDistrictId").value)
+				{
+					ddlDD.options[i].selected = true;
+					break;
+				}		
+			}		
+		}		
+	}
+	else fillDistricts("0");
+}
+else if(document.getElementById("txt_in_location").value == "2")
+{
+	document.getElementById("div_County_Dis").style.visibility = "hidden";
+	document.getElementById("div_County_Dis").style.display = "none";
+	ddlLocation.options[2].selected = true;
+}
+
+function enableReocc(ddl) {
+	if(ddl.options[ddl.selectedIndex].value == 0)
+	{
+		document.getElementById("txt_reocc").value= "0";	
+		divDaysHours.style.visibility = "hidden";
+		divDaysHours.style.display = "none";
+		
+		document.getElementById("chkMonday").checked = 0;
+		document.getElementById("chkTuesday").checked = 0;
+		document.getElementById("chkWednesday").checked = 0;
+		document.getElementById("chkThursday").checked = 0;
+		document.getElementById("chkFriday").checked = 0;
+		document.getElementById("chkSaturday").checked = 0;
+		document.getElementById("chkSunday").checked = 0;
+		
+		document.getElementById("ddlRecTimeFrom").options[0].selected = true;
+		document.getElementById("ddlRecTimeTo").options[0].selected = true;
+		
+		document.getElementById("tFrom").value = "";
+		document.getElementById("tTo").value = "";
+	}
+	else if(ddl.options[ddl.selectedIndex].value == 1)
+	{
+		document.getElementById("txt_reocc").value= "1";	
+		divDaysHours.style.visibility = "visible";
+		divDaysHours.style.display = "";
+	}
+}
+
+function enableLocation(ddl) {
+	if(ddl.options[ddl.selectedIndex].value == 0)
+	{
+		document.getElementById("div_County_Dis").style.visibility = "hidden";
+		document.getElementById("div_County_Dis").style.display = "none";	
+		document.getElementById("txt_in_location").value= "0";	
+		
+		document.getElementById("txtDistrictId").value = "";
+		document.getElementById("txtCountyId").value = "";
+		
+		fillDistricts("0");	
+		
+		document.getElementById("ddlDistrict").options[0].selected = true;
+		document.getElementById("ddlCounty").options[0].selected = true;
+	}
+	else if(ddl.options[ddl.selectedIndex].value == 1)
+	{
+		document.getElementById("div_County_Dis").style.visibility = "visible";
+		document.getElementById("div_County_Dis").style.display = "";	
+		document.getElementById("txt_in_location").value= "1";	
+		
+		fillDistricts("0");	
+	}	
+	else if(ddl.options[ddl.selectedIndex].value == 2)
+	{	
+		document.getElementById("div_County_Dis").style.visibility = "hidden";
+		document.getElementById("div_County_Dis").style.display = "none";	
+		document.getElementById("txt_in_location").value= "2";	
+		
+		document.getElementById("txtDistrictId").value = "";
+		document.getElementById("txtCountyId").value = "";
+		
+		fillDistricts("0");	
+		
+		document.getElementById("ddlDistrict").options[0].selected = true;
+		document.getElementById("ddlCounty").options[0].selected = true;
+	}
+}
+
+function fillDistricts(p_county)
+{
+	var ddlDis = document.getElementById("ddlDistrict");
+	
+	if(p_county == "0")
+	{			
+		var tmp = ddlDis.length;
+		for(var i=0; i < tmp; i++)
+		{	
+			ddlDis.remove(0);
+		}
+		
+		addElement("All","0",ddlDis)
+		document.getElementById("txtDistrictId").value = "";
+	}
+	else 
+	{
+		var tmp = ddlDis.length;
+		for(var i=0; i < tmp; i++)
+		{	
+			ddlDis.remove(0);
+		}
+		addElement("All","0",ddlDis)
+		
+		var ddlAllDistrict = document.getElementById("ddlAllDistrict");
+		for(var i=0; i < ddlAllDistrict.length; i++)
+		{
+			var searchStr = "##" + p_county + "##";	
+			if(ddlAllDistrict.options[i].text.indexOf(searchStr) > -1)
+			{
+				addElement(ddlAllDistrict.options[i].text.replace(searchStr,""),ddlAllDistrict.options[i].value, ddlDis);
+			}
+		}	
+	}	
+}
+
+function changeForDistrict()
+{	
+	var ddlD = document.getElementById("ddlDistrict");
+	if(ddlD.options[ddlD.selectedIndex].text == "All")
+	{
+		document.getElementById("txtDistrictId").value = "";
+	}
+	else
+	{
+		document.getElementById("txtDistrictId").value = ddlD.options[ddlD.selectedIndex].value;
+	}
+		
+}
+
+function addElement(text,value,ddl)
+{ 
+	var elOptNew = document.createElement('option');
+	elOptNew.text = text;
+	elOptNew.value = value;
+	
+  	try 
+	{
+		ddl.add(elOptNew, null); // standards compliant; doesn't work in IE
+	}
+  	catch(ex) {
+	    ddl.add(elOptNew); // IE only
+	}
+}
+
+function changeForCounty()
+{		
+	var ddlC = document.getElementById("ddlCounty");
+		
+	if(ddlC.options[ddlC.selectedIndex].text == "All")
+	{		
+		document.getElementById("txtCountyId").value = "";		
+		document.getElementById("txtDistrictId").value = "";	
+	}
+	else
+	{		
+		document.getElementById("txtCountyId").value = ddlC.options[ddlC.selectedIndex].value;	
+		document.getElementById("txtDistrictId").value = "";
+	}
+		
+	fillDistricts(ddlC.options[ddlC.selectedIndex].value);
+}
+
+function setTimeValue(obj, ind)
+{ 
+	var ddl = obj;
+	if(ind == 1)
+	{	
+		document.getElementById("tFrom").value = ddl.options[ddl.selectedIndex].value;	
+	}
+	else 
+	{
+		document.getElementById("tTo").value = ddl.options[ddl.selectedIndex].value;		
+	}
+}
+
+</script>

@@ -105,7 +105,7 @@ public class Requests extends BaseController
 	render(user, requestItem, requestOwner, someoneElsesRequest, hasApplied, userApplications, handshakeId);
     }
     
-    public static void search(String phrase) {
+    /*public static void search(String phrase) {
 	User user = getConnectedUser();
 
 	Query openRequestsQuery = JPA.em().createQuery("from " + Request.class.getName() + " where status is 'WAITING'");
@@ -114,7 +114,146 @@ public class Requests extends BaseController
 	List<Request> foundRequests = MatchService.match(allRequests, phrase);
 
 	render(user, foundRequests, allRequests, phrase);
+    }*/    
+    
+    public static void search(String phrase, String location, String county_id, String district_id, String reocc, String m1, String t2, String w3, String t4, String f5, String s6, String s7, String tFrom, String tTo) {
+    	User user = getConnectedUser();
+
+    	if(location == null) location = "0";
+    	Query openRequestsQuery;   
+    	String showFiltered = null;
+    	String dayHoursFilter = "";
+    	String originalPhrase = phrase;
+    	
+    	if(phrase != null && phrase.length() > 0)
+    	{
+    		if(phrase.toUpperCase().contains("ING"))
+    		{
+    			phrase = phrase.toUpperCase().replace("ING","");
+    		}
+    	}
+    	
+    	if(reocc != null && reocc.contains("1"))
+    	{
+    		dayHoursFilter = " and reoccure = True ";
+    		
+    		if(m1 != null && m1.contains("on"))
+    			dayHoursFilter += " and is_rec_monday = True ";
+    		
+    		if(t2 != null && t2.contains("on"))
+    			dayHoursFilter += " and is_rec_tuesday = True ";
+    		
+    		if(w3 != null && w3.contains("on"))
+    			dayHoursFilter += " and is_rec_wednesday = True ";
+    		
+    		if(t4 != null && t4.contains("on"))
+    			dayHoursFilter += " and is_rec_thursday = True ";
+    		
+    		if(f5 != null && f5.contains("on"))
+    			dayHoursFilter += " and is_rec_friday = True ";
+    		
+    		if(s6 != null && s6.contains("on"))
+    			dayHoursFilter += " and is_rec_saturday = True ";
+    		
+    		if(s7 != null && s7.contains("on"))
+    			dayHoursFilter += " and is_rec_sunday = True ";
+    		
+    		Integer tFromInt = 1;
+    		Integer tToInt = 1;
+    		
+    		if(tFrom != null && tFrom.length() > 0)
+    		{
+    			tFromInt = Integer.valueOf(tFrom);
+    		}
+    		
+    		if(tTo!= null && tTo.length() > 0)
+    		{
+    			tToInt = Integer.valueOf(tTo);
+    		}
+    		
+    		if(tFromInt != tToInt)
+    		{
+    			dayHoursFilter += " and ((reocc_start_hour_val < " +  tFromInt.toString() + " and reocc_end_hour_val > " + tFromInt.toString() + ")"; 
+    			dayHoursFilter += " or (reocc_start_hour_val <" + tToInt.toString() + " and reocc_end_hour_val > " + tToInt.toString() + ")";
+    			dayHoursFilter += " or (reocc_start_hour_val >" + tFromInt.toString() + " and reocc_end_hour_val < " + tToInt.toString() + "))";
+    		}
+    	}
+    	
+    	if(location.contains("1"))
+    	{
+    		Query openRequestsQueryAll = JPA.em().createQuery("from " + Request.class.getName() + " where status is 'WAITING'");
+    		List<Object[]> openRequestsListAll = openRequestsQueryAll.getResultList();
+    		
+    		String addStr = "";
+    		
+    		if(district_id != null && district_id.length() > 0)
+    		{
+    			addStr = " and district_id =" + district_id;
+    		}
+    		else if(county_id != null && county_id.length() > 0)
+    		{
+    			addStr = " and county_id =" + county_id;
+    		}
+    		    		
+    		openRequestsQuery = JPA.em().createQuery("from " + Request.class.getName() + " where status is 'WAITING' and (is_virtual is null or is_virtual = False) " + addStr + dayHoursFilter);
+    		List<Object[]> openRequestsList = openRequestsQuery.getResultList();
+        	List<Request> allRequests = new ArrayList(openRequestsList);
+        	
+        	List<Request> foundRequests = MatchService.match(allRequests, phrase);
+
+        	if(phrase == null || phrase.length() == 0)
+        	{
+        		showFiltered= "1";
+        		foundRequests = allRequests;
+        	}
+        	
+        	allRequests = new ArrayList(openRequestsListAll);
+        	
+        	phrase = originalPhrase;
+       		render(user, foundRequests, allRequests, phrase, location, county_id, district_id, showFiltered, reocc, m1, t2, w3, t4, f5, s6, s7, tFrom, tTo);
+    	}
+    	else if(location.contains("2"))
+    	{   		
+    		Query openRequestsQueryAll = JPA.em().createQuery("from " + Request.class.getName() + " where status is 'WAITING'");
+    		List<Object[]> openRequestsListAll = openRequestsQueryAll.getResultList();
+    		
+    		openRequestsQuery = JPA.em().createQuery("from " + Request.class.getName() + " where status is 'WAITING'"+ " and is_virtual = True" + dayHoursFilter);
+    		List<Object[]> openRequestsList = openRequestsQuery.getResultList();
+        	List<Request> allRequests = new ArrayList(openRequestsList);
+        	List<Request> foundRequests = MatchService.match(allRequests, phrase);
+
+        	if(phrase == null || phrase.length() == 0)
+        	{
+        		showFiltered= "1";
+        		foundRequests = allRequests;
+        	}
+        	
+        	allRequests = new ArrayList(openRequestsListAll);
+        	phrase = originalPhrase;
+       		render(user, foundRequests, allRequests, phrase, location, county_id, district_id, showFiltered, reocc, m1, t2, w3, t4, f5, s6, s7, tFrom, tTo);
+    	}
+    	else 
+    	{
+    		Query openRequestsQueryAll = JPA.em().createQuery("from " + Request.class.getName() + " where status is 'WAITING'");
+    		List<Object[]> openRequestsListAll = openRequestsQueryAll.getResultList();
+    		
+    		openRequestsQuery = JPA.em().createQuery("from " + Request.class.getName() + " where status is 'WAITING'" + dayHoursFilter);
+    		List<Object[]> openRequestsList = openRequestsQuery.getResultList();
+        	List<Request> allRequests = new ArrayList(openRequestsList);
+        	List<Request> foundRequests = MatchService.match(allRequests, phrase);
+        	
+        	if(phrase == null || phrase.length() == 0)
+        	{
+        		showFiltered= "1";
+        		foundRequests = allRequests;
+        	}
+        	
+        	allRequests = new ArrayList(openRequestsListAll);
+        	phrase = originalPhrase;
+        	render(user, foundRequests, allRequests, phrase, location, county_id, district_id, showFiltered, reocc, m1, t2, w3, t4, f5, s6, s7, tFrom, tTo);
+    	}
     }
+    
 
     public static void edit(Long id) {
     	Request requestItem = Request.findById(id);
