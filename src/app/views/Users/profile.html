@@ -11,8 +11,6 @@
       #{else}
       <img class="avatar" src="/public/images/lbi02.png" alt="Default User Photo" />
       #{/else}
-      
-      
       <p></p>      
       <div class="user_tabs">
         <ul>
@@ -137,6 +135,7 @@
 		      </div>
 		  </li>
           <li style="text-align: left">&nbsp;Name: ${observedUser.fullname}</li>
+          <li style="text-align: left">&nbsp;${observedUser.badge.toString().toLowerCase().replace("_"," ").replace("bee","Bee").replace("new","New").replace("busy","Busy").replace("working","Working").replace("bumble","Bumble")}</li>
 	  <li style="text-align: left">&nbsp;Honey Combs: ${observedUser.balance}</li>	 
 	  <li style="text-align: left">&nbsp;City:<br/>&nbsp;&nbsp;${observedUser.address}</li>
           <li style="text-align: left">&nbsp;Member Since: <br/>&nbsp;&nbsp;${observedUser.registrationDate.format('dd MMMM yyyy')}</li>

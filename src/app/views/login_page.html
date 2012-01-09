@@ -43,7 +43,7 @@
     <ul>
       <li>
         <a href="#" no="1"> New Bees</a>
-      </li>
+      </li> 
       <li>
         <a href="#" class="active" no="2"> Busy Bees</a>
       </li>
@@ -57,26 +57,100 @@
   </div>
   
   <div class="index_tab_content" id="index_tab_content_1" style="display:none">
-    <div class="active_users">
-      <p>No one has achieved New Bee status.</p>
+    <div class="active_users">    	
+         #{if users_new_bee}
+		  #{list items:users_new_bee, as:'usr'}		
+		  <label style="display:block;padding-left:15px;text-indent:-15px;padding-top:4px;">  
+		    &nbsp;&nbsp;&nbsp;
+			 #{if usr.photo.exists()}
+		      <img class="imgNon" src="@{Application.showUserPhoto(usr.id)}" style="width:25px" alt="$usr.fullname" />
+		      #{/if}
+		      #{else}
+		      <img class="imgNon" src="/public/images/lbi02.png" style="width:25px" alt="Default User Photo" />
+		      #{/else}	
+		      #{if usr.balance > 0}
+			 <a href="@{Users.profile(usr.id)}" style="font-weight:bold; color:gray" onmouseover="this.style.cursor='pointer'">
+			  &nbsp;${usr.fullname}, living in ${usr.address}, registered at ${usr.registrationDate.format('dd MMMM yyyy')}, has ${usr.balance} contributions.
+			  #{/if}
+		      #{else}
+		      <a href="@{Users.profile(usr.id)}" style="font-weight:bold; color:gray" onmouseover="this.style.cursor='pointer'">
+			  &nbsp;${usr.fullname}, living in ${usr.address}, registered at ${usr.registrationDate.format('dd MMMM yyyy')}, has no contributions yet.
+			  #{/else}	
+			 </a></label>
+			  #{/list}
+		#{/if}
+    	#{else}
+      		<p>No one has achieved New Bee status.</p>
+      	#{/else}
     </div>
   </div>
   
   <div class="index_tab_content" id="index_tab_content_2" style="display:block">
-    <div class="active_users">
-      <p>No one has achieved Busy Bee status.</p>
+    <div class="active_users">    	
+         #{if users_new_bee}
+		  #{list items:users_busy_bee, as:'usr'}		
+		  <label style="display:block;padding-left:15px;text-indent:-15px;padding-top:4px;">  
+		    &nbsp;&nbsp;&nbsp;
+			 #{if usr.photo.exists()}
+		      <img class="imgNon" src="@{Application.showUserPhoto(usr.id)}" style="width:25px" alt="$usr.fullname" />
+		      #{/if}
+		      #{else}
+		      <img class="imgNon" src="/public/images/lbi02.png" style="width:25px" alt="Default User Photo" />
+		      #{/else}	
+		 <a href="@{Users.profile(usr.id)}" style="font-weight:bold; color:gray" onmouseover="this.style.cursor='pointer'">
+		 &nbsp;${usr.fullname}, living in ${usr.address}, registered at ${usr.registrationDate.format('dd MMMM yyyy')}, has ${usr.balance} contributions.
+		 </a></label>
+		  #{/list}
+		#{/if}
+    	#{else}
+      		<p>No one has achieved Busy Bee status.</p>
+      	#{/else}
     </div>
   </div>
   
   <div class="index_tab_content" id="index_tab_content_3" style="display:none">
-    <div class="active_users">
-      <p>No one has achieved Working Bee status.</p>
+    <div class="active_users">    	
+         #{if users_new_bee}
+		  #{list items:users_working_bee, as:'usr'}		
+		  <label style="display:block;padding-left:15px;text-indent:-15px;padding-top:4px;">  
+		    &nbsp;&nbsp;&nbsp;
+		     #{if usr.photo.exists()}
+		      <img class="imgNon" src="@{Application.showUserPhoto(usr.id)}" style="width:25px" alt="$usr.fullname" />
+		      #{/if}
+		      #{else}
+		      <img class="imgNon" src="/public/images/lbi02.png" style="width:25px" alt="Default User Photo" />
+		      #{/else}						  
+		 <a href="@{Users.profile(usr.id)}" style="font-weight:bold; color:gray" onmouseover="this.style.cursor='pointer'">
+		 &nbsp;${usr.fullname}, living in ${usr.address}, registered at ${usr.registrationDate.format('dd MMMM yyyy')}, has ${usr.balance} contributions.
+		 </a></label>
+		  #{/list}
+		#{/if}
+    	#{else}
+      		<p>No one has achieved Working Bee status.</p>
+      	#{/else}
     </div>
   </div>
   
   <div class="index_tab_content" id="index_tab_content_4"  style="display:none">
-    <div class="active_users">
-      <p>No one has achieved Bumble Bee status.</p>
+    <div class="active_users">    	
+         #{if users_bumble_bee}
+		  #{list items:users_bumble_bee, as:'usr'}		
+		  <label style="display:block;padding-left:15px;text-indent:-15px;padding-top:4px;">  
+		    &nbsp;&nbsp;&nbsp;	
+		     #{if usr.photo.exists()}
+		      <img class="imgNon" src="@{Application.showUserPhoto(usr.id)}" style="width:25px" alt="$usr.fullname" />
+		      #{/if}
+		      #{else}
+		      <img class="imgNon" src="/public/images/lbi02.png" style="width:25px" alt="Default User Photo" />
+		      #{/else}		    
+			<a href="@{Users.profile(usr.id)}" style="font-weight:bold; color:gray" onmouseover="this.style.cursor='pointer'">
+		 &nbsp;${usr.fullname}, living in ${usr.address}, registered at ${usr.registrationDate.format('dd MMMM yyyy')}, has ${usr.balance} contributions.
+		 </a></label>
+		  #{/list}
+		#{/if}
+    	#{else}
+      		<p>No one has achieved Bumble Bee status.</p>
+      	#{/else}
     </div>
   </div>
 </div>
