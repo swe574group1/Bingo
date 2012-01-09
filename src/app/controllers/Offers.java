@@ -109,13 +109,22 @@ public class Offers extends BaseController
     	render(user, offerItem, offerOwner, someoneElsesOffer, hasApplied, userApplications, isOfferOwner);
     }
 
-    public static void search(String phrase, String location, String county_id, String district_id, String reocc, String m1, String t2, String w3, String t4, String f5, String s6, String s7) {
+    public static void search(String phrase, String location, String county_id, String district_id, String reocc, String m1, String t2, String w3, String t4, String f5, String s6, String s7, String tFrom, String tTo) {
     	User user = getConnectedUser();
 
     	if(location == null) location = "0";
     	Query openOffersQuery;   
     	String showFiltered = null;
     	String dayHoursFilter = "";
+    	String originalPhrase = phrase;
+    	
+    	if(phrase != null && phrase.length() > 0)
+    	{
+    		if(phrase.toUpperCase().contains("ING"))
+    		{
+    			phrase = phrase.toUpperCase().replace("ING","");
+    		}
+    	}
     	
     	if(reocc != null && reocc.contains("1"))
     	{
@@ -141,6 +150,26 @@ public class Offers extends BaseController
     		
     		if(s7 != null && s7.contains("on"))
     			dayHoursFilter += " and is_rec_sunday = True ";
+    		
+    		Integer tFromInt = 0;
+    		Integer tToInt = 0;
+    		
+    		if(tFrom != null && tFrom.length() > 0)
+    		{
+    			tFromInt = Integer.valueOf(tFrom);
+    		}
+    		
+    		if(tTo!= null && tTo.length() > 0)
+    		{
+    			tToInt = Integer.valueOf(tTo);
+    		}
+    		
+    		if(tFromInt != tToInt)
+    		{
+    			dayHoursFilter += " and ((reocc_start_hour_val < " +  tFromInt.toString() + " and reocc_end_hour_val > " + tFromInt.toString() + ")"; 
+    			dayHoursFilter += " or (reocc_start_hour_val <" + tToInt.toString() + " and reocc_end_hour_val > " + tToInt.toString() + ")";
+    			dayHoursFilter += " or (reocc_start_hour_val >" + tFromInt.toString() + " and reocc_end_hour_val < " + tToInt.toString() + "))";
+    		}
     	}
     	
     	if(location.contains("1"))
@@ -173,7 +202,8 @@ public class Offers extends BaseController
         	
         	allOffers = new ArrayList(openOffersListAll);
         	
-       		render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered, reocc, m1, t2, w3, t4, f5, s6, s7);
+        	phrase = originalPhrase;
+       		render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered, reocc, m1, t2, w3, t4, f5, s6, s7, tFrom, tTo);
     	}
     	else if(location.contains("2"))
     	{   		
@@ -192,7 +222,8 @@ public class Offers extends BaseController
         	}
         	
         	allOffers = new ArrayList(openOffersListAll);
-       		render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered, reocc, m1, t2, w3, t4, f5, s6, s7);
+        	phrase = originalPhrase;
+       		render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered, reocc, m1, t2, w3, t4, f5, s6, s7, tFrom, tTo);
     	}
     	else 
     	{
@@ -211,7 +242,8 @@ public class Offers extends BaseController
         	}
         	
         	allOffers = new ArrayList(openOffersListAll);
-        	render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered, reocc, m1, t2, w3, t4, f5, s6, s7);
+        	phrase = originalPhrase;
+        	render(user, foundOffers, allOffers, phrase, location, county_id, district_id, showFiltered, reocc, m1, t2, w3, t4, f5, s6, s7, tFrom, tTo);
     	}
     }
     

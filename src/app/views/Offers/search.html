@@ -57,8 +57,28 @@
        			   type="checkbox" name="s6" ${s6 ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Sunday
        		<input id="chkSunday" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
        			   type="checkbox" name="s7" ${s7 ? 'checked':''}/></label> 
-		</div>		
+       			   
+       		<label style="padding-left:125px;padding-right:10px;">Between</label>
+       		<select id="ddlRecTimeFrom" onchange="setTimeValue(this,1)" >
+       		 #{list items:recoccurancehouritems, as:'recoccurancehouritem'}
+		    <option value="${recoccurancehouritem.val}">	      	    
+		          ${recoccurancehouritem.hour_min}  
+		    </option>	    
+		    #{/list}
+			</select>
+			- 
+			<select id="ddlRecTimeTo" onchange="setTimeValue(this,2)" >
+       		 #{list items:recoccurancehouritems, as:'recoccurancehouritem'}
+		    <option value="${recoccurancehouritem.val}">	      	    
+		          ${recoccurancehouritem.hour_min}  
+		    </option>	    
+		    #{/list}
+			</select>
+			<input type="text" style="display:none; visibility: hidden" id="tFrom" name="tFrom" value="${tFrom}"/>
+			<input type="text" style="display:none; visibility: hidden" id="tTo" name="tTo" value="${tTo}"/>	
+		</div>	
 </form>
+
 #{/if}
 #{if phrase}
 #{if foundOffers}
@@ -161,6 +181,39 @@ $('div').keypress( function(e) {
 	}); 
 
 
+if(document.getElementById("tFrom").value !="")
+{
+	var obj = document.getElementById("ddlRecTimeFrom");
+	try
+	{
+		for(var i = 0; i < obj.length; i++)
+		{
+			if(obj.options[i].value == document.getElementById("tFrom").value)
+			{
+				obj.options[i].selected = true;
+				break;
+			}		
+		}
+	}catch(err){}
+}
+
+if(document.getElementById("tTo").value !="")
+{
+	var obj = document.getElementById("ddlRecTimeTo");
+	try
+	{
+		for(var i = 0; i < obj.length; i++)
+		{
+			if(obj.options[i].value == document.getElementById("tTo").value)
+			{
+				obj.options[i].selected = true;
+				break;
+			}		
+		}
+	}catch(err){}
+}
+
+
 var ddlLocation = document.getElementById("ddlLocation") ;
 var ddlReocc = document.getElementById("ddlReocc") ;
 var divDaysHours = document.getElementById("divDaysHours");
@@ -178,6 +231,12 @@ if(document.getElementById("txt_reocc").value == "0")
 	document.getElementById("chkFriday").checked = 0;
 	document.getElementById("chkSaturday").checked = 0;
 	document.getElementById("chkSunday").checked = 0;	
+	
+	document.getElementById("ddlRecTimeFrom").options[0].selected = true;
+	document.getElementById("ddlRecTimeTo").options[0].selected = true;
+	
+	document.getElementById("tFrom").value = "";
+	document.getElementById("tTo").value = "";
 }
 else if(document.getElementById("txt_reocc").value == "1")
 {
@@ -246,7 +305,13 @@ function enableReocc(ddl) {
 		document.getElementById("chkThursday").checked = 0;
 		document.getElementById("chkFriday").checked = 0;
 		document.getElementById("chkSaturday").checked = 0;
-		document.getElementById("chkSunday").checked = 0;	
+		document.getElementById("chkSunday").checked = 0;
+		
+		document.getElementById("ddlRecTimeFrom").options[0].selected = true;
+		document.getElementById("ddlRecTimeTo").options[0].selected = true;
+		
+		document.getElementById("tFrom").value = "";
+		document.getElementById("tTo").value = "";
 	}
 	else if(ddl.options[ddl.selectedIndex].value == 1)
 	{
@@ -376,6 +441,19 @@ function changeForCounty()
 	}
 		
 	fillDistricts(ddlC.options[ddlC.selectedIndex].value);
+}
+
+function setTimeValue(obj, ind)
+{ 
+	var ddl = obj;
+	if(ind == 1)
+	{	
+		document.getElementById("tFrom").value = ddl.options[ddl.selectedIndex].value;	
+	}
+	else 
+	{
+		document.getElementById("tTo").value = ddl.options[ddl.selectedIndex].value;		
+	}
 }
 
 </script>
