@@ -117,8 +117,8 @@
             <div class="comment-info">
 	      
 	      <a href="@{Users.profile(comment.user.id)}">
-	      #{if user.photo.exists()}
-	      <img alt=" ${comment.user.fullname}'s avatar" src="@{Application.showUserPhoto(user.id)}" class="lepetitavatar"/>
+	      #{if comment.user.photo.exists()}
+	      <img alt=" ${comment.user.fullname}'s avatar" src="@{Application.showUserPhoto(comment.user.id)}" class="lepetitavatar"/>
 	      #{/if}
 	      #{else}
 	      <img alt="Default Avatar" src="/public/images/lbi02.png" class="lepetitavatar" />
