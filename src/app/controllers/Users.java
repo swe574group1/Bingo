@@ -28,7 +28,10 @@ public class Users extends BaseController
     	    validation.keep();
     	    register();
     	}
-    	user.badge=BadgeType.NEW_BEE;
+    	
+    	if(isCreate)
+    		user.badge=BadgeType.NEW_BEE;
+    	
     	user.save();
 
     	if (isCreate) {

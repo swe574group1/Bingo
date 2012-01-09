@@ -25,6 +25,191 @@ public class BaseController extends Controller
     }
     
     @Before
+    static void set_New_Bee() {
+    	Query query = JPA.em().createQuery("select id, fullname, registrationDate, photo, address from User where badge = 'NEW_BEE'");
+    	List<Object[]> list = query.getResultList();
+    	List<User> users_new_bee_base = new ArrayList<User>();
+    	List<User> users_new_bee = new ArrayList<User>();
+    	Integer count = 0;
+    	
+    	for(Object[] a : list)
+       	{       		
+    		User usr = new User();
+    		usr.id = (Long) a[0];
+    		usr.fullname = (String) a[1];
+    		usr.registrationDate = (Date) a[2];
+    		usr.photo = (play.db.jpa.Blob ) a[3];
+    		usr.address = (String ) a[4];
+    		usr.balance = 0;
+       		
+    		users_new_bee_base.add(usr);
+       	}  
+    	
+    	Collections.shuffle(users_new_bee_base);
+    	
+    	for(User b : users_new_bee_base)
+    	{
+    		count ++;
+    		
+    		Query queryOffer = JPA.em().createQuery("SELECT e.id " 
+    				+ "FROM Tag p JOIN p.offer e JOIN e.user u where u.id = " + b.id.toString()
+    				+ " group by e.id");
+    		List<Object[]> listOffer = queryOffer.getResultList();
+        	
+    		Query queryRequest = JPA.em().createQuery("SELECT e.id " 
+    				+ "FROM Tag p JOIN p.request e JOIN e.user u where u.id = " + b.id.toString()
+    				+ " group by e.id");
+    		List<Object[]> listRequest = queryRequest.getResultList();
+        	
+        	b.balance = listOffer.size() + listRequest.size();
+    		
+   			if(count < 6)
+   				users_new_bee.add(b);   				
+    	}
+    	
+    	renderArgs.put("users_new_bee", users_new_bee); 
+    }
+    
+    @Before
+    static void set_Busy_Bee() {
+    	Query query = JPA.em().createQuery("select id, fullname, registrationDate, photo, address from User where badge = 'BUSY_BEE'");
+    	List<Object[]> list = query.getResultList();
+    	List<User> users_new_bee_base = new ArrayList<User>();
+    	List<User> users_new_bee = new ArrayList<User>();
+    	Integer count = 0;
+    	
+    	for(Object[] a : list)
+       	{       		
+    		User usr = new User();
+    		usr.id = (Long) a[0];
+    		usr.fullname = (String) a[1];
+    		usr.registrationDate = (Date) a[2];
+    		usr.photo = (play.db.jpa.Blob ) a[3];
+    		usr.address = (String ) a[4];
+    		usr.balance = 0;
+       		
+    		users_new_bee_base.add(usr);
+       	}  
+    	
+    	Collections.shuffle(users_new_bee_base);
+    	
+    	for(User b : users_new_bee_base)
+    	{
+    		count ++;
+    		
+    		Query queryOffer = JPA.em().createQuery("SELECT e.id " 
+    				+ "FROM Tag p JOIN p.offer e JOIN e.user u where u.id = " + b.id.toString()
+    				+ " group by e.id");
+    		List<Object[]> listOffer = queryOffer.getResultList();
+        	
+    		Query queryRequest = JPA.em().createQuery("SELECT e.id " 
+    				+ "FROM Tag p JOIN p.request e JOIN e.user u where u.id = " + b.id.toString()
+    				+ " group by e.id");
+    		List<Object[]> listRequest = queryRequest.getResultList();
+        	
+        	b.balance = listOffer.size() + listRequest.size();
+    		
+   			if(count < 6)
+   				users_new_bee.add(b);   				
+    	}
+    	
+    	renderArgs.put("users_busy_bee", users_new_bee); 
+    }
+    
+    @Before
+    static void set_Working_Bee() {
+    	Query query = JPA.em().createQuery("select id, fullname, registrationDate, photo, address from User where badge = 'WORKING_BEE'");
+    	List<Object[]> list = query.getResultList();
+    	List<User> users_new_bee_base = new ArrayList<User>();
+    	List<User> users_new_bee = new ArrayList<User>();
+    	Integer count = 0;
+    	
+    	for(Object[] a : list)
+       	{       		
+    		User usr = new User();
+    		usr.id = (Long) a[0];
+    		usr.fullname = (String) a[1];
+    		usr.registrationDate = (Date) a[2];
+    		usr.photo = (play.db.jpa.Blob ) a[3];
+    		usr.address = (String ) a[4];
+    		usr.balance = 0;
+       		
+    		users_new_bee_base.add(usr);
+       	}  
+    	
+    	Collections.shuffle(users_new_bee_base);
+    	
+    	for(User b : users_new_bee_base)
+    	{
+    		count ++;
+    		
+    		Query queryOffer = JPA.em().createQuery("SELECT e.id " 
+    				+ "FROM Tag p JOIN p.offer e JOIN e.user u where u.id = " + b.id.toString()
+    				+ " group by e.id");
+    		List<Object[]> listOffer = queryOffer.getResultList();
+        	
+    		Query queryRequest = JPA.em().createQuery("SELECT e.id " 
+    				+ "FROM Tag p JOIN p.request e JOIN e.user u where u.id = " + b.id.toString()
+    				+ " group by e.id");
+    		List<Object[]> listRequest = queryRequest.getResultList();
+        	
+        	b.balance = listOffer.size() + listRequest.size();
+    		
+   			if(count < 6)
+   				users_new_bee.add(b);   				
+    	}
+    	
+    	renderArgs.put("users_working_bee", users_new_bee); 
+    }
+    
+    @Before
+    static void set_Bumble_Bee() {
+    	Query query = JPA.em().createQuery("select id, fullname, registrationDate, photo, address from User where badge = 'BUMBLE_BEE'");
+    	List<Object[]> list = query.getResultList();
+    	List<User> users_new_bee_base = new ArrayList<User>();
+    	List<User> users_new_bee = new ArrayList<User>();
+    	Integer count = 0;
+    	
+    	for(Object[] a : list)
+       	{       		
+    		User usr = new User();
+    		usr.id = (Long) a[0];
+    		usr.fullname = (String) a[1];
+    		usr.registrationDate = (Date) a[2];
+    		usr.photo = (play.db.jpa.Blob ) a[3];
+    		usr.address = (String ) a[4];
+    		usr.balance = 0;
+       		
+    		users_new_bee_base.add(usr);
+       	}  
+    	
+    	Collections.shuffle(users_new_bee_base);
+    	
+    	for(User b : users_new_bee_base)
+    	{
+    		count ++;
+    		
+    		Query queryOffer = JPA.em().createQuery("SELECT e.id " 
+    				+ "FROM Tag p JOIN p.offer e JOIN e.user u where u.id = " + b.id.toString()
+    				+ " group by e.id");
+    		List<Object[]> listOffer = queryOffer.getResultList();
+        	
+    		Query queryRequest = JPA.em().createQuery("SELECT e.id " 
+    				+ "FROM Tag p JOIN p.request e JOIN e.user u where u.id = " + b.id.toString()
+    				+ " group by e.id");
+    		List<Object[]> listRequest = queryRequest.getResultList();
+        	
+        	b.balance = listOffer.size() + listRequest.size();
+    		
+   			if(count < 6)
+   				users_new_bee.add(b);   				
+    	}
+    	
+    	renderArgs.put("users_bumble_bee", users_new_bee); 
+    }
+    
+    
+    @Before
     static void setOfferTagCloud() {
     	
     	Query query = JPA.em().createQuery("select name, count(*) from Tag where offer_id is not null group by name order by count(*) desc");
