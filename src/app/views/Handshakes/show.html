@@ -81,7 +81,7 @@
 	#{/else}
       </p>
       
-      
+      #{if handshakeParticipant}      
       <div class="apply_menu">
 	#{if handshake.status == models.Handshake.Status.ACCEPTED}
 	<a style="width:130px" class="apply" href="@{Handshakes.start(handshake.id)}">Start</a>
@@ -91,6 +91,8 @@
 	<a style="width:130px" class="apply" href="@{Handshakes.end(handshake.id)}">End</a>
 	#{/if}
       </div>
+      #{/if}
+      
     </div>
   </div>
   
