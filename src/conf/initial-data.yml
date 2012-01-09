@@ -23,3 +23,10 @@ User(reducto):
   password: shrink
   fullname: Myron Reducto
   address: Williams Street
+
+City(all):
+  name: All
+
+County(all):
+  name: All
+  city: all

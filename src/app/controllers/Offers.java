@@ -45,6 +45,7 @@ public class Offers extends BaseController
 
 		validation.valid(offerItem);
 		if (validation.hasErrors()) {
+		    System.out.println("VALIDATION ERRORS:" + validation.errors());
 		    renderTemplate("Offers/form.html", offerItem);
 		}
 	

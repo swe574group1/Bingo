@@ -1,13 +1,11 @@
 package controllers;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.ArrayList;
+
 import javax.persistence.Query;
-
-import play.db.jpa.JPA;
-
 
 import models.BadgeType;
 import models.Comment;
@@ -16,6 +14,7 @@ import models.Handshake.Status;
 import models.Offer;
 import models.Request;
 import models.User;
+import play.db.jpa.JPA;
 import play.mvc.With;
 // Require Login
 @With(Secure.class)
@@ -60,7 +59,8 @@ public class Handshakes extends BaseController
 	User user = getConnectedUser();
 	Request request = Request.findById(id);
 
-	Offer offer = new Offer(user, 7, request); // magic number 7: fixed honey comb for applying to requests
+	Offer offer = new Offer(user, request);
+	offer.credit = request.credit;
 	offer.title = "OFFER FOR: " + request.title;
 	offer.save();
 
