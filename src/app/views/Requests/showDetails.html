@@ -132,7 +132,7 @@
   #{if someoneElsesRequest}  
   <div class="apply_menu">
     #{if !hasApplied}
-    <a class="apply" href="@{Handshakes.bindToRequest(requestItem.id)}">Apply</a>
+    <a id="a1" href="@{Handshakes.bindToRequest(requestItem.id)}" class="apply">Apply</a>
     #{/if}
     #{if hasApplied}
     <a class="cancel" href="@{Handshakes.cancelApplication(handshakeId)}">Cancel</a>
@@ -205,8 +205,8 @@
 
   
 </div>
-
 <script>
+
 	function disableClick(input){
 		 input.checked == true ? input.checked = false : input.checked = true;
 		}
