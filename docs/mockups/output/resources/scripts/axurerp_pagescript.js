@@ -562,14 +562,8 @@ function StartDragWidget(event, id) {
         y = window.event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     }
     else {
-        if (event.changedTouches) {
-            x = event.changedTouches[0].pageX;
-            y = event.changedTouches[0].pageY;
-        } else {
-            x = event.pageX;
-            y = event.pageY;
-            event.preventDefault();
-        }
+        x = event.pageX;
+        y = event.pageY;
     }
     widgetDragInfo.hasStarted = false;
     widgetDragInfo.widgetId = id;
@@ -588,8 +582,7 @@ function StartDragWidget(event, id) {
     else {
         document.addEventListener("mousemove", DragWidget, true);
         document.addEventListener("mouseup", StopDragWidget, true);
-        document.addEventListener("touchmove", DragWidget, true);
-        document.addEventListener("touchend", StopDragWidget, true);
+        event.preventDefault();
     }
     SuppressBubble(event);
 }
@@ -601,14 +594,8 @@ function DragWidget(event) {
         y = window.event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     }
     else {
-        if (event.changedTouches) {
-            x = event.changedTouches[0].pageX;
-            y = event.changedTouches[0].pageY;
-            event.preventDefault();
-        } else {
-            x = event.pageX;
-            y = event.pageY;
-        }
+        x = event.pageX;
+        y = event.pageY;
     }
     widgetDragInfo.xDelta = x - widgetDragInfo.currentX;
     widgetDragInfo.yDelta = y - widgetDragInfo.currentY;
@@ -646,8 +633,6 @@ function StopDragWidget(event) {
     else {
         document.removeEventListener("mousemove", DragWidget, true);
         document.removeEventListener("mouseup", StopDragWidget, true);
-        document.removeEventListener("touchmove", DragWidget, true);
-        document.removeEventListener("touchend", StopDragWidget, true);
     }
 
     if (widgetDragInfo.hasStarted) {
@@ -826,8 +811,9 @@ function GetSelectedOption(id) {
 }
 
 function GetNum(str) {
-    if (!str) return "";
-    return isNaN(str) ? str : Number(str);
+    if(!str) return "";
+    result = Number(str);
+    return isNaN(result) ? str : result;
 }
 
 function GetGlobalVariableValue(id) {

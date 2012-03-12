@@ -100,7 +100,7 @@
         returnVal += "<a class='sitemapPageLink' nodeUrl='" + node.url + "'><span class='sitemapPageIcon";
         if (node.type == "Flow") { returnVal += " sitemapFlowIcon"; }
         returnVal += "'></span><span class='sitemapPageName'>"
-        returnVal += $('<div/>').text(node.pageName).html();
+        returnVal += node.pageName;
         returnVal += "</span></a></div>";
         if (hasChildren) {
             returnVal += "<ul>";

@@ -32,10 +32,10 @@ function PopulateVariables(value) {
     var d = new Date();
   value = value.replace(/\[\[OnLoadVariable\]\]/g, $OnLoadVariable);
   value = value.replace(/\[\[PageName\]\]/g, PageName);
-  value = value.replace(/\[\[GenDay\]\]/g, '5');
+  value = value.replace(/\[\[GenDay\]\]/g, '12');
   value = value.replace(/\[\[GenMonth\]\]/g, '3');
-  value = value.replace(/\[\[GenMonthName\]\]/g, 'March');
-  value = value.replace(/\[\[GenDayOfWeek\]\]/g, 'Monday');
+  value = value.replace(/\[\[GenMonthName\]\]/g, 'Mart');
+  value = value.replace(/\[\[GenDayOfWeek\]\]/g, 'Pazartesi');
   value = value.replace(/\[\[GenYear\]\]/g, '2012');
   value = value.replace(/\[\[Day\]\]/g, d.getDate());
   value = value.replace(/\[\[Month\]\]/g, d.getMonth() + 1);

@@ -11,8 +11,7 @@ iframe
 div.intcases 
 {
 	font-family: arial; 
-	font-size: 12px;
-    text-align:left; 
+	font-size: 12px; 
 	border:1px solid #666666; 
 	background:#DDDDDD none repeat scroll 0% 0%; 
 	z-index:9999; 

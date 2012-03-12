@@ -59,6 +59,10 @@
 "type":"Wireframe",
 "url":"Search.html"},
 {
+"pageName":"Search (visitor)",
+"type":"Wireframe",
+"url":"Search__visitor_.html"},
+{
 "pageName":"Inbox",
 "type":"Wireframe",
 "url":"Inbox.html"},
