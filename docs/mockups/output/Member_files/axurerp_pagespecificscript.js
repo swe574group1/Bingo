@@ -32,7 +32,7 @@ function PopulateVariables(value) {
     var d = new Date();
   value = value.replace(/\[\[OnLoadVariable\]\]/g, $OnLoadVariable);
   value = value.replace(/\[\[PageName\]\]/g, PageName);
-  value = value.replace(/\[\[GenDay\]\]/g, '12');
+  value = value.replace(/\[\[GenDay\]\]/g, '19');
   value = value.replace(/\[\[GenMonth\]\]/g, '3');
   value = value.replace(/\[\[GenMonthName\]\]/g, 'Mart');
   value = value.replace(/\[\[GenDayOfWeek\]\]/g, 'Pazartesi');
@@ -107,6 +107,8 @@ var u87 = document.getElementById('u87');
 gv_vAlignTable['u87'] = 'top';
 var u1 = document.getElementById('u1');
 gv_vAlignTable['u1'] = 'center';
+var u119 = document.getElementById('u119');
+gv_vAlignTable['u119'] = 'top';
 var u4 = document.getElementById('u4');
 
 var u7 = document.getElementById('u7');
@@ -145,6 +147,10 @@ if (true) {
 
 }
 gv_vAlignTable['u66'] = 'top';
+var u112 = document.getElementById('u112');
+gv_vAlignTable['u112'] = 'top';
+var u115 = document.getElementById('u115');
+gv_vAlignTable['u115'] = 'top';
 var u104 = document.getElementById('u104');
 
 var u30 = document.getElementById('u30');
@@ -155,6 +161,8 @@ var u60 = document.getElementById('u60');
 gv_vAlignTable['u60'] = 'top';
 var u89 = document.getElementById('u89');
 gv_vAlignTable['u89'] = 'top';
+var u122 = document.getElementById('u122');
+gv_vAlignTable['u122'] = 'top';
 var u34 = document.getElementById('u34');
 
 var u17 = document.getElementById('u17');
@@ -207,6 +215,10 @@ var u81 = document.getElementById('u81');
 gv_vAlignTable['u81'] = 'top';
 var u97 = document.getElementById('u97');
 gv_vAlignTable['u97'] = 'top';
+var u118 = document.getElementById('u118');
+gv_vAlignTable['u118'] = 'top';
+var u124 = document.getElementById('u124');
+gv_vAlignTable['u124'] = 'top';
 var u85 = document.getElementById('u85');
 gv_vAlignTable['u85'] = 'top';
 var u11 = document.getElementById('u11');
@@ -305,12 +317,20 @@ var u54 = document.getElementById('u54');
 gv_vAlignTable['u54'] = 'top';
 var u99 = document.getElementById('u99');
 
+var u113 = document.getElementById('u113');
+gv_vAlignTable['u113'] = 'top';
 var u39 = document.getElementById('u39');
+
+var u111 = document.getElementById('u111');
 
 var u69 = document.getElementById('u69');
 gv_vAlignTable['u69'] = 'top';
 var u78 = document.getElementById('u78');
 
+var u120 = document.getElementById('u120');
+gv_vAlignTable['u120'] = 'top';
+var u114 = document.getElementById('u114');
+gv_vAlignTable['u114'] = 'top';
 var u94 = document.getElementById('u94');
 
 var u6 = document.getElementById('u6');
@@ -343,6 +363,8 @@ var u65 = document.getElementById('u65');
 gv_vAlignTable['u65'] = 'top';
 var u56 = document.getElementById('u56');
 gv_vAlignTable['u56'] = 'top';
+var u116 = document.getElementById('u116');
+gv_vAlignTable['u116'] = 'top';
 var u105 = document.getElementById('u105');
 gv_vAlignTable['u105'] = 'top';
 var u109 = document.getElementById('u109');
@@ -361,6 +383,8 @@ if (true) {
 
 }
 
+var u123 = document.getElementById('u123');
+gv_vAlignTable['u123'] = 'top';
 var u82 = document.getElementById('u82');
 
 var u5 = document.getElementById('u5');
@@ -413,12 +437,16 @@ var u18 = document.getElementById('u18');
 gv_vAlignTable['u18'] = 'top';
 var u48 = document.getElementById('u48');
 gv_vAlignTable['u48'] = 'top';
+var u110 = document.getElementById('u110');
+
 var u67 = document.getElementById('u67');
 
 var u88 = document.getElementById('u88');
 
 var u57 = document.getElementById('u57');
 
+var u125 = document.getElementById('u125');
+gv_vAlignTable['u125'] = 'top';
 var u101 = document.getElementById('u101');
 
 var u10 = document.getElementById('u10');
@@ -463,6 +491,8 @@ if (true) {
 gv_vAlignTable['u14'] = 'top';
 var u44 = document.getElementById('u44');
 gv_vAlignTable['u44'] = 'top';
+var u117 = document.getElementById('u117');
+gv_vAlignTable['u117'] = 'top';
 var u74 = document.getElementById('u74');
 
 var u29 = document.getElementById('u29');
@@ -473,4 +503,6 @@ var u98 = document.getElementById('u98');
 gv_vAlignTable['u98'] = 'top';
 var u91 = document.getElementById('u91');
 gv_vAlignTable['u91'] = 'top';
+var u121 = document.getElementById('u121');
+gv_vAlignTable['u121'] = 'top';
 if (window.OnLoad) OnLoad();
