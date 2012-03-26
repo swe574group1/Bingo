@@ -59,6 +59,10 @@
 "type":"Wireframe",
 "url":"Search.html"},
 {
+"pageName":"Search (member)",
+"type":"Wireframe",
+"url":"Search__member_.html"},
+{
 "pageName":"Search (visitor)",
 "type":"Wireframe",
 "url":"Search__visitor_.html"},

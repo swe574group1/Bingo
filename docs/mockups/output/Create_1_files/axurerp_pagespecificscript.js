@@ -32,7 +32,7 @@ function PopulateVariables(value) {
     var d = new Date();
   value = value.replace(/\[\[OnLoadVariable\]\]/g, $OnLoadVariable);
   value = value.replace(/\[\[PageName\]\]/g, PageName);
-  value = value.replace(/\[\[GenDay\]\]/g, '12');
+  value = value.replace(/\[\[GenDay\]\]/g, '19');
   value = value.replace(/\[\[GenMonth\]\]/g, '3');
   value = value.replace(/\[\[GenMonthName\]\]/g, 'Mart');
   value = value.replace(/\[\[GenDayOfWeek\]\]/g, 'Pazartesi');
@@ -149,6 +149,8 @@ if (true) {
 
 var u41 = document.getElementById('u41');
 gv_vAlignTable['u41'] = 'top';
+var u71 = document.getElementById('u71');
+gv_vAlignTable['u71'] = 'top';
 var u15 = document.getElementById('u15');
 
 var u45 = document.getElementById('u45');
@@ -403,6 +405,8 @@ function u40Clicku5568686ece9d41ab9c7a8ba743b78b9d(e)
 	ToggleLinks(e, 'u40LinksClick');
 }
 
+var u70 = document.getElementById('u70');
+gv_vAlignTable['u70'] = 'top';
 var u14 = document.getElementById('u14');
 
 var u44 = document.getElementById('u44');
