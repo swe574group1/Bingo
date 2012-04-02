@@ -18,7 +18,7 @@ public class Application extends BaseController
 	}
 
     public static void register() {
-	render();
+		render();
     }
 
     public static void about() {
