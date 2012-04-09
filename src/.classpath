@@ -82,6 +82,5 @@
 	<classpathentry kind="lib" path="C:/workspace/play-1.2.4/framework/lib/xstream-1.3.jar"/>
 	<classpathentry kind="lib" path="C:/workspace/play-1.2.4/modules/crud"/>
 	<classpathentry kind="lib" path="C:/workspace/play-1.2.4/modules/secure"/>
-	<classpathentry kind="lib" path="play_modules"/>
 	<classpathentry kind="output" path="eclipse/classes"/>
 </classpath>

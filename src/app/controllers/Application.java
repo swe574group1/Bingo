@@ -10,7 +10,7 @@ public class Application extends BaseController
 {   
     public static void index()
 	{
-	    int recentUserCount = 5;
+    	int recentUserCount =5;
 	    int recentHandshakeCount = 5;
 	    List<User> newUsers = User.getNewUsers(recentUserCount);
 	    List<Handshake> newHandshakes = Handshake.find("(status='ACCEPTED' or status='STARTED' or status='DONE') order by creationDate desc").fetch(recentHandshakeCount);
