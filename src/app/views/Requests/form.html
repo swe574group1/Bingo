@@ -273,7 +273,12 @@ function setTimeValue(obj, ind)
 	  			<option>7</option>
 	  			<option>19</option>
 			</select>
-      </li>     
+      </li> 
+    <li id="liDuration">
+        <label style="padding-top:7px">Duration</label>
+        <input type="text" style="width:100px;"name="requestItem.duration" value="${requestItem.duration}" />
+	<span class="error">#{error 'requestItem.duration' /}</span>          
+    </li>             
       <li>
       <label style="padding-top:7px">Is Virtual?</label>  
      		<select id="ddlVirtualization" onchange="enableVirtualization(this);">
@@ -299,7 +304,7 @@ function setTimeValue(obj, ind)
       		<select onchange="changeForDistrict();" id="ddlDistrict">
   			<option>All</option>
 		</select>
-      </li>       
+      </li>
       <select id="ddlAllDistrict" style="display:none; visibility:hidden;">
        #{list items:districts, as:'districtItem'}
     <option value="${districtItem.district_id}">	      	    

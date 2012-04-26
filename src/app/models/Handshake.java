@@ -25,6 +25,7 @@ public class Handshake extends Model
     @OneToOne
     public Request request;
 
+    public Double duration;
     public Long offererId;
     public Long requesterId;
 

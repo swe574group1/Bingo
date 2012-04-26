@@ -27,6 +27,10 @@ public class Offer extends Model implements Matchable
     @Required
     public String title;
 
+    
+    @Required
+    public Double duration;
+    
     @Required
     @Lob
     public String description;
@@ -92,6 +96,7 @@ public class Offer extends Model implements Matchable
     public Offer(User user, Request request) {
 	this.user = user;
 	this.title = request.title;
+	this.duration = request.duration;
 	this.description = request.description;
 	this.endDate = request.endDate;
 	this.status = Status.WAITING;
