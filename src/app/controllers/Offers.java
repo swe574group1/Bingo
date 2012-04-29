@@ -17,15 +17,69 @@ import service.Utils;
 
 import play.db.jpa.JPA;
 
-
-public class Offers extends BaseController
-{
+/**
+ * Offers is the controller class that is responsible of handling
+ * HTTP requests for offers.
+ * <p>
+ * Offers includes the following features:
+ * <ul>
+ * <li>Creating a new offer
+ * <li>Modifying details of a specific offer
+ * <li>Showing details of a specific offer
+ * <li>Listing all offers
+ * <li>Searching offers by keywords (e.g. phrase, location)
+ * </ul>
+ * <p>
+ * The class was originally created by last year's "Let It Bee"
+ * group members.
+ * 
+ * @author	Onur Yaman  <onuryaman@gmail.com>
+ * @version 2.0
+ * @since	1.0
+ */
+public class Offers extends BaseController {
+	
+	/**
+	 * Creates a new offer instance (with empty tags) and delegates
+	 * it to the offer creation form template renderer, which in
+	 * turn renders the form.
+	 * 
+	 * @see		Offer
+	 * @see 	ArrayList
+	 * @see		Tag
+	 * @see		Controller
+	 * @see		#renderTemplate
+	 * @since	1.0
+	 */
     public static void create() {
     	Offer offerItem = new Offer();
     	offerItem.tags = new ArrayList<Tag>();
     	renderTemplate("Offers/form.html", offerItem);
     }
 
+    /**
+     * Handles the POST request of the offer creation form. It simply
+     * gets the user-generated offer details (including the tags) and
+     * saves it in the database.
+     * <p>
+     * After the offer is saved, it forwards the user to the offer
+     * details showing page.
+     * 
+     * @param tags		tags to be attached to the offer
+     * @param offerItem the offer instance that will be recorded in
+     * 					the database
+     * @see				String
+     * @see				Offer
+     * @see				User
+     * @see				Tag
+     * @see				List
+     * @see				Utils
+     * @see				ArrayList
+     * @see				#validation
+     * @see				#renderTemplate
+     * @see				#show
+     * @since			1.0
+     */
     public static void doCreate(String tags, Offer offerItem) {
     	User user = getConnectedUser();
 
@@ -55,24 +109,74 @@ public class Offers extends BaseController
 		show(offerItem.id, isCreate);
     }
     
+    /**
+     * Seems like a dummy method. Need to be sure before
+     * deleting.
+     * 
+     * @deprecated
+     */
     public static void save(Long offerId) {
     	Offer offerItem = Offer.findById(offerId);
 	offerItem.save();
 	show(offerItem.id, true);
     }
 
+    /**
+     * Given the id of an offer and whether or not the operation
+     * is creation; renders the corresponding view.
+     * 
+     * @param id		id of the offer
+     * @param isCreate  whether or not the operation is creation
+     * @see				Long
+     * @see				Boolean
+     * @see				Offer
+     * @see				#render
+     * @since			0.1
+     */
     public static void show(Long id, Boolean isCreate) {
 	Offer offerItem = Offer.findById(id);
 	Boolean isOldOffer = !isCreate;
 	render(offerItem);
     }
 
+    /**
+     * Given the id of an offer; renders the corresponding
+     * modification view.
+     * 
+     * @param id		id of the offer
+     * @see				Long
+     * @see				Offer
+     * @see				Boolean
+     * @see				#render
+     * @since			0.1
+     */
     public static void showAfterEdit(Long id) {
 	Offer offerItem = Offer.findById(id);
 	Boolean isOldOffer = true;
 	render(offerItem, isOldOffer);
     }
 
+    /**
+     * Given the id of an offer; fetches corresponding handshakes
+     * and renders the offer details view.
+     * 
+     * @param id	id of the offer
+     * @see			User
+     * @see			#getConnectedUser
+     * @see			Offer
+     * @see			Long
+     * @see			Query
+     * @see			JPA
+     * @see			List
+     * @see			Boolean
+     * @see			Object
+     * @see			Handshake
+     * @see			Request
+     * @see			AbstractMap
+     * @see			HashMap
+     * @see			#render
+     * @since		0.1
+     */
     public static void showDetails(Long id) {
     	User user = getConnectedUser(); // user who is inspecting the offer
     	Offer offerItem = Offer.findById(id); // the offer being inspected
@@ -110,6 +214,12 @@ public class Offers extends BaseController
     	render(user, offerItem, offerOwner, someoneElsesOffer, hasApplied, userApplications, isOfferOwner);
     }
 
+    /**
+     * The search feature will be handled by a 3rd-party solution.
+     * This method will be useless.
+     * 
+     * @deprecated
+     */
     public static void search(String phrase, String location, String county_id, String district_id, String reocc, String m1, String t2, String w3, String t4, String f5, String s6, String s7, String tFrom, String tTo) {
     	User user = getConnectedUser();
 
@@ -248,11 +358,33 @@ public class Offers extends BaseController
     	}
     }
     
+    /**
+     * Given the id of an offer; renders the corresponding
+     * modification view.
+     * 
+     * @param id		id of the offer
+     * @see				Long
+     * @see				Offer
+     * @see				Boolean
+     * @see				#render
+     * @since			0.1
+     */
     public static void edit(Long id) {
     	Offer offerItem = Offer.findById(id);
     	renderTemplate("Offers/form.html", offerItem);
     }
 
+    /**
+     * Finds the offers created by the current logged in user
+     * and lists them.
+     * 
+     * @see		User
+     * @see		#getConnectedUser
+     * @see		List
+     * @see		Offer
+     * @see		#render
+     * @since	0.1
+     */
     public static void list() {
 	User user = getConnectedUser();
 	List<Offer> offers = Offer.find("user.id", user.id).fetch();
