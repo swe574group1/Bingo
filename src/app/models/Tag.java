@@ -64,8 +64,9 @@ public class Tag extends Model {
     	this.name = name;
 	}
 
-    public Tag(Request request, String name) {
+    public Tag(Request request, String freebaseId, String name) {
 		this.request = request;
+		this.freebaseId = freebaseId;
 		this.name = name;
     }
     

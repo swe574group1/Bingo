@@ -3,10 +3,15 @@
 
 #{set 'moreStyles'}
 <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/datepicker.css'}">
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/ui-lightness/jquery-ui-1.8.6.custom.css'}">
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/jquery.tagedit.css'}">
 #{/set}
 
 #{set 'moreScripts'}
 <script src="@{'/public/javascripts/datepicker.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+<script src="@{'/public/javascripts/jquery-ui-1.8.6.custom.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+<script src="@{'/public/javascripts/jquery.autoGrowInput.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+<script src="@{'/public/javascripts/jquery.tagedit.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 <script src="@{'/public/javascripts/create-offer.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 #{/set}
 
@@ -244,7 +249,7 @@ function setTimeValue(obj, ind)
 }
 </script>
 
-<form action="@{Requests.doCreate()}" method="POST" class="utility_form">
+<form action="@{Requests.doCreate()}" method="POST" class="utility_form taggable">
 	<input type="hidden" name="requestItem.id" value="${requestItem.id}" />
 
   <fieldset>
@@ -258,7 +263,7 @@ function setTimeValue(obj, ind)
       </li>
       <li>
         <label style="padding-top:7px">Tags</label>
-        <input style="width:200px;" type="text" name="tags" value="${requestItem.tags.join(' ')}" /> Separate tags with spaces
+        <input id="tags" style="width:200px;" type="text" name="tags[]" value="${requestItem.tags.join(' ')}" /> Separate tags with spaces
 	<span class="error">#{error 'requestItem.tags' /}</span>
       </li>
       <li>

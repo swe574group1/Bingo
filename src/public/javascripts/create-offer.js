@@ -1,48 +1,5 @@
-var TagManager = function() {};
-
-TagManager.prototype.compareItems = function (item1, item2) {
-		return item1 && item2 && (item1.guid == item2.guid);
-	};
-	
-TagManager.prototype.filter = function (list, query) {
-	var newList = [];
-	for (item in list) {
-		if (item.name && item.name.indexOf(query) !== -1) {
-			newList.push(item);
-		}
-	}
-	return newList;
-};
-	
-TagManager.prototype.init = function (core) {
-	console.log("starting tag manager...");
-};
-
-TagManager.prototype.itemContains = function (item, needle) {
-	return item.name.indexOf(needle) !== -1;
-};
-
-TagManager.prototype.itemToString = function (item) {
-	return item.name + " - " + item.type[0].name;
-};
-
-TagManager.prototype.stringToItem = function (str) {
-	return str;
-};
-
 $(document).ready(function(){
 	// tagging system.
-	/*
-	$("#tags").textext({
-		itemManager: TagManager,
-		plugins: "autocomplete ajax tags filter",
-		ajax: {
-			url: "/tag/search",
-			dataType: "json",
-			cacheResults: false
-		}
-	});
-	*/
 	$("#tags").tagedit({
 		allowEdit: false,
 		autocompleteOptions: {

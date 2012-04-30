@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.AbstractMap;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.Query;
 import models.Offer;
@@ -17,40 +18,107 @@ import models.Handshake;
 
 import play.db.jpa.JPA;
 
-public class Requests extends BaseController
-{
+/**
+ * Requests is the controller class that is responsible of handling
+ * HTTP requests for system requests.
+ * <p>
+ * Requests includes the following features:
+ * <ul>
+ * <li>Creating a new request
+ * <li>Modifying details of a specific request
+ * <li>Showing details of a specific request
+ * <li>Listing all requests
+ * <li>Searching requests by keywords (e.g. phrase, location)
+ * </ul>
+ * <p>
+ * The class was originally created by last year's "Let It Bee"
+ * group members.
+ * 
+ * @author	Onur Yaman  <onuryaman@gmail.com>
+ * @version 2.0
+ * @since	1.0
+ */
+public class Requests extends BaseController {
+	
+	/**
+	 * Creates a new request instance (with empty tags) and delegates
+	 * it to the request creation form template renderer, which in
+	 * turn renders the form.
+	 * 
+	 * @see		Request
+	 * @see 	ArrayList
+	 * @see		Tag
+	 * @see		Controller
+	 * @see		#renderTemplate
+	 * @since	1.0
+	 */
     public static void create() {
-	Request requestItem = new Request();
-	requestItem.tags = new ArrayList<Tag>();
-	renderTemplate("Requests/form.html", requestItem);
+		Request requestItem = new Request();
+		requestItem.tags = new ArrayList<Tag>();
+		renderTemplate("Requests/form.html", requestItem);
     }
 
-    public static void doCreate(String tags, Request requestItem) {
-	User user = getConnectedUser();
+    /**
+     * Handles the POST request of the offer creation form. It simply
+     * gets the user-generated offer details (including the tags) and
+     * saves it in the database.
+     * <p>
+     * After the offer is saved, it forwards the user to the offer
+     * details showing page.
+     * 
+     * @param tags		tags to be attached to the offer
+     * @param offerItem the offer instance that will be recorded in
+     * 					the database
+     * @see				String
+     * @see				Offer
+     * @see				User
+     * @see				Tag
+     * @see				List
+     * @see				Utils
+     * @see				ArrayList
+     * @see				#validation
+     * @see				#renderTemplate
+     * @see				#show
+     * @version			2.0
+     * @since			1.0
+     */
+    public static void doCreate(HashMap<String, String> tags, Request requestItem) {
+    	// check whether or not the request is new.
+    	boolean isCreate = requestItem.id == null;
+    	
+    	// if the request is not new;
+    	if (! isCreate) {
+    		// prevent tags to be appended to existing tags
+    		// on edit.
+    		Tag.delete("offer.id", requestItem.id);
+    	}
 
-	boolean isCreate = requestItem.id == null;
-	
-	if (!isCreate) {
-	    Tag.delete("request.id", requestItem.id);
-	}
-
-	List<String> tagsListString = Utils.parseTags(tags);
-	List<Tag> tagsList = new ArrayList<Tag>();
-	for (String tagString : tagsListString) {
-	    Tag tag = new Tag(requestItem, tagString);
-	    tagsList.add(tag);
-	}
-	requestItem.tags = tagsList;
-
-	validation.valid(requestItem);
-	if (validation.hasErrors()) {
-	    renderTemplate("Requests/form.html", requestItem);
-	}
-	
-	requestItem.user = user;
-	requestItem.save();
-	
-	show(requestItem.id);
+    	// for each tag the user entered;
+    	for (Map.Entry<String, String> entry : tags.entrySet()) {
+    		// create a new Tag instance.
+    		Tag tag = new Tag(requestItem, entry.getKey(), entry.getValue());
+    		
+    		// tag the offer.
+    		requestItem.tags.add(tag);
+    	}
+    	
+    	// make sure that the form is validated.
+    	validation.valid(requestItem);
+    	
+    	// if there are errors;
+    	if (validation.hasErrors()) {
+    		// render the form view again.
+    		renderTemplate("Requests/form.html", requestItem);
+    	}
+    	
+    	// assign the current user to the request.
+    	requestItem.user = getConnectedUser();
+    	
+    	// save the request.
+    	requestItem.save();
+    	
+    	// render the request view.
+    	show(requestItem.id);
     }
 
     public static void save(Long requestId) {
@@ -103,6 +171,7 @@ public class Requests extends BaseController
 	
 	Boolean someoneElsesRequest = (user != requestOwner);
 	render(user, requestItem, requestOwner, someoneElsesRequest, hasApplied, userApplications, handshakeId);
+
     }
     
     /*public static void search(String phrase) {
