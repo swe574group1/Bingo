@@ -4,6 +4,7 @@ import javax.persistence.Query;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import models.*;
 import play.mvc.*;
@@ -136,8 +137,18 @@ public class Users extends BaseController
 		
 		renderArgs.put("tagUserCloud", tagCloud); 	
 		/*Tagcloud end*/
+		Badge badge=new Badge();
+		BadgeType badges=badge.getbadgelist();
+//		Iterator<BadgeType> itr = badgeslist.iterator();
+//	    while (itr.hasNext()) {
+//	      BadgeType element = itr.next();
+//	      System.out.print(element.type + " ");
+//	    }
+//	
 	
-	render(observedUser, isOwnProfile, handshakes, offers, requests);
+		System.out.println(badges);
+	
+	render(observedUser, isOwnProfile, handshakes, offers, requests,badges);
     }
 
     public static void ownProfile() {
@@ -150,4 +161,5 @@ public class Users extends BaseController
         User user = User.findById(connectedUser.id);
         renderTemplate("Users/form.html", user);
     }
+    
 }

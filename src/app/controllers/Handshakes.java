@@ -218,12 +218,19 @@ public class Handshakes extends BaseController
 
     	long count=Handshake.count("(offer.user.id = ? or request.user.id = ?) and creationDate> ?", user.id, user.id,sixMonthAgo);
     	user.badge=BadgeType.NEW_BEE;
+//    	if(count>=5)
+//    		user.badge=BadgeType.BUSY_BEE;
+//    	if(count>=30)
+//    		user.badge=BadgeType.WORKING_BEE;
+//    	if(count>=60)
+//    		user.badge=BadgeType.BUMBLE_BEE;
+    	user.badge=BadgeType.NEW_BEE;
     	if(count>=5)
-    		user.badge=BadgeType.BUSY_BEE;
+    		user.badge=BadgeType.Fivester;
     	if(count>=30)
-    		user.badge=BadgeType.WORKING_BEE;
+    		user.badge=BadgeType.Populist;
     	if(count>=60)
-    		user.badge=BadgeType.BUMBLE_BEE;
+    		user.badge=BadgeType.Guru;
     	user.save();
     	
     }

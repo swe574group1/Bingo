@@ -18,16 +18,14 @@
             <a href="#" class="active" no="1">Handshakes</a>
           </li>
 	  <li>
-	    <a href="#" no="2">Offers</a>
+	    <a href="#" class="active" no="2">Offers</a>
 	  </li>
 	  <li>
-	    <a href="#" no="3">Requests</a>
+	    <a href="#" class="active"  no="3">Requests</a>
 	  </li>
 	  
-	   <li>
-	    <a href="#" no="3">Badges</a>
-	  </li>
-     
+	
+   
         </ul>
       </div>
 
@@ -40,7 +38,7 @@
           <th>Offerer</th>
           <th>Requester</th>
           <th>Details</th>
-        </tr>e
+        </tr>
         
 
 	#{list items:handshakes, as:'handshake'}
@@ -62,11 +60,7 @@
 
       </table>
       </div>
-      <!--   new tab comed here -->
-      
-      
-      
-      
+        
       
       #{/if}
 
@@ -96,7 +90,6 @@
             <th>Title</th>
             <th>Details</th>
           </tr>
-
       	  #{list items:requests, as:'request'}
       	  <tr>
       	    <td>${request.title}</td>
@@ -109,25 +102,11 @@
 
 
 
-      
+  
       <!-- new tab by   Ali      -->
-       #{if badges}
-      <div class="index_tab_content" id="index_tab_content_4" style="display:none">
-      	<table class="show_data" style="margin-left:0px; width:560px;">
-      	  <tr class="first">
-            <th>Title</th>
-            <th>Details</th>
-          </tr>
-
-      	  #{list items:badges, as:'badge'}
-      	  <tr>
-      	    <td>${badge.title}</td>
-      	     </tr>
-      	  #{/list}
-     	</table>
-      </div>
+  
       
-      #{/if}
+    
        <!-- new tab by   Ali   end-->
 
       <!-- <div class="pager" style="margin-right:0px;"> -->

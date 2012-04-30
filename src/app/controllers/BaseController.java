@@ -404,7 +404,7 @@ public class BaseController extends Controller
     	
     	Query query = JPA.em().createQuery("select hour_min,val from Recoccurancehour order by val");
     	List<Object[]> list = query.getResultList();
-       	
+      
     	List<Recoccurancehouritem> hours = new ArrayList<Recoccurancehouritem>(); 
     	
     	for(Object[] a : list)
