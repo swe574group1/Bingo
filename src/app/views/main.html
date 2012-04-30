@@ -23,9 +23,27 @@
 		<div id="header" style="border: 0px solid red;">
 			<a name="top"></a>
 			<h1 class="logo">bingo!</h1>
-			<div id="searchForm">
-			    <input type="search" name="query" value="" placeholder="search..." />
+			<div id="searchForm" style="display: none;">
+				<input type="search" name="query" value="" placeholder="search..." />
 			</div>
+			<ul id="profileLinks" class="hidden">
+			    <li><a href="@{Users.ownProfile()}">My Profile</a></li>
+			    <li><a href="@{Users.editProfile()}">Edit Profile</a></li>
+			    <li><a href="@{Secure.logout()}">Logout</a></li>
+			</ul>
+			#{if isLoggedIn}
+			<div class="profileWidget">
+			<a id="profileMenuToggle" href="#">
+		        #{if user.photo.exists()}
+			    <img style="height:15px; width:15px;" class="avatar" src="@{Application.showUserPhoto(user.id)}" alt="${user.fullname}" title="Your Profile Photo" style="margin-top:10px; display:block;" />
+			    #{/if}
+			    #{else}
+			        <img style="height:15px; width:15px;" src="/public/images/lbi02.png" alt="Default User Avatar" title="Your Profile Photo" style="margin-top:10px; display:block;"  />
+			        <span class="username"> ${user.fullname}!</span>
+			    #{/else}
+			</a>
+			</div>
+			#{/if}
 		</div>
 	</div>
 
