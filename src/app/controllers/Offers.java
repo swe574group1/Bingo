@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.AbstractMap;
 import java.util.HashMap;
+import java.util.Map;
+
+import javassist.bytecode.Descriptor.Iterator;
 
 import javax.persistence.Query;
 
@@ -78,35 +81,46 @@ public class Offers extends BaseController {
      * @see				#validation
      * @see				#renderTemplate
      * @see				#show
+     * @version			2.0
      * @since			1.0
      */
-    public static void doCreate(String tags, Offer offerItem) {
-    	User user = getConnectedUser();
-
+    public static void doCreate(HashMap<String, String> tags, Offer offerItem) {
+    	// check whether or not the offer is new.
     	boolean isCreate = offerItem.id == null;
-
-    	if (!isCreate) {
-    		// prevent tags to be appended to existing tags on edit
+    	
+    	// if the offer is not new;
+    	if (! isCreate) {
+    		// prevent tags to be appended to existing tags
+    		// on edit.
     		Tag.delete("offer.id", offerItem.id);
     	}
-		List<String> tagsListString = Utils.parseTags(tags);
-		List<Tag> tagsList = new ArrayList<Tag>();
-		for (String tagString : tagsListString) {
-		    Tag tag = new Tag(offerItem, tagString);
-		    tagsList.add(tag);
-		}
-		offerItem.tags = tagsList;
 
-		validation.valid(offerItem);
-		if (validation.hasErrors()) {
-		    System.out.println("VALIDATION ERRORS:" + validation.errors());
-		    renderTemplate("Offers/form.html", offerItem);
-		}
-	
-		offerItem.user = user;
-		offerItem.save();
-	
-		show(offerItem.id, isCreate);
+    	// for each tag the user entered;
+    	for (Map.Entry<String, String> entry : tags.entrySet()) {
+    		// create a new Tag instance.
+    		Tag tag = new Tag(offerItem, entry.getKey(), entry.getValue());
+    		
+    		// tag the offer.
+    		offerItem.tags.add(tag);
+    	}
+    	
+    	// make sure that the form is validated.
+    	validation.valid(offerItem);
+    	
+    	// if there are errors;
+    	if (validation.hasErrors()) {
+    		// render the form view again.
+    		renderTemplate("Offers/form.html", offerItem);
+    	}
+    	
+    	// assign the current user to the offer.
+    	offerItem.user = getConnectedUser();
+    	
+    	// save the offer.
+    	offerItem.save();
+    	
+    	// render the offer view.
+    	show(offerItem.id, isCreate);
     }
     
     /**

@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -86,20 +87,23 @@ public class Offer extends Model implements Matchable
     public Integer reocc_end_hour_val;
     
     public Offer(User user) {
-	this.user = user;
+    	this.tags = new ArrayList<Tag>();
+    	this.user = user;
     }
 
     public Offer() {
-	this.status = Status.WAITING;
+    	this.tags = new ArrayList<Tag>();
+    	this.status = Status.WAITING;
     }
 
     public Offer(User user, Request request) {
-	this.user = user;
-	this.title = request.title;
-	this.duration = request.duration;
-	this.description = request.description;
-	this.endDate = request.endDate;
-	this.status = Status.WAITING;
+    	this.tags = new ArrayList<Tag>();
+		this.user = user;
+		this.title = request.title;
+		this.duration = request.duration;
+		this.description = request.description;
+		this.endDate = request.endDate;
+		this.status = Status.WAITING;
     }
 
     @Override
