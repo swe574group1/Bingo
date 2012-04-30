@@ -5,3 +5,6 @@
 @import url("coolblue.css");
 @import url("enhancements.css"); 
 /* end import/hide */
+
+h1.logo { font-size: 25px; overflow: hidden; color: #fff; font-family: Helvetica; margin: 10px 0 0 0; display: inline-block; width: 300px; }
+#searchForm { float: right; margin-top: 15px; margin-right: 10px; }

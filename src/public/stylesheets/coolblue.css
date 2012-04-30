@@ -190,9 +190,8 @@ input.button {
 /* header */
 #header-wrap {
   float: left;
-  height: 310px;
+  height: 60px;
   width: 100%;
-  background: url(../images/header-bg.jpg) repeat-x;
 }
 #header {
   position: relative;
