@@ -15,8 +15,11 @@ import models.Request;
 import models.Tag;
 import models.User;
 import models.Handshake;
+import models.CreditType;
+import service.CreditManager;
 import service.MatchService;
 import service.Utils;
+
 
 import play.db.jpa.JPA;
 
@@ -57,6 +60,8 @@ public class Offers extends BaseController {
     public static void create() {
     	Offer offerItem = new Offer();
     	offerItem.tags = new ArrayList<Tag>();
+    	CreditType ct = CreditManager.getService(offerItem); 
+    	offerItem.credit = (int)ct.requesterSocialPoint;
     	renderTemplate("Offers/form.html", offerItem);
     }
 
