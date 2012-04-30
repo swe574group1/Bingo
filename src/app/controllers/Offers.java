@@ -15,6 +15,8 @@ import models.Request;
 import models.Tag;
 import models.User;
 import models.Handshake;
+import models.CreditType;
+import service.CreditManager;
 import service.MatchService;
 import service.Utils;
 
@@ -95,14 +97,14 @@ public class Offers extends BaseController {
     		Tag.delete("offer.id", offerItem.id);
     	}
 
-//    	// for each tag the user entered;
-//    	for (Map.Entry<String, String> entry : tags.entrySet()) {
-//    		// create a new Tag instance.
-//    	//	Tag tag = new Tag(offerItem, entry.getKey(), entry.getValue());
-//    		
-//    		// tag the offer.
-//    		offerItem.tags.add(tag);
-//    	}
+    	// for each tag the user entered;
+    	for (Map.Entry<String, String> entry : tags.entrySet()) {
+    		// create a new Tag instance.
+    		Tag tag = new Tag(offerItem, entry.getKey(), entry.getValue());
+    		
+    		// tag the offer.
+    		offerItem.tags.add(tag);
+    	}
     	
     	// make sure that the form is validated.
     	validation.valid(offerItem);

@@ -8,16 +8,6 @@
   <div id="sidebar"  style="border:0px solid #aaa; padding-top:0px;">
     
     <div class="sidemenu" align="left">
-      <h3>Menu</h3>
-      Welcome, ${user.fullname}!<br />
-      <a href="@{Users.ownProfile()}">
-      #{if user.photo.exists()}
-      <img style="height:120px; width:120px;" class="avatar" src="@{Application.showUserPhoto(user.id)}" alt="${user.fullname}" title="Your Profile Photo" style="margin-top:10px; display:block;" />
-      #{/if}
-      #{else}
-      <img style="height:120px; width:120px;" src="/public/images/lbi02.png" alt="Default User Avatar" title="Your Profile Photo" style="margin-top:10px; display:block;"  />
-      #{/else}
-      </a><br />
       <style>
 		  .create_offer {
 	background-color:#090;
@@ -37,10 +27,6 @@
 	<li><a href="@{Handshakes.list()}">My Handshakes</a></li>
         <li><a href="@{Offers.list()}">My Offers</a></li>
         <li><a href="@{Requests.list()}">My Requests</a></li>
-	<li><a href="@{Users.ownProfile()}">My Profile</a></li>
-	<li><a href="@{swe.badges()}">My Badges</a></li>
-	<li><a href="@{Users.editProfile()}">Edit Profile</a></li>
-	<li><a href="@{Secure.logout()}">Logout</a></li>
       </ul>
     </div>
     

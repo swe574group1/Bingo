@@ -1,8 +1,33 @@
- $(document).ready(function(){
-	 
-	 
-	 
- });
+$(document).ready(function(){
+	// tagging system.
+	$("#tags").tagedit({
+		allowEdit: false,
+		autocompleteOptions: {
+			minLength: 2,
+			source: function (request, response) {
+				$.getJSON("/tag/search?term=" + request.term, function(data) {
+					var list = [];
+					$.each(data, function(i, v) {
+						if (! v.name) {
+							return;
+						}
+						var item = {
+							label: v.name + " - " + v.type[0].name,
+							value: v.name,
+							id: v.guid
+						};
+						list.push(item);
+					});
+					response(list);
+				});
+			},
+			select: function (e, ui) {
+				$(this).val(ui.item.value).trigger('transformToTag', [ui.item.id]);
+				return false;
+			}
+		}
+	});
+});
  
  //date_input eklentisi turkce yama
   jQuery.extend(DateInput.DEFAULT_OPTS, {

@@ -221,130 +221,75 @@
 color:#2c76a5;
 }
 </style>
+<div class="post" style="padding:top:0px">
+  <h3 style="padding-top:0px;">Recent HandShakes</h3>
+  #{if newHandshakes}
+  <table>
+    <th>Title</th>
+    <th>Offerer</th>
+    <th>Requester</th>
+    <th>Honey Combs Made</th>
+    <th></th>
+    #{list items:newHandshakes, as:'handshake'}
+    <tr>
+      #{if handshake.isOriginallyAnOffer}
+      <td>${handshake.offer.title}</td>
+      #{/if}
+      #{else}
+      <td>${handshake.request.title}</td>
+      #{/else}
+      <td>${handshake.offer.user.fullname}</td>
+      <td>${handshake.request.user.fullname}</td>
+      <td>${handshake.offer.credit}</td>
+      <td><a href="@{Handshakes.show(handshake.id)}">Details</a></td>
+    </tr>
+    #{/list}
+  </table>
+  
+  
+  #{/if}
+  #{else}
+  <p>
+    There are no recent handshakes.
+  </p>
+    
+  #{/else}
 
-<!-- 
-<div class="post" style="padding-top:12px; padding:top:00px">
- <div class="user_tabs2" >
-    <ul>
-      <li><a href="#" class="active">Making it happen!</a>
-      </li>
-    </ul>
+</div>
+<div class="postalt" style="border:0px solid green; width:98%">
+<div class="user_tabs" style="margin-top:30px; border:opx solid red; text-align:middle; width:100%">
+  <div class="tag_cloud_big linearBg2" style="border:0px solid green; width:360px; display:inline-block; text-align: center; ">
+  <h4>Offers in Clouds</h4>    
+</div>
+<div class="tag_cloud_big linearBg2" style="border:0px solid green; width:360px; display:inline-block; text-align: center; ">
+  <h4>Requests in Clouds</h4>    
+</div>
   </div>
 
-<div style="vertical-align:middle; text-align:center;">
-<div class="index_tab_content2" id="index_tab_content_2" style="padding-top: 20px;padding-bottom:5px;">
-<iframe width="420" height="315" src="http://www.youtube.com/embed/RdopMqrftXs" frameborder="0" allowfullscreen></iframe>
+<div class="index_tab_content3" id="index_tab_content_1" style="width:99.5%">
+<div class="tag_cloud_big linearBg2" style="border:0px solid green; width:350px; display:inline-block; text-align: center; vertical-align:top;">
+       <br/>
+       <ul>          
+        #{list items:tagCloudBigOffer, as:'tagItem'}
+        <li class = "${tagItem.CssClass}">  
+           <a href="${tagItem.hyperlink}" style="color:gray">${tagItem.name}</a>          
+        </li>
+        #{/list}
+       </ul>   
+       <br/>  
+</div>
+<div class="tag_cloud_big linearBg2" style="border:0px solid green; width:350px; display:inline-block;text-align:center; vertical-align:top; ">
+     <br/>
+     <ul>        
+        #{list items:tagCloudBigRequest, as:'tagItem'}
+         <li class = "${tagItem.CssClass}">  
+            <a href="${tagItem.hyperlink}" style="color:gray">${tagItem.name}</a>
+        </li>
+        #{/list}
+       </ul> 
+       <br/>
 </div>
 </div>
-</div>
-<br style="clear:both;"/>-->
-
-<div class="post" style="padding-top:5px; padding:top:00px">
-  
-  <div class="user_tabs" style="margin-top:10px;">
-    <ul>
-      <li>            
-       <a id="user_tab_a_1" href="#" class="active" no="1" onmousedown="abortTimer();">Making it happen!</a>    
-      </li>
-      <li>
-        <a id="user_tab_a_2" href="#" no="2" onmousedown="abortTimer();">A Hard Day's Cooking Night</a>
-      </li>
-      <li>
-        <a id="user_tab_a_3" href="#" no="3" onmousedown="abortTimer();">Mowers of Lawn</a>
-      </li>
-      <li>
-        <a id="user_tab_a_4" href="#" no="4" onmousedown="abortTimer();">Ain't No Spot When He Cleans</a>
-      </li>
-    </ul>
-  </div>
-  <div class="index_tab_content" id="index_tab_content_1">    
-    <div onmousedown="abortTimer();" style="text-align:center; vertical-align:middle; padding-top:20px;padding-bottom:10px;">
-      <iframe width="560" height="315" src="http://www.youtube.com/embed/UqUTDXk-dAA?rel=0" frameborder="0" allowfullscreen></iframe>
-	</div>    
-    <div style="clear:both;"></div>
-  </div>
-  <div class="index_tab_content nonvisible" id="index_tab_content_2">
-    <div class="images">
-      <div align="center"><img src="@{'/public/images/cooking1.jpg'}" /></div>
-      <div align="center"><img src="@{'/public/images/cooking2.jpg'}" /></div>
-    </div>   
-    <div class="service">
-      <b>Service:</b><br  />
-      <p>Cooking, mostly chinese, some thai</p>
-      <b>Tagline:</b><br  />
-      <p>Two people, one eager to cook, one eager to learn, none eager to clean</p>
-      <b>Quotes:</b><br  />
-      <p>- My eye, my beautiful eye!<br  />
-        - I have no idea what I am eating, but it tastes good enough.<br />
-        - Which was the bowl with vomit in it, again?</p>
-    </div>  
-    <div style="clear:both;"></div>
-  </div>
-  
-  <div class="index_tab_content nonvisible" id="index_tab_content_3">
-    <div class="images">
-      <div align="center"><img src="@{'/public/images/lawn1.jpg'}" /></div>
-      <div align="center"><img src="@{'/public/images/lawn2.jpg'}" /></div>
-    </div>
-    
-    <div class="service">
-      <b>Service:</b><br  />
-      <p>Gardening services, most importantly lawn mowing</p>
-      <b>Tagline:</b><br  />
-      <p>It was supposed to be an ordinary day in the garden</p>
-      <b>Quotes:</b><br  />
-      <p>- I drink your lemonade!<br  />
-        - I didn't know a lawn mower could do that.<br />
-        - Is everyone's fingers intact?</p>
-    </div>   
-    <div style="clear:both;"></div>
-  </div>
-  
-  <div class="index_tab_content nonvisible" id="index_tab_content_4">
-    <div class="images">
-      <div align="center"><img src="@{'/public/images/garage1.jpg'}" /></div>
-      <div align="center"><img src="@{'/public/images/garage2.jpg'}" /></div>
-    </div>
-    
-    <div class="service">
-      <b>Service:</b><br  />
-      <p>Cleaning a garage</p>
-      <b>Tagline:</b><br  />
-      <p>In the garage, no one can hear you clean</p>
-      <b>Quotes:</b><br  />
-      <p>- Do you know what this is? - No, but I'll clean the hell out of it.<br  />
-	- Is it safe to mix these stuff? - Probably not. (continues mixing cleaning materials)<br />
-        - Did I miss a spot? - (Everyone) Nooooo!</p>
-    </div>
-
-    <div style="clear:both;"></div>
-    </div>
-  </div>
-<div class="post">
-  <h4>Humble Bee of The Month</h4>
-  <div class="interview">
-    <div class="image">
-      <div align="center"><img src="@{'/public/images/hbirdman.jpg'}" /></div>
-      <div align="center">Harvey Birdman<br  /><a href="#nowhere">Working Bee</a></div>
-    </div>
-    
-    <div class="baloon">
-      <blockquote>
-        <span class="bqstart">&ldquo;</span>
-        I joined because back then I had too much spare time. Now I try to manage my schedule to create free time for services! 
-        <span class="bqend">&rdquo;</span>
-      </blockquote>
-    </div>
-    
-    <div class="story">
-      <b>Let It Bee:</b>Can you tell us about yourself?<br  />
-      <b>Harvey Birdman:</b>Well, I am an ex-superhero, currently an attorney. My power comes from the rays of the sun. I also have the power of attorney [laughs]. <br  />
-      <b>Let It Bee:</b>When did you participate in your first service?<br  />
-      <b>Harvey Birdman:</b>It was eight months ago. When I first joined I had trouble with participating in services. Then ... <a href="#nowhere">read the rest of the interview</a> <br  />
-    </div>
-    
-  </div>
-  
 </div>
 #{/else}
 

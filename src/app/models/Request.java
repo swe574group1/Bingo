@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
@@ -29,7 +30,10 @@ public class Request extends Model implements Matchable
 
     @Required
     public String title;
-
+    
+    @Required
+    public Double duration;
+    
     @Required
     @Lob
     public String description;
@@ -87,11 +91,13 @@ public class Request extends Model implements Matchable
     public Integer reocc_end_hour_val;
     
     public Request(User user) {
-	this.user = user;
+    	this.tags = new ArrayList<Tag>();
+    	this.user = user;
     }
 
     public Request() {
-	this.status = Status.WAITING;
+    	this.tags = new ArrayList<Tag>();
+    	this.status = Status.WAITING;
     }
 
     @Override
@@ -113,11 +119,13 @@ public class Request extends Model implements Matchable
     }    
     
     public Request(User user, Offer offer) {
-	this.user = user;
-	this.title = offer.title;
-	this.description = offer.description;
-	this.endDate = offer.endDate;
-	this.status = Status.WAITING;
+    	this.tags = new ArrayList<Tag>();
+		this.user = user;
+		this.title = offer.title;
+		this.duration = offer.duration;
+		this.description = offer.description;
+		this.endDate = offer.endDate;
+		this.status = Status.WAITING;
     }
 
 }

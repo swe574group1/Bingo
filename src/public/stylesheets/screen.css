@@ -5,3 +5,13 @@
 @import url("coolblue.css");
 @import url("enhancements.css"); 
 /* end import/hide */
+
+h1.logo { float: left; font-size: 25px; overflow: hidden; color: #fff; font-family: Helvetica; margin: 10px 0 0 0; display: inline-block; width: 600px; }
+#searchForm { float: left; margin-top: 15px; margin-right: 10px; }
+.profileWidget { float: right; margin-top: 0; color: #fff; }
+    .username { line-height: 30px; vertical-align: middle; height: 60px; display: inline-block; margin-left: 10px; }
+.hidden { display: none; }
+#profileLinks { position: absolute; right: -26px; top: 50px; list-style: none; background-color: #1666BA; color: #fff; padding: 10px; width: 100px; }
+    #profileLinks a { color: #fff; }
+#profileMenuToggle { color: #fff; overflow: hidden; height: 40px; float: right; padding: 10px; }
+    #profileMenuToggle.active { background-color: #1666BA; }
