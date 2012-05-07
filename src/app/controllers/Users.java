@@ -32,7 +32,6 @@ public class Users extends BaseController
     	
     	if(isCreate)
     		user.badge=BadgeType.NEW_BEE;
-    	
     	user.save();
 
     	if (isCreate) {
@@ -137,7 +136,7 @@ public class Users extends BaseController
 		
 		renderArgs.put("tagUserCloud", tagCloud); 	
 		/*Tagcloud end*/
-		Badge badge=new Badge();
+		BadgeManager badge=new BadgeManager();
 		BadgeType badges=badge.getbadgelist();
 //		Iterator<BadgeType> itr = badgeslist.iterator();
 //	    while (itr.hasNext()) {

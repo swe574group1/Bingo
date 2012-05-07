@@ -43,6 +43,8 @@ public class BaseController extends Controller
     		usr.balance = 0;
        		
     		users_new_bee_base.add(usr);
+    		
+    		
        	}  
     	
     	Collections.shuffle(users_new_bee_base);

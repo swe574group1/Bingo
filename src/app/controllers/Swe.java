@@ -3,6 +3,7 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.BadgeEntity;
 import models.BadgeImage;
 import models.BadgeType;
 import models.Handshake;
@@ -17,16 +18,23 @@ public class Swe extends BaseController
 	{	
     	List Imagelist = new ArrayList();
 
-		Badge badge=new Badge();
+		BadgeManager badgemanager=new BadgeManager();
 		BadgeImage image = null;
-		BadgeType badges=badge.getbadgelist();
-		if(badges.toString()=="NEW_BEE"){
-			image=new BadgeImage();
-			image.setNewbee();
-			Imagelist.add(image);
-				
-		}
+		BadgeType badges=badgemanager.getbadgelist();
+		User currentuser=badgemanager.getConnectedUser();
 		
+		
+						if(badges.toString()=="NEW_BEE"){
+							BadgeEntity badgeEntity=new BadgeEntity();
+							badgeEntity.setEmail(currentuser.email);
+							badgeEntity.setNewbie("NEW_BEE");
+							badgeEntity.save(); 
+							
+							image=new BadgeImage();
+							image.setNewbee();
+							Imagelist.add(image);
+							}
+						
 	
 
 		//we should render the list of image

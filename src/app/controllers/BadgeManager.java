@@ -12,16 +12,14 @@ import models.User;
 import play.db.jpa.JPA;
 
 
-public class Badge {
+public class BadgeManager {
 	
 	//BadgeType badge = null;
 	// JPA.em().createQuery("from " + Request.class.getName() + " where status is 'WAITING'");
 	BadgeType	 getbadgelist(){
-		User currentUser = getConnectedUser();
+	User currentUser = getConnectedUser();
 	Query getBadgeQuery = JPA.em().createQuery("select badge from   " + User.class.getName() + " where id is " +currentUser.id);
-	
 	BadgeType badge = (BadgeType) getBadgeQuery. getSingleResult();
-
 //	Iterator<BadgeType> itr = badgeList.iterator();
 //    while (itr.hasNext()) {
 //      BadgeType element = itr.next();

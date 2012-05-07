@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import models.BadgeEntity;
 import models.BadgeType;
 import models.Comment;
 import models.Handshake;
@@ -229,7 +230,19 @@ public class Handshakes extends BaseController
 //    		user.badge=BadgeType.WORKING_BEE;
 //    	if(count>=60)
 //    		user.badge=BadgeType.BUMBLE_BEE;
-    	user.badge=BadgeType.NEW_BEE;
+    	
+       user.badge=BadgeType.NEW_BEE;
+    	   
+    
+       
+//    BadgeTable badgetable=new BadgeTable();
+//    user = getConnectedUser();
+//    Query getemailQuery = JPA.em().createQuery("select email from   " + User.class.getName() + " where id is " +user.id);
+//    String email = (String) getemailQuery. getSingleResult();
+//    badgetable.setEmail(email);
+//    badgetable.setNewbie("NEW_BEE");
+//    badgetable.save();
+//    	
     	if(count>=5)
     		user.badge=BadgeType.Fivester;
     	if(count>=30)

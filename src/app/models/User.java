@@ -78,6 +78,8 @@ public class User extends Model
 
      @OneToMany(mappedBy="user")
      public List<Comment> comments;
+     
+
 
      public static List<User> getNewUsers(int maxUsers) {
 	 return find("order by registrationDate DESC").fetch(maxUsers);
