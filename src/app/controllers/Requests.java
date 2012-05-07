@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.AbstractMap;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import javax.persistence.Query;
 import models.Offer;
 
 import models.Request;
+import models.RequestComment;
 import models.Tag;
 import models.User;
 import service.MatchService;
@@ -35,7 +37,7 @@ import play.db.jpa.JPA;
  * group members.
  * 
  * @author	Onur Yaman  <onuryaman@gmail.com>
- * @version 2.0
+ * @version 3.0
  * @since	1.0
  */
 public class Requests extends BaseController {
@@ -333,6 +335,34 @@ public class Requests extends BaseController {
 	User user = getConnectedUser();
 	List<Request> requests = Request.find("user.id", user.id).fetch();
 	render(user, requests);
+    }
+    
+    /**
+     * Adds a new comment for the offer.
+     * 
+     * @since	0.3
+     */
+    public static void makeComment(Request requestItem) {
+    	// get the connected user.
+    	User user = getConnectedUser();
+    	
+    	// fetch the comment text.
+    	String commentText = request.params.get("content");
+    	
+    	// create the comment instance.
+    	RequestComment comment = new RequestComment();
+    	
+    	// set the required data.
+    	comment.date = new Date();
+    	comment.text = commentText;
+    	comment.user = user;
+    	comment.request = requestItem;
+    	
+    	// save the data.
+    	comment.save();
+    	
+    	// show details of the offer again.
+    	showDetails(requestItem.id);
     }
 
 }

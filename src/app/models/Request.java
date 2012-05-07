@@ -90,6 +90,9 @@ public class Request extends Model implements Matchable
     public Integer reocc_start_hour_val;
     public Integer reocc_end_hour_val;
     
+    @OneToMany(mappedBy="request")
+    public List<RequestComment> comments;
+    
     public Request(User user) {
     	this.tags = new ArrayList<Tag>();
     	this.user = user;

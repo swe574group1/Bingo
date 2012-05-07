@@ -1,0 +1,33 @@
+<h4>Comments</h4>
+<ul class="comments">
+    #{list items:requestItem.comments, as:'comment'}
+    <li>
+        <div class="comment">
+            #{if comment.user.photo.exists()}
+                <img style="height:30px; width:30px;" class="avatar" src="@{Application.showUserPhoto(comment.user.id)}" alt="${comment.user.fullname}" title="${comment.user.fullname}" style="margin-top:10px; display:block;" />
+            #{/if}
+            #{else}
+                <img style="height:30px; width:30px;" class="avatar" src="/public/images/lbi02.png" alt="${comment.user.fullname}" title="${comment.user.fullname}" style="margin-top:10px; display:block;" />
+            #{/else}
+            <span class="username">${comment.user.fullname}</span>
+            <span class="datetime">${comment.date}</span>
+            <p class="content">${comment.text}</p>
+        </div>
+    </li>
+    #{/list}
+    <li>
+        <div class="leaveComment">
+            <form action="@{Requests.makeComment()}" method="POST" >
+                <label>
+                    <span class="label">Your comment:</span>
+                    <textarea name="content"></textarea>
+                </label>
+                <p class="rightAlign">
+                    <input type="hidden" name="requestItem.id" value="${requestItem.id}" />
+	                <input type="reset" value="Cancel" />
+	                <input type="submit" value="Make Comment" />
+                </p>
+            </form>
+        </div>
+    </li>
+</ul>
