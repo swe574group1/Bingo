@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.AbstractMap;
 import java.util.HashMap;
@@ -10,7 +11,9 @@ import javassist.bytecode.Descriptor.Iterator;
 
 import javax.persistence.Query;
 
+import models.Comment;
 import models.Offer;
+import models.OfferComment;
 import models.Request;
 import models.Tag;
 import models.User;
@@ -33,13 +36,14 @@ import play.db.jpa.JPA;
  * <li>Showing details of a specific offer
  * <li>Listing all offers
  * <li>Searching offers by keywords (e.g. phrase, location)
+ * <li>Making comments for an offer
  * </ul>
  * <p>
  * The class was originally created by last year's "Let It Bee"
  * group members.
  * 
  * @author	Onur Yaman  <onuryaman@gmail.com>
- * @version 2.0
+ * @version 3.0
  * @since	1.0
  */
 public class Offers extends BaseController {
@@ -150,9 +154,9 @@ public class Offers extends BaseController {
      * @since			0.1
      */
     public static void show(Long id, Boolean isCreate) {
-	Offer offerItem = Offer.findById(id);
-	Boolean isOldOffer = !isCreate;
-	render(offerItem);
+		Offer offerItem = Offer.findById(id);
+		Boolean isOldOffer = !isCreate;
+		render(offerItem);
     }
 
     /**
@@ -402,8 +406,36 @@ public class Offers extends BaseController {
      * @since	0.1
      */
     public static void list() {
-	User user = getConnectedUser();
-	List<Offer> offers = Offer.find("user.id", user.id).fetch();
-	render(user, offers);
+		User user = getConnectedUser();
+		List<Offer> offers = Offer.find("user.id", user.id).fetch();
+		render(user, offers);
+    }
+    
+    /**
+     * Adds a new comment for the offer.
+     * 
+     * @since	0.3
+     */
+    public static void makeComment(Offer offerItem) {
+    	// get the connected user.
+    	User user = getConnectedUser();
+    	
+    	// fetch the comment text.
+    	String commentText = request.params.get("content");
+    	
+    	// create the comment instance.
+    	OfferComment comment = new OfferComment();
+    	
+    	// set the required data.
+    	comment.date = new Date();
+    	comment.text = commentText;
+    	comment.user = user;
+    	comment.offer = offerItem;
+    	
+    	// save the data.
+    	comment.save();
+    	
+    	// show details of the offer again.
+    	showDetails(offerItem.id);
     }
 }

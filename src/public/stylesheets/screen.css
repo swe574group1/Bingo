@@ -15,3 +15,14 @@ h1.logo { float: left; font-size: 25px; overflow: hidden; color: #fff; font-fami
     #profileLinks a { color: #fff; }
 #profileMenuToggle { color: #fff; overflow: hidden; height: 40px; float: right; padding: 10px; }
     #profileMenuToggle.active { background-color: #1666BA; }
+ul.comments { list-style: none; padding: 0; margin-top: 20px; }
+    .comments span.username { vertical-align: top; height: 30px; line-height: inherit; }
+    .comments p.content { margin: 0; }
+    ul.comments li { border-bottom: #ccc 1px solid; padding: 15px 0 5px 0; }
+    ul.comments li:last-child { border-bottom: 0; }
+    span.datetime { float: right; }
+    div.leaveComment form { width: inherit; margin: 10px 0 0 0; padding-bottom: 10px; }
+        span.label { display: block; }
+    div.leaveComment form textarea { width: 98%; height: 100px; resize: none; }
+    div.leaveComment form p { width: 100%; margin: 0; padding: 0; border:0; }
+.rightAlign { text-align: right; }

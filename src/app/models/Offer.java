@@ -86,6 +86,9 @@ public class Offer extends Model implements Matchable
     public Integer reocc_start_hour_val;
     public Integer reocc_end_hour_val;
     
+    @OneToMany(mappedBy="offer")
+    public List<OfferComment> comments;
+    
     public Offer(User user) {
     	this.tags = new ArrayList<Tag>();
     	this.user = user;

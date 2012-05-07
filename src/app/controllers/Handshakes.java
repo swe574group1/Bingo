@@ -12,6 +12,7 @@ import models.BadgeType;
 import models.Comment;
 import models.Handshake;
 import models.Handshake.Status;
+import models.HandshakeComment;
 import models.Offer;
 import models.Request;
 import models.User;
@@ -203,13 +204,15 @@ public class Handshakes extends BaseController
     public static void saveComment(Long handshakeId)
     {
         User user = getConnectedUser();
-        Comment comment = new Comment();
+        
+        // create a new handshake comment.
+        HandshakeComment comment = new HandshakeComment();
         comment.user = user;
         comment.handshake = Handshake.findById(handshakeId);
         comment.date = new Date();
         comment.text = request.params.get("message");
         comment.save();
-	show(handshakeId);
+        show(handshakeId);
     }
 
     
