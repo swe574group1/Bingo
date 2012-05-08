@@ -1,6 +1,16 @@
 #{extends 'logged_user.html' /}
 #{set title:'Profile' /}
 
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/ui-lightness/jquery-ui-1.8.6.custom.css'}">
+#{/set}
+
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/jquery-ui-1.8.20.custom.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+<script src="@{'/public/javascripts/jquery.autoGrowInput.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+<script src="@{'/public/javascripts/profile.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+#{/set}
+
 <div id="main" style="padding-top:0px">
   <div class="post" style="padding:top:0px">
     <div class="right">
@@ -127,6 +137,7 @@
 
       <div class="post-meta">
         <ul>
+            <li style="text-align: left;"><a class="pm" href="#pm">Send Message</a></li>
          <li style="text-align: left">
 		  	<script type="text/javascript">
 			 $(document).ready( function() {
@@ -178,4 +189,12 @@
       </div>
     </div>
   </div>
+</div>
+
+<div id="pm" title="Send Message to ${observedUser.fullname}">
+    <form action="@{PrivateMessages.send()}" method="POST">
+        <input type="hidden" name="receiver.id" value="${observedUser.id}" />
+        <textarea name="text"></textarea>
+        <input type="submit" value="Send Message" />
+    </form>
 </div>

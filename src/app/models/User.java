@@ -79,7 +79,11 @@ public class User extends Model
      @OneToMany(mappedBy="user")
      public List<Comment> comments;
      
-
+     @OneToMany(mappedBy="receiver")
+     public List<PrivateMessage> inbox;
+     
+     @OneToMany(mappedBy="sender")
+     public List<PrivateMessage> outbox;
 
      public static List<User> getNewUsers(int maxUsers) {
 	 return find("order by registrationDate DESC").fetch(maxUsers);

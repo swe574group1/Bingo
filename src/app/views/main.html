@@ -27,6 +27,7 @@
 				<input type="search" name="query" value="" placeholder="search..." />
 			</div>
 			<ul id="profileLinks" class="hidden">
+			    <li><a href="@{PrivateMessages.inbox()}">Inbox (${user.inbox[0].getClass().getUnreadMessagesCount(user)})</a></li>
 			    <li><a href="@{Users.ownProfile()}">My Profile</a></li>
 			    <li><a href="@{Users.editProfile()}">Edit Profile</a></li>
 			    <li><a href="@{Secure.logout()}">Logout</a></li>

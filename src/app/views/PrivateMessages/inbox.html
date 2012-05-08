@@ -1,0 +1,14 @@
+#{extends 'logged_user.html' /}
+#{set title:'Inbox' /}
+
+<h3>Inbox</h3>
+#{if user.inbox}
+<ul>
+    #{list items:user.inbox, as:'pm'}
+    <li>${pm.sentAt.format('dd MMMM yyyy')} - ${pm.text}</li>
+    #{/list}
+</ul>
+#{/if}
+#{else}
+<p>Currently you have no messages in your inbox.</p>
+#{/else}

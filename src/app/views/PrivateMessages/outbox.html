@@ -1,0 +1,14 @@
+#{extends 'logged_user.html' /}
+#{set title:'Outbox' /}
+
+<h3>Outbox</h3>
+#{if user.outbox}
+<ul>
+    #{list items:user.outbox, as:'pm'}
+    <li>${pm.sentAt.format('dd MMMM yyyy')} - ${pm.text}</li>
+    #{/list}
+</ul>
+#{/if}
+#{else}
+<p>Currently you have no sent messages in your outbox.</p>
+#{/else}
