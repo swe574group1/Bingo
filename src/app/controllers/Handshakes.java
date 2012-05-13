@@ -223,7 +223,10 @@ public class Handshakes extends BaseController
     	Timestamp sixMonthAgo = new Timestamp(now.getTime() - 86400000*30*6);
 
     	long count=Handshake.count("(offer.user.id = ? or request.user.id = ?) and creationDate> ?", user.id, user.id,sixMonthAgo);
+    	long countoffer=Handshake.count("(offer.user.id = ? ) and creationDate> ?", user.id,sixMonthAgo);
+    	long countrequest=Handshake.count("( request.user.id = ?) and creationDate> ?", user.id,sixMonthAgo);
     	user.badge=BadgeType.NEW_BEE;
+//    	BadgeEntity badgeEntity=new BadgeEntity();
 //    	if(count>=5)
 //    		user.badge=BadgeType.BUSY_BEE;
 //    	if(count>=30)
@@ -232,24 +235,24 @@ public class Handshakes extends BaseController
 //    		user.badge=BadgeType.BUMBLE_BEE;
     	
        user.badge=BadgeType.NEW_BEE;
-    	   
-    
        
-//    BadgeTable badgetable=new BadgeTable();
-//    user = getConnectedUser();
-//    Query getemailQuery = JPA.em().createQuery("select email from   " + User.class.getName() + " where id is " +user.id);
-//    String email = (String) getemailQuery. getSingleResult();
-//    badgetable.setEmail(email);
-//    badgetable.setNewbie("NEW_BEE");
-//    badgetable.save();
-//    	
-    	if(count>=5)
+   	BadgeManager bm=new BadgeManager();
+    	   
+    	BadgeEntity oldBadgeEntity =bm.getBadgeEntity() ;
+    
+    	if(count>=5){
     		user.badge=BadgeType.Fivester;
-    	if(count>=30)
-    		user.badge=BadgeType.Populist;
-    	if(count>=60)
-    		user.badge=BadgeType.Guru;
-    	user.save();
+           	oldBadgeEntity.setFivester("Fivester");
+           
+    	}
+    	
+        	oldBadgeEntity.setHandshakeCount(count);
+
+        	user.save();
+        	oldBadgeEntity.save();
+        	
+    	}
+    	
     	
     }
-}
+

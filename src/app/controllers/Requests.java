@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.persistence.Query;
 import models.Offer;
 
+import models.BadgeEntity;
 import models.Request;
 import models.Tag;
 import models.User;
@@ -96,7 +97,12 @@ public class Requests extends BaseController {
     	// for each tag the user entered;
     	for (Map.Entry<String, String> entry : tags.entrySet()) {
     		// create a new Tag instance.
+    		
+    		
+    		
     		Tag tag = new Tag(requestItem, entry.getKey(), entry.getValue());
+    		
+    	//	System.out.println(entry.getValue());
     		
     		// tag the offer.
     		requestItem.tags.add(tag);
@@ -124,11 +130,31 @@ public class Requests extends BaseController {
     public static void save(Long requestId) {
 	Request requestItem = Request.findById(requestId);
 	requestItem.save();
+	
 	show(requestItem.id);
     }
 
     public static void show(Long requestId) {
 	Request requestItem = Request.findById(requestId);
+	
+	BadgeManager bm=new BadgeManager();
+	BadgeEntity badgeEntity =bm.getBadgeEntity();
+	long RequestCount=badgeEntity.getRequestCount();
+	RequestCount++;
+	badgeEntity.setRequestCount(RequestCount);
+	String oldbadgeServiceName=badgeEntity.getServicename();
+	
+	String badgeServiceName=requestItem.title+",";
+//	System.out.println(badgeServiceName);
+//	System.out.println(RequestCount);
+	
+	String newbadgeServiceName=oldbadgeServiceName+badgeServiceName;
+	  		
+	
+	badgeEntity.setServicename(newbadgeServiceName);
+	badgeEntity.save();
+	
+	System.out.println("track");
 	render(requestItem);
     }
 

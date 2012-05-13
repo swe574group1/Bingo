@@ -14,21 +14,27 @@ public class Swe extends BaseController
 {   
 	static String imageurl=null;
 
-    public static void badges()
+    @SuppressWarnings("null")
+	public static void badges()
 	{	
     	List Imagelist = new ArrayList();
-
+    //	Topic oldT = Topic.findByID(id);
 		BadgeManager badgemanager=new BadgeManager();
 		BadgeImage image = null;
 		BadgeType badges=badgemanager.getbadgelist();
-		User currentuser=badgemanager.getConnectedUser();
+		//User currentuser=badgemanager.getConnectedUser();
 		
 		
 						if(badges.toString()=="NEW_BEE"){
-							BadgeEntity badgeEntity=new BadgeEntity();
-							badgeEntity.setEmail(currentuser.email);
-							badgeEntity.setNewbie("NEW_BEE");
-							badgeEntity.save(); 
+							
+							BadgeEntity badgeEntity = null;
+							String email=badgemanager.getUserEmail();
+							badgeEntity=badgemanager.getBadgeEntity();
+					
+							
+							 badgeEntity.setEmail(email);
+							 badgeEntity.setNewbie("NEW_BEE");										
+						     badgeEntity.save(); 
 							
 							image=new BadgeImage();
 							image.setNewbee();
@@ -41,6 +47,8 @@ public class Swe extends BaseController
 	
     	render(badges,image);
 	}
+
+    
     
     public static void aboutbadge() {
   		render();

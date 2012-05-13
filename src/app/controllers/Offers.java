@@ -10,6 +10,7 @@ import javassist.bytecode.Descriptor.Iterator;
 
 import javax.persistence.Query;
 
+import models.BadgeEntity;
 import models.Offer;
 import models.Request;
 import models.Tag;
@@ -227,6 +228,18 @@ public class Offers extends BaseController {
 
 	Boolean isOfferOwner = (user == offerOwner);
 	Boolean someoneElsesOffer = (user != offerItem.user);
+	
+	
+	BadgeManager bm=new BadgeManager();
+	BadgeEntity badgeEntity =bm.getBadgeEntity();
+	long offerCount=badgeEntity.getOfferCount();
+	offerCount++;
+	badgeEntity.setOfferCount(offerCount);
+
+
+	badgeEntity.save();
+	
+	
     	render(user, offerItem, offerOwner, someoneElsesOffer, hasApplied, userApplications, isOfferOwner);
     }
 
