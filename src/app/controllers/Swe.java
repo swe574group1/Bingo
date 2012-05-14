@@ -28,8 +28,8 @@ public class Swe extends BaseController
 							BadgeEntity badgeEntity=new BadgeEntity();
 							badgeEntity.setEmail(currentuser.email);
 							badgeEntity.setNewbie("NEW_BEE");
-							badgeEntity.save(); 
-							
+							badgeEntity.save();
+
 							image=new BadgeImage();
 							image.setNewbee();
 							Imagelist.add(image);
