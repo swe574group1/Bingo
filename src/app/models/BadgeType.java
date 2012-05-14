@@ -13,8 +13,6 @@ public enum BadgeType {
 	private BadgeType(String type) {
 		this.type = type;
 	}
-
-
 	
 	
 

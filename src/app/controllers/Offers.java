@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.AbstractMap;
 import java.util.HashMap;
@@ -11,7 +12,9 @@ import javassist.bytecode.Descriptor.Iterator;
 import javax.persistence.Query;
 
 import models.BadgeEntity;
+import models.Comment;
 import models.Offer;
+import models.OfferComment;
 import models.Request;
 import models.Tag;
 import models.User;
@@ -34,13 +37,14 @@ import play.db.jpa.JPA;
  * <li>Showing details of a specific offer
  * <li>Listing all offers
  * <li>Searching offers by keywords (e.g. phrase, location)
+ * <li>Making comments for an offer
  * </ul>
  * <p>
  * The class was originally created by last year's "Let It Bee"
  * group members.
  * 
  * @author	Onur Yaman  <onuryaman@gmail.com>
- * @version 2.0
+ * @version 3.0
  * @since	1.0
  */
 public class Offers extends BaseController {
