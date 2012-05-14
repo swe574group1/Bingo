@@ -223,8 +223,7 @@ public class Handshakes extends BaseController
     	Timestamp sixMonthAgo = new Timestamp(now.getTime() - 86400000*30*6);
 
     	long count=Handshake.count("(offer.user.id = ? or request.user.id = ?) and creationDate> ?", user.id, user.id,sixMonthAgo);
-    	long countoffer=Handshake.count("(offer.user.id = ? ) and creationDate> ?", user.id,sixMonthAgo);
-    	long countrequest=Handshake.count("( request.user.id = ?) and creationDate> ?", user.id,sixMonthAgo);
+
     	user.badge=BadgeType.NEW_BEE;
 //    	BadgeEntity badgeEntity=new BadgeEntity();
 //    	if(count>=5)
@@ -245,11 +244,11 @@ public class Handshakes extends BaseController
            	oldBadgeEntity.setFivester("Fivester");
            
     	}
-    	
-        	oldBadgeEntity.setHandshakeCount(count);
-
+    	    System.out.println(count);
+    	    oldBadgeEntity.setHandshakeCount(count);
         	user.save();
         	oldBadgeEntity.save();
+    
         	
     	}
     	

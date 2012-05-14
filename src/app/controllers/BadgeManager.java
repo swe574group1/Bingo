@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import models.BadgeEntity;
+import models.BadgeImage;
 import models.BadgeType;
 import models.Request;
 import models.User;
@@ -81,15 +82,20 @@ public class BadgeManager {
    
    //...................................
    
-   public void badgeCheck(){
-	   
-	   
-	   
-	   
+   public BadgeImage badgeCheck(BadgeImage image){
+
+		BadgeEntity badgeEntity =getBadgeEntity() ;
+		String fivestarresult=badgeEntity.getFivester();
+		if(fivestarresult!=null){
+			image.setFivester();
+				}
+		String GuruResult=badgeEntity.getGuru();
+		if(GuruResult!=null){
+			image.setGuru();
+					}
+		return image;
+		   	   
    }
 
-	
-
-	
 }
 

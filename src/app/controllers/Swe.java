@@ -41,7 +41,8 @@ public class Swe extends BaseController
 							Imagelist.add(image);
 							}
 						
-	
+						image=badgemanager.badgeCheck(image);
+					   
 
 		//we should render the list of image
 	
