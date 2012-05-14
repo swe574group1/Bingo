@@ -5,7 +5,7 @@ $(document).ready(function(){
 		autocompleteOptions: {
 			minLength: 2,
 			source: function (request, response) {
-				$.getJSON("/tag/search?term=" + request.term, function(data) {
+				$.getJSON(getURL("/tag/search?term=" + request.term), function(data) {
 					var list = [];
 					$.each(data, function(i, v) {
 						if (! v.name) {
