@@ -44,8 +44,8 @@ public class Offer extends Model implements Matchable
     @Temporal(TemporalType.TIMESTAMP)
     public Date endDate;
 
-    @Required
-    public Integer credit;
+    public Double creditOffer;
+    public Double creditRequest;
 
     @ManyToOne
     public User user;

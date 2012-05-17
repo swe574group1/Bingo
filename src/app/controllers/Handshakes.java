@@ -29,6 +29,8 @@ public class Handshakes extends BaseController
         Request request = new Request(user, offer);
         request.title = "REQUEST FOR: " + offer.title;
         request.duration = offer.duration;
+        request.creditOffer = offer.creditOffer;
+        request.creditRequest = offer.creditRequest;
 
     	Handshake handshakeItem = new Handshake();
         handshakeItem.status = Status.WAITING_APPROVAL;
@@ -39,7 +41,9 @@ public class Handshakes extends BaseController
 	handshakeItem.requesterId = request.user.id;
 	handshakeItem.offererId = offer.user.id;
 	handshakeItem.duration = offer.duration;
-	
+	handshakeItem.creditOffer = offer.creditOffer;
+	handshakeItem.creditRequest = offer.creditRequest;
+    
 	handshakeItem.isOriginallyAnOffer = true;
 	handshakeItem.offererStart = false;
 	handshakeItem.requesterStart = false;
@@ -64,7 +68,8 @@ public class Handshakes extends BaseController
 	Request request = Request.findById(id);
 
 	Offer offer = new Offer(user, request);
-	offer.credit = request.credit;
+	offer.creditOffer = request.creditOffer;
+	offer.creditRequest = request.creditRequest;
 	offer.duration = request.duration;
 	offer.title = "OFFER FOR: " + request.title;
 	offer.save();
@@ -173,8 +178,8 @@ public class Handshakes extends BaseController
 	    User offerer = User.findById(handshakeItem.offererId);
 	    User requester = User.findById(handshakeItem.requesterId);
 	    
-	    offerer.balance += handshakeItem.offer.credit;
-	    requester.balance -= handshakeItem.offer.credit;
+	    offerer.balance += handshakeItem.offer.creditOffer;
+	    requester.balance -= handshakeItem.offer.creditRequest;
 	    offerer.save();
 	    requester.save();
 	    handshakeItem.status = Status.STARTED;

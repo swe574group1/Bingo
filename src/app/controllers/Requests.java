@@ -10,10 +10,12 @@ import java.util.Map;
 import javax.persistence.Query;
 import models.Offer;
 
+import models.CreditType;
 import models.Request;
 import models.RequestComment;
 import models.Tag;
 import models.User;
+import service.CreditManager;
 import service.MatchService;
 import service.Utils;
 import models.Handshake;
@@ -115,6 +117,14 @@ public class Requests extends BaseController {
     	
     	// assign the current user to the request.
     	requestItem.user = getConnectedUser();
+    	
+    	//Calculate social credits for offerer (credits to receive) 
+    	//and requester (credits required)
+    	
+    	CreditType ct = CreditManager.getService(requestItem);
+    	requestItem.creditOffer = ct.offererSocialPoint;
+    	requestItem.creditRequest = ct.requesterSocialPoint;
+    	
     	
     	// save the request.
     	requestItem.save();

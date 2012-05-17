@@ -6,6 +6,7 @@
   <tr>
     <th>Title</th>
     <th>Valid Until</th>
+    <th>Social Credits to Recieve</th>
     <th colspan="2" style="text-align: center">Actions</th>
   </tr>
   #{list items:requests, as:'request'}
@@ -13,6 +14,7 @@
     <!-- <td><a href="@{Requests.showDetails(request.id)}">${request.title}</td> --> 
     <td>${request.title}</td>
     <td>${request.endDate.format('dd MMMM yyyy')}</td>
+    <td>${(int)request.creditOffer}</td>
     <td><a href="@{Requests.showDetails(request.id)}">Show</a></td>
     <td><a href="@{Requests.edit(request.id)}">Edit</a></td>
   </tr>

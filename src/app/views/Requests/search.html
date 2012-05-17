@@ -87,6 +87,7 @@
     <th>Title</th>
     <th>Requester</th>
     <th>Valid Until</th>
+    <th>Social Credits to Recieve</th>
     <th>Details</th>
   </tr>
   #{list items:foundRequests, as:'request'}
@@ -94,6 +95,7 @@
     <td>${request.title}</td>
     <td>${request.user.fullname}</td>
     <td>${request.endDate.format('dd MMMM yyyy')}</td>
+    <td>${(int)request.creditOffer}</td>    
     <td><a href="@{Requests.showDetails(request.id)}">Details</a></td>
   </tr>
   #{/list}

@@ -122,6 +122,13 @@ public class Offers extends BaseController {
     	// assign the current user to the offer.
     	offerItem.user = getConnectedUser();
     	
+    	//Calculate social credits for offerer (credits to receive) 
+    	//and requester (credits required)
+    	
+    	CreditType ct = CreditManager.getService(offerItem);
+    	offerItem.creditOffer = ct.offererSocialPoint;
+    	offerItem.creditRequest = ct.requesterSocialPoint;
+    	
     	// save the offer.
     	offerItem.save();
     	

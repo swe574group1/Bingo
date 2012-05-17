@@ -17,7 +17,7 @@ import play.db.jpa.Blob;
 @Entity
 public class User extends Model
  {
-     public int INITIAL_BALANCE = 10;
+     public double INITIAL_BALANCE = 10;
      public int INITIAL_REPUTATION = 3;
 
      @Required
@@ -49,7 +49,7 @@ public class User extends Model
      // public UploadedFile avatar;
 
      @Required
-     public Integer balance;
+     public Double balance;
 
      @Required
      public Integer reputation;

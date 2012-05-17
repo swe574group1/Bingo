@@ -9,7 +9,7 @@
     <th>Title</th>
     <th>Offerer</th>
     <th>Requester</th>
-    <th>Honey Combs Made</th>
+    <th>Social Credits Made</th>
     <th></th>
     #{list items:newHandshakes, as:'handshake'}
     <tr>
@@ -21,7 +21,7 @@
       #{/else}
       <td>${handshake.offer.user.fullname}</td>
       <td>${handshake.request.user.fullname}</td>
-      <td>${handshake.offer.credit}</td>
+      <td>${(int)handshake.offer.creditOffer}</td>
       <td><a href="@{Handshakes.show(handshake.id)}">Details</a></td>
     </tr>
     #{/list}
@@ -228,7 +228,7 @@ color:#2c76a5;
     <th>Title</th>
     <th>Offerer</th>
     <th>Requester</th>
-    <th>Honey Combs Made</th>
+    <th>Social Credits Made</th>
     <th></th>
     #{list items:newHandshakes, as:'handshake'}
     <tr>
@@ -240,7 +240,7 @@ color:#2c76a5;
       #{/else}
       <td>${handshake.offer.user.fullname}</td>
       <td>${handshake.request.user.fullname}</td>
-      <td>${handshake.offer.credit}</td>
+      <td>${handshake.offer.creditOffer}</td>
       <td><a href="@{Handshakes.show(handshake.id)}">Details</a></td>
     </tr>
     #{/list}

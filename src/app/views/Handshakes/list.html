@@ -7,7 +7,7 @@
     <th>Title</th>
     <th>Offerer</th>
     <th>Requester</th>
-    <th>Honey Combs</th>
+    <th>Social Credits</th>
     <th>Status</th>
     <th></th>
   </tr>
@@ -29,7 +29,7 @@
       <td>
 	<a href="@{Users.profile(handshake.request.user.id)}">${handshake.request.user.fullname}</a>
       </td>
-      <td>${handshake.offer.credit}</td>
+      <td>${(int)handshake.offer.creditOffer}</td>
       <td>${handshake.status.toString().toLowerCase()}</td>
       <td><a href="@{Handshakes.show(handshake.id)}">Details</a></td>
   </tr>

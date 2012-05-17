@@ -273,18 +273,12 @@ function setTimeValue(obj, ind)
         <textarea rows="5" style="width:330px" name="offerItem.description">${offerItem.description}</textarea>
         <span style="position: absolute; padding-top:40px" class="error">&nbsp;#{error 'offerItem.description' /}</span>
       </li>
-      <li>
-        <label style="padding-top:7px">Honey Combs</label>
-			<select name="offerItem.credit">
-	  			<option>1</option>
-	  			<option>7</option>
-	  			<option>19</option>
-			</select>
-      </li> 
+
       	<li id="liDuration">
         <label style="padding-top:7px">Duration</label>
         <input type="text" style="width:100px;"name="offerItem.duration" value="${offerItem.duration}" />
-	<span class="error">#{error 'offerItem.duration' /}</span>          
+	<span class="error">#{error 'offerItem.duration' /}</span>  
+	 in hours        
     </li>   
       <li>
       <label style="padding-top:7px">Is Virtual?</label>  
