@@ -57,16 +57,18 @@ public class BaseController extends Controller
     	for(User b : users_new_bee_base)
     	{
     		count ++;
-    		
+    		/*
     		Query queryOffer = JPA.em().createQuery("SELECT e.id " 
     				+ "FROM Tag p JOIN p.offer e JOIN e.user u where u.id = " + b.id.toString()
     				+ " group by e.id");
-    		List<Object[]> listOffer = queryOffer.getResultList();
-        	
+    				*/
+    		List<Object[]> listOffer = new ArrayList<Object[]>(); //queryOffer.getResultList();
+        	/*
     		Query queryRequest = JPA.em().createQuery("SELECT e.id " 
     				+ "FROM Tag p JOIN p.request e JOIN e.user u where u.id = " + b.id.toString()
     				+ " group by e.id");
-    		List<Object[]> listRequest = queryRequest.getResultList();
+    				*/
+    		List<Object[]> listRequest = new ArrayList<Object[]>();//queryRequest.getResultList();
         	
         	b.balance = (double) (listOffer.size() + listRequest.size());
     		
@@ -219,8 +221,8 @@ public class BaseController extends Controller
     @Before
     static void setOfferTagCloud() {
     	
-    	Query query = JPA.em().createQuery("select name, count(*) from Tag where offer_id is not null group by name order by count(*) desc");
-    	List<Object[]> list = query.getResultList();
+    	//Query query = JPA.em().createQuery("select name, count(*) from Tag where offer_id is not null group by name order by count(*) desc");
+    	List<Object[]> list = new ArrayList<Object[]>();//query.getResultList();
        	
     	List<TagCloudItem> tagCloud = new ArrayList<TagCloudItem>(); 
     	Integer listFlag = 0;
@@ -254,8 +256,8 @@ public class BaseController extends Controller
     @Before
     static void setRequestTagCloud() {
     	
-    	Query query = JPA.em().createQuery("select name, count(*) from Tag where request_id is not null group by name order by count(*) desc");
-    	List<Object[]> list = query.getResultList();
+    	//Query query = JPA.em().createQuery("select name, count(*) from Tag where request_id is not null group by name order by count(*) desc");
+    	List<Object[]> list = new ArrayList<Object[]>(); //query.getResultList();
        	
     	List<TagCloudItem> tagCloud = new ArrayList<TagCloudItem>(); 
     	Integer listFlag = 0;
@@ -289,8 +291,8 @@ public class BaseController extends Controller
     @Before
     static void setOfferTagCloudBig() {
     	
-    	Query query = JPA.em().createQuery("select name, count(*) from Tag where offer_id is not null group by name order by count(*) desc");
-    	List<Object[]> list = query.getResultList();
+    	//Query query = JPA.em().createQuery("select name, count(*) from Tag where offer_id is not null group by name order by count(*) desc");
+    	List<Object[]> list = new ArrayList<Object[]>(); //query.getResultList();
        	
     	List<TagCloudItem> tagCloud = new ArrayList<TagCloudItem>(); 
     	Integer listFlag = 0;
@@ -324,8 +326,8 @@ public class BaseController extends Controller
     @Before
     static void setRequestTagCloudBig() {
     	
-    	Query query = JPA.em().createQuery("select name, count(*) from Tag where request_id is not null group by name order by count(*) desc");
-    	List<Object[]> list = query.getResultList();
+    	//Query query = JPA.em().createQuery("select name, count(*) from Tag where request_id is not null group by name order by count(*) desc");
+    	List<Object[]> list = new ArrayList<Object[]>(); //query.getResultList();
        	
     	List<TagCloudItem> tagCloud = new ArrayList<TagCloudItem>(); 
     	Integer listFlag = 0;

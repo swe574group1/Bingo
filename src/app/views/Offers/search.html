@@ -122,9 +122,14 @@
   #{list items:foundOffers, as:'offer'}
   <tr>
     <td>${offer.title}</td>
-    <td>${offer.user.fullname}</td>
-    <td>${offer.endDate.format('dd MMMM yyyy')}</td>
-    <td>${(int)offer.creditRequest}</td>
+    <td>${offer.owner.fullname}</td>
+    #{if offer.endsAt}
+    <td>${offer.endsAt.format('dd MMMM yyyy')}</td>
+    #{/if}
+    #{else}
+    <td>-</td>
+    #{/else}    
+    <td>${offer.getCredits().forRequester()}</td>
     <td><a href="@{Offers.showDetails(offer.id)}">Details</a></td>
   </tr>
   #{/list}

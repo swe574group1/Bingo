@@ -14,7 +14,7 @@
     <!--  <td><a href="@{Offers.showDetails(offer.id)}">${offer.title}</a></td> -->
     <td>${offer.title}</td>
     <td>${offer.endDate.format('dd MMMM yyyy')}</td>
-    <td>${(int)offer.creditRequest}</td>
+    <td>${offer.getCredits().forRequester()}</td>
     <td><a href="@{Offers.showDetails(offer.id)}">Show</a></td>
     <td><a href="@{Offers.edit(offer.id)}">Edit</a></td>
   </tr>

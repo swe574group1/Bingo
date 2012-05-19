@@ -2,7 +2,8 @@
 #{set title:'Handshake Detail' /}
 
 <div id="main" style="padding-top:0px">
-  <div class="post" style="padding:top:0px">
+    <div class="post" style="padding:top:0px">
+    
     #{if created}
     <h3>An application for the handshake has been initiated</h3>
     #{/if}
@@ -18,48 +19,32 @@
     #{elseif startedByOne}
     <h3>You have acknowledged the start of the handshake. The other party must also acknowledge in order to commence dividing of honey combs.</h3>
     #{/elseif}
-    #{if handshakeItem}
+    
+    #{if service}
     <h4>Handshake Details</h4>
     <table>
-      <tr>
-	<th>Title</th>
-	<th>Offerer</th>
-	<th>Requester</th>
-	<th>Description</th>
-	<th>Tags</th>
-	<th>Created On</th>
-      </tr>
-      <tr>
-	<td>
-	  #{if handshakeItem.isOriginallyAnOffer}
-	  ${handshakeItem.offer.title}
-	  #{/if}
-	  #{else}
-	  ${handshakeItem.request.title}
-	  #{/else}
-	</td>
-	<td>
-	  ${handshakeItem.offer.user.fullname}
-	</td>
-	<td>	  
-	  ${handshakeItem.request.user.fullname}
-	</td>
-	<td>
-	  ${handshakeItem.offer.description}
-	</td>
-	<td>
-	  #{if handshakeItem.offer.tags}
-	  ${handshakeItem.offer.tags.join(', ')}
-	  #{/if}
-	  #{else}
-	  ${handshakeItem.request.tags.join(', ')}
-	  #{/else}
-	</td>
-	<td>
-	  ${handshakeItem.creationDate.format('dd MMMM yyyy')}
-	</td>
-      </tr>
+        <thead>
+         <tr>
+         <th>Title</th>
+         <th>Owner</th>
+         <th>Participant(s)</th>
+         <th>Description</th>
+         <th>Tags</th>
+         <th>Created On</th>
+         </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>${ service.title }</td>
+                <td>${ service.owner.fullname }</td>
+                <td>TODO</td>
+                <td>${ service.description }</td>
+                <td>TODO</td>
+                <td>TODO</td>
+            </tr>
+        </tbody>
     </table>
     #{/if}
+    
   </div>
 </div>

@@ -7,6 +7,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -16,7 +17,7 @@ import play.db.jpa.Blob;
 
 @Entity
 public class User extends Model
- {
+{
      public double INITIAL_BALANCE = 10;
      public int INITIAL_REPUTATION = 3;
 
@@ -75,7 +76,6 @@ public class User extends Model
      @Enumerated(EnumType.STRING)
      public BadgeType badge;
      
-
      @OneToMany(mappedBy="user")
      public List<Comment> comments;
      
@@ -85,6 +85,22 @@ public class User extends Model
      @OneToMany(mappedBy="sender")
      public List<PrivateMessage> outbox;
 
+     /**
+      * Services to which the user has applied. User is not
+      * approved yet by the owners of the services in this
+      * set.
+      */
+     @ManyToMany(mappedBy="participantCandidates")
+     public Set<Service> appliedServices = new HashSet();
+     
+     /**
+      * Services to which the user has applied. User is
+      * approved by the owners of the services in this
+      * set.
+      */
+     /*@ManyToMany(mappedBy="participants")
+     public Set<Service> services = new HashSet<Service>();
+     */
      public static List<User> getNewUsers(int maxUsers) {
 	 return find("order by registrationDate DESC").fetch(maxUsers);
      }

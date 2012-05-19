@@ -116,15 +116,7 @@ public class Requests extends BaseController {
     	}
     	
     	// assign the current user to the request.
-    	requestItem.user = getConnectedUser();
-    	
-    	//Calculate social credits for offerer (credits to receive) 
-    	//and requester (credits required)
-    	
-    	CreditType ct = CreditManager.getService(requestItem);
-    	requestItem.creditOffer = ct.offererSocialPoint;
-    	requestItem.creditRequest = ct.requesterSocialPoint;
-    	
+    	requestItem.owner = getConnectedUser();
     	
     	// save the request.
     	requestItem.save();
@@ -153,7 +145,7 @@ public class Requests extends BaseController {
     public static void showDetails(Long id) {
 	User user = getConnectedUser();
 	Request requestItem = Request.findById(id);
-	User requestOwner = requestItem.user;
+	User requestOwner = requestItem.owner;
 
 	Long handshakeId = new Long(0L); // variable to store the id of the matched handshake
 	Query handshakeQuery = JPA.em().createQuery("from " + Handshake.class.getName() + " where request.id=" + requestItem.id); // handshakes which have been initiated with the current request's id
@@ -163,7 +155,7 @@ public class Requests extends BaseController {
 	for(Object singleHandshake : handshakeList) { // iterate over handshakes
 	    Handshake handshakeItem = (Handshake) singleHandshake; // type casting
 	    Offer offerItem = handshakeItem.offer; // the offer belonging to the current iteration's handshake
-	    hasApplied = (offerItem.user == user); // if the user of the request is equal to the current user, set hasApplied to true
+	    hasApplied = (offerItem.owner == user); // if the user of the request is equal to the current user, set hasApplied to true
 	    if (hasApplied) { // store the matched handhshake's id and break out of the for loop if we know user has applied to the current request
 		handshakeId = handshakeItem.id;
 		break;
