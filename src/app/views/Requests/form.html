@@ -284,56 +284,8 @@ function setTimeValue(obj, ind)
   			<option value="1">Yes</option>	  			
 		</select>
       		Via online interaction, chat, webcam etc.
-      		<input id="chkVirtualization" style="visibility: hidden; display: none" type="checkbox" name="requestItem.is_virtual" ${requestItem.is_virtual ? 'checked':''}  />	
-    	</li>      
-      <li>
-      <li id="liCounty">
-      <label style="padding-top:7px">County</label>
-      		<select id="ddlCounty" onchange="changeForCounty();">
-        #{list items:counties, as:'countyItem'}
-	    <option value="${countyItem.county_id}">	      	    
-	         ${countyItem.name}        
-	    </option>	    
-	    #{/list}
-	    </select>       		
-    	</li>      
-      <li id="liDistrict">
-      <label style="padding-top:7px">District</label>
-      		<select onchange="changeForDistrict();" id="ddlDistrict">
-  			<option>All</option>
-		</select>
-      </li>
-      <select id="ddlAllDistrict" style="display:none; visibility:hidden;">
-       #{list items:districts, as:'districtItem'}
-    <option value="${districtItem.district_id}">	      	    
-          ##${districtItem.county_id}##${districtItem.name}        
-    </option>	    
-    #{/list}
-    </select>         
-      <li style="visibility: hidden; display:none">
-      <label>City</label>
-      	<input type="text" id="txtCityName" name="requestItem.city_name" value="${requestItem.city_name}" />
-      	</li>  
-      <li style="visibility: hidden; display:none">
-      <label>County</label>
-      	<input type="text" id="txtCountyName" name="requestItem.county_name" value="${requestItem.county_name}" />
-      	</li>
-      <li style="visibility: hidden; display:none">
-      <label>District</label>
-      <input type="text" id="txtDistrictName" name="requestItem.district_name" value="${requestItem.district_name}" />
-       </li>
-      <li style="visibility: hidden; display:none">
-      <label>City_Id</label>
-      	<input type="text" id="txtCityId" name="requestItem.city.id" value="${requestItem.city}" />
-      	</li>  
-      <li style="visibility: hidden; display:none">
-      <label>County_Id</label>
-      	<input type="text" id="txtCountyId" name="requestItem.county.id" value="${requestItem.county}" />
-      	</li>
-      <li style="visibility: hidden; display:none">
-      <label>District_Id</label>
-      <input type="text" id="txtDistrictId" name="requestItem.district.id" value="${requestItem.district}" />
-       </li>
+      		<input id="chkVirtualization" style="visibility: hidden; display: none" type="checkbox" name="requestItem.is_virtual" ${requestItem.isVirtual ? 'checked':''}  />	
+    	</li>
     </ul>
   </fieldset>  
   <fieldset>
@@ -341,67 +293,12 @@ function setTimeValue(obj, ind)
     <ul>
       <li>
         <label style="padding-top:7px">Valid Until</label>
-        <input id="txt_val_until" readonly="readonly" type="text" name="requestItem.endDate" class="date_pick" value="${requestItem.endDate}" />
-		<span class="error">#{error 'requestItem.endDate' /}</span>
+        <input id="txt_val_until" readonly="readonly" type="text" name="requestItem.endDate" class="date_pick" value="${requestItem.endsAt}" />
+		<span class="error">#{error 'requestItem.endsAt' /}</span>
       </li>      
     </ul>    
-    <ul style="padding-top:4px;">
-   	 <li>
-        <label style="padding-top:10px">Is Recurrent?</label>    
-       		<select id="ddlReoccurance" onchange="enableDays();">
-	  			<option value="0" selected="selected">No</option>
-	  			<option value="1">Yes</option>	  			
-			</select>&nbsp;Will this offer recur?
-       		<input id="chkAllDays" type="checkbox" style="display:none;visibility:hidden" name="requestItem.reoccure" ${requestItem.reoccure ? 'checked':''}  />	
-
-       		<label style="width:400px;display:block;padding-left:215px;text-indent:-15px;padding-top:12px;">
-            <span id="spnDays" style="color:lightgray" disabled="disabled">Monday&nbsp;&nbsp;
-       		<input id="chkMonday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_monday" ${requestItem.is_rec_monday ? 'checked':''} />&nbsp;&nbsp;&nbsp;&nbsp;Tuesday
-       		<input id="chkTuesday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_tuesday" ${requestItem.is_rec_tuesday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Wednesday
-       		<input id="chkWednesday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_wednesday" ${requestItem.is_rec_wednesday ? 'checked':''}/></span></label>  
-       		<label id="lblDays" disabled="disabled" style="color:lightgray;padding-top:7px;padding-bottom:7px; width:400px;display:block;padding-left:215px;text-indent:-15px;">Thursday
-       		<input id="chkThursday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_thursday" ${requestItem.is_rec_thursday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Friday&nbsp;&nbsp;&nbsp;
-       		<input id="chkFriday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_friday" ${requestItem.is_rec_friday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Saturday&nbsp;&nbsp;&nbsp;
-       		<input id="chkSaturday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_saturday" ${requestItem.is_rec_saturday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;&nbsp;Sunday
-       		<input id="chkSunday" disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_sunday" ${requestItem.is_rec_sunday ? 'checked':''}/></label>  
-		</li>
-    </ul> 
-    <ul style="padding-top:4px;">
-    	<li>
-        <label>&nbsp;</label>       		
-       		<label id="lblAllhours" disabled="disabled" style="color:lightgray; width:360px;display:block;padding-left:15px;padding-top:4px;padding-bottom:7px;text-indent:-15px;">Reccuring between&nbsp;&nbsp;   		
-       		<!--<input disabled="disabled" style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-13px;*overflow:hidden;border:none;" 
-       			   onclick="openCloseHours();" id="chkAllHours" type="checkbox" name="requestItem.is_all_hours" ${requestItem.reoccure ? 'checked':''} />&nbsp;&nbsp;&nbsp;&nbsp; -->          		
-       		<select onchange="setTimeValue(this,1)" id="ddlRecTimeFrom" disabled="disabled">
-       		 #{list items:recoccurancehouritems, as:'recoccurancehouritem'}
-		    <option value="${recoccurancehouritem.val}">	      	    
-		          ${recoccurancehouritem.hour_min}  
-		    </option>	    
-		    #{/list}
-			</select>
-			- 
-			<select onchange="setTimeValue(this,2)" id="ddlRecTimeTo" disabled="disabled">
-       		 #{list items:recoccurancehouritems, as:'recoccurancehouritem'}
-		    <option value="${recoccurancehouritem.val}">	      	    
-		          ${recoccurancehouritem.hour_min}  
-		    </option>	    
-		    #{/list}
-			</select></label>
-		</li>
-    </ul>     
   </fieldset>
 
-<input type="text" style="visibility:hidden; display: none" id="txt_reocc_start" name="requestItem.reocc_start_hour" value="${requestItem.reocc_start_hour}"/>
-<input type="text" style="visibility:hidden; display: none" id="txt_reocc_end" name="requestItem.reocc_end_hour" value="${requestItem.reocc_end_hour}"/>
-<input type="text" style="visibility:hidden; display: none" id="txt_reocc_start_val" name="requestItem.reocc_start_hour_val" value="${requestItem.reocc_start_hour_val}"/>
-<input type="text" style="visibility:hidden; display: none" id="txt_reocc_end_val" name="requestItem.reocc_end_hour_val" value="${requestItem.reocc_end_hour_val}"/>
 <input type="submit" value="Submit" />
 </form>
 

@@ -45,31 +45,18 @@ public class Handshakes extends BaseController
 	renderTemplate("Handshakes/bind.html", cancelled);
     }
 
+    /**
+	 * Adds a user to the given request.
+	 * 
+	 * @param id	id of the request to which the user
+	 * 				will be added.
+	 */
     public static void bindToRequest(Long id) {
-	User user = getConnectedUser();
-	Request request = Request.findById(id);
+    	User user = getConnectedUser();
+    	Request service = Request.findById(id);
+    	service.addUser(user);
 
-	Offer offer = new Offer(user, request);
-	offer.title = "OFFER FOR: " + request.title;
-	offer.save();
-
-	Handshake handshakeItem = new Handshake();
-	handshakeItem.status = Status.WAITING_APPROVAL;
-	handshakeItem.offer = offer;
-	handshakeItem.request = request;
-	handshakeItem.creationDate = new Date();
-
-	handshakeItem.requesterId = request.owner.id;
-	handshakeItem.offererId = offer.owner.id;
-
-	handshakeItem.isOriginallyAnOffer = false;
-	handshakeItem.offererStart = false;
-	handshakeItem.requesterStart = false;
-
-	handshakeItem.save();
-
-	Boolean created = true;
-	renderTemplate("Handshakes/bind.html", handshakeItem, created);
+    	renderTemplate("Handshakes/bind.html", (Service) service, true);
     }
 
     public static void show(Long id) {
