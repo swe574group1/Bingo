@@ -21,54 +21,18 @@
 	  <li>
 	    <label style="width:150px;">Is Virtual?</label>
 	    <span id="txtVirtual"></span>
-	    <input type="checkbox" style="visibility: hidden; display: none" id="chkVir" ${requestItem.is_virtual ? 'checked':''} />
+	    <input type="checkbox" style="visibility: hidden; display: none" id="chkVir" ${requestItem.isVirtual ? 'checked':''} />
 	  </li>	 
-	  #{if requestItem.county_name}
-	  <li>
-	    <label style="width:150px;">County</label>
-	    	${requestItem.county_name}
-	  </li>
-	  #{/if}
-	  #{if requestItem.district_name}
-	  <li>
-	    <label style="width:150px;">District</label>
-	    	${requestItem.district_name}
-	  </li>
-	  #{/if}
       <li>
             <label style="width:150px;">Valid Until</label>
-	    ${requestItem.endDate.format('dd MMMM yyyy')}
+	    #{if requestItem.endsAt}
+        <input class="roinput" type="text" readonly="readonly" value="${requestItem.endsAt.format('dd MMMM yyyy')}" />
+        #{/if}
+        #{else}
+        <input class="roinput" type="text" value="" />
+       #{/else}
        </li>
-       <li>
-	    <label style="width:150px;">Is Reoccurrent?</label>
-	    <span id="txtRec"></span>
-	    <input type="checkbox" style="visibility: hidden; display: none" id="chkRec" ${requestItem.reoccure ? 'checked':''} />
-	  </li>		    
-	  <li id="liDays">
-	  		<label id="lblDays1" style="color:inherit; font-weight:normal; position:relative;left:150px; width:339px; display:block;padding-top:6px;">
-            <span id="spnDays">&nbsp;Monday&nbsp;&nbsp;
-       		<input id="chkMonday" onclick='disableClick(this);' style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_monday" ${requestItem.is_rec_monday ? 'checked':''} />&nbsp;&nbsp;&nbsp;Tuesday
-       		<input id="chkTuesday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_tuesday" ${requestItem.is_rec_tuesday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;Wednesday
-       		<input id="chkWednesday" onclick='disableClick(this);' style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_wednesday" ${requestItem.is_rec_wednesday ? 'checked':''}/></span></label>  
-       		<label id="lblDays2" onclick='disableClick(this);' style="color:inherit; font-weight:normal; position:relative;left:150px; width:339px; padding-top:7px;padding-bottom:7px; display:block;">&nbsp;Thursday
-       		<input id="chkThursday" onclick='disableClick(this);' style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_thursday" ${requestItem.is_rec_thursday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;Friday&nbsp;&nbsp;&nbsp;
-       		<input id="chkFriday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_friday" ${requestItem.is_rec_friday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;Saturday&nbsp;&nbsp;&nbsp;&nbsp;
-       		<input id="chkSaturday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_saturday" ${requestItem.is_rec_saturday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;Sunday
-       		<input id="chkSunday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="requestItem.is_rec_sunday" ${requestItem.is_rec_sunday ? 'checked':''}/></label>
-	  </li>	  
-	  <li id="liRecTime">    		
-	      		<label style="width:150px;">Recurring Between</label> 		
-	      	    <span>${requestItem.reocc_start_hour} - ${requestItem.reocc_end_hour}</span>
-	      	    <input style="display:none; visibility: hidden" id="txtRecFrom" type="text" readonly="readonly" value="${requestItem.reocc_start_hour}"  />
-	      	    <input style="display:none; visibility: hidden" id="txtRecTo" type="text" readonly="readonly" value="${requestItem.reocc_end_hour}"  />
-	  </li> 
+
         </ul>
       </div>
     </div>
@@ -86,10 +50,10 @@
         <ul>
            <li class="user">          
            <a href="@{Users.profile(requestOwner.id)}">           
-          	${requestItem.user.fullname}</a>
+          	${requestItem.owner.fullname}</a>
 		  	<script type="text/javascript">
 			 $(document).ready( function() {
-				 deger = ${requestItem.user.reputation};  
+				 deger = ${requestItem.owner.reputation};  
 					for(i = 1; i < 6; i++)
 					{
 						if( i > deger)
@@ -107,8 +71,8 @@
 		      
 		      </div>
 		  </li>
-          <li><h4>Honey Combs</h4>${requestItem.credit}</li>
-          <li><h4>Duration</h4>${requestItem.duration}</li>
+          <li><h4>Social Credits to Receive</h4>${requestItem.getCredits().forOfferer()}</li>
+          <li><h4>Duration</h4>${requestItem.duration} in hours</li>
         </ul>
       </div>
     </div>

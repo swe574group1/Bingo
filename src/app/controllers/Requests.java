@@ -10,10 +10,12 @@ import java.util.Map;
 import javax.persistence.Query;
 import models.Offer;
 
+import models.CreditType;
 import models.Request;
 import models.RequestComment;
 import models.Tag;
 import models.User;
+import service.CreditManager;
 import service.MatchService;
 import service.Utils;
 import models.Handshake;
@@ -114,7 +116,7 @@ public class Requests extends BaseController {
     	}
     	
     	// assign the current user to the request.
-    	requestItem.user = getConnectedUser();
+    	requestItem.owner = getConnectedUser();
     	
     	// save the request.
     	requestItem.save();
@@ -143,7 +145,7 @@ public class Requests extends BaseController {
     public static void showDetails(Long id) {
 	User user = getConnectedUser();
 	Request requestItem = Request.findById(id);
-	User requestOwner = requestItem.user;
+	User requestOwner = requestItem.owner;
 
 	Long handshakeId = new Long(0L); // variable to store the id of the matched handshake
 	Query handshakeQuery = JPA.em().createQuery("from " + Handshake.class.getName() + " where request.id=" + requestItem.id); // handshakes which have been initiated with the current request's id
@@ -153,7 +155,7 @@ public class Requests extends BaseController {
 	for(Object singleHandshake : handshakeList) { // iterate over handshakes
 	    Handshake handshakeItem = (Handshake) singleHandshake; // type casting
 	    Offer offerItem = handshakeItem.offer; // the offer belonging to the current iteration's handshake
-	    hasApplied = (offerItem.user == user); // if the user of the request is equal to the current user, set hasApplied to true
+	    hasApplied = (offerItem.owner == user); // if the user of the request is equal to the current user, set hasApplied to true
 	    if (hasApplied) { // store the matched handhshake's id and break out of the for loop if we know user has applied to the current request
 		handshakeId = handshakeItem.id;
 		break;

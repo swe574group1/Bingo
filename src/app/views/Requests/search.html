@@ -87,13 +87,20 @@
     <th>Title</th>
     <th>Requester</th>
     <th>Valid Until</th>
+    <th>Social Credits to Recieve</th>
     <th>Details</th>
   </tr>
   #{list items:foundRequests, as:'request'}
   <tr>
     <td>${request.title}</td>
-    <td>${request.user.fullname}</td>
-    <td>${request.endDate.format('dd MMMM yyyy')}</td>
+    <td>${request.owner.fullname}</td>
+    #{if request.endsAt}
+    <td>${request.endsAt.format('dd MMMM yyyy')}</td>
+    #{/if}
+    #{else}
+    <td>-</td>
+    #{/else}    
+    <td>${request.getCredits().forOfferer()}</td>
     <td><a href="@{Requests.showDetails(request.id)}">Details</a></td>
   </tr>
   #{/list}
@@ -119,8 +126,14 @@
   #{list items:foundRequests, as:'request'}
   <tr>
     <td>${request.title}</td>
-    <td>${request.user.fullname}</td>
-    <td>${request.endDate.format('dd MMMM yyyy')}</td>
+    <td>${request.owner.fullname}</td>
+    #{if request.endsAt}
+    <td>${request.endsAt.format('dd MMMM yyyy')}</td>
+    #{/if}
+    #{else}
+    <td>-</td>
+    #{/else}    
+    <td>${request.getCredits().forOfferer()}</td>
     <td><a href="@{Requests.showDetails(request.id)}">Details</a></td>
   </tr>
   #{/list}
@@ -146,8 +159,14 @@
   #{list items:allRequests, as:'request'}
   <tr>
     <td>${request.title}</td>
-    <td>${request.user.fullname}</td>
-    <td>${request.endDate.format('dd MMMM yyyy')}</td>
+    <td>${request.owner.fullname}</td>
+    #{if request.endsAt}
+    <td>${request.endsAt.format('dd MMMM yyyy')}</td>
+    #{/if}
+    #{else}
+    <td>-</td>
+    #{/else}    
+    <td>${request.getCredits().forOfferer()}</td>
     <td><a href="@{Requests.showDetails(request.id)}">Details</a></td>
   </tr>
   #{/list}

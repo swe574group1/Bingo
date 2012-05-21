@@ -1,8 +1,11 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import play.data.validation.Required;
@@ -17,15 +20,11 @@ import static com.freebase.json.JSON.o;
 import static com.freebase.json.JSON.a;
 
 @Entity
-public class Tag extends Model {
-
-    @ManyToOne
-    @Required
-    public Offer offer;
-
-    @ManyToOne
-    @Required
-    public Request request;
+public class Tag extends Model
+{
+ 
+	@ManyToMany(mappedBy="tags")
+    public List<Service> services = new ArrayList<Service>();
     
     /**
      * Required in order to differentiate tags and for
@@ -59,13 +58,13 @@ public class Tag extends Model {
     public Boolean is_request;
     
     public Tag(Offer offer, String freebaseId, String name) {
-    	this.offer = offer;
+    	this.services.add(offer);
     	this.freebaseId = freebaseId;
     	this.name = name;
 	}
 
     public Tag(Request request, String freebaseId, String name) {
-		this.request = request;
+    	this.services.add(request);
 		this.freebaseId = freebaseId;
 		this.name = name;
     }

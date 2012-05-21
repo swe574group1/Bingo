@@ -44,7 +44,7 @@
       <table class="show_data" style="margin-left:0px; width:560px;">
         <tr class="first">
           <th>Title</th>
-          <th>Honey Combs Made</th>
+          <th>Social Credits</th>
           <th>Offerer</th>
           <th>Requester</th>
           <th>Details</th>
@@ -61,7 +61,7 @@
 	  ${handshake.request.title}
 	  #{/else}
 	  </td>
-	  <td>${handshake.offer.credit}</td>
+	  <td>${(int)handshake.offer.creditOffer}</td>
 	  <td>${handshake.offer.user.fullname}</td>
 	  <td>${handshake.request.user.fullname}</td>
 	  <td><a href="@{Handshakes.show(handshake.id)}">Details</a></td>
@@ -161,7 +161,7 @@
 		  </li>
           <li style="text-align: left">&nbsp;Name: ${observedUser.fullname}</li>
           <li style="text-align: left">&nbsp;${observedUser.badge.toString().toLowerCase().replace("_"," ").replace("bee","Bee").replace("new","New").replace("busy","Busy").replace("working","Working").replace("bumble","Bumble")}</li>
-	  <li style="text-align: left">&nbsp;Honey Combs: ${observedUser.balance}</li>	 
+	  <li style="text-align: left">&nbsp;Social Credits: ${(int)observedUser.balance}</li>	 
 	  <li style="text-align: left">&nbsp;City:<br/>&nbsp;&nbsp;${observedUser.address}</li>
           <li style="text-align: left">&nbsp;Member Since: <br/>&nbsp;&nbsp;${observedUser.registrationDate.format('dd MMMM yyyy')}</li>
 		  

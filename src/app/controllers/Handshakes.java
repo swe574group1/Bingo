@@ -11,6 +11,7 @@ import models.BadgeEntity;
 import models.BadgeType;
 import models.Comment;
 import models.Handshake;
+import models.Service;
 import models.Handshake.Status;
 import models.HandshakeComment;
 import models.Offer;
@@ -22,34 +23,19 @@ import play.mvc.With;
 @With(Secure.class)
 public class Handshakes extends BaseController
 {
-    public static void bindToOffer(Long id) {
+	/**
+	 * Adds a user to the given offer.
+	 * 
+	 * @param id	id of the offer to which the user
+	 * 				will be added.
+	 */
+    public static void bindToOffer(Long id)
+    {
         User user = getConnectedUser();
-    	Offer offer = Offer.findById(id);
+    	Offer service = Offer.findById(id);
+    	service.addUser(user);
 
-        Request request = new Request(user, offer);
-        request.title = "REQUEST FOR: " + offer.title;
-        request.duration = offer.duration;
-
-    	Handshake handshakeItem = new Handshake();
-        handshakeItem.status = Status.WAITING_APPROVAL;
-    	handshakeItem.offer = offer;
-    	handshakeItem.request = request;
-    	handshakeItem.creationDate = new Date();
-
-	handshakeItem.requesterId = request.user.id;
-	handshakeItem.offererId = offer.user.id;
-	handshakeItem.duration = offer.duration;
-	
-	handshakeItem.isOriginallyAnOffer = true;
-	handshakeItem.offererStart = false;
-	handshakeItem.requesterStart = false;
-
-	offer.save();
-	request.save();
-    	handshakeItem.save();
-
-	Boolean created = true;
-    	renderTemplate("Handshakes/bind.html", handshakeItem, created);
+    	renderTemplate("Handshakes/bind.html", (Service) service, true);
     }
 
     public static void cancelApplication(Long handshakeId) {
@@ -59,34 +45,18 @@ public class Handshakes extends BaseController
 	renderTemplate("Handshakes/bind.html", cancelled);
     }
 
+    /**
+	 * Adds a user to the given request.
+	 * 
+	 * @param id	id of the request to which the user
+	 * 				will be added.
+	 */
     public static void bindToRequest(Long id) {
-	User user = getConnectedUser();
-	Request request = Request.findById(id);
+    	User user = getConnectedUser();
+    	Request service = Request.findById(id);
+    	service.addUser(user);
 
-	Offer offer = new Offer(user, request);
-	offer.credit = request.credit;
-	offer.duration = request.duration;
-	offer.title = "OFFER FOR: " + request.title;
-	offer.save();
-
-	Handshake handshakeItem = new Handshake();
-	handshakeItem.status = Status.WAITING_APPROVAL;
-	handshakeItem.offer = offer;
-	handshakeItem.request = request;
-	handshakeItem.creationDate = new Date();
-
-	handshakeItem.requesterId = request.user.id;
-	handshakeItem.offererId = offer.user.id;
-	handshakeItem.duration = request.duration;
-
-	handshakeItem.isOriginallyAnOffer = false;
-	handshakeItem.offererStart = false;
-	handshakeItem.requesterStart = false;
-
-	handshakeItem.save();
-
-	Boolean created = true;
-	renderTemplate("Handshakes/bind.html", handshakeItem, created);
+    	renderTemplate("Handshakes/bind.html", (Service) service, true);
     }
 
     public static void show(Long id) {
@@ -123,7 +93,7 @@ public class Handshakes extends BaseController
         handshakeItem.save();
 
 	Offer offer = Offer.findById(handshakeItem.offer.id);
-	offer.status = Offer.Status.HANDSHAKED;
+	offer.status = Service.Status.HANDSHAKED;
 	offer.save();
 	
 
@@ -173,8 +143,8 @@ public class Handshakes extends BaseController
 	    User offerer = User.findById(handshakeItem.offererId);
 	    User requester = User.findById(handshakeItem.requesterId);
 	    
-	    offerer.balance += handshakeItem.offer.credit;
-	    requester.balance -= handshakeItem.offer.credit;
+	    //offerer.balance += handshakeItem.offer.creditOffer;
+	    //requester.balance -= handshakeItem.offer.creditRequest;
 	    offerer.save();
 	    requester.save();
 	    handshakeItem.status = Status.STARTED;
@@ -217,8 +187,8 @@ public class Handshakes extends BaseController
 
     
     private static void updateBadgeForHandshake(Handshake handshake){
-    	updateBadgeForUser(handshake.offer.user);
-    	updateBadgeForUser(handshake.request.user);
+    	updateBadgeForUser(handshake.offer.owner);
+    	updateBadgeForUser(handshake.request.owner);
     }
 
     private static void updateBadgeForUser(User user){
