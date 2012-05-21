@@ -78,6 +78,13 @@ public abstract class Service extends Model
 	 */
 	public String location;
 	
+	public int range;
+	
+	/**
+	 * Range from the location
+	 */
+	public double rangeFromLocation;
+	
 	public boolean isVirtual;
 	
 	/**
