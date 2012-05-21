@@ -43,13 +43,6 @@ public class BaseController extends Controller
     		usr.balance = (double) 0;
        		
     		users_new_bee_base.add(usr);
-    		
-    		//Add to notification
-    		//TODO: Ali is going to move this code to the appropriate place.
-			NotificationManager nManager = new NotificationManager();
-		    String message = "You have just earned NewBee badge.";
-		    String link = "users/profile?userId=" + usr.id;
-			//nManager.AddNewNotification(usr, message, link);
        	}  
     	
     	Collections.shuffle(users_new_bee_base);
