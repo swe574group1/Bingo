@@ -14,7 +14,7 @@ public class Application extends BaseController
     	int recentUserCount =5;
 	    int recentHandshakeCount = 5;
 	    List<User> newUsers = User.getNewUsers(recentUserCount);
-	    List<Handshake> newHandshakes = Handshake.find("(status='ACCEPTED' or status='STARTED' or status='DONE') order by creationDate desc").fetch(recentHandshakeCount);
+	    //List<Handshake> newHandshakes = Handshake.find("(status='ACCEPTED' or status='STARTED' or status='DONE') order by creationDate desc").fetch(recentHandshakeCount);
 	    
 	    List<Notification> notifications = null;
 	    User user = BaseController.getConnectedUser();
@@ -22,7 +22,7 @@ public class Application extends BaseController
 	    	notifications = new NotificationManager().GetNotifications(user.id);
 	    }
 
-	   	render(newUsers, newHandshakes, notifications);
+	   	render(newUsers, notifications);
 	}
 
     public static void register() {
