@@ -10,17 +10,15 @@ public class EmailTemplate {
 		this.msg = msg;
 	}
 
-	String msg;
+	private String msg;
 	
 public String getTemp() {
-		return Temp;
+		return part1+getMsg()+part2;
 	}
 
-	public void setTemp(String temp) {
-		Temp = temp;
-	}
 
-String Temp="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"+
+
+private String part1="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"+
 "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /><title>*|MC:SUBJECT|*</title>"+
 "<style type=\"text/css\">#outlook a{padding:0;} /* Force Outlook to provide a \"view in browser\" button. */"+
 "body{width:100% !important;} .ReadMsgBody{width:100%;} .ExternalClass{width:100%;} /* Force Hotmail to display emails at full width */"+
@@ -73,13 +71,13 @@ String Temp="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"
 "<br /><strong>Bingo is free service </strong><br />"+
 "SWE 574 Group1 2012 Spring semester</div> </td></tr> </table> </td></tr>"+
  "</table></td> <td valign=\"top\" class=\"bodyContent\"><table border=\"0\" cellpadding=\"10\" cellspacing=\"0\" width=\"100%\">"+
-"<tr> <td valign=\"top\" style=\"padding-left:0;\"><div mc:edit=\"std_content00\"><h2 class=\"h2\">MESSAGE:</h2>"+msg+
-"</div></td> </tr></table> </td></tr></table></td></tr> <tr> <td align=\"center\" valign=\"top\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" id=\"templateFooter\">"+
-"<tr> <td valign=\"top\" class=\"footerContent\"> <table border=\"0\" cellpadding=\"10\" cellspacing=\"0\" width=\"100%\">"+
-"<tr> <td colspan=\"2\" valign=\"middle\" id=\"social\"><div mc:edit=\"std_social\">&nbsp;<a href=\"*|TWITTER:PROFILEURL|*\">follow on Twitter</a> | <a href=\"*|FACEBOOK:PROFILEURL|*\">friend on Facebook</a> | <a href=\"*|FORWARD|*\">forward to a friend</a>&nbsp;"+
-"</div></td></tr> <tr><td valign=\"top\" width=\"350\"><div mc:edit=\"std_footer\"><b>Copyright &copy; 2012 *Bogazici University*, All rights reserved.</b>"+
-"</div></td><td valign=\"top\" width=\"190\" id=\"monkeyRewards\"><div mc:edit=\"monkeyrewards\"></div>"+
-"</td></tr><tr> <td colspan=\"2\" valign=\"middle\" id=\"utility\"> <div mc:edit=\"std_utility\"> &nbsp;<a href=\"*|UNSUB|*\">unsubscribe from this list</a> | <a href=\"*|UPDATE_PROFILE|*\">update subscription preferences</a>&nbsp;"+
-"</div></td></tr></table> </td></tr></table></td></tr> </table> <br /></td> </tr></table></center></body></html>";
+"<tr> <td valign=\"top\" style=\"padding-left:0;\"><div mc:edit=\"std_content00\"><h2 class=\"h2\">MESSAGE:</h2>";
+private String part2="</div></td> </tr></table> </td></tr></table></td></tr> <tr> <td align=\"center\" valign=\"top\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" id=\"templateFooter\">"+
+		"<tr> <td valign=\"top\" class=\"footerContent\"> <table border=\"0\" cellpadding=\"10\" cellspacing=\"0\" width=\"100%\">"+
+		"<tr> <td colspan=\"2\" valign=\"middle\" id=\"social\"><div mc:edit=\"std_social\">&nbsp;<a href=\"*|TWITTER:PROFILEURL|*\">follow on Twitter</a> | <a href=\"*|FACEBOOK:PROFILEURL|*\">friend on Facebook</a> | <a href=\"*|FORWARD|*\">forward to a friend</a>&nbsp;"+
+		"</div></td></tr> <tr><td valign=\"top\" width=\"350\"><div mc:edit=\"std_footer\"><b>Copyright &copy; 2012 *Bogazici University*, All rights reserved.</b>"+
+		"</div></td><td valign=\"top\" width=\"190\" id=\"monkeyRewards\"><div mc:edit=\"monkeyrewards\"></div>"+
+		"</td></tr><tr> <td colspan=\"2\" valign=\"middle\" id=\"utility\"> <div mc:edit=\"std_utility\"> &nbsp;<a href=\"*|UNSUB|*\">unsubscribe from this list</a> | <a href=\"*|UPDATE_PROFILE|*\">update subscription preferences</a>&nbsp;"+
+		"</div></td></tr></table> </td></tr></table></td></tr> </table> <br /></td> </tr></table></center></body></html>";
 
 }
