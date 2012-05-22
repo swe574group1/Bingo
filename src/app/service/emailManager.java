@@ -33,6 +33,7 @@ public class emailManager  {
 	
 	public void sendEmail(User user,String subject,String msg) throws EmailException, IOException{
     EmailTemplate et=new EmailTemplate();
+    et.setMsg(msg);
     String Temp=et.getTemp();
 	HtmlEmail email = new HtmlEmail();	
 //	SimpleEmail email = new SimpleEmail();

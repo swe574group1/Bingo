@@ -2,6 +2,9 @@ package controllers;
 
 import javax.persistence.Query;
 
+import org.apache.commons.mail.EmailException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -11,6 +14,7 @@ import play.mvc.*;
 import play.data.validation.*;
 
 import play.db.jpa.JPA;
+import service.emailManager;
 
 public class Users extends BaseController
 {
@@ -21,7 +25,7 @@ public class Users extends BaseController
         renderTemplate("Users/form.html", user);
     }
 
-    public static void save(@Valid User user) {
+    public static void save(@Valid User user) throws EmailException, IOException {
         boolean isCreate = (user.id == null);
 
     	if (validation.hasErrors()) {
@@ -31,6 +35,9 @@ public class Users extends BaseController
     	}
     	
     	if(isCreate){
+    		emailManager em=new emailManager();
+    		
+    		em.sendEmail(user,"Bingo","congratulation - won new badge ");
     		user.badge=BadgeType.NEW_BEE;
     	}
     	user.save();
@@ -50,8 +57,10 @@ public class Users extends BaseController
 		nManager.AddNewNotification(user, message, link);
     }
     
-    public static void success(Long userId) {
+    public static void success(Long userId) throws EmailException, IOException {
         User user = User.findById(userId);
+		emailManager email=new emailManager();
+		email.sendEmail(user,"Bingo","congratulation -- you are registration completed - enjoy!");
         render(user);
     }
 
