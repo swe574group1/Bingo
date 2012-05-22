@@ -14,10 +14,19 @@
 	charset="${_response_encoding}"></script>
 <script src="@{'/public/javascripts/index.js'}" type="text/javascript"
 	charset="${_response_encoding}"></script>
+<script src="@{'/public/javascripts/notification.js'}" type="text/javascript"
+	charset="${_response_encoding}"></script>
 <script>
 function getURL(path) {
 	return "" + path;
 }
+
+$(document).ready(function() {
+	var unreadCount = 0;
+	#{if unreadNotifications} unreadCount = ${unreadNotifications.size()}; #{/if}
+	InitNotification(unreadCount);
+});
+
 </script>
 #{get 'moreScripts' /}
 </head>
@@ -31,6 +40,39 @@ function getURL(path) {
 			<div id="searchForm" style="display: none;">
 				<input type="search" name="query" value="" placeholder="search..." />
 			</div>
+			
+			<div style="float:right; weight:70px; height:70px; background-image:url(public/images/notification.jpg); background-repeat:no-repeat; 
+				margin-left:50px; margin-top:20px" func="notification">
+
+				#{if notifications}
+				<span id="counter" style="width:50px; cursor:pointer; padding-top:4px; padding-left:7px; height:50px; display:block; color:red; weight:bold;">
+					<strong>0</strong>
+				</span>
+				
+				<div func="notification_items" id="notification_items" style="position:static; visibility:hidden; border:1px solid gray; margin-top:-30px; padding:10px; background-color: white; height:200px; width:200px; ">
+					<ul>
+						#{list items:notifications, as:'notification'}
+						<li>
+							#{if !notification.isread}
+							<a href='${notification.link}'>${notification.message}</a>
+							#{/if}
+							
+							#{if notification.isread}
+							${notification.message}
+							#{/if}
+						</li>
+						#{/list}
+					</ul>
+				</div>
+				
+				#{/if}
+			
+			</div>
+			
+			<div id="searchForm">
+			    <input type="search" name="query" value="" placeholder="search..." />
+			</div>
+			
 			#{if isLoggedIn}
 			<ul id="profileLinks" class="hidden">
 			    <li><a href="@{PrivateMessages.inbox()}">Inbox (${models.PrivateMessage.getUnreadMessagesCount(user)})</a></li>
@@ -107,7 +149,7 @@ function getURL(path) {
 						<li>${(models.User.findAll()).size()} Users!</li>
 						<li>${(models.Offer.findAll()).size()} Offers!</li>
 						<li>${(models.Request.findAll()).size()} Requests!</li>
-						<li>${models.Handshake.findAll().size()} Handshakes!</li>
+						
 					</ul>
 				</div>
 

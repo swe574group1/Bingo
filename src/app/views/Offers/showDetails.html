@@ -21,54 +21,18 @@
 	  <li>
 	    <label style="width:150px;">Is Virtual?</label>
 	    <span id="txtVirtual"></span>
-	    <input type="checkbox" style="visibility: hidden; display: none" id="chkVir" ${offerItem.is_virtual ? 'checked':''} />
+	    <input type="checkbox" style="visibility: hidden; display: none" id="chkVir" ${offerItem.isVirtual ? 'checked':''} />
 	  </li>	 
-	  #{if offerItem.county_name}
-	  <li>
-	    <label style="width:150px;">County</label>
-	    	${offerItem.county_name}
-	  </li>
-	  #{/if}
-	  #{if offerItem.district_name}
-	  <li>
-	    <label style="width:150px;">District</label>
-	    	${offerItem.district_name}
-	  </li>
-	  #{/if}	
+	 	
 	  <li>
          <label style="width:150px;">Valid Until</label>
-	  		${offerItem.endDate.format('dd MMMM yyyy')}
-      </li>          
-      <li>
-	    <label style="width:150px;">Is Reoccurrent?</label>
-	    <span id="txtRec"></span>
-	    <input type="checkbox" style="visibility: hidden; display: none" id="chkRec" ${offerItem.reoccure ? 'checked':''} />
-	  </li>		    
-	  <li id="liDays">
-	  		<label id="lblDays1" style="color:inherit; font-weight:normal; position:relative;left:150px; width:339px; display:block;padding-top:6px;">
-            <span id="spnDays">&nbsp;Monday&nbsp;&nbsp;
-       		<input id="chkMonday" onclick='disableClick(this);' style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="offerItem.is_rec_monday" ${offerItem.is_rec_monday ? 'checked':''} />&nbsp;&nbsp;&nbsp;Tuesday
-       		<input id="chkTuesday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="offerItem.is_rec_tuesday" ${offerItem.is_rec_tuesday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;Wednesday
-       		<input id="chkWednesday" onclick='disableClick(this);' style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="offerItem.is_rec_wednesday" ${offerItem.is_rec_wednesday ? 'checked':''}/></span></label>  
-       		<label id="lblDays2" onclick='disableClick(this);' style="color:inherit; font-weight:normal; position:relative;left:150px; width:339px; padding-top:7px;padding-bottom:7px; display:block;">&nbsp;Thursday
-       		<input id="chkThursday" onclick='disableClick(this);' style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="offerItem.is_rec_thursday" ${offerItem.is_rec_thursday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;Friday&nbsp;&nbsp;&nbsp;
-       		<input id="chkFriday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="offerItem.is_rec_friday" ${offerItem.is_rec_friday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;Saturday&nbsp;&nbsp;&nbsp;&nbsp;
-       		<input id="chkSaturday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="offerItem.is_rec_saturday" ${offerItem.is_rec_saturday ? 'checked':''}/>&nbsp;&nbsp;&nbsp;Sunday
-       		<input id="chkSunday" onclick='disableClick(this);'  style="width:13px;height:13px;padding:0;margin:0;vertical-align:bottom;position:relative;top:-4px;*overflow:hidden;border:none;" 
-       			   type="checkbox" name="offerItem.is_rec_sunday" ${offerItem.is_rec_sunday ? 'checked':''}/></label>
-	  </li>	  
-	  <li id="liRecTime">    		
-	      		<label style="width:150px;">Recurring Between</label> 		
-	      	    <span>${offerItem.reocc_start_hour} - ${offerItem.reocc_end_hour}</span>
-	      	    <input style="display:none; visibility: hidden" id="txtRecFrom" type="text" readonly="readonly" value="${offerItem.reocc_start_hour}"  />
-	      	    <input style="display:none; visibility: hidden" id="txtRecTo" type="text" readonly="readonly" value="${offerItem.reocc_end_hour}"  />
-	  </li>  
+	   #{if offerItem.endsAt}
+        <input class="roinput" type="text" readonly="readonly" value="${offerItem.endsAt.format('dd MMMM yyyy')}" />
+        #{/if}
+        #{else}
+        <input class="roinput" type="text" value="" />
+       #{/else}
+      </li> 
         </ul>
       </div>
     </div>
@@ -87,10 +51,10 @@
         <ul>
           <li class="user">          
            <a href="@{Users.profile(offerOwner.id)}">           
-          	${offerItem.user.fullname}</a>
+          	${offerItem.owner.fullname}</a>
           	<script type="text/javascript">
 			 $(document).ready( function() {
-				 deger = ${offerItem.user.reputation};  
+				 deger = ${offerItem.owner.reputation};  
 					for(i = 1; i < 6; i++)
 					{
 						if( i > deger)
@@ -108,8 +72,8 @@
 		      
 		      </div>          	
           	</li>
-          <li><h4>Honey Combs</h4>${offerItem.credit}</li>
-          <li><h4>Duration</h4>${offerItem.duration}</li>
+          <li><h4>Social Credits Required</h4>${offerItem.getCredits().forRequester()}</li>
+          <li><h4>Duration</h4>${offerItem.duration} in hours</li>
         </ul>
       </div>
     </div>    
@@ -131,6 +95,9 @@
     <a class="cancel" href="@{Handshakes.cancelApplication(handshakeId)}">Cancel</a>
     #{/if}
   </div>
+
+    <!--  show comments for the current offer -->
+    #{include "partials/commentsForOffer.html" /}
 
   #{if isOfferOwner}
   <ul>

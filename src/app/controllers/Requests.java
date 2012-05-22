@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.AbstractMap;
 import java.util.HashMap;
@@ -9,10 +10,12 @@ import java.util.Map;
 import javax.persistence.Query;
 import models.Offer;
 
-import models.BadgeEntity;
+import models.CreditType;
 import models.Request;
+import models.RequestComment;
 import models.Tag;
 import models.User;
+import service.CreditManager;
 import service.MatchService;
 import service.Utils;
 import models.Handshake;
@@ -36,7 +39,7 @@ import play.db.jpa.JPA;
  * group members.
  * 
  * @author	Onur Yaman  <onuryaman@gmail.com>
- * @version 2.0
+ * @version 3.0
  * @since	1.0
  */
 public class Requests extends BaseController {
@@ -97,12 +100,7 @@ public class Requests extends BaseController {
     	// for each tag the user entered;
     	for (Map.Entry<String, String> entry : tags.entrySet()) {
     		// create a new Tag instance.
-    		
-    		
-    		
     		Tag tag = new Tag(requestItem, entry.getKey(), entry.getValue());
-    		
-    	//	System.out.println(entry.getValue());
     		
     		// tag the offer.
     		requestItem.tags.add(tag);
@@ -118,7 +116,7 @@ public class Requests extends BaseController {
     	}
     	
     	// assign the current user to the request.
-    	requestItem.user = getConnectedUser();
+    	requestItem.owner = getConnectedUser();
     	
     	// save the request.
     	requestItem.save();
@@ -130,31 +128,11 @@ public class Requests extends BaseController {
     public static void save(Long requestId) {
 	Request requestItem = Request.findById(requestId);
 	requestItem.save();
-	
 	show(requestItem.id);
     }
 
     public static void show(Long requestId) {
 	Request requestItem = Request.findById(requestId);
-	
-	BadgeManager bm=new BadgeManager();
-	BadgeEntity badgeEntity =bm.getBadgeEntity();
-	long RequestCount=badgeEntity.getRequestCount();
-	RequestCount++;
-	badgeEntity.setRequestCount(RequestCount);
-	String oldbadgeServiceName=badgeEntity.getServicename();
-	
-	String badgeServiceName=requestItem.title+",";
-//	System.out.println(badgeServiceName);
-//	System.out.println(RequestCount);
-	
-	String newbadgeServiceName=oldbadgeServiceName+badgeServiceName;
-	  		
-	
-	badgeEntity.setServicename(newbadgeServiceName);
-	badgeEntity.save();
-	
-	System.out.println("track");
 	render(requestItem);
     }
 
@@ -167,7 +145,7 @@ public class Requests extends BaseController {
     public static void showDetails(Long id) {
 	User user = getConnectedUser();
 	Request requestItem = Request.findById(id);
-	User requestOwner = requestItem.user;
+	User requestOwner = requestItem.owner;
 
 	Long handshakeId = new Long(0L); // variable to store the id of the matched handshake
 	Query handshakeQuery = JPA.em().createQuery("from " + Handshake.class.getName() + " where request.id=" + requestItem.id); // handshakes which have been initiated with the current request's id
@@ -177,7 +155,7 @@ public class Requests extends BaseController {
 	for(Object singleHandshake : handshakeList) { // iterate over handshakes
 	    Handshake handshakeItem = (Handshake) singleHandshake; // type casting
 	    Offer offerItem = handshakeItem.offer; // the offer belonging to the current iteration's handshake
-	    hasApplied = (offerItem.user == user); // if the user of the request is equal to the current user, set hasApplied to true
+	    hasApplied = (offerItem.owner == user); // if the user of the request is equal to the current user, set hasApplied to true
 	    if (hasApplied) { // store the matched handhshake's id and break out of the for loop if we know user has applied to the current request
 		handshakeId = handshakeItem.id;
 		break;
@@ -359,6 +337,34 @@ public class Requests extends BaseController {
 	User user = getConnectedUser();
 	List<Request> requests = Request.find("user.id", user.id).fetch();
 	render(user, requests);
+    }
+    
+    /**
+     * Adds a new comment for the offer.
+     * 
+     * @since	0.3
+     */
+    public static void makeComment(Request requestItem) {
+    	// get the connected user.
+    	User user = getConnectedUser();
+    	
+    	// fetch the comment text.
+    	String commentText = request.params.get("content");
+    	
+    	// create the comment instance.
+    	RequestComment comment = new RequestComment();
+    	
+    	// set the required data.
+    	comment.date = new Date();
+    	comment.text = commentText;
+    	comment.user = user;
+    	comment.request = requestItem;
+    	
+    	// save the data.
+    	comment.save();
+    	
+    	// show details of the offer again.
+    	showDetails(requestItem.id);
     }
 
 }

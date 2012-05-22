@@ -3,16 +3,12 @@ package models;
 import play.db.jpa.Model;
 import java.util.*;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -22,9 +18,7 @@ import play.db.jpa.Blob;
 @Entity
 public class BadgeEntity  extends Model{
 	
-	
-
-	@Required
+      @Required
       public String email;
     
 	  public String getEmail() {
@@ -115,29 +109,18 @@ public class BadgeEntity  extends Model{
 		this.beta = beta;
 	}
 
-	public long getServiceCount() {
+	public String getServiceCount() {
 		return serviceCount;
 	}
 
-	public void setServiceCount(long serviceCount) {
+	public void setServiceCount(String serviceCount) {
 		this.serviceCount = serviceCount;
 	}
 
 	@Required
 	     public String newbie;
-	
-	@Required
-    public String servicename;
 	  
-	  public String getServicename() {
-		return servicename;
-	}
-
-	public void setServicename(String servicename) {
-		this.servicename = servicename;
-	}
-
-	@Required
+	  @Required
 	     public String autobiographer;
 	  
 	  @Required
@@ -165,48 +148,10 @@ public class BadgeEntity  extends Model{
 	     public String beta;
 	  
 	  @Required
-	    public long serviceCount;
-	  
-	  
-	  public long getHandshakeCount() {
-		return handshakeCount;
-	}
-
-	public void setHandshakeCount(long handshakeCount) {
-		this.handshakeCount = handshakeCount;
-	}
-
-	public long getOfferCount() {
-		return offerCount;
-	}
-
-	public void setOfferCount(long offerCount) {
-		this.offerCount = offerCount;
-	}
-
-	public long getRequestCount() {
-		return requestCount;
-	}
-
-	public void setRequestCount(long requestCount) {
-		this.requestCount = requestCount;
-	}
-
-	@Required
-	    public long handshakeCount;
-	  
-	  
-	  @Required
-	    public long offerCount;
-	  
-	  
-	  
-	  @Required
-	    public long requestCount;
-	  
-	  public static BadgeEntity getEmailOfBadger(String email) {
-			 return find("byEmail", email).first();
-		     }
+	    public String serviceCount;
 	
 
+
+	
+	
 }

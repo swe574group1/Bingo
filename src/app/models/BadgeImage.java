@@ -1,8 +1,5 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BadgeImage {
 	public String 	image1="/public/images/newbieg.jpg";
 	public String image2="/public/images/Autobiographerg.jpg";
@@ -167,26 +164,6 @@ public class BadgeImage {
 	public void setImage9(String image9) {
 		this.image9 = image9;
 	}
-	
-	
-
-
-	public List<String> getAllImage(){
-		List Imagelist = new ArrayList();
-		Imagelist.add(getImage1());
-		Imagelist.add(getImage2());
-		Imagelist.add(getImage3());
-		Imagelist.add(getImage4());
-		Imagelist.add(getImage5());
-		Imagelist.add(getImage6());
-		Imagelist.add(getImage7());
-		Imagelist.add(getImage8());
-		Imagelist.add(getImage9());
-		
-		return Imagelist;
-		
-	}
-	
 
 
 

@@ -30,17 +30,26 @@ public class Users extends BaseController
     	    register();
     	}
     	
-    	if(isCreate)
+    	if(isCreate){
     		user.badge=BadgeType.NEW_BEE;
+    	}
     	user.save();
 
     	if (isCreate) {
+    		AddNewBeeBadgeNotification(user);
     	    success(user.id);
     	} else {
     	    ownProfile();
     	}
     }
 
+    private static void AddNewBeeBadgeNotification(User user){
+		NotificationManager nManager = new NotificationManager();
+	    String message = "You have just earned NewBee badge.";
+	    String link = "swe/badges";
+		nManager.AddNewNotification(user, message, link);
+    }
+    
     public static void success(Long userId) {
         User user = User.findById(userId);
         render(user);
@@ -161,4 +170,10 @@ public class Users extends BaseController
         renderTemplate("Users/form.html", user);
     }
     
+    public static void setNotificationsAsRead(){
+    	 User user = getConnectedUser();
+    	 NotificationManager manager = new NotificationManager();
+    	 manager.SetAllUserNotificationsAsRead(user);
+    	 //noRender
+    }
 }

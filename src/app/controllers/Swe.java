@@ -14,42 +14,33 @@ public class Swe extends BaseController
 {   
 	static String imageurl=null;
 
-    @SuppressWarnings("null")
-	public static void badges()
+    public static void badges()
 	{	
     	List Imagelist = new ArrayList();
-    //	Topic oldT = Topic.findByID(id);
+
 		BadgeManager badgemanager=new BadgeManager();
 		BadgeImage image = null;
 		BadgeType badges=badgemanager.getbadgelist();
-		//User currentuser=badgemanager.getConnectedUser();
+		User currentuser=badgemanager.getConnectedUser();
 		
 		
 						if(badges.toString()=="NEW_BEE"){
-							
-							BadgeEntity badgeEntity = null;
-							String email=badgemanager.getUserEmail();
-							badgeEntity=badgemanager.getBadgeEntity();
-					
-							
-							 badgeEntity.setEmail(email);
-							 badgeEntity.setNewbie("NEW_BEE");										
-						     badgeEntity.save(); 
-							
+							BadgeEntity badgeEntity=new BadgeEntity();
+							badgeEntity.setEmail(currentuser.email);
+							badgeEntity.setNewbie("NEW_BEE");
+							badgeEntity.save();
+
 							image=new BadgeImage();
 							image.setNewbee();
 							Imagelist.add(image);
 							}
 						
-						image=badgemanager.badgeCheck(image);
-					   
+	
 
 		//we should render the list of image
 	
     	render(badges,image);
 	}
-
-    
     
     public static void aboutbadge() {
   		render();

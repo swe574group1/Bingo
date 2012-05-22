@@ -1,16 +1,389 @@
-#{extends 'main.html' /}
-#{set title:"About" /}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Create Offer | bingo!</title>
+<meta http-equiv="content-type"
+	content="application/xhtml+xml; charset=UTF-8" />
+<link rel="shortcut icon" type="image/png"
+	href="/public/images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="screen"
+	href="/public/stylesheets/screen.css" />
+
+<link rel="stylesheet" type="text/css" media="screen" href="/public/stylesheets/datepicker.css">
+<link rel="stylesheet" type="text/css" media="screen" href="/public/stylesheets/ui-lightness/jquery-ui-1.8.6.custom.css">
+<link rel="stylesheet" type="text/css" media="screen" href="/public/stylesheets/jquery.tagedit.css">
+<script src="/public/javascripts/jquery.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="/public/javascripts/index.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="/public/javascripts/notification.js" type="text/javascript"
+	charset="utf-8"></script>
+<script>
+function getURL(path) {
+	return "" + path;
+}
+
+$(document).ready(function() {
+	var unreadCount = 0;
+	
+	InitNotification(unreadCount);
+});
+
+</script>
+
+<script src="/public/javascripts/datepicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/javascripts/jquery-ui-1.8.6.custom.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/javascripts/jquery.autoGrowInput.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/javascripts/jquery.tagedit.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/javascripts/create-offer.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/javascripts/gmaps.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://www.google.com/jsapi" type="application/javascript" charset="utf-8" ></script>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCG9Kc_QV1stkM1sPMZqdkPmXfb47u_HFc&sensor=false" type="application/javascript" charset="utf-8"  ></script>
+
+</head>
+
+<body>
+
+	<div id="header-wrap">
+		<div id="header" style="border: 0px solid red;">
+			<a name="top"></a>
+			<h1 class="logo"><a href="" style="color: #fff;">bingo!</a></h1>
+			<div id="searchForm" style="display: none;">
+				<input type="search" name="query" value="" placeholder="search..." />
+			</div>
+			
+			<div style="float:right; weight:70px; height:70px; background-image:url(public/images/notification.jpg); background-repeat:no-repeat; 
+				margin-left:50px; margin-top:20px" func="notification">
+
+				
+			
+			</div>
+			
+			<div id="searchForm">
+			    <input type="search" name="query" value="" placeholder="search..." />
+			</div>
+			
+			
+			<ul id="profileLinks" class="hidden">
+			    <li><a href="/privatemessages/inbox">Inbox (0)</a></li>
+			    <li><a href="/users/ownprofile">My Profile</a></li>
+			    <li><a href="/users/editprofile">Edit Profile</a></li>
+			    <li><a href="/secure/logout">Logout</a></li>
+			</ul>
+			<div class="profileWidget">
+			<a id="profileMenuToggle" href="#">
+		        
+			    
+			        <img style="height:15px; width:15px;" src="/public/images/lbi02.png" alt="Default User Avatar" title="Your Profile Photo" style="margin-top:10px; display:block;"  />
+			        <span class="username"> Seyfi!</span>
+			    
+			</a>
+			</div>
+			
+		</div>
+	</div>
+
+	<div id="content-wrap" class="clear">
+
 <div id="content">
-  <div id="main" style="padding-top: 0px">
-    <div class="post" style="padding:top:0px">
-      <h3 style="padding-top:0px;">About LETS</h3>
-      <p>LET System are popular across UK, United States, Canada and Australia. In 1980s LETS were developed in British Columbia, Canada aiming to bring supply and demand when the conventional money was unavailable due to an economic recession.</p>
-      <p>LETS aims to create an alternative economy outside and parallel to the wider money economy by encouraging people to exchange goods and services within the local community.</p>
-      <p>With the increasing usage of social networking can promote participation in alternative economic systems. LETS is an alternative to traditional consumption that enables face-to-face commerce by creating community bonds.</p>
-      <p>LET is a community-based non-profit organization. The idea behind the LETS is that a person should be free to issue money. Each member of the LETS has an account that denominated in &quot;credits&quot;. When anyone want to use a credit in exchange, two member handshakes and system is notified that to debit the account of the payer and credit the account of the payee.</p>
-      <p>Each accounts starts with zero balance, members can maintain both positive and negative balance.</p>
-      <p>&quot;Negative Balance&quot; means that the member has gone into &quot;commitment&quot; to the system which is promise that he/she will provide an equivalent value in goods and services in the futures.</p>
-      <p>LET systems uses a virtual currency (There is no physical currency) to record the exchanges that takes place. Unlike national currency, credits do not have to eared before they are spent and no interest is payable on either negative balances or savings.</p>
+  <div id="main" style="padding-top:0px">
+    
+
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+    </style>
+
+
+
+
+
+
+<h3 style="padding-top:0px;">Create New Offer</h3>
+<p>Use the form below to create a new offer.</p>
+
+
+<script>
+
+function addElement(text,value,ddl)
+{ 
+	var elOptNew = document.createElement('option');
+	elOptNew.text = text;
+	elOptNew.value = value;
+	
+  	try 
+	{
+		ddl.add(elOptNew, null); // standards compliant; doesn't work in IE
+	}
+  	catch(ex) {
+	    ddl.add(elOptNew); // IE only
+	}
+}
+
+
+
+
+
+</script>
+
+
+<form action="/offers/docreate" method="POST" class="utility_form taggable">
+	<input type="hidden" name="offerItem.id" value="" />
+
+  <fieldset>
+    <legend>Descriptions</legend>
+    
+    <ul>
+      <li>
+        <label style="padding-top:7px">Title</label>
+        <input type="text" style="width:200px;"name="offerItem.title" value="" />
+	<span class="error"></span>
+      </li>
+      <li>
+        <label style="padding-top:7px">Tags</label>
+        <input id="tags" type="text" style="width:200px;" name="tags[]" value="" /> Separate tags with spaces
+	<span class="error"></span>
+      </li>
+     <li>
+        <label style="padding-top:7px">Description</label>
+        <textarea rows="5" style="width:330px" name="offerItem.description"></textarea>
+        <span style="position: absolute; padding-top:40px" class="error">&nbsp;</span>
+      </li>
+
+      	<li id="liDuration">
+        <label style="padding-top:7px">Duration</label>
+        <input type="text" style="width:100px;"name="offerItem.duration" value="0.0" />
+	<span class="error"></span>  
+	 in hours        
+    </li>   
+      <li>
+      <label style="padding-top:7px">Is Virtual?</label>  
+     		<select id="ddlVirtualization" onchange="enableVirtualization(this);">
+  			<option value="0" selected="selected">No</option>
+  			<option value="1">Yes</option>	  			
+		</select>
+      		Via online interaction, chat, webcam etc.
+      		<input id="chkVirtualization" style="visibility: hidden; display: none" type="checkbox" name="offerItem.is_virtual"   />	
+    	</li>
+    </ul>
+  </fieldset>
+  
+  <fieldset>
+    <legend>Limitations</legend>
+    <ul>
+      <li>
+        <label style="padding-top:7px">Valid Until</label>
+        <input id="txt_val_until" readonly="readonly" type="text" name="offerItem.endDate" class="date_pick" value=""/>
+	<span class="error"></span>
+      </li>
+    </ul>
+   
+  </fieldset>
+   
+   <fieldset><legend>Location</legend>
+   <ul>
+   <li>
+   <label style="padding-top:7px">Range</label> 
+   <input id="txt_range"  type="text" name="offerItem.rangeFromLocation" value="0.0" />  KM
+   </li>
+   <li>
+   <input id="txt_location"  name="offerItem.location" value="" />
+   </li>
+   </ul>
+   <div id="map_canvas" style="width:600px; height:280px"></div>
+   </fieldset>
+       
+   
+  <input type="submit" value="Submit" />
+
+</form>
+
+<script>
+initialize();
+
+</script>
+
+  </div>
+
+  <div id="sidebar"  style="border:0px solid #aaa; padding-top:0px;">
+    
+    <div class="sidemenu" align="left">
+      <style>
+		  .create_offer {
+	background-color:#090;
+	-moz-border-radius:8px;
+	border-radius:8px;
+}
+.create_offer a {
+	color:#fff !important;
+}
+</style>
+      <ul>
+        <li class="create_offer"><a href="/offers/create"><span style="font-size:16px; font-weight: bolder; color: white" >Create Offer</span></a></li>
+        <li class="create_offer"><a href="/requests/create"><span style="font-size:16px; font-weight: bolder; color: white" >Create Request</span></a></li>
+		<li><a href="/offers/search">Search Offers</a></li>
+		<li><a href="/requests/search">Search Requests</a></li>
+		<li><a href="/handshakes/search">Search Handshakes</a></li>
+	<li><a href="/handshakes/list">My Handshakes</a></li>
+        <li><a href="/offers/list">My Offers</a></li>
+        <li><a href="/requests/list">My Requests</a></li>
+          <li><a href="/swe/badges">My Badges</a></li>
+      </ul>
     </div>
+    
+   <!-- <div class="popular">
+      <h3>Recent Comments</h3>
+      <p>No recent comments</p>
+    </div> --> 
   </div>
 </div>
+</div>
+
+	<div id="footer-outer" class="clear">
+		<div id="footer-wrap">
+			
+			<div id="gallery" class="clear" style="margin-top: 10px">
+				<h3>Recent Users</h3>
+				
+				<a href="/users/profile?userId=250">
+				
+			    
+			    <img class="avatar"
+					src="/public/images/lbi02.png" alt="Default Avatar"
+					title="Ali" style="margin-right: 5px;" />
+				
+				</a>
+				
+				<a href="/users/profile?userId=249">
+				
+			    
+			    <img class="avatar"
+					src="/public/images/lbi02.png" alt="Default Avatar"
+					title="ali" style="margin-right: 5px;" />
+				
+				</a>
+				
+				<a href="/users/profile?userId=248">
+				
+			    
+			    <img class="avatar"
+					src="/public/images/lbi02.png" alt="Default Avatar"
+					title="ali" style="margin-right: 5px;" />
+				
+				</a>
+				
+				<a href="/users/profile?userId=247">
+				
+			    
+			    <img class="avatar"
+					src="/public/images/lbi02.png" alt="Default Avatar"
+					title="Doğan Cem G&uuml;nd&uuml;z" style="margin-right: 5px;" />
+				
+				</a>
+				
+				<a href="/users/profile?userId=246">
+				
+			    
+			    <img class="avatar"
+					src="/public/images/lbi02.png" alt="Default Avatar"
+					title="Mehmet Emrah Konya" style="margin-right: 5px;" />
+				
+				</a>
+				
+			</div>
+			
+			<div class="col-a">
+				<h3>About</h3>
+				<p>This project is developed in SWE574 class @ Bogazici
+					University Software Engineering Department.</p>
+				<p>
+					For more information: <a href="/application/contact">visit
+						contact page</a>
+				</p>
+			</div>
+			<div class="col-a">
+				<h3>Site Links</h3>
+				<div class="footer-list">
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/application/about">About</a></li>
+						<li><a href="/application/faq">FAQ</a></li>
+						<li><a href="/application/termsofservice">Terms Of
+								Service</a></li>
+						<li><a href="/application/contact">Contact</a></li>
+					</ul>
+				</div>
+
+			</div>
+			<div class="col-a">
+				<h3>Statistics</h3>
+				<div class="footer-list">
+					<ul>
+						<li>249 Users!</li>
+						<li>0 Offers!</li>
+						<li>0 Requests!</li>
+						
+					</ul>
+				</div>
+
+			</div>
+			<!-- 
+	 
+	<div class="col-b">
+	  <h3>Tag Cloud</h3>
+	  <div class=" tag_cloud">
+            <ul>
+	      <p>Offers</p>
+	      
+	      <a href="/offers/search?phrase=Reading">Reading</a>
+	      
+	      <a href="/offers/search?phrase=English">English</a>
+	      
+	      <a href="/offers/search?phrase=Books">Books</a>
+	      
+	      <a href="/offers/search?phrase=Tango">Tango</a>
+	      
+	      <a href="/offers/search?phrase=Dancing">Dancing</a>
+	      
+	      <a href="/offers/search?phrase=Math">Math</a>
+	      
+            </ul>
+            <ul>
+	      <p>Requests</p>
+	      
+	      <a href="/requests/search?phrase=Reading">Reading</a>
+	      
+	      <a href="/requests/search?phrase=English">English</a>
+	      
+	      <a href="/requests/search?phrase=Books">Books</a>
+	      
+	      <a href="/requests/search?phrase=Tango">Tango</a>
+	      
+	      <a href="/requests/search?phrase=Dancing">Dancing</a>
+	      
+	      <a href="/requests/search?phrase=Math">Math</a>
+	      
+	    </ul>
+	  </div>
+	  
+	</div>
+	
+	 -->
+
+		</div>
+	</div>
+
+	<div id="footer-bottom">
+		<p class="bottom-left">
+			&copy; 2012 <strong>SWE 574 Team 1 Members</strong>&nbsp; &nbsp;
+			&nbsp;
+		</p>
+		<p class="bottom-right">
+			<strong><a href="#top">Back to Top</a></strong>
+		</p>
+	</div>
+
+</body>
+</html>

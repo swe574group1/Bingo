@@ -1,6 +1,16 @@
 #{extends 'logged_user.html' /}
 #{set title:'Profile' /}
 
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/ui-lightness/jquery-ui-1.8.6.custom.css'}">
+#{/set}
+
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/jquery-ui-1.8.20.custom.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+<script src="@{'/public/javascripts/jquery.autoGrowInput.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+<script src="@{'/public/javascripts/profile.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+#{/set}
+
 <div id="main" style="padding-top:0px">
   <div class="post" style="padding:top:0px">
     <div class="right">
@@ -34,7 +44,7 @@
       <table class="show_data" style="margin-left:0px; width:560px;">
         <tr class="first">
           <th>Title</th>
-          <th>Honey Combs Made</th>
+          <th>Social Credits</th>
           <th>Offerer</th>
           <th>Requester</th>
           <th>Details</th>
@@ -51,7 +61,7 @@
 	  ${handshake.request.title}
 	  #{/else}
 	  </td>
-	  <td>${handshake.offer.credit}</td>
+	  <td>${(int)handshake.offer.creditOffer}</td>
 	  <td>${handshake.offer.user.fullname}</td>
 	  <td>${handshake.request.user.fullname}</td>
 	  <td><a href="@{Handshakes.show(handshake.id)}">Details</a></td>
@@ -127,6 +137,7 @@
 
       <div class="post-meta">
         <ul>
+            <li style="text-align: left;"><a class="pm" href="#pm">Send Message</a></li>
          <li style="text-align: left">
 		  	<script type="text/javascript">
 			 $(document).ready( function() {
@@ -150,7 +161,7 @@
 		  </li>
           <li style="text-align: left">&nbsp;Name: ${observedUser.fullname}</li>
           <li style="text-align: left">&nbsp;${observedUser.badge.toString().toLowerCase().replace("_"," ").replace("bee","Bee").replace("new","New").replace("busy","Busy").replace("working","Working").replace("bumble","Bumble")}</li>
-	  <li style="text-align: left">&nbsp;Honey Combs: ${observedUser.balance}</li>	 
+	  <li style="text-align: left">&nbsp;Social Credits: ${(int)observedUser.balance}</li>	 
 	  <li style="text-align: left">&nbsp;City:<br/>&nbsp;&nbsp;${observedUser.address}</li>
           <li style="text-align: left">&nbsp;Member Since: <br/>&nbsp;&nbsp;${observedUser.registrationDate.format('dd MMMM yyyy')}</li>
 		  
@@ -178,4 +189,12 @@
       </div>
     </div>
   </div>
+</div>
+
+<div id="pm" title="Send Message to ${observedUser.fullname}">
+    <form action="@{PrivateMessages.send()}" method="POST">
+        <input type="hidden" name="receiver.id" value="${observedUser.id}" />
+        <textarea name="text"></textarea>
+        <input type="submit" value="Send Message" />
+    </form>
 </div>

@@ -11,7 +11,9 @@ import models.BadgeEntity;
 import models.BadgeType;
 import models.Comment;
 import models.Handshake;
+import models.Service;
 import models.Handshake.Status;
+import models.HandshakeComment;
 import models.Offer;
 import models.Request;
 import models.User;
@@ -21,34 +23,19 @@ import play.mvc.With;
 @With(Secure.class)
 public class Handshakes extends BaseController
 {
-    public static void bindToOffer(Long id) {
+	/**
+	 * Adds a user to the given offer.
+	 * 
+	 * @param id	id of the offer to which the user
+	 * 				will be added.
+	 */
+    public static void bindToOffer(Long id)
+    {
         User user = getConnectedUser();
-    	Offer offer = Offer.findById(id);
+    	Offer service = Offer.findById(id);
+    	service.addUser(user);
 
-        Request request = new Request(user, offer);
-        request.title = "REQUEST FOR: " + offer.title;
-        request.duration = offer.duration;
-
-    	Handshake handshakeItem = new Handshake();
-        handshakeItem.status = Status.WAITING_APPROVAL;
-    	handshakeItem.offer = offer;
-    	handshakeItem.request = request;
-    	handshakeItem.creationDate = new Date();
-
-	handshakeItem.requesterId = request.user.id;
-	handshakeItem.offererId = offer.user.id;
-	handshakeItem.duration = offer.duration;
-	
-	handshakeItem.isOriginallyAnOffer = true;
-	handshakeItem.offererStart = false;
-	handshakeItem.requesterStart = false;
-
-	offer.save();
-	request.save();
-    	handshakeItem.save();
-
-	Boolean created = true;
-    	renderTemplate("Handshakes/bind.html", handshakeItem, created);
+    	renderTemplate("Handshakes/bind.html", (Service) service, true);
     }
 
     public static void cancelApplication(Long handshakeId) {
@@ -58,34 +45,18 @@ public class Handshakes extends BaseController
 	renderTemplate("Handshakes/bind.html", cancelled);
     }
 
+    /**
+	 * Adds a user to the given request.
+	 * 
+	 * @param id	id of the request to which the user
+	 * 				will be added.
+	 */
     public static void bindToRequest(Long id) {
-	User user = getConnectedUser();
-	Request request = Request.findById(id);
+    	User user = getConnectedUser();
+    	Request service = Request.findById(id);
+    	service.addUser(user);
 
-	Offer offer = new Offer(user, request);
-	offer.credit = request.credit;
-	offer.duration = request.duration;
-	offer.title = "OFFER FOR: " + request.title;
-	offer.save();
-
-	Handshake handshakeItem = new Handshake();
-	handshakeItem.status = Status.WAITING_APPROVAL;
-	handshakeItem.offer = offer;
-	handshakeItem.request = request;
-	handshakeItem.creationDate = new Date();
-
-	handshakeItem.requesterId = request.user.id;
-	handshakeItem.offererId = offer.user.id;
-	handshakeItem.duration = request.duration;
-
-	handshakeItem.isOriginallyAnOffer = false;
-	handshakeItem.offererStart = false;
-	handshakeItem.requesterStart = false;
-
-	handshakeItem.save();
-
-	Boolean created = true;
-	renderTemplate("Handshakes/bind.html", handshakeItem, created);
+    	renderTemplate("Handshakes/bind.html", (Service) service, true);
     }
 
     public static void show(Long id) {
@@ -122,7 +93,7 @@ public class Handshakes extends BaseController
         handshakeItem.save();
 
 	Offer offer = Offer.findById(handshakeItem.offer.id);
-	offer.status = Offer.Status.HANDSHAKED;
+	offer.status = Service.Status.HANDSHAKED;
 	offer.save();
 	
 
@@ -172,8 +143,8 @@ public class Handshakes extends BaseController
 	    User offerer = User.findById(handshakeItem.offererId);
 	    User requester = User.findById(handshakeItem.requesterId);
 	    
-	    offerer.balance += handshakeItem.offer.credit;
-	    requester.balance -= handshakeItem.offer.credit;
+	    //offerer.balance += handshakeItem.offer.creditOffer;
+	    //requester.balance -= handshakeItem.offer.creditRequest;
 	    offerer.save();
 	    requester.save();
 	    handshakeItem.status = Status.STARTED;
@@ -203,19 +174,21 @@ public class Handshakes extends BaseController
     public static void saveComment(Long handshakeId)
     {
         User user = getConnectedUser();
-        Comment comment = new Comment();
+        
+        // create a new handshake comment.
+        HandshakeComment comment = new HandshakeComment();
         comment.user = user;
         comment.handshake = Handshake.findById(handshakeId);
         comment.date = new Date();
         comment.text = request.params.get("message");
         comment.save();
-	show(handshakeId);
+        show(handshakeId);
     }
 
     
     private static void updateBadgeForHandshake(Handshake handshake){
-    	updateBadgeForUser(handshake.offer.user);
-    	updateBadgeForUser(handshake.request.user);
+    	updateBadgeForUser(handshake.offer.owner);
+    	updateBadgeForUser(handshake.request.owner);
     }
 
     private static void updateBadgeForUser(User user){
@@ -223,9 +196,7 @@ public class Handshakes extends BaseController
     	Timestamp sixMonthAgo = new Timestamp(now.getTime() - 86400000*30*6);
 
     	long count=Handshake.count("(offer.user.id = ? or request.user.id = ?) and creationDate> ?", user.id, user.id,sixMonthAgo);
-
     	user.badge=BadgeType.NEW_BEE;
-//    	BadgeEntity badgeEntity=new BadgeEntity();
 //    	if(count>=5)
 //    		user.badge=BadgeType.BUSY_BEE;
 //    	if(count>=30)
@@ -234,24 +205,24 @@ public class Handshakes extends BaseController
 //    		user.badge=BadgeType.BUMBLE_BEE;
     	
        user.badge=BadgeType.NEW_BEE;
-       
-   	BadgeManager bm=new BadgeManager();
     	   
-    	BadgeEntity oldBadgeEntity =bm.getBadgeEntity() ;
     
-    	if(count>=5){
+       
+//    BadgeTable badgetable=new BadgeTable();
+//    user = getConnectedUser();
+//    Query getemailQuery = JPA.em().createQuery("select email from   " + User.class.getName() + " where id is " +user.id);
+//    String email = (String) getemailQuery. getSingleResult();
+//    badgetable.setEmail(email);
+//    badgetable.setNewbie("NEW_BEE");
+//    badgetable.save();
+//    	
+    	if(count>=5)
     		user.badge=BadgeType.Fivester;
-           	oldBadgeEntity.setFivester("Fivester");
-           
-    	}
-    	    System.out.println(count);
-    	    oldBadgeEntity.setHandshakeCount(count);
-        	user.save();
-        	oldBadgeEntity.save();
-    
-        	
-    	}
-    	
+    	if(count>=30)
+    		user.badge=BadgeType.Populist;
+    	if(count>=60)
+    		user.badge=BadgeType.Guru;
+    	user.save();
     	
     }
-
+}

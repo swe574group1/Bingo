@@ -11,7 +11,6 @@ import javassist.bytecode.Descriptor.Iterator;
 
 import javax.persistence.Query;
 
-import models.BadgeEntity;
 import models.Comment;
 import models.Offer;
 import models.OfferComment;
@@ -121,7 +120,7 @@ public class Offers extends BaseController {
     	}
     	
     	// assign the current user to the offer.
-    	offerItem.user = getConnectedUser();
+    	offerItem.owner = getConnectedUser();
     	
     	// save the offer.
     	offerItem.save();
@@ -155,9 +154,8 @@ public class Offers extends BaseController {
      * @since			0.1
      */
     public static void show(Long id, Boolean isCreate) {
-	Offer offerItem = Offer.findById(id);
-	Boolean isOldOffer = !isCreate;
-	render(offerItem);
+		Offer offerItem = Offer.findById(id);
+		render(offerItem);
     }
 
     /**
@@ -201,7 +199,7 @@ public class Offers extends BaseController {
     public static void showDetails(Long id) {
     	User user = getConnectedUser(); // user who is inspecting the offer
     	Offer offerItem = Offer.findById(id); // the offer being inspected
-	User offerOwner = offerItem.user; // owner of the offer
+	User offerOwner = offerItem.owner; // owner of the offer
 
 	Long handshakeId = new Long(0L); // variable to store the id of the matched handshake
 	Query handshakeQuery = JPA.em().createQuery("from " + Handshake.class.getName() + " where offer.id=" + offerItem.id); // handshakes which have been initiated with the current offer's id
@@ -212,7 +210,7 @@ public class Offers extends BaseController {
 	for(Object singleHandshake : handshakeList) { // iterate over handshakes
 	    Handshake handshakeItem = (Handshake) singleHandshake; // type casting
 	    Request requestItem = handshakeItem.request; // the request belonging to the current iteration's handshake
-	    hasApplied = (requestItem.user == user); // if the user of the request is equal to the current user, set hasApplied to true
+	    hasApplied = (requestItem.owner == user); // if the user of the request is equal to the current user, set hasApplied to true
 	    if (hasApplied) { // store the matched handhshake's id and break out of the for loop if we know user has applied to the current offer
 		handshakeId = handshakeItem.id;
 		break;
@@ -231,19 +229,7 @@ public class Offers extends BaseController {
 	}
 
 	Boolean isOfferOwner = (user == offerOwner);
-	Boolean someoneElsesOffer = (user != offerItem.user);
-	
-	
-	BadgeManager bm=new BadgeManager();
-	BadgeEntity badgeEntity =bm.getBadgeEntity();
-	long offerCount=badgeEntity.getOfferCount();
-	offerCount++;
-	badgeEntity.setOfferCount(offerCount);
-
-
-	badgeEntity.save();
-	
-	
+	Boolean someoneElsesOffer = (user != offerItem.owner);
     	render(user, offerItem, offerOwner, someoneElsesOffer, hasApplied, userApplications, isOfferOwner);
     }
 
@@ -419,8 +405,36 @@ public class Offers extends BaseController {
      * @since	0.1
      */
     public static void list() {
-	User user = getConnectedUser();
-	List<Offer> offers = Offer.find("user.id", user.id).fetch();
-	render(user, offers);
+		User user = getConnectedUser();
+		List<Offer> offers = Offer.find("user.id", user.id).fetch();
+		render(user, offers);
+    }
+    
+    /**
+     * Adds a new comment for the offer.
+     * 
+     * @since	0.3
+     */
+    public static void makeComment(Offer offerItem) {
+    	// get the connected user.
+    	User user = getConnectedUser();
+    	
+    	// fetch the comment text.
+    	String commentText = request.params.get("content");
+    	
+    	// create the comment instance.
+    	OfferComment comment = new OfferComment();
+    	
+    	// set the required data.
+    	comment.date = new Date();
+    	comment.text = commentText;
+    	comment.user = user;
+    	comment.offer = offerItem;
+    	
+    	// save the data.
+    	comment.save();
+    	
+    	// show details of the offer again.
+    	showDetails(offerItem.id);
     }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import models.Handshake;
 import models.Handshake.Status;
+import models.Notification;
 import models.User;
 
 public class Application extends BaseController
@@ -13,8 +14,20 @@ public class Application extends BaseController
     	int recentUserCount =5;
 	    int recentHandshakeCount = 5;
 	    List<User> newUsers = User.getNewUsers(recentUserCount);
-	    List<Handshake> newHandshakes = Handshake.find("(status='ACCEPTED' or status='STARTED' or status='DONE') order by creationDate desc").fetch(recentHandshakeCount);
-	    render(newUsers, newHandshakes);
+	    //List<Handshake> newHandshakes = Handshake.find("(status='ACCEPTED' or status='STARTED' or status='DONE') order by creationDate desc").fetch(recentHandshakeCount);
+	    
+	    //Notifications
+	    List<Notification> notifications = null;
+	    User user = BaseController.getConnectedUser();
+	    NotificationManager nManager = new NotificationManager();
+	    List<Notification> unreadNotifications = null;
+	    if (user != null){
+	    	notifications = nManager.GetNotifications(user.id);
+	    	unreadNotifications = nManager.ExtractUnreadNotifications(notifications);
+	    }
+	    
+	    //Render
+	   	render(newUsers, notifications, unreadNotifications);
 	}
 
     public static void register() {

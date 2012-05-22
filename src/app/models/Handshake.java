@@ -26,6 +26,9 @@ public class Handshake extends Model
     public Request request;
 
     public Double duration;
+    public Double creditOffer;
+    public Double creditRequest;
+
     public Long offererId;
     public Long requesterId;
 

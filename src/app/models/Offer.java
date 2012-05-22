@@ -1,126 +1,50 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import play.data.validation.Required;
-import play.db.jpa.Model;
 import service.Matchable;
 
 @Entity
-public class Offer extends Model implements Matchable
+public class Offer extends Service implements Matchable
 {
-    public enum Status {
-        WAITING, HANDSHAKED
-    }
-
-    @Required
-    public String title;
-
-    
-    @Required
-    public Double duration;
-    
-    @Required
-    @Lob
-    public String description;
-
-    @Required
-    @OneToMany(mappedBy="offer", cascade=CascadeType.ALL)
-    public List<Tag> tags;
-
-    @Required
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date endDate;
-
-    @Required
-    public Integer credit;
-
-    @ManyToOne
-    public User user;
-
-    // @Required
-    @Enumerated(EnumType.STRING)
-    public Status status;
-    
-    @ManyToOne
-    public City city;
-    
-    @ManyToOne
-    public County county;
-    
-    @ManyToOne
-    public District district;
-    
-    public String city_name;
-    
-    public String county_name;
-    
-    public String district_name;
-    
-    public Boolean reoccure;  
-    public Boolean is_rec_monday;    
-    public Boolean is_rec_tuesday;
-    public Boolean is_rec_wednesday;
-    public Boolean is_rec_thursday;
-    public Boolean is_rec_friday;
-    public Boolean is_rec_saturday;
-    public Boolean is_rec_sunday;    
-
-    public Boolean is_all_hours; 
-    public Boolean is_virtual; 
-
-    public String reocc_start_hour;    
-    public String reocc_end_hour;
-    public Integer reocc_start_hour_val;
-    public Integer reocc_end_hour_val;
-    
-    public Offer(User user) {
+	@OneToMany(mappedBy="offer")
+    public List<OfferComment> comments;
+	
+	public Offer() {
     	this.tags = new ArrayList<Tag>();
-    	this.user = user;
+    	this.status = Status.CREATED;
     }
-
-    public Offer() {
+	
+	public Offer(User user) {
     	this.tags = new ArrayList<Tag>();
-    	this.status = Status.WAITING;
+    	this.owner = user;
     }
-
-    public Offer(User user, Request request) {
-    	this.tags = new ArrayList<Tag>();
-		this.user = user;
+	
+	public Offer(User user, Request request) {
+    	this();
 		this.title = request.title;
-		this.duration = request.duration;
 		this.description = request.description;
-		this.endDate = request.endDate;
-		this.status = Status.WAITING;
     }
 
-    @Override
-    public List<Tag> getTags()
-    {
-        return tags;
-    }
-    
-    @Override
-    public String getDescription()
-    {
-        return description;
-    }
-    
-    @Override
-    public String getTitle()
-    {
-        return title;
-    }    
+	@Override
+	protected void createSessions() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void updateSessions() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void deleteSessions() {
+		// TODO Auto-generated method stub
+		
+	}
 }
