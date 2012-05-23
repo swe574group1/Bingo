@@ -9,6 +9,13 @@
 	href="@{'/public/images/favicon.png'}" />
 <link rel="stylesheet" type="text/css" media="screen"
 	href="@{'/public/stylesheets/screen.css'}" />
+	
+	<link rel="stylesheet" type="text/css" media="screen"
+	href="@{'/public/stylesheets/bootstrap.css'}" />
+	
+		<link rel="stylesheet" type="text/css" media="screen"
+	href="@{'/public/stylesheets/bootstrap-responsive.css'}" />
+	
 #{get 'moreStyles' /}
 <script src="@{'/public/javascripts/jquery.js'}" type="text/javascript"
 	charset="${_response_encoding}"></script>
@@ -33,14 +40,54 @@ $(document).ready(function() {
 
 <body>
 
-	<div id="header-wrap">
-		<div id="header" style="border: 0px solid red;">
-			<a name="top"></a>
-			<h1 class="logo"><a href="" style="color: #fff;">bingo!</a></h1>
-			<div id="searchForm" style="display: none;">
-				<input type="search" name="query" value="" placeholder="search..." />
-			</div>
-			
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner" >
+<div class="container">
+
+
+    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+<ul class="nav">
+
+  <li><a class="brand" >Bingo</a></li>
+  <li class="active">
+  <a href="#">Home</a>
+  </li>
+  
+   <li class="active">
+   <a href="#">FAQ's</a>
+   </li>
+  
+   <li class="active">
+   <a href="#">Contact Us</a>
+   </li>
+
+</ul>
+<div class="navbar-inner" style=" color: #999999; margin-top: 5px" >
+<div id="navbar form-search">
+<input type="text" name="query" class="search-query  input-medium"  placeholder="search..." />
+</div>
+
+<ul class="nav pull-right">
+#{if isLoggedIn}
+	
+			    <li><a href="@{PrivateMessages.inbox()}">Inbox (${models.PrivateMessage.getUnreadMessagesCount(user)})</a></li>
+			    <li><a href="@{Users.ownProfile()}">My Profile</a></li>
+			    <li><a href="@{Users.editProfile()}">Edit Profile</a></li>
+			    <li><a href="@{Secure.logout()}">Logout</a></li>
+#{/if}
+</ul>
+</div>
+</div>
+</div>
+
+<div style="padding-top: 50px"></div>
+<!-- nav end -->
+
+<!-- 			
 			<div style="float:right; weight:70px; height:70px; background-image:url(public/images/notification.jpg); background-repeat:no-repeat; 
 				margin-left:50px; margin-top:20px" func="notification">
 
@@ -69,17 +116,10 @@ $(document).ready(function() {
 			
 			</div>
 			
-			<div id="searchForm">
-			    <input type="search" name="query" value="" placeholder="search..." />
-			</div>
+	
 			
 			#{if isLoggedIn}
-			<ul id="profileLinks" class="hidden">
-			    <li><a href="@{PrivateMessages.inbox()}">Inbox (${models.PrivateMessage.getUnreadMessagesCount(user)})</a></li>
-			    <li><a href="@{Users.ownProfile()}">My Profile</a></li>
-			    <li><a href="@{Users.editProfile()}">Edit Profile</a></li>
-			    <li><a href="@{Secure.logout()}">Logout</a></li>
-			</ul>
+			
 			<div class="profileWidget">
 			<a id="profileMenuToggle" href="#">
 		        #{if user.photo.exists()}
@@ -93,9 +133,9 @@ $(document).ready(function() {
 			</div>
 			#{/if}
 		</div>
-	</div>
+	</div> -->
 
-	<div id="content-wrap" class="clear">#{doLayout /}</div>
+<div id="content-wrap" class="clear">#{doLayout /}</div>
 
 	<div id="footer-outer" class="clear">
 		<div id="footer-wrap">
