@@ -14,13 +14,6 @@
 	charset="${_response_encoding}"></script>
 <script src="@{'/public/javascripts/index.js'}" type="text/javascript"
 	charset="${_response_encoding}"></script>
-<script src="@{'/public/javascripts/notification.js'}" type="text/javascript"
-	charset="${_response_encoding}"></script>
-<script>
-function getURL(path) {
-	return "" + path;
-}
-</script>
 #{get 'moreScripts' /}
 </head>
 
@@ -29,50 +22,16 @@ function getURL(path) {
 	<div id="header-wrap">
 		<div id="header" style="border: 0px solid red;">
 			<a name="top"></a>
-			<h1 class="logo"><a href="" style="color: #fff;">bingo!</a></h1>
+			<h1 class="logo"><a href="/" style="color: #fff;">bingo!</a></h1>
 			<div id="searchForm" style="display: none;">
 				<input type="search" name="query" value="" placeholder="search..." />
 			</div>
-			
-			<div style="float:right; weight:70px; height:70px; background-image:url(public/images/notification.jpg); background-repeat:no-repeat; 
-				margin-left:50px; margin-top:20px" func="notification">
-
-				#{if notifications}
-				<span id="counter" style="width:50px; cursor:pointer; padding-top:4px; padding-left:7px; height:50px; display:block; color:red; weight:bold;">
-					<strong>1</strong>
-				</span>
-				
-				<div func="notification_items" id="notification_items" style="position:static; visibility:visible; border:1px solid gray; margin-top:-30px; padding:10px; background-color: white; height:200px; width:200px; ">
-					<ul>
-						#{list items:notifications, as:'notification'}
-						<li>
-							#{if !notification.isread}
-							<a href='${notification.link}'>${notification.message}</a>
-							#{/if}
-							
-							#{if notification.isread}
-							${notification.message}
-							#{/if}
-						</li>
-						#{/list}
-					</ul>
-				</div>
-				
-				#{/if}
-			
-			</div>
-			
-			<div id="searchForm">
-			    <input type="search" name="query" value="" placeholder="search..." />
-			</div>
-			
-			#{if isLoggedIn}
 			<ul id="profileLinks" class="hidden">
-			    <li><a href="@{PrivateMessages.inbox()}">Inbox (${models.PrivateMessage.getUnreadMessagesCount(user)})</a></li>
 			    <li><a href="@{Users.ownProfile()}">My Profile</a></li>
 			    <li><a href="@{Users.editProfile()}">Edit Profile</a></li>
 			    <li><a href="@{Secure.logout()}">Logout</a></li>
 			</ul>
+			#{if isLoggedIn}
 			<div class="profileWidget">
 			<a id="profileMenuToggle" href="#">
 		        #{if user.photo.exists()}
@@ -142,7 +101,7 @@ function getURL(path) {
 						<li>${(models.User.findAll()).size()} Users!</li>
 						<li>${(models.Offer.findAll()).size()} Offers!</li>
 						<li>${(models.Request.findAll()).size()} Requests!</li>
-						
+						<li>${models.Handshake.findAll().size()} Handshakes!</li>
 					</ul>
 				</div>
 

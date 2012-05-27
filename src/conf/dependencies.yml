@@ -4,4 +4,5 @@ require:
     - play
     - play -> secure
     - play -> crud
+    - play -> search 2.0 
  
