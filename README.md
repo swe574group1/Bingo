@@ -8,6 +8,10 @@
 
 The application is developed in [Java](http://www.java.com "Java") using the [Play! Framework](http://www.playframework.org "Play! Framework"). The [MySQL](http://mysql.com "MySQL") database server is used for managing application related data.
 
+## Mockups
+
+The first step we took was to analyze the predecessor project, find its weaknesses and fix them. During that process, we decided to update the graphical user interface. First thing was to create mockups and you can find them from this url: http://swe574group1.github.com/Bingo .
+
 ### Setting up the development environment
 
 [TODO: Add instructions for setting up the development environment]
