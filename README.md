@@ -4,6 +4,8 @@
 
 **Bingo** is the successor of the [Let It Bee Project](http://code.google.com/p/swe574group2 "Google Code project page for Let It Bee") that is developed by [Bogazici University Software Engineering](http://www.cmpe.boun.edu.tr/graduate/msInSwe " Official web page of the Master of Science in Software Engineering Program at Bogazici University") students for the "Software Development as a Team" course.
 
+You can reach to the deployed application from here: http://swe.cmpe.boun.edu.tr:8080/bingo/
+
 ## Technical Details
 
 The application is developed in [Java](http://www.java.com "Java") using the [Play! Framework](http://www.playframework.org "Play! Framework"). The [MySQL](http://mysql.com "MySQL") database server is used for managing application related data.
@@ -37,6 +39,10 @@ All group meeting notes can be reached via https://github.com/swe574group1/Bingo
 ### Reputation and Credits System
 
 We updated the reputation and credits system of the Let It Bee project. Details can be found on https://github.com/swe574group1/Bingo/wiki/Reputation-and-Credits-System
+
+### System Components
+
+Details about system components are given here: https://github.com/swe574group1/Bingo/wiki/Components
 
 ## Issue List
 
