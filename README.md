@@ -16,6 +16,10 @@ The first step we took was to analyze the predecessor project, find its weakness
 
 The requirements specification document of the project is written depending on the mockups. The document can be reached via https://github.com/swe574group1/Bingo/wiki/Requirements-Specification-Document .
 
+## Implementation Plan
+
+The project is developed by using the Iterative and Incremental Development methodology. Detailed project implementation plan can be found here: https://github.com/swe574group1/Bingo/blob/master/docs/plan/implementation_plan.pdf
+
 ### Setting up the development environment
 
 [TODO: Add instructions for setting up the development environment]
