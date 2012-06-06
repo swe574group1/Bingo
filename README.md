@@ -12,6 +12,10 @@ The application is developed in [Java](http://www.java.com "Java") using the [Pl
 
 The first step we took was to analyze the predecessor project, find its weaknesses and fix them. During that process, we decided to update the graphical user interface. First thing was to create mockups and you can find them from this url: http://swe574group1.github.com/Bingo .
 
+## Requirements Analysis
+
+The requirements specification document of the project is written depending on the mockups. The document can be reached via https://github.com/swe574group1/Bingo/wiki/Requirements-Specification-Document .
+
 ### Setting up the development environment
 
 [TODO: Add instructions for setting up the development environment]
